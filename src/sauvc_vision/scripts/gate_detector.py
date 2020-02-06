@@ -3,6 +3,7 @@
 
 # import the necessary packages
 import rospy
+import rospkg
 import cv2 as cv
 from cv_bridge import CvBridge, CvBridgeError
 import numpy as np
@@ -19,10 +20,13 @@ class gate_detector:
 		self.device = device
 		self.confidence = confidence
 		# other
-		self.labels = "/home/vladushked/net/labels.txt"
-		self.colors = "/home/vladushked/net/colors.txt"
-		self.weights = "/home/vladushked/net/frozen_inference_graph.pb"
-		self.config = "/home/vladushked/net/opencv_graph.pbtxt"
+		rospack = rospkg.RosPack()
+		rospack.list() 
+		path = rospack.get_path('sauvc_vision')
+		self.labels = path + "/net/labels.txt"
+		self.colors = path + "/net/colors.txt"
+		self.weights = path + "/net/frozen_inference_graph.pb"
+		self.config = path + "/net/opencv_graph.pbtxt"
 		rospy.loginfo(self.labels)
 		rospy.loginfo(os.getcwd())
 	
