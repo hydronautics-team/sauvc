@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>sauvc_missions</name>
+  <version>0.1.0</version>
+  <description>Missions for SAUVC competition</description>
+
+  <maintainer email="rentgeny@mail.ru">Timur Akhtyamov</maintainer>
+
+  <license>MIT</license>
+
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <depend>rospy</depend>
+  <depend>std_msgs</depend>
+  <depend>std_srvs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>actionlib</depend>
+  <depend>actionlib_msgs</depend>
+  <depend>stingray_missions_lib</depend>
+  <depend>stingray_movement_msgs</depend>
+
+
+</package>

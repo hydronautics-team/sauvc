@@ -1,0 +1,17 @@
+<launch>
+
+    <!-- Enables simulation mode -->
+    <arg name="simulation" default="false" />
+
+    <!-- Enables connection with hardware platform -->
+    <arg name="hardware_connection" default="true" />
+
+    <include file="$(find stingray_launch)/launch/stingray_common.launch">
+        <arg name="simulation" default="$(arg simulation)" />
+        <arg name="hardware_connection" default="$(arg hardware_connection)" />
+        <arg name="missions_module" value="sauvc_missions.sauvc_missions_fsm" />
+        <arg name="missions_class"  value="SauvcMissions" />
+        <arg name="missions_enabled" value="true" />
+    </include>
+
+</launch>
