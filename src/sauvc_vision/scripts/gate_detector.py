@@ -1,110 +1,128 @@
 #!/usr/bin/env python
+
 # https://www.pyimagesearch.com/2018/11/19/mask-r-cnn-with-opencv/
 
-# import the necessary packages
 import rospy
 import rospkg
 import cv2 as cv
-from cv_bridge import CvBridge, CvBridgeError
 import numpy as np
 import time
 import os
-
+from cv_bridge import CvBridge, CvBridgeError
+from sauvc_common.msg import Gate 
 from sensor_msgs.msg import Image
 
 class gate_detector:
-	def __init__(self, topic, device, confidence):
-		self.bridge = CvBridge()
-		self.image_sub = rospy.Subscriber(topic, Image, self.callback, queue_size=1)
-		# get ros parameters
-		self.device = device
-		self.confidence = confidence
-		# other
-		rospack = rospkg.RosPack()
-		rospack.list() 
-		path = rospack.get_path('sauvc_vision')
-		self.labels = path + "/net/labels.txt"
-		self.colors = path + "/net/colors.txt"
-		self.weights = path + "/net/frozen_inference_graph.pb"
-		self.config = path + "/net/opencv_graph.pbtxt"
-		rospy.loginfo(self.labels)
-		rospy.loginfo(os.getcwd())
-	
-	def callback(self,data):
-		try:
-			cv_image = self.bridge.imgmsg_to_cv2(data, "bgr8")
-			self.detector(cv_image)
-			rospy.loginfo(rospy.get_caller_id())
-		except CvBridgeError as e:
-			print(e)
-		cv.imshow("Image window", cv_image)
-		cv.waitKey(3)
+    def __init__(self, camera_sub_topic, gate_pub_topic, dnn_pub_topic, device, confidence):
+        rospy.loginfo("gate_detector node initializing")
+        # init cv_bridge
+        self.bridge = CvBridge()
+        # init publishers and subscribers
+        self.image_sub = rospy.Subscriber(camera_sub_topic, Image, self.callback, queue_size=1)
+        self.gate_pub = rospy.Publisher(gate_pub_topic, Gate, queue_size=1)
+        self.dnn_image_pub = rospy.Publisher(dnn_pub_topic, Image, queue_size=1)
+        self.gate_message = Gate()
 
-	def detector(self, image):
-		# loading the labels
-		LABELS = open(self.labels).read().strip().split("\n")
+        # get ros parameters
+        self.device = device
+        self.confidence = confidence
+        # get package path
+        rospack = rospkg.RosPack()
+        rospack.list() 
+        path = rospack.get_path('sauvc_vision')
+        # other constants
+        self.labels = path + "/net/labels.txt"
+        self.colors = path + "/net/colors.txt"
+        self.weights = path + "/net/frozen_inference_graph.pb"
+        self.config = path + "/net/opencv_graph.pbtxt"
+        # load our NET from disk
+        rospy.loginfo("Loading NET from disk...")
+        self.cvNet = cv.dnn.readNetFromTensorflow(self.weights, self.config)
+            
+    def callback(self,data):
+        try:
+            cv_image = self.bridge.imgmsg_to_cv2(data, "bgr8")
+            cv.imshow("Input image", cv_image)
+            is_exist, x_start, y_start, x_end, y_end, x_center, y_center, dnn_cv_image = self.detector(cv_image)
+            #publish gate coordinates and existance
+            self.gate_message.is_exist = is_exist
+            self.gate_message.x_start = x_start
+            self.gate_message.y_start = y_start
+            self.gate_message.x_end = x_end
+            self.gate_message.y_end = y_end
+            self.gate_message.x_center = x_center
+            self.gate_message.y_center = y_center
+            self.gate_pub.publish(self.gate_message)
+            #convert cv image into ros format
+            ros_image = self.bridge.cv2_to_imgmsg(dnn_cv_image, "bgr8")
+            #publish image after dnn
+            self.dnn_image_pub.publish(ros_image)
+        except CvBridgeError as e:
+            print(e)
+        cv.imshow("Output image", dnn_cv_image)
+        cv.waitKey(3)
 
-		# load the set of colors that will be used when visualizing a given
-		# instance segmentation
-		COLORS = open(self.colors).read().strip().split("\n")
-		COLORS = [np.array(c.split(",")).astype("int") for c in COLORS]
+    def detector(self, image):
+        # construct a blob from the input image and then perform a
+        # forward pass, giving us the bounding box
+        # coordinates of the objects in the image
+        self.cvNet.setInput(cv.dnn.blobFromImage(image, size=(300, 300), swapRB=True, crop=False))
+        start = time.time()
+        cvOut = self.cvNet.forward()
+        end = time.time()
+        # show timing information and volume information on NET
+        rospy.loginfo("Took {:.6f} seconds".format(end - start))
+        # find gate
+        gate_confidence = 0
+        gate_confidence_index = 0
+        is_exist = False
+        x_start = 0
+        y_start = 0
+        x_end = 0
+        y_end = 0
+        x_center = 0
+        y_center = 0
+        for i in range(0, cvOut.shape[2]):
+            # check confidence
+            confidence = cvOut[0, 0, i, 2]
+            # check object ID
+            if (int(cvOut[0, 0, i, 1]) == 1) and (confidence >= self.confidence) and (confidence >= gate_confidence):
+                gate_confidence = confidence
+                gate_confidence_index = i
+                is_exist = True
+        # scale the bounding box coordinates back relative to the
+        # size of the image and then compute the width and the height
+        # of the bounding box
+        if is_exist:
+            rows = image.shape[0]
+            cols = image.shape[1]
+            box = cvOut[0, 0, gate_confidence_index, 3:7] * np.array([cols, rows, cols, rows])
+            (x_start, y_start, x_end, y_end) = box.astype("int")
+            x_center = int((x_end - x_start)/2)
+            y_center = int((y_end - y_start)/2)
+            #draw bounding box on image
+            boxW = x_end - x_start
+            boxH = y_end - y_start 
+            cv.rectangle(image, (x_start, y_start), (x_end, y_end), (173,255,47), 4)  
+            # draw the predicted label and associated probability of the
+            # instance segmentation on the image
+            text = "gate: {:.4f}".format(self.confidence)
+            cv.putText(image, text, (x_start, y_start + 15),
+                cv.FONT_HERSHEY_SIMPLEX, 0.5, (173,255,47), 2)
 
-		# load our NET from disk
-		rospy.loginfo("loading NET from disk...")
-		cvNet = cv.dnn.readNetFromTensorflow(self.weights, self.config)
-
-		# construct a blob from the input image and then perform a
-		# forward pass, giving us the bounding box
-		# coordinates of the objects in the image
-		rows = image.shape[0]
-		cols = image.shape[1]
-		cvNet.setInput(cv.dnn.blobFromImage(image, size=(300, 300), swapRB=True, crop=False))
-		start = time.time()
-		cvOut = cvNet.forward()
-		end = time.time()
-
-		# show timing information and volume information on NET
-		rospy.loginfo("Took {:.6f} seconds".format(end - start))
-		rospy.loginfo("Boxes shape: {}".format(cvOut.shape))
-
-		# loop over the number of detected objects
-		for i in range(0, cvOut.shape[2]):
-			# extract the class ID of the detection along with the confidence
-			# (i.e., probability) associated with the prediction
-			classID = int(cvOut[0, 0, i, 1])
-			confidence = cvOut[0, 0, i, 2]
-			color = COLORS[classID]
-			color = [int(c) for c in color]
-
-			# filter out weak predictions by ensuring the detected probability
-			# is greater than the minimum probability
-			if confidence > self.confidence:
-				# scale the bounding box coordinates back relative to the
-				# size of the image and then compute the width and the height
-				# of the bounding box
-				box = cvOut[0, 0, i, 3:7] * np.array([cols, rows, cols, rows])
-				(startX, startY, endX, endY) = box.astype("int")
-				boxW = endX - startX
-				boxH = endY - startY 
-				cv.rectangle(image, (startX, startY), (endX, endY), color, 4)  
-
-				# draw the predicted label and associated probability of the
-				# instance segmentation on the image
-				text = "{}: {:.4f}".format(LABELS[classID], confidence)
-				cv.putText(image, text, (startX, startY - 5),
-					cv.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
-				# print (color)
+        return is_exist, x_start, y_start, x_end, y_end, x_center, y_center, image
 
 if __name__ == '__main__':
-	rospy.init_node('gate_detector')
-	# parameters
-	source_topic = rospy.get_param('~source_topic')
-	video_device = rospy.get_param('~video_device')
-	net_confidence = int(rospy.get_param('~net_confidence'))
-	
-	try:
-		gt = gate_detector(source_topic, video_device, net_confidence)
-		rospy.spin()
-	except rospy.ROSInterruptException:
-		print("Shutting down")
-	cv.destroyAllWindows()
+    rospy.init_node('gate_detector')
+    # parameters
+    camera_sub_topic = rospy.get_param('~camera_sub_topic')
+    gate_pub_topic = rospy.get_param('~gate_pub_topic')
+    dnn_pub_topic = rospy.get_param('~dnn_pub_topic')
+    video_device = rospy.get_param('~video_device')
+    dnn_confidence = int(rospy.get_param('~dnn_confidence'))
+    try:
+        gt = gate_detector(camera_sub_topic, gate_pub_topic, dnn_pub_topic, video_device, dnn_confidence)
+        rospy.spin()
+    except rospy.ROSInterruptException:
+        print("Shutting down")
+    cv.destroyAllWindows()

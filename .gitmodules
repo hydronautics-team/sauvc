@@ -4,3 +4,4 @@
 [submodule "src/stingray"]
 	path = src/stingray
 	url = https://github.com/hidronautics/stingray.git
+	branch = develop
