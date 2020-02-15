@@ -14,4 +14,12 @@
         <arg name="missions_enabled" value="true" />
     </include>
 
+    <node name="gate_detector" pkg="sauvc_vision" type="gate_detector.py" output="screen" respawn="true">
+        <param name="camera_sub_topic" value="/device_camera/image_raw" />
+        <param name="gate_pub_topic" value="/bottom_equipment/gate" />
+        <param name="dnn_pub_topic" value="/dnn/image" />
+        <param name="video_device" value="/dev/video0" />
+        <param name="dnn_confidence" value="0.5" />
+    </node>
+
 </launch>
