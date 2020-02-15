@@ -15,17 +15,23 @@
     <!-- Enables video recording -->
     <arg name="record" default="false" />
     
-    <!-- Camera interface node -->
-    <node name="device_camera" pkg="usb_cam" type="usb_cam_node" output="screen" respawn="true">
-        <param name="video_device" value="$(arg device)" />
-        <param name="image_width" value="640" />
-        <param name="image_height" value="480" />
-        <param name="pixel_format" value="yuyv" />
-        <param name="framerate" value="$(arg fps)" />
-        <param name="camera_frame_id" value="device_camera" />
-        <param name="camera_name" value="device_camera" />
-        <param name="io_method" value="mmap"/>
-    </node>
+    <!-- launch video stream -->
+    <include file="$(find video_stream_opencv)/launch/camera.launch" >
+        <!-- node name and ros graph name -->
+        <arg name="camera_name" value="file" />
+        <!-- means video device 0, /dev/video0 -->
+        <arg name="video_stream_provider" value="/home/vladushked/Downloads/Telegram Desktop/stingray_video_records/device_bottom_camera_image_raw_2020_02_08_13_11_56.avi" />
+        <!-- set camera fps to (if the device allows) -->
+        <arg name="set_camera_fps" value="30"/>
+        <!-- set buffer queue size of frame capturing to -->
+        <arg name="buffer_queue_size" value="100" />
+        <!-- throttling the querying of frames to -->
+        <arg name="fps" value="30" />
+        <!-- setting frame_id -->
+        <arg name="frame_id" value="webcam" />
+        <!-- visualize on an image_view window the stream generated -->
+        <arg name="visualize" value="true" />
+    </include>
 
     <!-- Gate detector node -->
     <node name="gate_detector" pkg="sauvc_vision" type="gate_detector.py" output="screen" respawn="true">
@@ -35,7 +41,16 @@
         <param name="video_device" value="$(arg device)" />
         <param name="dnn_confidence" value="0.5" />
     </node>
-    
+
+    <!-- Red flare detector node -->
+    <node name="red_flare_detector" pkg="sauvc_vision" type="red_flare_detector.py" output="screen" respawn="true">
+        <param name="camera_sub_topic" value="/device_camera/image_raw" />
+        <param name="red_flare_pub_topic" value="/bottom_equipment/red_flare" />
+        <param name="dnn_pub_topic" value="/dnn/image" />
+        <param name="video_device" value="$(arg device)" />
+        <param name="dnn_confidence" value="0.5" />
+    </node>
+
     <group if="$(arg record)">
         <!-- Video recorder node -->
         <node name="video_recorder" pkg="stingray_utils" type="video_recorder.py" output="screen" respawn="true">

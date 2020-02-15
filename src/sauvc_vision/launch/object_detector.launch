@@ -35,7 +35,16 @@
         <param name="video_device" value="$(arg device)" />
         <param name="dnn_confidence" value="0.5" />
     </node>
-    
+
+    <!-- Red flare detector node -->
+    <node name="red_flare_detector" pkg="sauvc_vision" type="red_flare_detector.py" output="screen" respawn="true">
+        <param name="camera_sub_topic" value="/device_camera/image_raw" />
+        <param name="red_flare_pub_topic" value="/bottom_equipment/red_flare" />
+        <param name="dnn_pub_topic" value="/dnn/image" />
+        <param name="video_device" value="$(arg device)" />
+        <param name="dnn_confidence" value="0.5" />
+    </node>
+
     <group if="$(arg record)">
         <!-- Video recorder node -->
         <node name="video_recorder" pkg="stingray_utils" type="video_recorder.py" output="screen" respawn="true">

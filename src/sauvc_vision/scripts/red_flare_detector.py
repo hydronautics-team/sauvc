@@ -12,16 +12,16 @@ from cv_bridge import CvBridge, CvBridgeError
 from sauvc_common.msg import Object 
 from sensor_msgs.msg import Image
 
-class gate_detector:
-    def __init__(self, camera_sub_topic, gate_pub_topic, dnn_pub_topic, device, confidence):
-        rospy.loginfo("gate_detector node initializing")
+class red_flare_detector:
+    def __init__(self, camera_sub_topic, red_flare_pub_topic, dnn_pub_topic, device, confidence):
+        rospy.loginfo("red_flare_detector node initializing")
         # init cv_bridge
         self.bridge = CvBridge()
         # init publishers and subscribers
         self.image_sub = rospy.Subscriber(camera_sub_topic, Image, self.callback, queue_size=1)
-        self.gate_pub = rospy.Publisher(gate_pub_topic, Object, queue_size=1)
+        self.red_flare_pub = rospy.Publisher(red_flare_pub_topic, Object, queue_size=1)
         self.dnn_image_pub = rospy.Publisher(dnn_pub_topic, Image, queue_size=1)
-        self.gate_message = Object()
+        self.red_flare_message = Object()
 
         # get ros parameters
         self.device = device
@@ -44,15 +44,15 @@ class gate_detector:
             cv_image = self.bridge.imgmsg_to_cv2(data, "bgr8")
             cv.imshow("Input image", cv_image)
             is_exist, x_start, y_start, x_end, y_end, x_center, y_center, dnn_cv_image = self.detector(cv_image)
-            #publish gate coordinates and existance
-            self.gate_message.is_exist = is_exist
-            self.gate_message.x_start = x_start
-            self.gate_message.y_start = y_start
-            self.gate_message.x_end = x_end
-            self.gate_message.y_end = y_end
-            self.gate_message.x_center = x_center
-            self.gate_message.y_center = y_center
-            self.gate_pub.publish(self.gate_message)
+            #publish red_flare coordinates and existance
+            self.red_flare_message.is_exist = is_exist
+            self.red_flare_message.x_start = x_start
+            self.red_flare_message.y_start = y_start
+            self.red_flare_message.x_end = x_end
+            self.red_flare_message.y_end = y_end
+            self.red_flare_message.x_center = x_center
+            self.red_flare_message.y_center = y_center
+            self.red_flare_pub.publish(self.red_flare_message)
             #convert cv image into ros format
             ros_image = self.bridge.cv2_to_imgmsg(dnn_cv_image, "bgr8")
             #publish image after dnn
@@ -72,9 +72,9 @@ class gate_detector:
         end = time.time()
         # show timing information and volume information on NET
         rospy.loginfo("Took {:.6f} seconds".format(end - start))
-        # find gate
-        gate_confidence = 0
-        gate_confidence_index = 0
+        # find red_flare
+        red_flare_confidence = 0
+        red_flare_confidence_index = 0
         is_exist = False
         x_start = 0
         y_start = 0
@@ -86,9 +86,9 @@ class gate_detector:
             # check confidence
             confidence = cvOut[0, 0, i, 2]
             # check object ID
-            if (int(cvOut[0, 0, i, 1]) == 1) and (confidence >= self.confidence) and (confidence >= gate_confidence):
-                gate_confidence = confidence
-                gate_confidence_index = i
+            if (int(cvOut[0, 0, i, 1]) == 2) and (confidence >= self.confidence) and (confidence >= red_flare_confidence):
+                red_flare_confidence = confidence
+                red_flare_confidence_index = i
                 is_exist = True
         # scale the bounding box coordinates back relative to the
         # size of the image and then compute the width and the height
@@ -96,32 +96,32 @@ class gate_detector:
         if is_exist:
             rows = image.shape[0]
             cols = image.shape[1]
-            box = cvOut[0, 0, gate_confidence_index, 3:7] * np.array([cols, rows, cols, rows])
+            box = cvOut[0, 0, red_flare_confidence_index, 3:7] * np.array([cols, rows, cols, rows])
             (x_start, y_start, x_end, y_end) = box.astype("int")
-            x_center = int(x_end - x_start + x_start)
-            y_center = int(y_end - y_start + y_start)
+            x_center = int(x_end - x_start)
+            y_center = int(y_end - y_start)
             #draw bounding box on image
             boxW = x_end - x_start
             boxH = y_end - y_start 
             cv.rectangle(image, (x_start, y_start), (x_end, y_end), (173,255,47), 4)  
             # draw the predicted label and associated probability of the
             # instance segmentation on the image
-            text = "gate: {:.4f}".format(self.confidence)
+            text = "red_flare: {:.4f}".format(self.confidence)
             cv.putText(image, text, (x_start, y_start + 15),
                 cv.FONT_HERSHEY_SIMPLEX, 0.5, (173,255,47), 2)
 
         return is_exist, x_start, y_start, x_end, y_end, x_center, y_center, image
 
 if __name__ == '__main__':
-    rospy.init_node('gate_detector')
+    rospy.init_node('red_flare_detector')
     # parameters
     camera_sub_topic = rospy.get_param('~camera_sub_topic')
-    gate_pub_topic = rospy.get_param('~gate_pub_topic')
+    red_flare_pub_topic = rospy.get_param('~red_flare_pub_topic')
     dnn_pub_topic = rospy.get_param('~dnn_pub_topic')
     video_device = rospy.get_param('~video_device')
     dnn_confidence = int(rospy.get_param('~dnn_confidence'))
     try:
-        gt = gate_detector(camera_sub_topic, gate_pub_topic, dnn_pub_topic, video_device, dnn_confidence)
+        gt = red_flare_detector(camera_sub_topic, red_flare_pub_topic, dnn_pub_topic, video_device, dnn_confidence)
         rospy.spin()
     except rospy.ROSInterruptException:
         print("Shutting down")
