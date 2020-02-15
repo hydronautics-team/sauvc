@@ -1,3 +1,4 @@
+
 <launch>
 
     <!-- Enables simulation mode -->
@@ -18,8 +19,27 @@
         <param name="camera_sub_topic" value="/device_camera/image_raw" />
         <param name="gate_pub_topic" value="/bottom_equipment/gate" />
         <param name="dnn_pub_topic" value="/dnn/image" />
-        <param name="video_device" value="/dev/video0" />
+        <param name="video_device" value="/dev/video2" />
         <param name="dnn_confidence" value="0.5" />
     </node>
+
+    <!-- Camera interface node -->
+    <node name="device_camera" pkg="usb_cam" type="usb_cam_node" output="screen" respawn="true">
+        <param name="video_device" value="/dev/video2" />
+        <param name="image_width" value="640" />
+        <param name="image_height" value="480" />
+        <param name="pixel_format" value="yuyv" />
+        <param name="framerate" value="30" />
+        <param name="camera_frame_id" value="device_camera" />
+        <param name="camera_name" value="device_camera" />
+        <param name="io_method" value="mmap"/>
+    </node>
+
+        <!-- Video web server -->
+        <!-- Stream will be available at http://<hostname>:8080/stream_viewer?topic=/device_camera/image_raw -->
+        <node name="video_server" pkg="web_video_server" type="web_video_server" output="screen" respawn="true">
+            <param name="server_threads" value="4" />
+            <param name="ros_threads" value="10" />
+        </node>
 
 </launch>
