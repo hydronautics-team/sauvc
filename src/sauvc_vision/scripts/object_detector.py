@@ -12,16 +12,16 @@ from cv_bridge import CvBridge, CvBridgeError
 from sauvc_common.msg import Object 
 from sensor_msgs.msg import Image
 
-class red_flare_detector:
-    def __init__(self, camera_sub_topic, red_flare_pub_topic, dnn_pub_topic, device, confidence):
-        rospy.loginfo("red_flare_detector node initializing")
+class object_detector:
+    def __init__(self, camera_sub_topic, object_pub_topic, dnn_pub_topic, device, confidence):
+        rospy.loginfo("object_detector node initializing")
         # init cv_bridge
         self.bridge = CvBridge()
         # init publishers and subscribers
         self.image_sub = rospy.Subscriber(camera_sub_topic, Image, self.callback, queue_size=1)
-        self.red_flare_pub = rospy.Publisher(red_flare_pub_topic, Object, queue_size=1)
+        self.object_pub = rospy.Publisher(object_pub_topic, Object, queue_size=1)
         self.dnn_image_pub = rospy.Publisher(dnn_pub_topic, Image, queue_size=1)
-        self.red_flare_message = Object()
+        self.object_message = Object()
 
         # get ros parameters
         self.device = device
@@ -44,15 +44,15 @@ class red_flare_detector:
             cv_image = self.bridge.imgmsg_to_cv2(data, "bgr8")
             cv.imshow("Input image", cv_image)
             is_exist, x_start, y_start, x_end, y_end, x_center, y_center, dnn_cv_image = self.detector(cv_image)
-            #publish red_flare coordinates and existance
-            self.red_flare_message.is_exist = is_exist
-            self.red_flare_message.x_start = x_start
-            self.red_flare_message.y_start = y_start
-            self.red_flare_message.x_end = x_end
-            self.red_flare_message.y_end = y_end
-            self.red_flare_message.x_center = x_center
-            self.red_flare_message.y_center = y_center
-            self.red_flare_pub.publish(self.red_flare_message)
+            #publish object coordinates and existance
+            self.object_message.is_exist = is_exist
+            self.object_message.x_start = x_start
+            self.object_message.y_start = y_start
+            self.object_message.x_end = x_end
+            self.object_message.y_end = y_end
+            self.object_message.x_center = x_center
+            self.object_message.y_center = y_center
+            self.object_pub.publish(self.object_message)
             #convert cv image into ros format
             ros_image = self.bridge.cv2_to_imgmsg(dnn_cv_image, "bgr8")
             #publish image after dnn
@@ -72,31 +72,35 @@ class red_flare_detector:
         end = time.time()
         # show timing information and volume information on NET
         rospy.loginfo("Took {:.6f} seconds".format(end - start))
-        # find red_flare
-        red_flare_confidence = 0
-        red_flare_confidence_index = 0
-        is_exist = False
-        x_start = 0
-        y_start = 0
-        x_end = 0
-        y_end = 0
-        x_center = 0
-        y_center = 0
+        # find object
+        gate[gate_confidence, gate_confidence_index]
+        gate_confidence = 0
+        gate_confidence_index = 0
+        gate_is_exist = False
+        gate_confidence = 0
+        gate_confidence_index = 0
+        gate_is_exist = False
+        # go through all objects
         for i in range(0, cvOut.shape[2]):
             # check confidence
             confidence = cvOut[0, 0, i, 2]
-            # check object ID
-            if (int(cvOut[0, 0, i, 1]) == 2) and (confidence >= self.confidence) and (confidence >= red_flare_confidence):
+            # check gate ID
+            if (int(cvOut[0, 0, i, 1]) == 1) and (confidence >= self.confidence) and (confidence >= object_confidence):
+                gate_confidence = confidence
+                gate_confidence_index = i
+                gate_is_exist = True
+            # check red_flare ID
+            if (int(cvOut[0, 0, i, 1]) == 2) and (confidence >= self.confidence) and (confidence >= object_confidence):
                 red_flare_confidence = confidence
                 red_flare_confidence_index = i
-                is_exist = True
+                red_flare_is_exist = True
         # scale the bounding box coordinates back relative to the
         # size of the image and then compute the width and the height
         # of the bounding box
         if is_exist:
             rows = image.shape[0]
             cols = image.shape[1]
-            box = cvOut[0, 0, red_flare_confidence_index, 3:7] * np.array([cols, rows, cols, rows])
+            box = cvOut[0, 0, object_confidence_index, 3:7] * np.array([cols, rows, cols, rows])
             (x_start, y_start, x_end, y_end) = box.astype("int")
             x_center = int(x_end - x_start)
             y_center = int(y_end - y_start)
@@ -106,22 +110,21 @@ class red_flare_detector:
             cv.rectangle(image, (x_start, y_start), (x_end, y_end), (173,255,47), 4)  
             # draw the predicted label and associated probability of the
             # instance segmentation on the image
-            text = "red_flare: {:.4f}".format(self.confidence)
+            text = "object: {:.4f}".format(self.confidence)
             cv.putText(image, text, (x_start, y_start + 15),
                 cv.FONT_HERSHEY_SIMPLEX, 0.5, (173,255,47), 2)
-
-        return is_exist, x_start, y_start, x_end, y_end, x_center, y_center, image
+            return is_exist, x_start, y_start, x_end, y_end, x_center, y_center, image
 
 if __name__ == '__main__':
-    rospy.init_node('red_flare_detector')
+    rospy.init_node('object_detector')
     # parameters
     camera_sub_topic = rospy.get_param('~camera_sub_topic')
-    red_flare_pub_topic = rospy.get_param('~red_flare_pub_topic')
+    object_pub_topic = rospy.get_param('~object_pub_topic')
     dnn_pub_topic = rospy.get_param('~dnn_pub_topic')
     video_device = rospy.get_param('~video_device')
     dnn_confidence = int(rospy.get_param('~dnn_confidence'))
     try:
-        gt = red_flare_detector(camera_sub_topic, red_flare_pub_topic, dnn_pub_topic, video_device, dnn_confidence)
+        gt = object_detector(camera_sub_topic, object_pub_topic, dnn_pub_topic, video_device, dnn_confidence)
         rospy.spin()
     except rospy.ROSInterruptException:
         print("Shutting down")

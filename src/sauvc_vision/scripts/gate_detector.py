@@ -42,7 +42,6 @@ class gate_detector:
     def callback(self,data):
         try:
             cv_image = self.bridge.imgmsg_to_cv2(data, "bgr8")
-            cv.imshow("Input image", cv_image)
             is_exist, x_start, y_start, x_end, y_end, x_center, y_center, dnn_cv_image = self.detector(cv_image)
             #publish gate coordinates and existance
             self.gate_message.is_exist = is_exist
@@ -59,8 +58,6 @@ class gate_detector:
             self.dnn_image_pub.publish(ros_image)
         except CvBridgeError as e:
             print(e)
-        cv.imshow("Output image", dnn_cv_image)
-        cv.waitKey(3)
 
     def detector(self, image):
         # construct a blob from the input image and then perform a
@@ -125,4 +122,3 @@ if __name__ == '__main__':
         rospy.spin()
     except rospy.ROSInterruptException:
         print("Shutting down")
-    cv.destroyAllWindows()
