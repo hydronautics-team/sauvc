@@ -36,7 +36,7 @@ class object_detector:
         red_bowl_2_topic = node_name + "/red_bowl_2_topic"
         red_bowl_3_topic = node_name + "/red_bowl_3_topic"
         blue_bowl_topic = node_name + "/blue_bowl_topic"
-        dnn_image_topic = node_name + "/image"
+        dnn_image_topic = "/dnn/image"
         # init msg
         self.gate_message = Object()
         self.red_flare_message = Object()
@@ -92,10 +92,9 @@ class object_detector:
             cv_image = self.bridge.imgmsg_to_cv2(data, "bgr8")
             # detect our objects
             objects = self.detector(cv_image)
-            rospy.loginfo(objects)
             # publish object coordinates and existance
             for key in objects.keys():
-                obj = objects.pop(key)
+                obj = objects.get(key)
                 self.messages[key].name = obj.get('name')
                 self.messages[key].is_exist = obj.get('is_exist')
                 self.messages[key].x_start = obj.get('x_start')
@@ -142,7 +141,7 @@ class object_detector:
                 else:
                     objects[key] = object_id, object_label_id, object_confidence
         for key in objects.keys():
-            id = objects.pop(key)[0]
+            id, label_id, confidence = objects.pop(key)
             rows = img.shape[0]
             cols = img.shape[1]
             box = cvOut[0, 0, id, 3:7] * np.array([cols, rows, cols, rows])
@@ -151,34 +150,30 @@ class object_detector:
             y_center = int(y_end - y_start)
             objects[key] = {'name': self.labels[id],
                             'is_exist': True,
+                            'confidence': confidence,
                             'x_start': x_start,
                             'y_start': y_start,
                             'x_end': x_end,
                             'y_end': y_end,
                             'x_center': x_center,
                             'y_center': y_center}
+        
         return objects
 
-    def draw(self, objects, image):
+    def draw(self, img, objects):
         # scale the bounding box coordinates back relative to the
         # size of the image and then compute the width and the height
         # of the bounding box
-        if is_exist:
-            rows = image.shape[0]
-            cols = image.shape[1]
-            box = cvOut[0, 0, object_confidence_index, 3:7] * np.array([cols, rows, cols, rows])
-            (x_start, y_start, x_end, y_end) = box.astype("int")
-            x_center = int(x_end - x_start)
-            y_center = int(y_end - y_start)
+        for key in objects.keys():
+            obj = objects.get(key)
             #draw bounding box on image
-            boxW = x_end - x_start
-            boxH = y_end - y_start 
-            cv.rectangle(image, (x_start, y_start), (x_end, y_end), (173,255,47), 4)  
+            cv.rectangle(img, (obj['x_start'], obj['y_start']), (obj['x_end'], obj['y_end']), (173,255,47), 4)  
             # draw the predicted label and associated probability of the
             # instance segmentation on the image
-            text = "object: {:.4f}".format(self.confidence)
-            cv.putText(image, text, (x_start, y_start + 15),
-                cv.FONT_HERSHEY_SIMPLEX, 0.5, (173,255,47), 2)
+            text = obj['name'] + str(obj['confidence'])
+            cv.putText(img, text, (obj['x_start'], obj['y_start'] + 15), cv.FONT_HERSHEY_SIMPLEX, 0.5, (173,255,47), 2)
+        
+        return img
 
 if __name__ == '__main__':
     rospy.init_node('object_detector')
