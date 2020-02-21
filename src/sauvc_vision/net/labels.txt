@@ -1,4 +1,4 @@
 gate
 gate
 red_flare
-yellow_flare
+yellow_flare_1

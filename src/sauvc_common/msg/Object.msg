@@ -1,3 +1,4 @@
+string name
 bool is_exist
 float64 x_start
 float64 y_start

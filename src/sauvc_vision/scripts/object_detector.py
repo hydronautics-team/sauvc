@@ -13,87 +13,153 @@ from sauvc_common.msg import Object
 from sensor_msgs.msg import Image
 
 class object_detector:
-    def __init__(self, camera_sub_topic, object_pub_topic, dnn_pub_topic, device, confidence):
-        rospy.loginfo("object_detector node initializing")
+    def __init__(self, front_camera_sub_topic, bottom_camera_sub_topic, confidence):
+        node_name = rospy.get_name()
+        rospy.loginfo(node_name + "node initializing...")
+        # constants 
+        rospack = rospkg.RosPack()
+        path = rospack.get_path('sauvc_vision')
+        labels_path = path + "/net/labels.txt"
+        colors_path = path + "/net/colors.txt"
+        weights_path = path + "/net/frozen_inference_graph.pb"
+        config_path = path + "/net/opencv_graph.pbtxt"
+        self.confidence = confidence
+        self.labels = open(labels_path).read().strip().split("\n")
+        self.colors = open(colors_path).read().strip().split("\n")
+        # ROS Topic names
+        gate_topic = node_name + "/gate"
+        red_flare_topic = node_name + "/red_flare"
+        yellow_flare_1_topic = node_name + "/yellow_flare_1"
+        yellow_flare_2_topic = node_name + "/yellow_flare_2"
+        mat_topic = node_name + "/mat_topic"
+        red_bowl_1_topic = node_name + "/red_bowl_1_topic"
+        red_bowl_2_topic = node_name + "/red_bowl_2_topic"
+        red_bowl_3_topic = node_name + "/red_bowl_3_topic"
+        blue_bowl_topic = node_name + "/blue_bowl_topic"
+        dnn_image_topic = node_name + "/image"
+        # init msg
+        self.gate_message = Object()
+        self.red_flare_message = Object()
+        self.yellow_flare_1_message = Object()
+        self.yellow_flare_2_message = Object()
+        self.mat_message = Object()
+        self.red_bowl_1_message = Object()
+        self.red_bowl_2_message = Object()
+        self.red_bowl_3_message = Object()
+        self.blue_bowl_message = Object()
+        self.messages = dict()
+        self.messages['gate'] = self.gate_message
+        self.messages['red_flare'] = self.red_flare_message
+        self.messages['yellow_flare_1'] = self.yellow_flare_1_message
+        self.messages['yellow_flare_2'] = self.yellow_flare_2_message
+        self.messages['mat'] = self.mat_message
+        self.messages['red_bowl_1'] = self.red_bowl_1_message
+        self.messages['red_bowl_2'] = self.red_bowl_2_message
+        self.messages['red_bowl_3'] = self.red_bowl_3_message
+        self.messages['blue_bowl'] = self.blue_bowl_message
+        # subscribers
+        self.image_sub = rospy.Subscriber(front_camera_sub_topic, Image, self.callback, queue_size=1)
+        # publishers
+        self.gate_pub = rospy.Publisher(gate_topic, Object, queue_size=1)
+        self.red_flare_pub = rospy.Publisher(red_flare_topic, Object, queue_size=1)
+        self.yellow_flare_1_pub = rospy.Publisher(yellow_flare_1_topic, Object, queue_size=1)
+        self.yellow_flare_2_pub = rospy.Publisher(yellow_flare_2_topic, Object, queue_size=1)
+        self.mat_pub = rospy.Publisher(mat_topic, Object, queue_size=1)
+        self.red_bowl_1_pub = rospy.Publisher(red_bowl_1_topic, Object, queue_size=1)
+        self.red_bowl_2_pub = rospy.Publisher(red_bowl_2_topic, Object, queue_size=1)
+        self.red_bowl_3_pub = rospy.Publisher(red_bowl_3_topic, Object, queue_size=1)
+        self.blue_bowl_pub = rospy.Publisher(blue_bowl_topic, Object, queue_size=1)
+        self.image_pub = rospy.Publisher(dnn_image_topic, Image, queue_size=1)
+        self.publishers = dict()
+        self.publishers['gate'] = self.gate_pub
+        self.publishers['red_flare'] = self.red_flare_pub
+        self.publishers['yellow_flare_1'] = self.yellow_flare_1_pub
+        self.publishers['yellow_flare_2'] = self.yellow_flare_2_pub
+        self.publishers['mat'] = self.mat_pub
+        self.publishers['red_bowl_1'] = self.red_bowl_1_pub
+        self.publishers['red_bowl_2'] = self.red_bowl_2_pub
+        self.publishers['red_bowl_3'] = self.red_bowl_3_pub
+        self.publishers['blue_bowl'] = self.blue_bowl_pub
         # init cv_bridge
         self.bridge = CvBridge()
-        # init publishers and subscribers
-        self.image_sub = rospy.Subscriber(camera_sub_topic, Image, self.callback, queue_size=1)
-        self.object_pub = rospy.Publisher(object_pub_topic, Object, queue_size=1)
-        self.dnn_image_pub = rospy.Publisher(dnn_pub_topic, Image, queue_size=1)
-        self.object_message = Object()
-
-        # get ros parameters
-        self.device = device
-        self.confidence = confidence
-        # get package path
-        rospack = rospkg.RosPack()
-        rospack.list() 
-        path = rospack.get_path('sauvc_vision')
-        # other constants
-        self.labels = path + "/net/labels.txt"
-        self.colors = path + "/net/colors.txt"
-        self.weights = path + "/net/frozen_inference_graph.pb"
-        self.config = path + "/net/opencv_graph.pbtxt"
         # load our NET from disk
         rospy.loginfo("Loading NET from disk...")
-        self.cvNet = cv.dnn.readNetFromTensorflow(self.weights, self.config)
+        self.cvNet = cv.dnn.readNetFromTensorflow(weights_path, config_path)
             
     def callback(self,data):
         try:
+            # convert ROS image to OpenCV image
             cv_image = self.bridge.imgmsg_to_cv2(data, "bgr8")
-            cv.imshow("Input image", cv_image)
-            is_exist, x_start, y_start, x_end, y_end, x_center, y_center, dnn_cv_image = self.detector(cv_image)
-            #publish object coordinates and existance
-            self.object_message.is_exist = is_exist
-            self.object_message.x_start = x_start
-            self.object_message.y_start = y_start
-            self.object_message.x_end = x_end
-            self.object_message.y_end = y_end
-            self.object_message.x_center = x_center
-            self.object_message.y_center = y_center
-            self.object_pub.publish(self.object_message)
-            #convert cv image into ros format
+            # detect our objects
+            objects = self.detector(cv_image)
+            rospy.loginfo(objects)
+            # publish object coordinates and existance
+            for key in objects.keys():
+                obj = objects.pop(key)
+                self.messages[key].name = obj.get('name')
+                self.messages[key].is_exist = obj.get('is_exist')
+                self.messages[key].x_start = obj.get('x_start')
+                self.messages[key].y_start = obj.get('y_start')
+                self.messages[key].x_end = obj.get('x_end')
+                self.messages[key].y_end = obj.get('y_end')
+                self.messages[key].x_center = obj.get('x_center')
+                self.messages[key].y_center = obj.get('y_center')
+                self.publishers[key].publish(self.messages[key])
+            # draw bounding boxes
+            dnn_cv_image = self.draw(cv_image, objects)
+            # convert cv image into ros format
             ros_image = self.bridge.cv2_to_imgmsg(dnn_cv_image, "bgr8")
-            #publish image after dnn
-            self.dnn_image_pub.publish(ros_image)
+            # publish image after dnn
+            self.image_pub.publish(ros_image)
         except CvBridgeError as e:
             print(e)
-        cv.imshow("Output image", dnn_cv_image)
-        cv.waitKey(3)
 
-    def detector(self, image):
+    def detector(self, img):
         # construct a blob from the input image and then perform a
         # forward pass, giving us the bounding box
         # coordinates of the objects in the image
-        self.cvNet.setInput(cv.dnn.blobFromImage(image, size=(300, 300), swapRB=True, crop=False))
+        self.cvNet.setInput(cv.dnn.blobFromImage(img, size=(300, 300), swapRB=True, crop=False))
         start = time.time()
         cvOut = self.cvNet.forward()
         end = time.time()
         # show timing information and volume information on NET
         rospy.loginfo("Took {:.6f} seconds".format(end - start))
-        # find object
-        gate[gate_confidence, gate_confidence_index]
-        gate_confidence = 0
-        gate_confidence_index = 0
-        gate_is_exist = False
-        gate_confidence = 0
-        gate_confidence_index = 0
-        gate_is_exist = False
-        # go through all objects
+        # dictionary with objects: obj[object_id, object_label_id, confidence]
+        objects = dict()
+        # go through all detected objects
         for i in range(0, cvOut.shape[2]):
             # check confidence
-            confidence = cvOut[0, 0, i, 2]
-            # check gate ID
-            if (int(cvOut[0, 0, i, 1]) == 1) and (confidence >= self.confidence) and (confidence >= object_confidence):
-                gate_confidence = confidence
-                gate_confidence_index = i
-                gate_is_exist = True
-            # check red_flare ID
-            if (int(cvOut[0, 0, i, 1]) == 2) and (confidence >= self.confidence) and (confidence >= object_confidence):
-                red_flare_confidence = confidence
-                red_flare_confidence_index = i
-                red_flare_is_exist = True
+            object_confidence = cvOut[0, 0, i, 2]
+            object_id = i
+            object_label_id = int(cvOut[0, 0, i, 1])
+            if object_confidence >= self.confidence:
+                key = self.labels[object_label_id]
+                if objects.get(key):
+                    if  object_confidence > objects.get(key)[2]:
+                        objects[key] = object_id, object_label_id, object_confidence
+                    else:
+                        continue
+                else:
+                    objects[key] = object_id, object_label_id, object_confidence
+        for key in objects.keys():
+            id = objects.pop(key)[0]
+            rows = img.shape[0]
+            cols = img.shape[1]
+            box = cvOut[0, 0, id, 3:7] * np.array([cols, rows, cols, rows])
+            (x_start, y_start, x_end, y_end) = box.astype("int")
+            x_center = int(x_end - x_start)
+            y_center = int(y_end - y_start)
+            objects[key] = {'name': self.labels[id],
+                            'is_exist': True,
+                            'x_start': x_start,
+                            'y_start': y_start,
+                            'x_end': x_end,
+                            'y_end': y_end,
+                            'x_center': x_center,
+                            'y_center': y_center}
+        return objects
+
+    def draw(self, objects, image):
         # scale the bounding box coordinates back relative to the
         # size of the image and then compute the width and the height
         # of the bounding box
@@ -113,18 +179,15 @@ class object_detector:
             text = "object: {:.4f}".format(self.confidence)
             cv.putText(image, text, (x_start, y_start + 15),
                 cv.FONT_HERSHEY_SIMPLEX, 0.5, (173,255,47), 2)
-            return is_exist, x_start, y_start, x_end, y_end, x_center, y_center, image
 
 if __name__ == '__main__':
     rospy.init_node('object_detector')
     # parameters
-    camera_sub_topic = rospy.get_param('~camera_sub_topic')
-    object_pub_topic = rospy.get_param('~object_pub_topic')
-    dnn_pub_topic = rospy.get_param('~dnn_pub_topic')
-    video_device = rospy.get_param('~video_device')
+    front_camera_sub_topic = rospy.get_param('~front_camera_sub_topic')
+    bottom_camera_sub_topic = rospy.get_param('~bottom_camera_sub_topic')
     dnn_confidence = int(rospy.get_param('~dnn_confidence'))
     try:
-        gt = object_detector(camera_sub_topic, object_pub_topic, dnn_pub_topic, video_device, dnn_confidence)
+        gt = object_detector(front_camera_sub_topic, bottom_camera_sub_topic, dnn_confidence)
         rospy.spin()
     except rospy.ROSInterruptException:
         print("Shutting down")
