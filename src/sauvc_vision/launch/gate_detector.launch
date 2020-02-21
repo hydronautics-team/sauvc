@@ -4,7 +4,7 @@
 <launch>
 
     <!-- Defines device that will be used as camera -->
-    <arg name="device" default="/dev/video0" />
+    <arg name="device" default="/dev/video2" />
 
     <!-- Defines FPS -->
     <arg name="fps" default="25" />

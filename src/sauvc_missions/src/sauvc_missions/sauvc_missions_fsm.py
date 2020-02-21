@@ -34,7 +34,7 @@ class GatesMission(Mission):
         self.pub_ = rospy.Publisher("/sauvc/topic/align/gate", AlignValue, queue_size=10)
 
         rospy.loginfo("Diving...")
-        steerer.dive(70)
+        #steerer.dive(70)
         rospy.loginfo("Dived!")
 
         lagGoal = steerer.create_lag_goal(600000, 0.2)
