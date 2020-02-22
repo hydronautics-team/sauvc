@@ -34,28 +34,35 @@ class GatesMission(Mission):
         self.pub_ = rospy.Publisher("/sauvc/topic/align/gate", AlignValue, queue_size=10)
 
         rospy.loginfo("Diving...")
-        #steerer.dive(70)
+        steerer.dive(70)
         rospy.loginfo("Dived!")
 
-        lagGoal = steerer.create_lag_goal(600000, 0.2)
-        linear_client.send_goal(lagGoal, active_cb=None, feedback_cb=None, done_cb=None)
+        rospy.loginfo("Starting lag movement")
+        lag_goal = steerer.create_lag_goal(600000, 0.2)
+        goal_handle = linear_client.send_goal(lag_goal, active_cb=None, feedback_cb=None, done_cb=None)
 
-        hasGateCount = 0
-        while hasGateCount < 2:
-            msg = rospy.wait_for_message("/bottom_equipment/gate", Object)
+        has_gate_count = 0
+        while has_gate_count < 2:
+            msg = rospy.wait_for_message("/object_detector/gate", Object)
             if msg.is_exist:
-                hasGateCount += 1
+                rospy.loginfo("Gates!")
+                has_gate_count += 1
             else:
-                hasGateCount = 0
+                rospy.loginfo("No gates!")
+                has_gate_count = 0
 
+        rospy.loginfo("Stopping lag movement...")
         steerer.stop()
-        linear_client.cancel_goal()
+        linear_client.cancel_all_goals()
+        rospy.loginfo("Lag movement stopped")
 
-        sub = rospy.Subscriber("/bottom_equipment/gate", Object,
+        rospy.loginfo("Starting alignment")
+        sub = rospy.Subscriber("/object_detector/gate", Object,
                                lambda msg: self.sub_callback(msg))
         align_goal = stingray_movement_msgs.msg.AlignGoal(topicName="/sauvc/topic/align/gate", delta=10.0)
         align_client.send_goal(align_goal)
         align_client.wait_for_result()
+        sub.unregister()
 
         return self.outcome_ok_
 

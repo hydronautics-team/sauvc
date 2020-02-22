@@ -7,7 +7,8 @@
     <!-- Enables connection with hardware platform -->
     <arg name="hardware_connection" default="true" />
 
-    <!-- Enables recording and streaming -->
+    <!-- Enables cameras, recording and streaming -->
+    <arg name="cameras_enabled" default="true" />
     <arg name="record" default="false" />
     <arg name="stream" default="false" />
 
@@ -20,6 +21,7 @@
     </include>
 
     <include file="$(find sauvc_vision)/launch/object_detector.launch">
+        <arg name="cameras" value="$(arg cameras_enabled)" />
         <arg name="device_front" default="/dev/v4l/by-path/platform-3530000.xhci-usb-0:1:1.0-video-index0" />
         <arg name="device_bottom" default="/dev/v4l/by-path/platform-3530000.xhci-usb-0:2:1.0-video-index0" />
         <arg name="record" default="$(arg record)" />

@@ -14,28 +14,32 @@
     <arg name="stream" default="false" />
     <!-- Enables video recording -->
     <arg name="record" default="false" />
-    
-    <!-- Front camera interface node -->
-    <node name="front_camera" pkg="usb_cam" type="usb_cam_node" output="screen" respawn="true">
-        <param name="video_device" value="$(arg device_front)" />
-        <param name="image_width" value="640" />
-        <param name="image_height" value="480" />
-        <param name="pixel_format" value="yuyv" />
-        <param name="framerate" value="$(arg fps)" />
-        <param name="camera_name" value="front_camera" />
-        <param name="io_method" value="mmap"/>
-    </node>
+    <!-- Enables or disables camera (in debug purposes -->
+    <arg name="cameras" default="true" />
 
-    <!-- Bottom camera interface node -->
-    <node name="bottom_camera" pkg="usb_cam" type="usb_cam_node" output="screen" respawn="true">
-        <param name="video_device" value="$(arg device_bottom)" />
-        <param name="image_width" value="640" />
-        <param name="image_height" value="480" />
-        <param name="pixel_format" value="yuyv" />
-        <param name="framerate" value="$(arg fps)" />
-        <param name="camera_name" value="bottom_camera" />
-        <param name="io_method" value="mmap"/>
-    </node>
+    <group if="$(arg cameras)">
+        <!-- Front camera interface node -->
+        <node name="front_camera" pkg="usb_cam" type="usb_cam_node" output="screen" respawn="true">
+            <param name="video_device" value="$(arg device_front)" />
+            <param name="image_width" value="640" />
+            <param name="image_height" value="480" />
+            <param name="pixel_format" value="yuyv" />
+            <param name="framerate" value="$(arg fps)" />
+            <param name="camera_name" value="front_camera" />
+            <param name="io_method" value="mmap"/>
+        </node>
+
+        <!-- Bottom camera interface node -->
+        <node name="bottom_camera" pkg="usb_cam" type="usb_cam_node" output="screen" respawn="true">
+            <param name="video_device" value="$(arg device_bottom)" />
+            <param name="image_width" value="640" />
+            <param name="image_height" value="480" />
+            <param name="pixel_format" value="yuyv" />
+            <param name="framerate" value="$(arg fps)" />
+            <param name="camera_name" value="bottom_camera" />
+            <param name="io_method" value="mmap"/>
+        </node>
+    </group>
 
     <!-- Object detector node -->
     <node name="object_detector" pkg="sauvc_vision" type="object_detector.py" output="screen" respawn="true">

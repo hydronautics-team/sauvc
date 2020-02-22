@@ -122,7 +122,7 @@ class object_detector:
         cvOut = self.cvNet.forward()
         end = time.time()
         # show timing information and volume information on NET
-        rospy.loginfo("Took {:.6f} seconds".format(end - start))
+        #rospy.loginfo("Took {:.6f} seconds".format(end - start))
         # dictionary with objects: obj[object_id, object_label_id, confidence]
         objects = dict()
         # go through all detected objects
@@ -146,8 +146,8 @@ class object_detector:
             cols = img.shape[1]
             box = cvOut[0, 0, id, 3:7] * np.array([cols, rows, cols, rows])
             (x_start, y_start, x_end, y_end) = box.astype("int")
-            x_center = int(x_end - x_start)
-            y_center = int(y_end - y_start)
+            x_center = int((x_end + x_start) / 2.0)
+            y_center = int((y_end + y_start) / 2.0)
             objects[key] = {'name': self.labels[id],
                             'is_exist': True,
                             'confidence': confidence,
