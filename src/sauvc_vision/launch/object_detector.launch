@@ -59,7 +59,8 @@
 
     <group if="$(arg stream)">
         <!-- Video web server -->
-        <!-- Stream will be available at http://<hostname>:8080/stream_viewer?topic=/device_camera/image_raw -->
+        <!-- Stream will be available at http://<hostname>:8080/stream_viewer?topic=<image topic> -->
+        <!-- For direct images from camera the topic is /<camera_name>/image_raw -->
         <node name="video_server" pkg="web_video_server" type="web_video_server" output="screen" respawn="true">
             <param name="server_threads" value="4" />
             <param name="ros_threads" value="10" />

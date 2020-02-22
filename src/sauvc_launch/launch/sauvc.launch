@@ -7,6 +7,10 @@
     <!-- Enables connection with hardware platform -->
     <arg name="hardware_connection" default="true" />
 
+    <!-- Enables recording and streaming -->
+    <arg name="record" default="false" />
+    <arg name="stream" default="false" />
+
     <include file="$(find stingray_launch)/launch/stingray_common.launch">
         <arg name="simulation" default="$(arg simulation)" />
         <arg name="hardware_connection" default="$(arg hardware_connection)" />
@@ -15,31 +19,11 @@
         <arg name="missions_enabled" value="true" />
     </include>
 
-    <node name="gate_detector" pkg="sauvc_vision" type="gate_detector.py" output="screen" respawn="true">
-        <param name="camera_sub_topic" value="/device_camera/image_raw" />
-        <param name="gate_pub_topic" value="/bottom_equipment/gate" />
-        <param name="dnn_pub_topic" value="/dnn/image" />
-        <param name="video_device" value="/dev/video2" />
-        <param name="dnn_confidence" value="0.5" />
-    </node>
-
-    <!-- Camera interface node -->
-    <node name="device_camera" pkg="usb_cam" type="usb_cam_node" output="screen" respawn="true">
-        <param name="video_device" value="/dev/video2" />
-        <param name="image_width" value="640" />
-        <param name="image_height" value="480" />
-        <param name="pixel_format" value="yuyv" />
-        <param name="framerate" value="30" />
-        <param name="camera_frame_id" value="device_camera" />
-        <param name="camera_name" value="device_camera" />
-        <param name="io_method" value="mmap"/>
-    </node>
-
-        <!-- Video web server -->
-        <!-- Stream will be available at http://<hostname>:8080/stream_viewer?topic=/device_camera/image_raw -->
-        <node name="video_server" pkg="web_video_server" type="web_video_server" output="screen" respawn="true">
-            <param name="server_threads" value="4" />
-            <param name="ros_threads" value="10" />
-        </node>
+    <include file="$(find sauvc_vision)/launch/object_detector.launch">
+        <arg name="device_front" default="/dev/v4l/by-path/platform-3530000.xhci-usb-0:1:1.0-video-index0" />
+        <arg name="device_bottom" default="/dev/v4l/by-path/platform-3530000.xhci-usb-0:2:1.0-video-index0" />
+        <arg name="record" default="$(arg record)" />
+        <arg name="stream" default="$(arg stream)" />
+    </include>
 
 </launch>
