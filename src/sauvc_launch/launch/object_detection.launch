@@ -1,5 +1,35 @@
 <launch>
+    <!-- COMMON ARGUMENTS -->
+    <!-- Defines FPS -->
+    <arg name="fps" default="30" />
+    <!-- Enables video streaming -->
+    <arg name="stream" default="false" />
+    <!-- Enables video recording -->
+    <arg name="record" default="false" />
+    <!-- Debug mode. Enabled output images publishing after yolo prediction -->
+    <arg name="debug" default="true" />
+
+    <!-- REAL CAM -->
+    <!-- Providing video from real cameras -->
+    <arg name="real_cam" default="false" />
+    <!-- Defines device that will be used as camera -->
+    <!-- < arg name="device_front" default="/dev/v4l/by-path/platform-3530000.xhci-usb-0:1:1.0-video-index0"> -->
+    <!-- < arg name="device_bottom" default="/dev/v4l/by-path/platform-3530000.xhci-usb-0:2:1.0-video-index0"> -->
+    <arg name="front_cam" default="/dev/video0" />
+    <arg name="bottom_cam" default="/dev/video2" />
+
+    <!-- SIMULATION CAM -->
+    <!-- Providing video from simulation -->
     <arg name="simulation" default="false" />
+    <arg name="simulation_front_cam" default="/stereo/camera/left/image_raw" />
+    <arg name="simulation_bottom_cam" default="/rov_model_urdf/camera_bottom/image_raw" />
+
+    <!-- FILE CAM -->
+    <!-- Providing video from file -->
+    <arg name="file" default="false" />
+    <arg name="file1_path" default="video1.mp4" />
+    <arg name="file2_path" default="video2.mp4" />
+
     <!-- WEIGHTS -->
     <!-- Package name with your dnn weights -->
     <arg name="weights_pkg_name" default="sauvc_vision" />
@@ -7,24 +37,24 @@
     <include file="$(find stingray_startup)/launch/object_detection.launch">
         <!-- COMMON ARGUMENTS -->
         <!-- Defines FPS -->
-        <arg name="fps" default="30" />
+        <arg name="fps" default="$(arg fps)" />
         <!-- Enables video streaming -->
-        <arg name="stream" default="false" />
+        <arg name="stream" default="$(arg stream)" />
         <!-- Enables video recording -->
-        <arg name="record" default="false" />
+        <arg name="record" default="$(arg record)" />
         <!-- Debug mode. Enabled output images publishing after yolo prediction -->
-        <arg name="debug" default="true" />
+        <arg name="debug" default="$(arg debug)" />
 
         <!-- REAL CAM -->
         <!-- Providing video from real cameras -->
-        <arg name="real_cam" default="false" />
+        <arg name="real_cam" default="$(arg real_cam)" />
         <arg name="front_camera_node_name" default="front_camera" />
         <arg name="bottom_camera_node_name" default="bottom_camera" />
         <!-- Defines device that will be used as camera -->
         <!-- < arg name="device_front" default="/dev/v4l/by-path/platform-3530000.xhci-usb-0:1:1.0-video-index0"> -->
         <!-- < arg name="device_bottom" default="/dev/v4l/by-path/platform-3530000.xhci-usb-0:2:1.0-video-index0"> -->
-        <arg name="front_cam" default="/dev/video0" />
-        <arg name="bottom_cam" default="/dev/video2" />
+        <arg name="front_cam" default="$(arg front_cam)" />
+        <arg name="bottom_cam" default="$(arg bottom_cam)" />
 
         <!-- SIMULATION CAM -->
         <!-- Providing video from simulation -->
@@ -32,12 +62,12 @@
 
         <!-- FILE CAM -->
         <!-- Providing video from file -->
-        <arg name="file" default="false" />
-        <arg name="file1_path" default="video1.mp4" />
-        <arg name="file2_path" default="video2.mp4" />
+        <arg name="file" default="$(arg file)" />
+        <arg name="file1_path" default="$(arg file1_path)" />
+        <arg name="file2_path" default="$(arg file2_path)" />
 
         <!-- WEIGHTS -->
         <!-- Package name with your dnn weights -->
-        <arg name="weights_pkg_name" default="sauvc_vision" />
+        <arg name="weights_pkg_name" default="$(arg weights_pkg_name)" />
     </include>
 </launch>
