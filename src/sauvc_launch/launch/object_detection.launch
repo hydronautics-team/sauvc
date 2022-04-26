@@ -1,4 +1,9 @@
 <launch>
+    <arg name="simulation" default="false" />
+    <!-- WEIGHTS -->
+    <!-- Package name with your dnn weights -->
+    <arg name="weights_pkg_name" default="sauvc_vision" />
+
     <include file="$(find stingray_startup)/launch/object_detection.launch">
         <!-- COMMON ARGUMENTS -->
         <!-- Defines FPS -->
@@ -8,11 +13,13 @@
         <!-- Enables video recording -->
         <arg name="record" default="false" />
         <!-- Debug mode. Enabled output images publishing after yolo prediction -->
-        <arg name="debug" default="false" />
+        <arg name="debug" default="true" />
 
         <!-- REAL CAM -->
         <!-- Providing video from real cameras -->
         <arg name="real_cam" default="false" />
+        <arg name="front_camera_node_name" default="front_camera" />
+        <arg name="bottom_camera_node_name" default="bottom_camera" />
         <!-- Defines device that will be used as camera -->
         <!-- < arg name="device_front" default="/dev/v4l/by-path/platform-3530000.xhci-usb-0:1:1.0-video-index0"> -->
         <!-- < arg name="device_bottom" default="/dev/v4l/by-path/platform-3530000.xhci-usb-0:2:1.0-video-index0"> -->
@@ -21,15 +28,13 @@
 
         <!-- SIMULATION CAM -->
         <!-- Providing video from simulation -->
-        <arg name="simulation_cam" default="false" />
-        <arg name="simulation_front_cam" default="/stereo/camera/left/image_raw" />
-        <arg name="simulation_bottom_cam" default="/camera/bottom/image_raw" />
+        <arg name="simulation" default="$(arg simulation)" />
 
         <!-- FILE CAM -->
         <!-- Providing video from file -->
         <arg name="file" default="false" />
-        <arg name="file1_path" default="/home/vladushked/Videos/front.avi" />
-        <arg name="file2_path" default="/home/vladushked/Videos/fog_test.mp4" />
+        <arg name="file1_path" default="video1.mp4" />
+        <arg name="file2_path" default="video2.mp4" />
 
         <!-- WEIGHTS -->
         <!-- Package name with your dnn weights -->
