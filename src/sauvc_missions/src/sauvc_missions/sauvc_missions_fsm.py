@@ -1,10 +1,10 @@
 import rospy
 import smach
-from stingray_missions_lib.missions_fsm import Mission, MissionsFSMFactory
-from stingray_missions_lib.steering import BasicSteerer
+from stingray_missions_lib.fsm.missions_fsm import Mission, MissionsFSMFactory
+from stingray_missions_lib.control.controller import AUVController
 import actionlib
 import stingray_movement_msgs.msg
-from sauvc_common.msg import Object
+from stingray_object_detection_msgs.msg import Object
 from stingray_movement_msgs.msg import AlignValue
 
 
@@ -29,7 +29,7 @@ class RedFlareMission(Mission):
                                                     stingray_movement_msgs.msg.AlignAction)
         linear_client.wait_for_server()
         align_client.wait_for_server()
-        steerer = BasicSteerer()
+        steerer = AUVController()
 
         self.pub_ = rospy.Publisher("/sauvc/topic/align/flare", AlignValue, queue_size=10)
 
@@ -38,7 +38,7 @@ class RedFlareMission(Mission):
         rospy.loginfo("Dived!")
 
         rospy.loginfo("Starting lag movement")
-        lag_goal = steerer.create_lag_goal(600000, 0.2)
+        lag_goal = steerer.lag(600000, 0.2)
         goal_handle = linear_client.send_goal(lag_goal, active_cb=None, feedback_cb=None, done_cb=None)
 
         has_gate_count = 0
@@ -69,7 +69,7 @@ class RedFlareMission(Mission):
         steerer.march(4000, 0.4)
         steerer.lag(4000, -0.4)
 
-        return self.outcome_ok_
+        return self.outcome_ok
 
 
 class GatesMission(Mission):
@@ -93,7 +93,7 @@ class GatesMission(Mission):
                                                     stingray_movement_msgs.msg.AlignAction)
         linear_client.wait_for_server()
         align_client.wait_for_server()
-        steerer = BasicSteerer()
+        steerer = AUVController()
 
         self.pub_ = rospy.Publisher("/sauvc/topic/align/gate", AlignValue, queue_size=10)
 
@@ -102,7 +102,7 @@ class GatesMission(Mission):
         rospy.loginfo("Dived!")
 
         rospy.loginfo("Starting lag movement")
-        lag_goal = steerer.create_lag_goal(600000, 0.2)
+        lag_goal = steerer.lag(600000, 0.2)
         goal_handle = linear_client.send_goal(lag_goal, active_cb=None, feedback_cb=None, done_cb=None)
 
         has_gate_count = 0
@@ -128,7 +128,7 @@ class GatesMission(Mission):
         align_client.wait_for_result()
         sub.unregister()
 
-        return self.outcome_ok_
+        return self.outcome_ok
 
 
 class SauvcMissions(MissionsFSMFactory):
@@ -136,10 +136,10 @@ class SauvcMissions(MissionsFSMFactory):
         MissionsFSMFactory.__init__(self)
 
     def create_fsm(self):
-        sm = smach.StateMachine(outcomes=[self.outcome_ok_, self.outcome_failed_])
+        sm = smach.StateMachine(outcomes=[self.outcome_ok, self.outcome_failed])
         with sm:
-            smach.StateMachine.add("RED_FLARE", RedFlareMission(), transitions={"RED_FLARE_OK": "GATES",
-                                                                                "RED_FLARE_FAILED": self.outcome_failed_})
-            smach.StateMachine.add("GATES", GatesMission(), transitions={"GATES_OK": self.outcome_ok_,
-                                                                         "GATES_FAILED": self.outcome_failed_})
+            # smach.StateMachine.add("RED_FLARE", RedFlareMission(), transitions={"RED_FLARE_OK": "GATES",
+            #                                                                     "RED_FLARE_FAILED": self.outcome_failed})
+            smach.StateMachine.add("GATES", GatesMission(), transitions={"GATES_OK": self.outcome_ok,
+                                                                         "GATES_FAILED": self.outcome_failed})
         return sm
