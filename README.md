@@ -1,5 +1,5 @@
 # sauvc
-Software for SAUVC competition
+Software for [SAUVC](https://sauvc.org/) competition
 
 ## Building
 
@@ -23,4 +23,13 @@ catkin_make
 Do not forget to setup workspace before you start to work:
 ```bash
 source devel/setup.bash
+```
+
+## Simulation startup
+
+* Clone and built our [simulator](https://github.com/hidronautics/simulator) for SAUVC competition.
+* Run simulator.
+* in sauvc directory run
+```bash
+roslaunch sauvc_startup simulation.launch
 ```
