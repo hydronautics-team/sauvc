@@ -1,11 +1,4 @@
-
 <launch>
-
-    <!-- Enables simulation mode -->
-    <arg name="simulation" default="true" />
-
-    <!-- Enables connection with hardware platform -->
-    <arg name="hardware_connection" default="false" />
 
     <!-- Enables cameras, recording and streaming -->
     <arg name="cameras_enabled" default="true" />
