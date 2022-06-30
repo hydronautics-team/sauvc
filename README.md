@@ -1,35 +1,50 @@
 # sauvc
-Software for [SAUVC](https://sauvc.org/) competition
+Software for [SAUVC](https://sauvc.org/) competition based on [Stingray](https://github.com/hidronautics/stingray)
 
-## Building
+# Installation
 
-Install dependencies:
-
-```bash
-sudo apt-get install ros-$ROS_DISTRO-usb-cam ros-$ROS_DISTRO-rosbridge-server ros-$ROS_DISTRO-image-view ros-$ROS_DISTRO-actionlib ros-$ROS_DISTRO-smach ros-$ROS_DISTRO-smach-viewer
-```
-
-Initialize and update git submodules used in project:
+- Initialize and update git submodules used in project:
 
 ```bash
 git submodule update --init --recursive
 ```
 
-Use following commands to build:
+- Complete pre-build steps in [stingray](/src/stingray/)
+
+- Build **sauvc**:
+
 ```bash
 source /opt/ros/$ROS_DISTRO/setup.bash
 catkin_make
 ```
-Do not forget to setup workspace before you start to work:
+
+# Run
+
+Setup workspace before you start to work:
+
 ```bash
 source devel/setup.bash
 ```
 
-## Simulation startup
+### Simulation startup
 
 * Clone and built our [simulator](https://github.com/hidronautics/simulator) for SAUVC competition.
 * Run simulator.
 * in sauvc directory run
 ```bash
 roslaunch sauvc_startup simulation.launch
+```
+
+### Object detection
+- Run detection on real cameras:
+```bash
+roslaunch sauvc_startup object_detection.launch real_cam:=true 
+```
+- Run detection on simulation cameras:
+```bash
+roslaunch sauvc_startup object_detection.launch simulation:=true
+```
+- Run detection on video from files:
+```bash
+roslaunch sauvc_startup object_detection.launch file:=true file1_path:=PATH_TO_VIDEO_1 file2_path:=PATH_TO_VIDEO_2
 ```
