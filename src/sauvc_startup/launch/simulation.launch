@@ -9,13 +9,20 @@
     <!-- Package name with your dnn weights -->
     <arg name="weights_pkg_name" default="sauvc_vision" />
 
+    <arg name="missions_enabled" default="true" />
+    <arg name="gate_vision" default="false" />
+    <arg name="gate_brute" default="false" />
+
     <include file="$(find stingray_startup)/launch/simulation.launch">
         <arg name="delay_after_init" value="0" />
-        <arg name="missions_module" value="sauvc_missions.sauvc_missions_fsm" />
-        <arg name="missions_class"  value="SauvcMissions" />
-        <arg name="missions_enabled" value="true" />
         <arg name="weights_pkg_name" value="$(arg weights_pkg_name)" />
     </include>
+
+    <include if="$(arg missions_enabled)" file="$(find sauvc_startup)/launch/missions.launch">
+        <arg name="gate_vision" default="$(arg gate_vision)" />
+        <arg name="gate_brute" default="$(arg gate_brute)" />
+    </include>
+
 
     <!-- <include file="$(find sauvc_vision)/launch/object_detector.launch">
         <arg name="cameras" value="$(arg cameras_enabled)" />

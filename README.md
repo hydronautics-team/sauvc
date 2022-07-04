@@ -33,3 +33,12 @@ source devel/setup.bash
 ```bash
 roslaunch sauvc_startup simulation.launch
 ```
+
+### Missions
+
+* Set `missions_enabled` to `false` to turn missions module off. It's online by default
+* For gate mission with vision set `gate_vision` to `true`
+* For gate mission with preset path set `gate_brute` to `true`
+```bash
+roslaunch sauvc_startup simulation.launch gate_vision:=true
+```

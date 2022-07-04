@@ -1,24 +1,21 @@
 <?xml version="1.0"?>
 <package format="2">
   <name>sauvc_missions</name>
-  <version>0.1.0</version>
-  <description>Missions for SAUVC competition</description>
+  <version>0.0.1</version>
+  <description>Missions for SAUVC 2022 competition</description>
 
-  <maintainer email="rentgeny@mail.ru">Timur Akhtyamov</maintainer>
+  <maintainer email="davtart2000@yandex.ru">Davtyan Artyom</maintainer>
+
 
   <license>MIT</license>
 
-
   <buildtool_depend>catkin</buildtool_depend>
-
-  <depend>rospy</depend>
-  <depend>std_msgs</depend>
-  <depend>std_srvs</depend>
-  <depend>geometry_msgs</depend>
-  <depend>actionlib</depend>
-  <depend>actionlib_msgs</depend>
-  <depend>stingray_missions_lib</depend>
-  <depend>stingray_movement_msgs</depend>
-
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>rospy</build_depend>
+  <build_depend>stingray_tfsm</build_depend>
+  <build_export_depend>rospy</build_export_depend>
+  <build_export_depend>stingray_tfsm</build_export_depend>
+  <exec_depend>rospy</exec_depend>
+  <exec_depend>stingray_tfsm</exec_depend>
 
 </package>
