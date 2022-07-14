@@ -3,8 +3,8 @@
     <arg name="ros_output" default="screen" />
     <arg name="debug" default="true" />
 
-    <arg name="gate_vision" default="false" />
-    <arg name="gate_brute" default="false" />
+    <arg name="gate_vision" default="true" />
+    <arg name="gate_brute" default="true" />
 
     <node pkg="sauvc_missions" type="tfsm_master.py" name="control_fsm" output="$(arg ros_output)" respawn="false">
         <param name="gate_vision" value="$(arg gate_vision)"/>
