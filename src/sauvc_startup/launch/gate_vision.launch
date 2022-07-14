@@ -1,0 +1,25 @@
+<launch>
+    <!-- WEIGHTS -->
+    <!-- Package name with your dnn weights -->
+    <arg name="weights_pkg_name" default="sauvc_vision" />
+
+    <!-- Enables cameras, recording and streaming -->
+    <arg name="cameras_enabled" default="true" />
+    <arg name="record" default="false" />
+    <arg name="stream" default="false" />
+
+    <arg name="missions_enabled" default="true" />
+    <arg name="gate_vision" default="true" />
+    <arg name="gate_brute" default="false" />
+
+    <include file="$(find stingray_startup)/launch/base.launch">
+        <arg name="hardware_connection" value="false" />
+        <arg name="weights_pkg_name" value="$(arg weights_pkg_name)" />
+    </include>
+
+    <include if="$(arg missions_enabled)" file="$(find sauvc_startup)/launch/missions.launch">
+        <arg name="gate_vision" default="$(arg gate_vision)" />
+        <arg name="gate_brute" default="$(arg gate_brute)" />
+    </include>
+
+</launch>
