@@ -16,9 +16,11 @@ if __name__ == '__main__':
 
     gate_vision = rospy.get_param('/' + NODE_NAME + "/gate_vision")
     gate_brute = rospy.get_param('/' + NODE_NAME + "/gate_brute")
+    gate_verbose = rospy.get_param('/' + NODE_NAME + "/verbose", True)
 
     if gate_vision:
         from sauvc_missions.gate_vision import gate_mission
+        gate_mission.set_verbose(gate_verbose)
         control_fsm.add_state(('gate',), on_enter=gate_mission.run)
         control_fsm.add_transitions([
             ['start', 'init', 'gate'],
@@ -27,6 +29,7 @@ if __name__ == '__main__':
 
     elif gate_brute:
         from sauvc_missions.gate_bruteforce import gate_mission
+        gate_mission.set_verbose(gate_verbose)
         control_fsm.add_state(('gate',), on_enter=gate_mission.run)
         control_fsm.add_transitions([
             ['start', 'init', 'gate'],
