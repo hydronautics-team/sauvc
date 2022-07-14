@@ -17,9 +17,9 @@
         <arg name="weights_pkg_name" value="$(arg weights_pkg_name)" />
     </include>
 
-    <include if="$(arg missions_enabled)" file="$(find sauvc_startup)/launch/missions.launch">
-        <arg name="gate_vision" default="$(arg gate_vision)" />
-        <arg name="gate_brute" default="$(arg gate_brute)" />
-    </include>
+    <node pkg="sauvc_missions" type="tfsm_master.py" name="control_fsm" output="$(arg ros_output)" respawn="false">
+        <param name="gate_vision" value="$(arg gate_vision)"/>
+        <param name="gate_brute" value="$(arg gate_brute)"/>
+    </node>
 
 </launch>
