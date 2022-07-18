@@ -17,6 +17,7 @@ if __name__ == '__main__':
     gate_vision = rospy.get_param('/' + NODE_NAME + "/gate_vision")
     gate_brute = rospy.get_param('/' + NODE_NAME + "/gate_brute")
     gate_verbose = rospy.get_param('/' + NODE_NAME + "/verbose", True)
+    front_cam = rospy.get_param('/' + NODE_NAME + "/front_cam")
 
     if gate_vision:
         from sauvc_missions.gate_vision import gate_mission

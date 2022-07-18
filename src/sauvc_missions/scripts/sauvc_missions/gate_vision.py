@@ -5,6 +5,7 @@ from stingray_tfsm.event import ObjectDetectionEvent
 import rospy
 
 HARDCODE = '/rov_model_urdf/camera_front/image_raw/yolo_detector/objects'
+HARDCODE1 = '/front_camera/image_raw/yolo_detector/objects'
 EXHAUST_MAX = 40
 CONFIRMATION = 10
 TARGET = 'gate'
@@ -23,7 +24,7 @@ TRANSITIONS = [     # Vision exhaustion loop
     ['end', '*', 'done']
 ]
 
-gate_detection_event = ObjectDetectionEvent(HARDCODE, TARGET, CONFIRMATION)
+gate_detection_event = ObjectDetectionEvent(HARDCODE1, TARGET, CONFIRMATION)
 EXHAUSTION = 0
 
 
@@ -32,11 +33,13 @@ def gates_condition(*args, **kwargs):
     gate_detection_event.start_listening()
     rospy.sleep(2)
     if gate_detection_event.is_triggered():
+        rospy.loginfo("DEBUG: gate detected by event")
         EXHAUSTION = 0
         gate_detection_event.stop_listening()
         return 1
     else:
         EXHAUSTION += 1
+        rospy.loginfo("DEBUG: no gate detected")
         gate_detection_event.stop_listening()
         if EXHAUSTION >= EXHAUST_MAX:
             rospy.loginfo("it's time to stop, but i'll implement it later")

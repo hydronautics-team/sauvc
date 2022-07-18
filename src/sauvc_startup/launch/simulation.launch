@@ -5,32 +5,14 @@
     <arg name="record" default="false" />
     <arg name="stream" default="false" />
 
-    <!-- SIMULATION CAM -->
-    <!-- Providing video from simulation -->
-    <arg name="simulation" default="true" />
-
     <!-- WEIGHTS -->
     <!-- Package name with your dnn weights -->
     <arg name="weights_pkg_name" default="sauvc_vision" />
 
-    <arg name="missions_enabled" default="true" />
-    <arg name="gate_vision" default="false" />
-    <arg name="gate_brute" default="false" />
 
     <include file="$(find stingray_startup)/launch/simulation.launch">
         <arg name="delay_after_init" value="0" />
         <arg name="weights_pkg_name" value="$(arg weights_pkg_name)" />
     </include>
-
-<!--    <include if="$(arg missions_enabled)" file="$(find sauvc_startup)/launch/missions.launch">-->
-<!--        <arg name="gate_vision" default="$(arg gate_vision)" />-->
-<!--        <arg name="gate_brute" default="$(arg gate_brute)" />-->
-<!--    </include>-->
-
-<!--    <include file="$(find sauvc_startup)/launch/object_detection.launch">-->
-<!--        <arg name="record" default="$(arg record)" />-->
-<!--        <arg name="stream" default="$(arg stream)" />-->
-<!--        <arg name="simulation" default="$(arg simulation)" />-->
-<!--    </include>-->
 
 </launch>
