@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 
 from stingray_tfsm.ros_transitions import AUVStateMachine
-from stingray_tfsm.event import ObjectDetectionEvent
+from stingray_tfsm.vision_events import ObjectDetectionEvent
 import rospy
 
 HARDCODE = '/rov_model_urdf/camera_front/image_raw/yolo_detector/objects'
@@ -9,10 +9,6 @@ HARDCODE1 = '/front_camera/image_raw/yolo_detector/objects'
 EXHAUST_MAX = 40
 CONFIRMATION = 10
 TARGET = 'gate'
-
-
-class GateRighterEvent(ObjectDetectionEvent):
-    pass
 
 
 STATES = ('init', 'condition_gate',
@@ -24,7 +20,7 @@ TRANSITIONS = [     # Vision exhaustion loop
     ['end', '*', 'done']
 ]
 
-gate_detection_event = ObjectDetectionEvent(HARDCODE1, TARGET, CONFIRMATION)
+gate_detection_event = ObjectDetectionEvent(HARDCODE, TARGET, CONFIRMATION)
 EXHAUSTION = 0
 
 

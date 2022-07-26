@@ -7,6 +7,7 @@
     <arg name="cameras_enabled" default="true" />
     <arg name="record" default="false" />
     <arg name="stream" default="false" />
+
     <arg name="simulation" default="false" />
 
     <!-- detected objects from front camera -->
@@ -16,9 +17,12 @@
 
     <!-- real camera input -->
     <arg name="missions_enabled" default="true" />
-    <arg name="gate_vision" default="true" />
+    <arg name="gate_vision" default="false" />
     <arg name="gate_brute" default="false" />
-    <arg name="verbose" default="True" />
+    <arg name="gate_centering" default="False" />
+    <arg name="verbose" default="false" />
+    <arg name="test" default="False" />
+
     <arg name="ros_output" default="screen" />
 
     <include unless="$(arg simulation)" file="$(find stingray_startup)/launch/base.launch">
@@ -34,7 +38,10 @@
         <param name="verbose" value="$(arg verbose)" />
         <param name="gate_vision" value="$(arg gate_vision)"/>
         <param name="gate_brute" value="$(arg gate_brute)"/>
+        <param name="gate_centering" value="$(arg gate_centering)"/>
         <param name="front_cam" value="$(arg front_cam)"/>
+        <param name="test" value="$(arg test)"/>
+
     </node>
 
 </launch>
