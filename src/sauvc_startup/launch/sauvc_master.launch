@@ -39,7 +39,7 @@
         <param name="gate_vision" value="$(arg gate_vision)"/>
         <param name="gate_brute" value="$(arg gate_brute)"/>
         <param name="gate_centering" value="$(arg gate_centering)"/>
-        <param name="front_cam" value="$(arg front_cam)"/>
+        <param name="simulation" value="$(arg simulation)"/>
         <param name="test" value="$(arg test)"/>
 
     </node>

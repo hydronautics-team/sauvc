@@ -13,6 +13,7 @@ def no_mission_set(*args, **kwargs):
 
 def setup(*args, **kwargs):
     """here arguments from launches/ros should be retrieved and applied to where they belong"""
+    # TODO machine which just checks that all required topics and nodes are online
     pass
 
 
@@ -24,7 +25,7 @@ if __name__ == '__main__':
     gate_centering = rospy.get_param('/' + NODE_NAME + "/gate_centering")
     verbose = rospy.get_param('/' + NODE_NAME + "/verbose", True)
     centering_test = rospy.get_param('/' + NODE_NAME + "/test")
-    front_cam = rospy.get_param('/' + NODE_NAME + "/front_cam")
+    simulation = rospy.get_param('/' + NODE_NAME + "/simulation")
 
     if centering_test:
         from sauvc_missions.centering import centering_sub
