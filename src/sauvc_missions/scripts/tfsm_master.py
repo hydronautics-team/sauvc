@@ -28,9 +28,8 @@ if __name__ == '__main__':
     simulation = rospy.get_param('/' + NODE_NAME + "/simulation")
 
     if centering_test:
-        from sauvc_missions.centering import centering_sub
-        centering_sub.set_verbose(verbose)
-        master_fsm.add_state('centering', on_enter=centering_sub.run)
+        from sauvc_missions.uart_test_mission import test
+        master_fsm.add_state('centering', on_enter=test.run)
         master_fsm.add_transitions([
             ['start', 'init', 'centering'],
             ['finish', 'centering', 'done'],
@@ -38,7 +37,7 @@ if __name__ == '__main__':
 
     elif gate_vision:
         from sauvc_missions.gate_vision import gate_mission
-        gate_mission.set_verbose(verbose)
+        gate_mission.verbose(verbose)
         master_fsm.add_state(('gate',), on_enter=gate_mission.run)
         master_fsm.add_transitions([
             ['start', 'init', 'gate'],
