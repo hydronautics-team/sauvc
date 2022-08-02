@@ -1,5 +1,6 @@
 from stingray_tfsm.ros_transitions import AUVStateMachine
-from sauvc_missions.centering import centering_sub
+#from sauvc_missions.centering import centering_sub
+from sauvc_missions.centering_experimental import CenteringSub
 from stingray_tfsm.vision_events import ObjectDetectionEvent
 import rospy
 
@@ -12,7 +13,7 @@ EXHAUSTION = 0
 
 def gates_condition(*args, **kwargs):
     gate_detection_event.start_listening()
-    rospy.sleep(0.8)
+    rospy.sleep(0.5)
     if gate_detection_event.is_triggered():
         rospy.loginfo("DEBUG: gate detected by event")
         gate_detection_event.stop_listening()
@@ -24,6 +25,7 @@ def gates_condition(*args, **kwargs):
 
 
 def not_gates(*args, **kwargs):
+    rospy.sleep(1)
     return not gates_condition(*args, **kwargs)
 
 
@@ -33,7 +35,7 @@ STATES = ('init', 'condition_gate',
           'done', 'aborted')
 
 TRANSITIONS = [
-    ['start', ['init', 'rotate_clockwise', 'move_march_1'], 'condition_gate'],
+    ['start', ['init', 'rotate_clockwise'], 'condition_gate'],
 
     ['condition_f', 'condition_gate', 'rotate_clockwise'],
     ['condition_s', 'condition_gate', 'condition_centering'],
@@ -48,6 +50,8 @@ TRANSITIONS = [
 
     ['end', '*', 'done']
 ]
+
+centering_sub = CenteringSub()
 
 STATES_ARGS = {
     'init': {
@@ -76,8 +80,8 @@ STATES_ARGS = {
     },
     'move_march_1': {
         'direction': 3,
-        'velocity': 0.4,
-        'duration': 1500
+        'velocity': 0.41,
+        'duration': 2000
     },
     'done': {},
     'aborted': {}

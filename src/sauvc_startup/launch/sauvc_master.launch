@@ -43,11 +43,12 @@
 
     <node pkg="sauvc_missions" type="tfsm_master.py" name="control_fsm" output="$(arg ros_output)" respawn="false">
         <param name="verbose" value="$(arg verbose)" />
-        <param name="gate_vision" value="$(arg gate_vision)" />
-        <param name="gate_brute" value="$(arg gate_brute)" />
-        <param name="gate_centering" value="$(arg gate_centering)" />
+        <param name="gate_vision" value="$(arg gate_vision)"/>
+        <param name="gate_brute" value="$(arg gate_brute)"/>
+        <param name="gate_centering" value="$(arg gate_centering)"/>
+        <param name="simulation" value="$(arg simulation)"/>
         <param name="front_cam" value="$(arg front_cam)" />
-        <param name="test" value="$(arg test)" />
+        <param name="test" value="$(arg test)"/>
     </node>
 
 </launch>
