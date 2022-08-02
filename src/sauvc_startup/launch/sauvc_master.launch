@@ -29,8 +29,6 @@
     <arg name="verbose" default="false" />
     <arg name="test" default="False" />
 
-    <arg name="ros_output" default="screen" />
-
     <include file="$(find stingray_startup)/launch/base.launch">
         <arg name="ros_output" value="$(arg ros_output)" />
         <arg name="simulation" value="$(arg simulation)" />
