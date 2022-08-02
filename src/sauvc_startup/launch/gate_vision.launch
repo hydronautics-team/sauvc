@@ -1,22 +1,28 @@
 <launch>
+    <!-- COMMON -->
+    <!-- Settings for "output" parameter of nodes -->
+    <arg name="ros_output" default="screen" />
+    <!-- Debug mode. Enabled output images publishing after object detection -->
+    <arg name="debug" default="true" />
+    <!-- Record cameras -->
+    <arg name="record" value="false" />
+    <!-- Directory where to save videos -->
+    <arg name="record_dir" default="$(env HOME)/stingray_video_records/" />
+    <!-- Enables connection with simulator -->
+    <arg name="simulation" default="false" />
+    <!-- Enables video streaming -->
+    <arg name="stream" default="false" />
+
     <!-- WEIGHTS -->
     <!-- Package name with your dnn weights -->
     <arg name="weights_pkg_name" default="sauvc_vision" />
 
-    <!-- Enables cameras, recording and streaming -->
-    <arg name="cameras_enabled" default="true" />
-    <arg name="record" default="false" />
-    <arg name="stream" default="false" />
-
-    <arg name="simulation" default="false" />
-
     <!-- detected objects from front camera -->
-    <arg name="front_cam" default="/front_camera/image_raw/yolo_detector/objects" unless="$(arg simulation)"/>
-    <arg name="front_cam" value="/rov_model_urdf/camera_front/image_raw/yolo_detector/objects" if="$(arg simulation)"/>
+    <arg name="front_cam" default="/front_camera/image_raw/yolo_detector/objects" unless="$(arg simulation)" />
+    <arg name="front_cam" value="/rov_model_urdf/camera_front/image_raw/yolo_detector/objects" if="$(arg simulation)" />
 
 
     <!-- real camera input -->
-    <arg name="missions_enabled" default="true" />
     <arg name="gate_vision" default="false" />
     <arg name="gate_brute" default="false" />
     <arg name="gate_centering" default="False" />
@@ -25,23 +31,23 @@
 
     <arg name="ros_output" default="screen" />
 
-    <include unless="$(arg simulation)" file="$(find stingray_startup)/launch/base.launch">
-        <arg name="hardware_connection" value="false" />
-        <arg name="weights_pkg_name" value="$(arg weights_pkg_name)" />
-    </include>
-
-    <include if="$(arg simulation)" file="$(find stingray_startup)/launch/simulation.launch">
+    <include file="$(find stingray_startup)/launch/base.launch">
+        <arg name="ros_output" value="$(arg ros_output)" />
+        <arg name="simulation" value="$(arg simulation)" />
+        <arg name="debug" value="$(arg debug)" />
+        <arg name="record" value="$(arg record)" />
+        <arg name="record_dir" value="$(arg record_dir)" />
+        <arg name="stream" value="$(arg stream)" />
         <arg name="weights_pkg_name" value="$(arg weights_pkg_name)" />
     </include>
 
     <node pkg="sauvc_missions" type="tfsm_master.py" name="control_fsm" output="$(arg ros_output)" respawn="false">
         <param name="verbose" value="$(arg verbose)" />
-        <param name="gate_vision" value="$(arg gate_vision)"/>
-        <param name="gate_brute" value="$(arg gate_brute)"/>
-        <param name="gate_centering" value="$(arg gate_centering)"/>
-        <param name="front_cam" value="$(arg front_cam)"/>
-        <param name="test" value="$(arg test)"/>
-
+        <param name="gate_vision" value="$(arg gate_vision)" />
+        <param name="gate_brute" value="$(arg gate_brute)" />
+        <param name="gate_centering" value="$(arg gate_centering)" />
+        <param name="front_cam" value="$(arg front_cam)" />
+        <param name="test" value="$(arg test)" />
     </node>
 
 </launch>
