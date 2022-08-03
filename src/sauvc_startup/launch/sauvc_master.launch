@@ -5,7 +5,7 @@
     <!-- Debug mode. Enabled output images publishing after object detection -->
     <arg name="debug" default="true" />
     <!-- Record cameras -->
-    <arg name="record" value="false" />
+    <arg name="record" default="false" />
     <!-- Directory where to save videos -->
     <arg name="record_dir" default="$(env HOME)/stingray_video_records/" />
     <!-- Enables connection with simulator -->
