@@ -55,3 +55,11 @@ gate_vision:=true
 gate_brute:=true
 ```
 
+## Other args:
+
+- `hardware_connection:=false` - disable connection btw jetson and stm32 via serial (uart_driver) 
+- `stream:=true` - enable web video stream from all cameras 
+- `debug:=false` - disable image_view nodes and publishing output videos after object detection
+- `file_cam:=true` - provide input videos from file
+- `record_raw:=true` - enable recording video from all cameras 
+- `record_output:=true` - enable recording video after object detection 
