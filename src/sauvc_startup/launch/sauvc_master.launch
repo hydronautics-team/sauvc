@@ -4,12 +4,18 @@
     <arg name="ros_output" default="screen" />
     <!-- Debug mode. Enabled output images publishing after object detection -->
     <arg name="debug" default="true" />
-    <!-- Record cameras -->
-    <arg name="record" default="false" />
+    <!-- Enables raw video recording -->
+    <arg name="record_raw" default="false" />
+    <!-- Enables output video recording -->
+    <arg name="record_output" default="false" />
     <!-- Directory where to save videos -->
     <arg name="record_dir" default="$(env HOME)/stingray_video_records/" />
     <!-- Enables connection with simulator -->
     <arg name="simulation" default="false" />
+    <!-- Enables video from file -->
+    <arg name="file_cam" default="false" />
+    <!-- Enables connection with hardware -->
+    <arg name="hardware_connection" default="true" />
     <!-- Enables video streaming -->
     <arg name="stream" default="false" />
 
@@ -32,8 +38,11 @@
     <include file="$(find stingray_startup)/launch/base.launch">
         <arg name="ros_output" value="$(arg ros_output)" />
         <arg name="simulation" value="$(arg simulation)" />
+        <arg name="file_cam" value="$(arg file_cam)"/>
+        <arg name="hardware_connection" value="$(arg hardware_connection)" />
         <arg name="debug" value="$(arg debug)" />
-        <arg name="record" value="$(arg record)" />
+        <arg name="record_raw" value="$(arg record_raw)" />
+        <arg name="record_output" value="$(arg record_output)" />
         <arg name="record_dir" value="$(arg record_dir)" />
         <arg name="stream" value="$(arg stream)" />
         <arg name="weights_pkg_name" value="$(arg weights_pkg_name)" />
