@@ -19,8 +19,7 @@ ROS_CONFIG = load_config()
 STATES = ('init', 'condition_gate', 'custom_setup',
           'rotate_clockwise', 'rotate_anticlockwise', 'move_march', 'done', 'aborted')
 TRANSITIONS = [     # Vision exhaustion loop
-    ['start', 'init', 'custom_setup'],
-    ['step', ['custom_setup', 'rotate_clockwise', 'move_march'], 'condition_gate'],
+    ['start', ['init', 'rotate_clockwise', 'move_march'], 'condition_gate'],
     ['condition_f', 'condition_gate', 'rotate_clockwise'],
     ['condition_s', 'condition_gate', 'move_march'],
     ['end', '*', 'done']
@@ -63,11 +62,8 @@ def rotation_overflow_condition(*args, **kwargs):
 
 STATES_ARGS = {
     'init': {
-        'time': 0.1
-    },
-    'custom_setup': {
-      'custom': set_camera_online,
-      'args': (0, 1)
+        'preps': set_camera_online,
+        "args": (0, 1),
     },
     'condition_gate': {
         'condition': gates_condition,
