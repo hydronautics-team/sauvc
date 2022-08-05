@@ -20,39 +20,38 @@ catkin_make
 
 # Run
 
-Setup workspace before you start to work:
+## Setup workspace before you start to work:
 
 ```bash
 source devel/setup.bash
 ```
+## Basic launch file:
 
-### Simulation startup
+```bash
+roslaunch sauvc_startup sauvc_master.launch 
+```
+*see args inside
+
+## Simulation startup
 
 * Clone and built our [simulator](https://github.com/hidronautics/simulator) for SAUVC competition.
 * Run simulator.
 * in sauvc directory run
+
+And use arg:
 ```bash
-roslaunch sauvc_startup simulation.launch
+simulation:=true 
 ```
 
-### Missions
+## Missions
 
-* Set `missions_enabled` to `false` to turn missions module off. It's online by default
-* For gate mission with vision set `gate_vision` to `true`
-* For gate mission with preset path set `gate_brute` to `true`
+* For gate mission with vision use arg:
 ```bash
-roslaunch sauvc_startup simulation.launch gate_vision:=true
+gate_vision:=true
 ```
-### Object detection
-- Run detection on real cameras:
+* For gate mission with preset path use arg:
+
 ```bash
-roslaunch sauvc_startup object_detection.launch real_cam:=true 
+gate_brute:=true
 ```
-- Run detection on simulation cameras:
-```bash
-roslaunch sauvc_startup object_detection.launch simulation:=true
-```
-- Run detection on video from files:
-```bash
-roslaunch sauvc_startup object_detection.launch file:=true file1_path:=PATH_TO_VIDEO_1 file2_path:=PATH_TO_VIDEO_2
-```
+
