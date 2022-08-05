@@ -2,6 +2,9 @@
 
 from stingray_tfsm.ros_transitions import AUVStateMachine
 from stingray_tfsm.vision_events import ObjectDetectionEvent
+from stingray_object_detection_msgs.srv import SetEnableObjectDetection
+from stingray_object_detection_msgs.msg import ObjectsArray
+from stingray_tfsm.load_config import load_config
 import rospy
 
 HARDCODE = '/rov_model_urdf/camera_front/image_raw/yolo_detector/objects'
@@ -10,11 +13,14 @@ EXHAUST_MAX = 40
 CONFIRMATION = 10
 TARGET = 'gate'
 
+ROS_CONFIG = load_config()
 
-STATES = ('init', 'condition_gate',
+
+STATES = ('init', 'condition_gate', 'custom_setup',
           'rotate_clockwise', 'rotate_anticlockwise', 'move_march', 'done', 'aborted')
 TRANSITIONS = [     # Vision exhaustion loop
-    ['start', ['init', 'rotate_clockwise', 'move_march'], 'condition_gate'],
+    ['start', 'init', 'custom_setup'],
+    ['step', ['custom_setup', 'rotate_clockwise', 'move_march'], 'condition_gate'],
     ['condition_f', 'condition_gate', 'rotate_clockwise'],
     ['condition_s', 'condition_gate', 'move_march'],
     ['end', '*', 'done']
@@ -42,13 +48,26 @@ def gates_condition(*args, **kwargs):
         return 0
 
 
+def set_camera_online(args):
+    print(f"trying to set object detection on camera {args[0]} to {args[1]}")
+    srv_name = ROS_CONFIG["services"]["set_enable_object_detection"]
+    rospy.wait_for_service(srv_name)
+    set_camera = rospy.ServiceProxy(srv_name, SetEnableObjectDetection)
+    print(set_camera(args[0], args[1]))
+    rospy.wait_for_message(HARDCODE, ObjectsArray)
+
+
 def rotation_overflow_condition(*args, **kwargs):
     return 1
 
 
 STATES_ARGS = {
     'init': {
-        'time': 10
+        'time': 0.1
+    },
+    'custom_setup': {
+      'custom': set_camera_online,
+      'args': (0, 1)
     },
     'condition_gate': {
         'condition': gates_condition,

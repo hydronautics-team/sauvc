@@ -37,7 +37,7 @@ if __name__ == '__main__':
 
     elif gate_vision:
         from sauvc_missions.gate_vision import gate_mission
-        gate_mission.verbose(verbose)
+        gate_mission.set_verbose(verbose)
         master_fsm.add_state(('gate',), on_enter=gate_mission.run)
         master_fsm.add_transitions([
             ['start', 'init', 'gate'],
