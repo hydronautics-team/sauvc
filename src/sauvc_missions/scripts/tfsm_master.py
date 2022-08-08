@@ -23,6 +23,7 @@ if __name__ == '__main__':
     gate_vision = rospy.get_param('/' + NODE_NAME + "/gate_vision")
     gate_brute = rospy.get_param('/' + NODE_NAME + "/gate_brute", False)
     gate_centering = rospy.get_param('/' + NODE_NAME + "/gate_centering")
+    drums = rospy.get_param('/' + NODE_NAME + "/drums")
     verbose = rospy.get_param('/' + NODE_NAME + "/verbose", True)
     centering_test = rospy.get_param('/' + NODE_NAME + "/test")
     simulation = rospy.get_param('/' + NODE_NAME + "/simulation")
@@ -59,6 +60,14 @@ if __name__ == '__main__':
         master_fsm.add_transitions([
             ['start', 'init', 'gate'],
             ['finish', 'gate', 'done'],
+        ])
+    elif drums:
+        from sauvc_missions.drums import drums_mission
+        drums_mission.set_verbose(verbose)
+        master_fsm.add_state(('drums',), on_enter=drums_mission.run)
+        master_fsm.add_transitions([
+            ['start', 'init', 'drums'],
+            ['finish', 'drums', 'done'],
         ])
 
     master_fsm.add_transitions((

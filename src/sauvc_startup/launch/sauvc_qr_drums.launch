@@ -1,0 +1,27 @@
+<launch>
+
+    <arg name="ros_output" default="screen" />
+    <arg name="debug" default="true" />
+    <!-- Enables connection with simulator -->
+    <arg name="simulation" default="false" />\
+    <!-- detected objects from front camera -->
+    <arg name="front_cam" default="/front_camera/image_raw/yolo_detector/objects" unless="$(arg simulation)" />
+    <arg name="front_cam" value="/rov_model_urdf/camera_front/image_raw/yolo_detector/objects" if="$(arg simulation)" />
+
+    <!-- real camera input -->
+    <arg name="gate_vision" default="True" />
+    <arg name="gate_brute" default="false" />
+    <arg name="gate_centering" default="False" />
+    <arg name="verbose" default="false" />
+    <arg name="test" default="False" />
+
+    <node pkg="sauvc_missions" type="tfsm_master.py" name="control_fsm" output="$(arg ros_output)" respawn="false">
+        <param name="verbose" value="$(arg verbose)" />
+        <param name="gate_vision" value="$(arg gate_vision)" />
+        <param name="gate_brute" value="$(arg gate_brute)" />
+        <param name="gate_centering" value="$(arg gate_centering)" />
+        <param name="simulation" value="$(arg simulation)" />
+        <param name="front_cam" value="$(arg front_cam)" />
+        <param name="test" value="$(arg test)" />
+    </node>
+</launch>

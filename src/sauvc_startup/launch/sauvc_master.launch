@@ -39,6 +39,7 @@
     <arg name="gate_vision" default="false" />
     <arg name="gate_brute" default="false" />
     <arg name="gate_centering" default="False" />
+    <arg name="drums" default="False" />
     <arg name="verbose" default="false" />
     <arg name="test" default="False" />
 
@@ -64,6 +65,7 @@
             <param name="gate_vision" value="$(arg gate_vision)" />
             <param name="gate_brute" value="$(arg gate_brute)" />
             <param name="gate_centering" value="$(arg gate_centering)" />
+            <param name="drums" value="$(arg drums)" />
             <param name="simulation" value="$(arg simulation)" />
             <param name="front_cam" value="$(arg front_cam)" />
             <param name="test" value="$(arg test)" />
