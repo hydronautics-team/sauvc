@@ -68,10 +68,10 @@ class CenteringSub(MissionBase):
                 'args': self.gate_lefter
             },
             'rotate_anti': {
-                'angle': -10
+                'angle': -5
             },
             'rotate_clock': {
-                'angle': 10
+                'angle': 5
             },
             'done': {},
             'aborted': {}
