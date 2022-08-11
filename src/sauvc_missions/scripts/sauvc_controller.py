@@ -23,7 +23,6 @@ class SAUVCController(AUVController):
                  front_camera: str,
                  bottom_camera: str
                  ):
-        super().__init__()
         self.gate_vision = gate_vision
         self.gate_brute = gate_brute
         self.gate_centering = gate_centering
@@ -32,19 +31,23 @@ class SAUVCController(AUVController):
         self.centering_test = centering_test
         self.front_camera = front_camera
         self.bottom_camera = bottom_camera
+        super().__init__()
 
     def setup_missions(self):
         if self.drums:
-            self.gate_mission = GateMission("gate_mission", 
-                self.front_camera, self.bottom_camera)
+            self.gate_mission = GateMission("gate_mission",
+                                            self.front_camera, self.bottom_camera)
             self.add_mission(self.gate_mission)
-            self.drums_mission = DrumsMission("drums_mission", 
-                self.front_camera, self.bottom_camera)
+            self.drums_mission = DrumsMission("drums_mission",
+                                              self.front_camera, self.bottom_camera)
             self.add_mission(self.drums_mission)
             self.add_mission_transitions([
-                [self.machine.transition_start, self.machine.state_init, 'gate'],
-                ['finish_gate', 'gate', 'drums'],
+                [self.machine.transition_start,self.machine.state_init, self.gate_mission.name],
+                ['finish_gate', self.gate_mission.name, self.drums_mission.name],
+                [self.machine.transition_end, self.drums_mission.name, self.machine.state_end],
+
             ])
+        rospy.loginfo("Missions setup done")
 
 
 if __name__ == '__main__':

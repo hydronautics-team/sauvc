@@ -17,15 +17,17 @@ class GateMission(SAUVCMission):
                  mat="mat",
                  blue_bowl="blue_bowl",
                  red_bowl="red_bowl"):
+        self.exhaustion = 0
+        self.centering_submission = CenteringMission(
+            "centering", front_camera, gate)
         super().__init__(name, front_camera, bottom_camera, gate,
                          red_flare, yellow_flare, mat, blue_bowl, red_bowl)
 
-        self.centering_submission = CenteringMission()
-
     def setup_states(self):
+
         return ('condition_gate',
                 'rotate_clockwise', 'condition_centering',
-                'move_march_0', 'condition_in_front', 'move_march_1')
+                'move_march_0', 'condition_in_front', 'move_march_1') + self.machine.default_states
 
     def setup_transitions(self):
         return [
@@ -42,7 +44,7 @@ class GateMission(SAUVCMission):
 
             ['condition_f', 'condition_in_front', 'condition_centering'],
             ['condition_s', 'condition_in_front', 'move_march_1'],
-        ]
+        ] + self.machine.default_transitions
 
     def setup_scene(self):
         return {
@@ -82,23 +84,23 @@ class GateMission(SAUVCMission):
         self.gate_detection_event = ObjectDetectionEvent(
             self.front_camera, self.gate, self.confirmation)
 
-    def gate_event_handler(self):
+    def gate_event_handler(self, *args, **kwargs):
         self.gate_detection_event.start_listening()
         rospy.sleep(2)
         if self.gate_detection_event.is_triggered():
             rospy.loginfo("DEBUG: gate detected by event")
-            self.EXHAUSTION = 0
+            self.exhaustion = 0
             self.gate_detection_event.stop_listening()
             return 1
         else:
-            self.EXHAUSTION += 1
+            self.exhaustion += 1
             rospy.loginfo("DEBUG: no gate detected")
             self.gate_detection_event.stop_listening()
-            if self.EXHAUSTION >= self.exhaust_max:
+            if self.exhaustion >= self.exhaust_max:
                 rospy.loginfo("it's time to stop, but i'll implement it later")
             return 0
 
-    def not_gates(self):
+    def not_gates(self, *args, **kwargs):
         rospy.sleep(1)
         return not self.gate_event_handler()
 

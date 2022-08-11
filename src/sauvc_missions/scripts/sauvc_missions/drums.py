@@ -21,15 +21,15 @@ class DrumsMission(SAUVCMission):
 
     def setup_states(self):
         return ('condition_drums', 'custom_setup',
-                'rotate_clockwise', 'rotate_anticlockwise', 'move_march')
+                'rotate_clockwise', 'rotate_anticlockwise', 'move_march') + self.machine.default_states
 
     def setup_transitions(self):
         return [     # Vision exhaustion loop
-            [self.transition_start, [self.machine.state_init, 'rotate_clockwise',
+            [self.machine.transition_start, [self.machine.state_init, 'rotate_clockwise',
                                      'move_march'], 'condition_drums'],
             ['condition_f', 'condition_drums', 'rotate_clockwise'],
             ['condition_s', 'condition_drums', 'move_march'],
-        ]
+        ]  + self.machine.default_transitions
 
     def setup_scene(self):
         return {
@@ -58,7 +58,7 @@ class DrumsMission(SAUVCMission):
 
     def setup_events(self):
         self.drums_detection_event = ObjectDetectionEvent(
-            self.front_camera, self.mat_object, self.confirmation)
+            self.front_camera, self.mat, self.confirmation)
 
     def drums_event_handler(self):
         self.drums_detection_event.start_listening()
