@@ -23,6 +23,7 @@ include
 
 catkin_install_python(PROGRAMS
         scripts/tfsm_master.py
+        scripts/sauvc_controller.py
         DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
         )
 catkin_python_setup()

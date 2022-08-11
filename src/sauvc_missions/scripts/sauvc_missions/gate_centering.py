@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 
-from sauvc_missions.scripts.sauvc_missions.sauvc_mission import SAUVCMission
+from sauvc_missions.sauvc_mission import SAUVCMission
 from sauvc_missions.centering_experimental import CenteringMission
 from stingray_tfsm.vision_events import ObjectDetectionEvent
 import rospy

@@ -22,9 +22,17 @@
     <arg name="stream" default="false" />
     <!-- Package name with weights -->
     <arg name="weights_pkg_name" default="sauvc_vision" />
-    <!-- detected objects from front camera -->
-    <arg name="front_cam" default="/front_camera/image_raw/yolo_detector/objects" unless="$(arg simulation)" />
-    <arg name="front_cam" value="/rov_model_urdf/camera_front/image_raw/yolo_detector/objects" if="$(arg simulation)" />
+    <!-- Cameras -->
+    <!-- <group unless="$(arg simulation)"> -->
+        <arg name="front_camera" default="/front_camera/image_raw" unless="$(arg simulation)"/>
+        <arg name="bottom_camera" default="/bottom_camera/image_raw" unless="$(arg simulation)"/>
+    <!-- </group> -->
+
+    <!-- <group if="$(arg simulation)"> -->
+        <arg name="front_camera" value="/rov_model_urdf/camera_front/image_raw" if="$(arg simulation)"/>
+        <arg name="bottom_camera" value="/rov_model_urdf/camera_bottom/image_raw" if="$(arg simulation)"/>
+    <!-- </group> -->
+
 
     <!-- QR TRIGGER -->
     <!-- Package name with launch files -->
@@ -60,14 +68,14 @@
     </include>
 
     <group unless="$(arg qr_launch)">
-        <node pkg="sauvc_missions" type="tfsm_master.py" name="control_fsm" output="$(arg ros_output)" respawn="false">
+        <node pkg="sauvc_missions" type="sauvc_controller.py" name="sauvc_controller" output="$(arg ros_output)" respawn="false">
             <param name="verbose" value="$(arg verbose)" />
             <param name="gate_vision" value="$(arg gate_vision)" />
             <param name="gate_brute" value="$(arg gate_brute)" />
             <param name="gate_centering" value="$(arg gate_centering)" />
             <param name="drums" value="$(arg drums)" />
-            <param name="simulation" value="$(arg simulation)" />
-            <param name="front_cam" value="$(arg front_cam)" />
+            <param name="front_camera" value="$(arg front_camera)" />
+            <param name="bottom_camera" value="$(arg bottom_camera)" />
             <param name="test" value="$(arg test)" />
         </node>
     </group>
