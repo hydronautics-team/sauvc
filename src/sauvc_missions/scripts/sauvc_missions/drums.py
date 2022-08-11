@@ -1,91 +1,85 @@
 #! /usr/bin/env python3
 
-from stingray_tfsm.ros_transitions import AUVStateMachine
+from sauvc_missions.sauvc_mission import SAUVCMission
 from stingray_tfsm.vision_events import ObjectDetectionEvent
-from stingray_object_detection_msgs.srv import SetEnableObjectDetection
-from stingray_object_detection_msgs.msg import ObjectsArray
-from stingray_tfsm.load_config import load_config
 import rospy
 
-HARDCODE = '/rov_model_urdf/camera_front/image_raw/yolo_detector/objects'
-HARDCODE1 = '/front_camera/image_raw/yolo_detector/objects'
-EXHAUST_MAX = 40
-CONFIRMATION = 10
-TARGET = 'blue_bowl'
 
-ROS_CONFIG = load_config()
+class DrumsMission(SAUVCMission):
+    def __init__(self,
+                 front_camera: str,
+                 bottom_camera: str,
+                 gate="gate",
+                 red_flare="red_flare",
+                 yellow_flare="yellow_flare",
+                 mat="mat",
+                 blue_bowl="blue_bowl",
+                 red_bowl="red_bowl"):
+        super().__init__(front_camera, bottom_camera, gate,
+                         red_flare, yellow_flare, mat, blue_bowl, red_bowl)
 
+    def setup_states(self):
+        return ('condition_drums', 'custom_setup',
+                'rotate_clockwise', 'rotate_anticlockwise', 'move_march')
 
-STATES = ('init', 'condition_drums', 'custom_setup',
-          'rotate_clockwise', 'rotate_anticlockwise', 'move_march', 'done', 'aborted')
-TRANSITIONS = [     # Vision exhaustion loop
-    ['start', ['init', 'rotate_clockwise', 'move_march'], 'condition_drums'],
-    ['condition_f', 'condition_drums', 'rotate_clockwise'],
-    ['condition_s', 'condition_drums', 'move_march'],
-    ['end', '*', 'done']
-]
+    def setup_transitions(self):
+        return [     # Vision exhaustion loop
+            [self.transition_start, [self.state_init, 'rotate_clockwise',
+                                     'move_march'], 'condition_drums'],
+            ['condition_f', 'condition_drums', 'rotate_clockwise'],
+            ['condition_s', 'condition_drums', 'move_march'],
+        ]
 
-drums_detection_event = ObjectDetectionEvent(HARDCODE, TARGET, CONFIRMATION)
-EXHAUSTION = 0
+    def setup_scene(self):
+        return {
+            self.state_init: {
+                'preps': self.enable_object_detection,
+                "args": (self.front_camera, True),
+            },
+            'condition_drums': {
+                'condition': self.drums_event_handler,
+                'args': None
+            },
+            'rotate_clockwise': {
+                'angle': 10
+            },
+            'rotate_anticlockwise': {
+                'angle': -10
+            },
+            'move_march': {
+                'direction': 3,
+                'velocity': 0.4,
+                'duration': 1000
+            },
+            'done': {},
+            'aborted': {}
+        }
 
+    def setup_events(self):
+        self.drums_detection_event = ObjectDetectionEvent(
+            self.front_camera, self.mat_object, self.confirmation)
 
-def drums_condition(*args, **kwargs):
-    global EXHAUSTION
-    drums_detection_event.start_listening()
-    rospy.sleep(2)
-    if drums_detection_event.is_triggered():
-        rospy.loginfo("DEBUG: drums detected by event")
-        EXHAUSTION = 0
-        drums_detection_event.stop_listening()
-        return 1
-    else:
-        EXHAUSTION += 1
-        rospy.loginfo("DEBUG: no drums detected")
-        drums_detection_event.stop_listening()
-        if EXHAUSTION >= EXHAUST_MAX:
-            rospy.loginfo("it's time to stop, but i'll implement it later")
-        return 0
+    def drums_event_handler(self):
+        self.drums_detection_event.start_listening()
+        rospy.sleep(2)
+        if self.drums_detection_event.is_triggered():
+            rospy.loginfo("DEBUG: drums detected by event")
+            self.EXHAUSTION = 0
+            self.drums_detection_event.stop_listening()
+            return 1
+        else:
+            self.EXHAUSTION += 1
+            rospy.loginfo("DEBUG: no drums detected")
+            self.drums_detection_event.stop_listening()
+            if self.EXHAUSTION >= self.exhaust_max:
+                rospy.loginfo("it's time to stop, but i'll implement it later")
+            return 0
 
-
-def set_camera_online(args):
-    print(f"trying to set object detection on camera {args[0]} to {args[1]}")
-    srv_name = ROS_CONFIG["services"]["set_enable_object_detection"]
-    rospy.wait_for_service(srv_name)
-    set_camera = rospy.ServiceProxy(srv_name, SetEnableObjectDetection)
-    print(set_camera(args[0], args[1]))
-    rospy.wait_for_message(HARDCODE, ObjectsArray)
-
-
-def rotation_overflow_condition(*args, **kwargs):
-    return 1
-
-
-STATES_ARGS = {
-    'init': {
-        'preps': set_camera_online,
-        "args": (0, 1),
-    },
-    'condition_drums': {
-        'condition': drums_condition,
-        'args': None
-    },
-    'rotate_clockwise': {
-        'angle': 10
-    },
-    'rotate_anticlockwise': {
-            'angle': -10
-        },
-    'move_march': {
-        'direction': 3,
-        'velocity': 0.4,
-        'duration': 1000
-    },
-    'done': {},
-    'aborted': {}
-}
-
-drums_mission = AUVStateMachine(STATES, TRANSITIONS, STATES_ARGS)
 
 if __name__ == '__main__':
-    rospy.init_node("control_fsm")
+    rospy.init_node("drums_centering_fsm")
+    front_camera_topic = rospy.get_param('~front_camera_topic')
+    bottom_camera_topic = rospy.get_param('~front_camera_topic')
+
+    drums_mission = DrumsMission(front_camera_topic, bottom_camera_topic)
     drums_mission.run()

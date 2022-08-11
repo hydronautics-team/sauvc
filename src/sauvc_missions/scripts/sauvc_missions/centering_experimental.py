@@ -1,58 +1,47 @@
 #! /usr/bin/env python3
 
-from stingray_tfsm.mission_transitions import MissionBase
-from stingray_tfsm.ros_transitions import AUVStateMachine
-from stingray_tfsm.pure_transitions import FSM_Simple
+from stingray_tfsm.auv_mission import AUVMission
+from stingray_tfsm.auv_fsm import AUVStateMachine
+from stingray_tfsm.core.pure_fsm import PureStateMachine
 from stingray_tfsm.vision_events import ObjectDetectionEvent, ObjectOnRight, ObjectOnLeft
 
-import rospy
 
-
-class CenteringSub(MissionBase):
-    TARGET = 'gate'
-    CONFIRMATION = 2
-    TOLERANCE = 14
-    SIM_CAMERA = '/rov_model_urdf/camera_front/image_raw/yolo_detector/objects'
-    HRD_CAMERA = '/front_camera/image_raw/yolo_detector/objects'
-    STATES = ('init', 'condition_detected',
-              'condition_lefter', 'condition_righter',
-              'rotate_clock', 'rotate_anti',
-              'condition_exhausted', 'done', 'aborted')
-    TRANSITIONS = [
-        ['start', ['init', 'rotate_clock', 'rotate_anti'], 'condition_detected'],
-
-        ['condition_f', 'condition_detected', 'aborted'],
-        ['condition_s', 'condition_detected', 'condition_lefter'],
-
-        ['condition_f', 'condition_lefter', 'condition_righter'],
-        ['condition_s', 'condition_lefter', 'rotate_anti'],
-
-        ['condition_f', 'condition_righter', 'done'],
-        ['condition_s', 'condition_righter', 'rotate_clock'],
-        # add exhaustion
-        ['end', '*', 'done']
-    ]
-
-    def setup_events(self):
-        self.gate_detected = ObjectDetectionEvent(self.camera, self.TARGET, self.CONFIRMATION)
-        self.gate_lefter = ObjectOnLeft(self.camera, self.TARGET, self.CONFIRMATION, tolerance=self.TOLERANCE * 0.01)
-        self.gate_righter = ObjectOnRight(self.camera, self.TARGET, self.CONFIRMATION, tolerance=self.TOLERANCE * 0.01)
-        self.events = True
-        return self.events
-
-    def reset(self, camera=False):
-        self.events = False
+class CenteringMission(AUVMission):
+    def __init__(self, camera: str, target: str, confirmation: int = 2, tolerance: int = 14):
+        super().__init__()
+        self.target = target
+        self.confirmation = confirmation
+        self.tolerance = tolerance
         self.camera = camera
-        if self.camera:
-            self.camera = self.SIM_CAMERA
-        else:
-            self.camera = self.HRD_CAMERA
-        rospy.loginfo(f"CenteringSub yobject feed set to {self.camera}")
 
-        self.setup_events()
+        self.gate_detected = None
+        self.gate_lefter = None
+        self.gate_righter = None
 
-        self.scene = {
-            'init': {
+    def setup_states(self):
+        return ('condition_detected',
+                'condition_lefter', 'condition_righter',
+                'rotate_clock', 'rotate_anti',
+                'condition_exhausted')
+
+    def setup_transitions(self):
+        return [
+            [self.transition_start, [self.state_init, 'rotate_clock',
+                                     'rotate_anti'], 'condition_detected'],
+
+            ['condition_f', 'condition_detected', 'aborted'],
+            ['condition_s', 'condition_detected', 'condition_lefter'],
+
+            ['condition_f', 'condition_lefter', 'condition_righter'],
+            ['condition_s', 'condition_lefter', 'rotate_anti'],
+
+            ['condition_f', 'condition_righter', 'done'],
+            ['condition_s', 'condition_righter', 'rotate_clock'],
+        ]
+
+    def setup_scene(self):
+        return {
+            self.state_init: {
                 'time': 0.1
             },
             'condition_detected': {
@@ -72,34 +61,20 @@ class CenteringSub(MissionBase):
             },
             'rotate_clock': {
                 'angle': 5
-            },
-            'done': {},
-            'aborted': {}
+            }
         }
 
-        if self.events:
-            self.machine = AUVStateMachine(CenteringSub.STATES, CenteringSub.TRANSITIONS, self.scene, verbose=False)
-
-    def __init__(self, target='gate'):
-        self.confirmation = rospy.get_param('/control_fsm' + "/centering_confirmation", self.CONFIRMATION)
-        self.tolerance = rospy.get_param('/control_fsm/centering_tolerance', self.TOLERANCE)
-
-        self.events = False
-        self.target = target
-
-        self.gate_detected = None
-        self.gate_lefter = None
-        self.gate_righter = None
-
-        self.scene = None
-        self.machine = None
-
-        self.camera = rospy.get_param('/control_fsm/simulation', False)
-        self.reset(self.camera)
+    def setup_events(self):
+        self.gate_detected = ObjectDetectionEvent(
+            self.camera, self.target, self.confirmation)
+        self.gate_lefter = ObjectOnLeft(
+            self.camera, self.target, self.confirmation, tolerance=self.TOLERANCE * 0.01)
+        self.gate_righter = ObjectOnRight(
+            self.camera, self.target, self.confirmation, tolerance=self.TOLERANCE * 0.01)
 
     def check_machine(self):
         if type(self.machine) is AUVStateMachine or \
-                type(self.machine) is FSM_Simple:
+                type(self.machine) is PureStateMachine:
             return 1
         else:
             raise TypeError("machine was not initialized")
