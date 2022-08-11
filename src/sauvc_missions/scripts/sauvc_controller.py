@@ -6,10 +6,6 @@ from stingray_tfsm.auv_controller import AUVController
 NODE_NAME = "sauvc_controller"
 
 
-def no_mission_set(*args, **kwargs):
-    rospy.loginfo("No mission")
-
-
 def setup(*args, **kwargs):
     """here arguments from launches/ros should be retrieved and applied to where they belong"""
     # TODO machine which just checks that all required topics and nodes are online
@@ -17,14 +13,25 @@ def setup(*args, **kwargs):
 
 
 class SAUVCController(AUVController):
-    def __init__(self):
+    def __init__(self,
+                 gate_vision: bool,
+                 gate_brute: bool,
+                 gate_centering: bool,
+                 drums: bool,
+                 verbose: bool,
+                 centering_test: bool,
+                 front_camera: str,
+                 bottom_camera: str
+                 ):
         super().__init__()
-        self.add_mission_transitions((
-            {'trigger': 'skip',
-             'source': 'init',
-             'dest': 'done',
-             'prepare': no_mission_set},
-        ))
+        self.gate_vision = gate_vision
+        self.gate_brute = gate_brute
+        self.gate_centering = gate_centering
+        self.drums = drums
+        self.verbose = verbose
+        self.centering_test = centering_test
+        self.front_camera = front_camera
+        self.bottom_camera = bottom_camera
 
     def setup_missions(self):
         if self.drums:
@@ -49,7 +56,17 @@ if __name__ == '__main__':
     drums = rospy.get_param("~drums")
     verbose = rospy.get_param("~verbose", True)
     centering_test = rospy.get_param("~test")
-    simulation = rospy.get_param("~simulation")
+    front_camera = rospy.get_param("~front_camera")
+    bottom_camera = rospy.get_param("~bottom_camera")
 
-    controller = SAUVCController()
+    controller = SAUVCController(
+        gate_vision,
+        gate_brute,
+        gate_centering,
+        drums,
+        verbose,
+        centering_test,
+        front_camera,
+        bottom_camera
+    )
     controller.run()
