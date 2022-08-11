@@ -92,6 +92,10 @@ class CenteringMission(AUVMission):
         else:
             raise TypeError("machine was not initialized")
 
+    def set_init_state(self,):
+        if self.check_machine():
+            self.machine.set_state(self.machine.state_init)
+
     def set_state(self, state):
         if self.check_machine():
             self.machine.set_state(state)
