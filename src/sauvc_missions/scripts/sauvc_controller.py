@@ -42,7 +42,7 @@ class SAUVCController(AUVController):
                                               self.front_camera, self.bottom_camera)
             self.add_mission(self.drums_mission)
             self.add_mission_transitions([
-                [self.machine.transition_start,self.machine.state_init, self.gate_mission.name],
+                [self.machine.transition_start, self.machine.state_init, self.gate_mission.name],
                 ['finish_gate', self.gate_mission.name, self.drums_mission.name],
                 [self.machine.transition_end, self.drums_mission.name, self.machine.state_end],
 

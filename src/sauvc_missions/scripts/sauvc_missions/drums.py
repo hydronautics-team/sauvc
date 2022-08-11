@@ -1,6 +1,7 @@
 #! /usr/bin/env python3
 
 from sauvc_missions.sauvc_mission import SAUVCMission
+from stingray_object_detection.utils import get_objects_topic
 from stingray_tfsm.vision_events import ObjectDetectionEvent
 import rospy
 
@@ -39,7 +40,7 @@ class DrumsMission(SAUVCMission):
             },
             'condition_drums': {
                 'condition': self.drums_event_handler,
-                'args': None
+                'args': ()
             },
             'rotate_clockwise': {
                 'angle': 10
@@ -58,7 +59,7 @@ class DrumsMission(SAUVCMission):
 
     def setup_events(self):
         self.drums_detection_event = ObjectDetectionEvent(
-            self.front_camera, self.mat, self.confirmation)
+            get_objects_topic(self.front_camera), self.mat, self.confirmation)
 
     def drums_event_handler(self):
         self.drums_detection_event.start_listening()

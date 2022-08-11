@@ -1,5 +1,6 @@
 #! /usr/bin/env python3
 
+from stingray_object_detection.utils import get_objects_topic
 from stingray_tfsm.auv_mission import AUVMission
 from stingray_tfsm.auv_fsm import AUVStateMachine
 from stingray_tfsm.core.pure_fsm import PureStateMachine
@@ -78,11 +79,11 @@ class CenteringMission(AUVMission):
 
     def setup_events(self):
         self.gate_detected = ObjectDetectionEvent(
-            self.camera, self.target, self.confirmation)
+            get_objects_topic(self.camera), self.target, self.confirmation)
         self.gate_lefter = ObjectOnLeft(
-            self.camera, self.target, self.confirmation, tolerance=self.tolerance * 0.01)
+            get_objects_topic(self.camera), self.target, self.confirmation, tolerance=self.tolerance * 0.01)
         self.gate_righter = ObjectOnRight(
-            self.camera, self.target, self.confirmation, tolerance=self.tolerance * 0.01)
+            get_objects_topic(self.camera), self.target, self.confirmation, tolerance=self.tolerance * 0.01)
 
     def check_machine(self):
         if type(self.machine) is AUVStateMachine or \

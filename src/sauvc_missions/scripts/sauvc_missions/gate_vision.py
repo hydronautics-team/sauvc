@@ -67,7 +67,7 @@ STATES_ARGS = {
     },
     'condition_gate': {
         'condition': gates_condition,
-        'args': None
+        'args': ()
     },
     'rotate_clockwise': {
         'angle': 10

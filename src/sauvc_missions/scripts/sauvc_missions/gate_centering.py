@@ -2,6 +2,7 @@
 
 from sauvc_missions.sauvc_mission import SAUVCMission
 from sauvc_missions.centering_experimental import CenteringMission
+from stingray_object_detection.utils import get_objects_topic
 from stingray_tfsm.vision_events import ObjectDetectionEvent
 import rospy
 
@@ -24,7 +25,7 @@ class GateMission(SAUVCMission):
                          red_flare, yellow_flare, mat, blue_bowl, red_bowl)
 
     def setup_states(self):
-
+        
         return ('condition_gate',
                 'rotate_clockwise', 'condition_centering',
                 'move_march_0', 'condition_in_front', 'move_march_1') + self.machine.default_states
@@ -54,11 +55,11 @@ class GateMission(SAUVCMission):
             },
             'condition_gate': {
                 'condition': self.gate_event_handler,
-                'args': None
+                'args': ()
             },
             'condition_in_front': {
                 'condition': self.not_gates,
-                'args': None
+                'args': ()
             },
             'rotate_clockwise': {
                 'angle': 5
@@ -66,7 +67,7 @@ class GateMission(SAUVCMission):
             'condition_centering': {
                 'subFSM': True,
                 'condition': self.centering_submission,
-                'args': None
+                'args': ()
             },
             'move_march_0': {
                 'direction': 3,
@@ -82,9 +83,9 @@ class GateMission(SAUVCMission):
 
     def setup_events(self):
         self.gate_detection_event = ObjectDetectionEvent(
-            self.front_camera, self.gate, self.confirmation)
+            get_objects_topic(self.front_camera), self.gate, self.confirmation)
 
-    def gate_event_handler(self, *args, **kwargs):
+    def gate_event_handler(self):
         self.gate_detection_event.start_listening()
         rospy.sleep(2)
         if self.gate_detection_event.is_triggered():
@@ -100,7 +101,7 @@ class GateMission(SAUVCMission):
                 rospy.loginfo("it's time to stop, but i'll implement it later")
             return 0
 
-    def not_gates(self, *args, **kwargs):
+    def not_gates(self):
         rospy.sleep(1)
         return not self.gate_event_handler()
 
