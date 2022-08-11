@@ -7,8 +7,19 @@ from stingray_tfsm.vision_events import ObjectDetectionEvent, ObjectOnRight, Obj
 
 
 class CenteringMission(AUVMission):
-    def __init__(self, camera: str, target: str, confirmation: int = 2, tolerance: int = 14):
-        super().__init__()
+    """ Submission for centering on object in camera """
+
+    def __init__(self, name: str, camera: str, target: str, confirmation: int = 2, tolerance: int = 14):
+        """ Submission for centering on object in camera
+
+        Args:
+            name (str): mission name
+            camera (str): camera name
+            target (str): object name
+            confirmation (int, optional): confirmation value of continuously detected object after which will be event triggered. Defaults to 2.
+            tolerance (int, optional): centering tolerance. Defaults to 14.
+        """
+        super().__init__(name)
         self.target = target
         self.confirmation = confirmation
         self.tolerance = tolerance
@@ -26,7 +37,7 @@ class CenteringMission(AUVMission):
 
     def setup_transitions(self):
         return [
-            [self.transition_start, [self.state_init, 'rotate_clock',
+            [self.machine.transition_start, [self.machine.state_init, 'rotate_clock',
                                      'rotate_anti'], 'condition_detected'],
 
             ['condition_f', 'condition_detected', 'aborted'],
@@ -41,7 +52,7 @@ class CenteringMission(AUVMission):
 
     def setup_scene(self):
         return {
-            self.state_init: {
+            self.machine.state_init: {
                 'time': 0.1
             },
             'condition_detected': {

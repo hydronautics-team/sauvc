@@ -79,7 +79,7 @@ class GateMission(PureStateMachine):
             }
         else:
             userdata = None
-        self.trigger(self.fsm.get_triggers(self.state)[0],
+        self.trigger(self.machine.get_triggers(self.state)[0],
                      userdata, external_cb=self.goal_switch)
 
     def goal_switch(self, userdata: dict):  # TODO this is redundant?

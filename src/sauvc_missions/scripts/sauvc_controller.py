@@ -35,14 +35,14 @@ class SAUVCController(AUVController):
 
     def setup_missions(self):
         if self.drums:
-            self.gate_mission = GateMission(
+            self.gate_mission = GateMission("gate_mission", 
                 self.front_camera, self.bottom_camera)
             self.add_mission(self.gate_mission)
-            self.drums_mission = DrumsMission(
+            self.drums_mission = DrumsMission("drums_mission", 
                 self.front_camera, self.bottom_camera)
             self.add_mission(self.drums_mission)
             self.add_mission_transitions([
-                [self.transition_start, self.state_init, 'gate'],
+                [self.machine.transition_start, self.machine.state_init, 'gate'],
                 ['finish_gate', 'gate', 'drums'],
             ])
 

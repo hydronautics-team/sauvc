@@ -8,6 +8,7 @@ import rospy
 
 class GateMission(SAUVCMission):
     def __init__(self,
+                 name: str,
                  front_camera: str,
                  bottom_camera: str,
                  gate="gate",
@@ -16,7 +17,7 @@ class GateMission(SAUVCMission):
                  mat="mat",
                  blue_bowl="blue_bowl",
                  red_bowl="red_bowl"):
-        super().__init__(front_camera, bottom_camera, gate,
+        super().__init__(name, front_camera, bottom_camera, gate,
                          red_flare, yellow_flare, mat, blue_bowl, red_bowl)
 
         self.centering_submission = CenteringMission()
@@ -28,8 +29,8 @@ class GateMission(SAUVCMission):
 
     def setup_transitions(self):
         return [
-            [self.transition_start, [self.state_init,
-                                     'rotate_clockwise'], 'condition_gate'],
+            [self.machine.transition_start, [self.machine.state_init,
+                                             'rotate_clockwise'], 'condition_gate'],
 
             ['condition_f', 'condition_gate', 'rotate_clockwise'],
             ['condition_s', 'condition_gate', 'condition_centering'],
@@ -45,7 +46,7 @@ class GateMission(SAUVCMission):
 
     def setup_scene(self):
         return {
-            self.state_init: {
+            self.machine.state_init: {
                 'preps': self.enable_object_detection,
                 "args": (self.front_camera, True),
             },

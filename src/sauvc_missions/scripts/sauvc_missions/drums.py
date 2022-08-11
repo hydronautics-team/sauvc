@@ -7,6 +7,7 @@ import rospy
 
 class DrumsMission(SAUVCMission):
     def __init__(self,
+                 name: str,
                  front_camera: str,
                  bottom_camera: str,
                  gate="gate",
@@ -15,7 +16,7 @@ class DrumsMission(SAUVCMission):
                  mat="mat",
                  blue_bowl="blue_bowl",
                  red_bowl="red_bowl"):
-        super().__init__(front_camera, bottom_camera, gate,
+        super().__init__(name, front_camera, bottom_camera, gate,
                          red_flare, yellow_flare, mat, blue_bowl, red_bowl)
 
     def setup_states(self):
@@ -24,7 +25,7 @@ class DrumsMission(SAUVCMission):
 
     def setup_transitions(self):
         return [     # Vision exhaustion loop
-            [self.transition_start, [self.state_init, 'rotate_clockwise',
+            [self.transition_start, [self.machine.state_init, 'rotate_clockwise',
                                      'move_march'], 'condition_drums'],
             ['condition_f', 'condition_drums', 'rotate_clockwise'],
             ['condition_s', 'condition_drums', 'move_march'],
@@ -32,7 +33,7 @@ class DrumsMission(SAUVCMission):
 
     def setup_scene(self):
         return {
-            self.state_init: {
+            self.machine.state_init: {
                 'preps': self.enable_object_detection,
                 "args": (self.front_camera, True),
             },
