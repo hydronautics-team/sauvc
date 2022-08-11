@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 
-from stingray_tfsm.pure_transitions import FSM_Simple
+from stingray_tfsm.core.pure_fsm import PureStateMachine
 import rospy
 from actionlib import SimpleActionClient
 import stingray_movement_msgs.msg as msg
@@ -35,7 +35,7 @@ def callback_feedback(feedback):
     rospy.loginfo("Feedback:%s" % str(feedback))
 
 
-class GateMission(FSM_Simple):
+class GateMission(PureStateMachine):
     def __init__(self):
         super().__init__(states=STATES, transitions=TRANSITIONS, path=None)
         self.move_client = SimpleActionClient('stingray_action_linear_movement', msg.LinearMoveAction)

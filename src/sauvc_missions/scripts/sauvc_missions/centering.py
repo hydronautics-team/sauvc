@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 
-from stingray_tfsm.ros_transitions import AUVStateMachine
+from stingray_tfsm.auv_fsm import AUVStateMachine
 from stingray_tfsm.vision_events import ObjectDetectionEvent, ObjectOnRight, ObjectOnLeft
 
 import rospy

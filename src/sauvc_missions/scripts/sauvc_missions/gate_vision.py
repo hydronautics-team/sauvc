@@ -1,10 +1,10 @@
 #! /usr/bin/env python3
 
-from stingray_tfsm.ros_transitions import AUVStateMachine
+from stingray_tfsm.auv_fsm import AUVStateMachine
 from stingray_tfsm.vision_events import ObjectDetectionEvent
 from stingray_object_detection_msgs.srv import SetEnableObjectDetection
 from stingray_object_detection_msgs.msg import ObjectsArray
-from stingray_tfsm.load_config import load_config
+from stingray_resources.utils import load_config
 import rospy
 
 HARDCODE = '/rov_model_urdf/camera_front/image_raw/yolo_detector/objects'

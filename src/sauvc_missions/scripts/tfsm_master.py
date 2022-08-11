@@ -1,9 +1,9 @@
 import rospy
-from stingray_tfsm.pure_transitions import FSM_Simple
+from stingray_tfsm.core.pure_fsm import PureStateMachine
 
 STATES = ('init', 'done', 'aborted')
 TRANSITIONS = [['finish', 'aborted', 'done']]
-master_fsm = FSM_Simple(STATES, [])
+master_fsm = PureStateMachine(STATES, [])
 NODE_NAME = "control_fsm"
 
 

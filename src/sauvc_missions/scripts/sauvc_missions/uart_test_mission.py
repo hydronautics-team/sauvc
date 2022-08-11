@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 
 
-from stingray_tfsm.ros_transitions import AUVStateMachine
+from stingray_tfsm.auv_fsm import AUVStateMachine
 
 STATES = ('init', 'move_first',
           'rotate_clock', 'move_second',
