@@ -2,7 +2,7 @@
 
 from sauvc_missions.sauvc_mission import SAUVCMission
 from sauvc_missions.centering_experimental import CenteringMission
-from stingray_tfsm.vision_events import ObjectDetectionEvent
+from stingray_tfsm.vision_events import ObjectDetectionEvent, ObjectIsCloseEvent
 import rospy
 
 
@@ -25,12 +25,16 @@ class GateMission(SAUVCMission):
     def setup_states(self):
         return ('condition_gate',
                 'rotate_clockwise', 'condition_centering',
+                'condition_flare', 'move_lag_right',
                 'move_march_0', 'condition_in_front', 'move_march_1')
 
     def setup_transitions(self):
         return [
             [self.machine.transition_start, [self.machine.state_init,
-                                             'rotate_clockwise'], 'condition_gate'],
+                                             'rotate_clockwise', 'move_lag_right'], 'condition_gate'],
+
+            ['condition_f', 'condition_flare', 'condition_gate'],
+            ['condition_s', 'condition_flare', 'move_lag_right'],
 
             ['condition_f', 'condition_gate', 'rotate_clockwise'],
             ['condition_s', 'condition_gate', 'condition_centering'],
@@ -40,8 +44,10 @@ class GateMission(SAUVCMission):
 
             ['next', 'move_march_0', 'condition_in_front'],
 
-            ['condition_f', 'condition_in_front', 'condition_centering'],
+            ['condition_f', 'condition_in_front', 'condition_flare'],
             ['condition_s', 'condition_in_front', 'move_march_1'],
+
+            ['end', '*', 'done']
         ]
 
     def setup_scene(self):
@@ -75,27 +81,49 @@ class GateMission(SAUVCMission):
                 'direction': 3,
                 'velocity': 0.41,
                 'duration': 2000
-            }
+            },
+            'condition_flare': {
+                'condition': self.flare_event_handler,
+                'args': None
+            },
+            'move_lag_right': {
+                'direction': 1,
+                'velocity': 0.5,
+                'duration': 1000
+            },
         }
 
     def setup_events(self):
         self.gate_detection_event = ObjectDetectionEvent(
             self.front_camera, self.gate, self.confirmation)
+        self.flare_assession_event = ObjectIsCloseEvent(
+            self.front_camera, self.red_flare, self.confirmation
+        )
 
     def gate_event_handler(self):
         self.gate_detection_event.start_listening()
-        rospy.sleep(2)
+        rospy.sleep(0.5)
         if self.gate_detection_event.is_triggered():
             rospy.loginfo("DEBUG: gate detected by event")
-            self.EXHAUSTION = 0
             self.gate_detection_event.stop_listening()
             return 1
         else:
-            self.EXHAUSTION += 1
             rospy.loginfo("DEBUG: no gate detected")
             self.gate_detection_event.stop_listening()
             if self.EXHAUSTION >= self.exhaust_max:
                 rospy.loginfo("it's time to stop, but i'll implement it later")
+            return 0
+
+    def flare_event_handler(self, *args, **kwargs):
+        self.flare_assession_event.start_listening()
+        rospy.sleep(0.5)
+        if self.flare_assession_event.is_triggered():
+            rospy.loginfo("DEBUG: flare is detected and is a threat")
+            self.flare_assession_event.stop_listening()
+            return 1
+        else:
+            rospy.loginfo("DEBUG: no risks of collision with red flare")
+            self.flare_assession_event.stop_listening()
             return 0
 
     def not_gates(self):
