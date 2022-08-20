@@ -85,7 +85,7 @@ class GateMission(SAUVCMission):
             },
             'condition_flare': {
                 'condition': self.flare_event_handler,
-                'args': None
+                'args': ()
             },
             'move_lag_right': {
                 'direction': 1,
@@ -96,13 +96,15 @@ class GateMission(SAUVCMission):
 
     def setup_events(self):
         self.gate_detection_event = ObjectDetectionEvent(
-            self.front_camera, self.gate, self.confirmation)
+            get_objects_topic(self.front_camera), self.gate, self.confirmation)
         self.flare_assession_event = ObjectIsCloseEvent(
-            self.front_camera, self.red_flare, self.confirmation
+            get_objects_topic(self.front_camera), self.red_flare, self.confirmation
         )
 
     def gate_event_handler(self):
         self.gate_detection_event.start_listening()
+        rospy.loginfo("DEBUG: start listnening gate detection")
+
         rospy.sleep(0.5)
         if self.gate_detection_event.is_triggered():
             rospy.loginfo("DEBUG: gate detected by event")

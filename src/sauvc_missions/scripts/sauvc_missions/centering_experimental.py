@@ -42,13 +42,13 @@ class CenteringMission(AUVMission):
             [self.machine.transition_start, [self.machine.state_init, 'rotate_clock',
                                              'rotate_anti'], 'condition_detected'],
 
-            ['condition_f', 'condition_detected', 'aborted'],
+            ['condition_f', 'condition_detected', self.machine.state_aborted],
             ['condition_s', 'condition_detected', 'condition_lefter'],
 
             ['condition_f', 'condition_lefter', 'condition_righter'],
             ['condition_s', 'condition_lefter', 'rotate_anti'],
 
-            ['condition_f', 'condition_righter', 'done'],
+            ['condition_f', 'condition_righter', self.machine.state_end],
             ['condition_s', 'condition_righter', 'rotate_clock'],
         ] + self.machine.default_transitions
 
@@ -59,15 +59,15 @@ class CenteringMission(AUVMission):
             },
             'condition_detected': {
                 'condition': self.event_handler,
-                'args': self.gate_detected
+                'args': (self.gate_detected,)
             },
             'condition_righter': {
                 'condition': self.event_handler,
-                'args': self.gate_righter
+                'args': (self.gate_righter,)
             },
             'condition_lefter': {
                 'condition': self.event_handler,
-                'args': self.gate_lefter
+                'args': (self.gate_lefter,)
             },
             'rotate_anti': {
                 'angle': -5

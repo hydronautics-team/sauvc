@@ -42,6 +42,6 @@ class SAUVCMission(AUVMission):
         self.front_camera = front_camera
         self.bottom_camera = bottom_camera
 
-        self.confirmation = 10
+        self.confirmation = 5
         self.exhaust_max = 40
         super().__init__(name)
