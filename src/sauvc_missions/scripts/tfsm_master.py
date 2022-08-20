@@ -30,7 +30,7 @@ if __name__ == '__main__':
 
     if centering_test:
         from sauvc_missions.uart_test_mission import test
-        master_fsm.add_state('centering', on_enter=test.run)
+        master_fsm.add_states('centering', on_enter=test.run)
         master_fsm.add_transitions([
             ['start', 'init', 'centering'],
             ['finish', 'centering', 'done'],
@@ -39,7 +39,7 @@ if __name__ == '__main__':
     elif gate_vision:
         from sauvc_missions.gate_vision import gate_mission
         gate_mission.set_verbose(verbose)
-        master_fsm.add_state(('gate',), on_enter=gate_mission.run)
+        master_fsm.add_states(('gate',), on_enter=gate_mission.run)
         master_fsm.add_transitions([
             ['start', 'init', 'gate'],
             ['finish', 'gate', 'done'],
@@ -48,7 +48,7 @@ if __name__ == '__main__':
     elif gate_brute:
         from sauvc_missions.gate_bruteforce import gate_mission
         gate_mission.set_verbose(verbose)
-        master_fsm.add_state(('gate',), on_enter=gate_mission.run)
+        master_fsm.add_states(('gate',), on_enter=gate_mission.run)
         master_fsm.add_transitions([
             ['start', 'init', 'gate'],
             ['finish', 'gate', 'done'],
@@ -56,7 +56,7 @@ if __name__ == '__main__':
     elif gate_centering:
         from sauvc_missions.gate_centering import gate_mission
         gate_mission.set_verbose(verbose)
-        master_fsm.add_state(('gate',), on_enter=gate_mission.run)
+        master_fsm.add_states(('gate',), on_enter=gate_mission.run)
         master_fsm.add_transitions([
             ['start', 'init', 'gate'],
             ['finish', 'gate', 'done'],
@@ -65,9 +65,9 @@ if __name__ == '__main__':
         from sauvc_missions.gate_centering import gate_mission
         from sauvc_missions.drums import drums_mission
         gate_mission.set_verbose(verbose)
-        master_fsm.add_state(('gate'), on_enter=gate_mission.run)
+        master_fsm.add_states(('gate'), on_enter=gate_mission.run)
         drums_mission.set_verbose(verbose)
-        master_fsm.add_state(('drums'), on_enter=drums_mission.run)
+        master_fsm.add_states(('drums'), on_enter=drums_mission.run)
         master_fsm.add_transitions([
             ['start', 'init', 'gate'],
             ['finish_gate', 'gate', 'drums'],

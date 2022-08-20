@@ -1,10 +1,12 @@
 #! /usr/bin/env python3
 
+from abc import abstractmethod
 from stingray_tfsm.auv_mission import AUVMission
 
 
 class SAUVCMission(AUVMission):
     """ Abstract class to implement AUV missions for SAUVC competitnion """
+    @abstractmethod
     def __init__(self,
                  name: str,
                  front_camera: str,
@@ -29,7 +31,6 @@ class SAUVCMission(AUVMission):
             blue_bowl (str, optional): blue_bowl object name. Defaults to "blue_bowl".
             red_bowl (str, optional): red_bowl object name. Defaults to "red_bowl".
         """
-        super().__init__(name)
         # objects
         self.gate = gate
         self.red_flare = red_flare
@@ -43,3 +44,4 @@ class SAUVCMission(AUVMission):
 
         self.confirmation = 10
         self.exhaust_max = 40
+        super().__init__(name)

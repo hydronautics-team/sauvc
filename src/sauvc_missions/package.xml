@@ -13,6 +13,7 @@
   <buildtool_depend>catkin</buildtool_depend>
   <depend>rospy</depend>
   <depend>stingray_tfsm</depend>
+  <depend>stingray_object_detection</depend>
   <depend>stingray_object_detection_msgs</depend>
 
 </package>

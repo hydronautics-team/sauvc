@@ -88,15 +88,15 @@ STATES_ARGS = {
     },
     'condition_detected': {
         'condition': Centering.visible,
-        'args': None
+        'args': ()
     },
     'condition_righter': {
         'condition': Centering.righter,
-        'args': None
+        'args': ()
     },
     'condition_lefter': {
             'condition': Centering.lefter,
-            'args': None
+            'args': ()
         },
     'rotate_anti': {
         'angle': -10

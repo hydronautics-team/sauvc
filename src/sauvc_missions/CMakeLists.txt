@@ -6,6 +6,8 @@ add_compile_options(-std=c++11)
 find_package(catkin REQUIRED COMPONENTS
   rospy
   stingray_tfsm
+  stingray_object_detection
+  stingray_object_detection_msgs
 )
 
 catkin_package(

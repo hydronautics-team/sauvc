@@ -2,6 +2,7 @@
 
 from sauvc_missions.sauvc_mission import SAUVCMission
 from sauvc_missions.centering_experimental import CenteringMission
+from stingray_object_detection.utils import get_objects_topic
 from stingray_tfsm.vision_events import ObjectDetectionEvent, ObjectIsCloseEvent
 import rospy
 
@@ -17,16 +18,18 @@ class GateMission(SAUVCMission):
                  mat="mat",
                  blue_bowl="blue_bowl",
                  red_bowl="red_bowl"):
+        self.exhaustion = 0
+        self.centering_submission = CenteringMission(
+            "centering", front_camera, gate)
         super().__init__(name, front_camera, bottom_camera, gate,
                          red_flare, yellow_flare, mat, blue_bowl, red_bowl)
 
-        self.centering_submission = CenteringMission()
-
     def setup_states(self):
+        
         return ('condition_gate',
                 'rotate_clockwise', 'condition_centering',
                 'condition_flare', 'move_lag_right',
-                'move_march_0', 'condition_in_front', 'move_march_1')
+                'move_march_0', 'condition_in_front', 'move_march_1') + self.machine.default_states
 
     def setup_transitions(self):
         return [
@@ -46,9 +49,7 @@ class GateMission(SAUVCMission):
 
             ['condition_f', 'condition_in_front', 'condition_flare'],
             ['condition_s', 'condition_in_front', 'move_march_1'],
-
-            ['end', '*', 'done']
-        ]
+        ] + self.machine.default_transitions
 
     def setup_scene(self):
         return {
@@ -58,11 +59,11 @@ class GateMission(SAUVCMission):
             },
             'condition_gate': {
                 'condition': self.gate_event_handler,
-                'args': None
+                'args': ()
             },
             'condition_in_front': {
                 'condition': self.not_gates,
-                'args': None
+                'args': ()
             },
             'rotate_clockwise': {
                 'angle': 5
@@ -70,7 +71,7 @@ class GateMission(SAUVCMission):
             'condition_centering': {
                 'subFSM': True,
                 'condition': self.centering_submission,
-                'args': None
+                'args': ()
             },
             'move_march_0': {
                 'direction': 3,
@@ -110,7 +111,7 @@ class GateMission(SAUVCMission):
         else:
             rospy.loginfo("DEBUG: no gate detected")
             self.gate_detection_event.stop_listening()
-            if self.EXHAUSTION >= self.exhaust_max:
+            if self.exhaustion >= self.exhaust_max:
                 rospy.loginfo("it's time to stop, but i'll implement it later")
             return 0
 

@@ -1,9 +1,11 @@
 #! /usr/bin/env python3
 
+from stingray_object_detection.utils import get_objects_topic
 from stingray_tfsm.auv_mission import AUVMission
 from stingray_tfsm.auv_fsm import AUVStateMachine
 from stingray_tfsm.core.pure_fsm import PureStateMachine
 from stingray_tfsm.vision_events import ObjectDetectionEvent, ObjectOnRight, ObjectOnLeft
+import rospy
 
 
 class CenteringMission(AUVMission):
@@ -19,7 +21,6 @@ class CenteringMission(AUVMission):
             confirmation (int, optional): confirmation value of continuously detected object after which will be event triggered. Defaults to 2.
             tolerance (int, optional): centering tolerance. Defaults to 14.
         """
-        super().__init__(name)
         self.target = target
         self.confirmation = confirmation
         self.tolerance = tolerance
@@ -28,17 +29,18 @@ class CenteringMission(AUVMission):
         self.gate_detected = None
         self.gate_lefter = None
         self.gate_righter = None
+        super().__init__(name)
 
     def setup_states(self):
         return ('condition_detected',
                 'condition_lefter', 'condition_righter',
                 'rotate_clock', 'rotate_anti',
-                'condition_exhausted')
+                'condition_exhausted') + self.machine.default_states
 
     def setup_transitions(self):
         return [
             [self.machine.transition_start, [self.machine.state_init, 'rotate_clock',
-                                     'rotate_anti'], 'condition_detected'],
+                                             'rotate_anti'], 'condition_detected'],
 
             ['condition_f', 'condition_detected', 'aborted'],
             ['condition_s', 'condition_detected', 'condition_lefter'],
@@ -48,7 +50,7 @@ class CenteringMission(AUVMission):
 
             ['condition_f', 'condition_righter', 'done'],
             ['condition_s', 'condition_righter', 'rotate_clock'],
-        ]
+        ] + self.machine.default_transitions
 
     def setup_scene(self):
         return {
@@ -77,11 +79,11 @@ class CenteringMission(AUVMission):
 
     def setup_events(self):
         self.gate_detected = ObjectDetectionEvent(
-            self.camera, self.target, self.confirmation)
+            get_objects_topic(self.camera), self.target, self.confirmation)
         self.gate_lefter = ObjectOnLeft(
-            self.camera, self.target, self.confirmation, tolerance=self.TOLERANCE * 0.01)
+            get_objects_topic(self.camera), self.target, self.confirmation, tolerance=self.tolerance * 0.01)
         self.gate_righter = ObjectOnRight(
-            self.camera, self.target, self.confirmation, tolerance=self.TOLERANCE * 0.01)
+            get_objects_topic(self.camera), self.target, self.confirmation, tolerance=self.tolerance * 0.01)
 
     def check_machine(self):
         if type(self.machine) is AUVStateMachine or \
@@ -90,13 +92,17 @@ class CenteringMission(AUVMission):
         else:
             raise TypeError("machine was not initialized")
 
+    def set_init_state(self,):
+        if self.check_machine():
+            self.machine.set_state(self.machine.state_init)
+
     def set_state(self, state):
         if self.check_machine():
             self.machine.set_state(state)
 
-    def run(self, *args, **kwargs):
+    def run(self):
         if self.check_machine():
-            value = self.machine.run(*args, **kwargs)
+            value = self.machine.run()
             return value
 
     def verbose(self, verbose):
