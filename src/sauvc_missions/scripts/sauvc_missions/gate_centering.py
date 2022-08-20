@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 
 from sauvc_missions.sauvc_mission import SAUVCMission
-from sauvc_missions.centering_experimental import CenteringMission
+from sauvc_missions.centering import CenteringMission
 from stingray_object_detection.utils import get_objects_topic
 from stingray_tfsm.vision_events import ObjectDetectionEvent, ObjectIsCloseEvent
 import rospy
