@@ -1,7 +1,7 @@
 import rospy
 from sauvc_missions.drums import DrumsMission
 from sauvc_missions.gate_centering import GateMission
-from sauvc_missions.avoid_submachine import AvoidSub
+from sauvc_missions.reach_submachine import ReachSub
 from stingray_tfsm.auv_controller import AUVController
 
 NODE_NAME = "sauvc_controller"
@@ -36,18 +36,19 @@ class SAUVCController(AUVController):
 
     def setup_missions(self):
         if self.test:
-            # self.test_mission_1 = AvoidSub("avoid_one", self.front_camera, self.bottom_camera, ['red_flare', ])
-            # self.add_mission(self.test_mission_1)
-            self.test_mission_2 = AvoidSub("avoid_two", self.front_camera, self.bottom_camera, ['red_flare', 'gate'])
-            self.add_mission(self.test_mission_2)
+            self.test_mission_1 = ReachSub("avoid_two", self.front_camera, self.bottom_camera,
+                                           'yellow_flare', ['red_flare', 'gate'], rotate='right')
+            self.add_mission(self.test_mission_1)
 
             self.add_mission_transitions([
-                [self.machine.transition_start, self.machine.state_init, self.test_mission_2.name],
+                [self.machine.transition_start, self.machine.state_init, self.test_mission_1.name],
                 # ['next_mission', self.test_mission_1.name, self.test_mission_2.name],
-                [self.machine.transition_end, self.test_mission_2.name, self.machine.state_end],
+                [self.machine.transition_end, self.test_mission_1.name, self.machine.state_end],
             ])
+        elif not "self.yellow_flare":
+            pass
 
-        if self.gate_centering:
+        elif self.gate_centering:
             self.gate_mission = GateMission("gate_mission",
                                             self.front_camera, self.bottom_camera)
             self.add_mission(self.gate_mission)

@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 
 from sauvc_missions.sauvc_mission import SAUVCMission
-from sauvc_missions.centering import CenteringMission
+from sauvc_missions.centering_angle import CenteringAngleMission
 from stingray_object_detection.utils import get_objects_topic
 from stingray_tfsm.vision_events import ObjectDetectionEvent, ObjectIsCloseEvent
 import rospy
@@ -19,7 +19,7 @@ class GateMission(SAUVCMission):
                  blue_bowl="blue_bowl",
                  red_bowl="red_bowl"):
         self.exhaustion = 0
-        self.centering_submission = CenteringMission(
+        self.centering_submission = CenteringAngleMission(
             "centering", front_camera, gate)
         super().__init__(name, front_camera, bottom_camera, gate,
                          red_flare, yellow_flare, mat, blue_bowl, red_bowl)
@@ -100,6 +100,12 @@ class GateMission(SAUVCMission):
         self.flare_assession_event = ObjectIsCloseEvent(
             get_objects_topic(self.front_camera), self.red_flare, self.confirmation
         )
+        self.gate_proximity_event = ObjectIsCloseEvent(
+            get_objects_topic(self.front_camera), self.gate, self.confirmation
+        )
+        # self.gate_angle_event = ObjectOrtho(
+        #     get_objects_topic(self.front_camera), self.gate, self.confirmation
+        # )
 
     def gate_event_handler(self):
         self.gate_detection_event.start_listening()
