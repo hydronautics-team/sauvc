@@ -3,7 +3,7 @@
     <!-- Settings for "output" parameter of nodes -->
     <arg name="ros_output" default="screen" />
     <!-- Debug mode. Enabled output images publishing after object detection -->
-    <arg name="debug" default="true" />
+    <arg name="debug" default="false" />
     <!-- Enables connection with simulator -->
     <arg name="simulation" default="false" />
     <!-- Enables connection with hardware -->
@@ -19,7 +19,7 @@
     <!-- Enables video from file -->
     <arg name="file_cam" default="false" />
     <!-- Enables video streaming -->
-    <arg name="stream" default="false" />
+    <arg name="stream" default="true" />
     <!-- Package name with weights -->
     <arg name="weights_pkg_name" default="sauvc_vision" />
     <!-- Cameras -->
