@@ -18,7 +18,6 @@ class GateMission(SAUVCMission):
                  mat="mat",
                  blue_bowl="blue_bowl",
                  red_bowl="red_bowl"):
-        self.exhaustion = 0
         self.centering_submission = CenteringAngleMission(
             "centering", front_camera, gate)
         super().__init__(name, front_camera, bottom_camera, gate,
@@ -119,8 +118,6 @@ class GateMission(SAUVCMission):
         else:
             rospy.loginfo("DEBUG: no gate detected")
             self.gate_detection_event.stop_listening()
-            if self.exhaustion >= self.exhaust_max:
-                rospy.loginfo("it's time to stop, but i'll implement it later")
             return 0
 
     def flare_event_handler(self, *args, **kwargs):

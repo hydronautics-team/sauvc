@@ -35,7 +35,7 @@ class CenteringAngleMission(AUVMission):
         return ('condition_detected',
                 'condition_lefter', 'condition_righter',
                 'rotate_clock', 'rotate_anti',
-                'condition_exhausted') + self.machine.default_states
+                ) + self.machine.default_states
 
     def setup_transitions(self):
         return [
