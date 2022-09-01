@@ -63,19 +63,18 @@ class SAUVCController(AUVController):
                 [self.machine.transition_start, self.machine.state_init, self.test_mission.name],
                 [self.machine.transition_end, self.test_mission.name, self.machine.state_end]
             ])
-        rospy.loginfo("Missions setup done")
 
 
 if __name__ == '__main__':
     rospy.init_node(NODE_NAME)
 
-    gate_vision = rospy.get_param("~gate_vision")
+    gate_vision = rospy.get_param("~gate_vision", False)
     gate_brute = rospy.get_param("~gate_brute", False)
-    gate_centering = rospy.get_param("~gate_centering")
-    drums = rospy.get_param("~drums")
-    test = rospy.get_param("~test")
+    gate_centering = rospy.get_param("~gate_centering", False)
+    drums = rospy.get_param("~drums", False)
+    test = rospy.get_param("~test", False)
     verbose = rospy.get_param("~verbose", True)
-    centering_test = rospy.get_param("~test")
+    centering_test = rospy.get_param("~test", False)
     front_camera = rospy.get_param("~front_camera")
     bottom_camera = rospy.get_param("~bottom_camera")
 

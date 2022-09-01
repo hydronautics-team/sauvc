@@ -1,0 +1,10 @@
+<launch>
+
+    <arg name="ros_output" default="screen" />
+
+    <node pkg="sauvc_missions" type="sauvc_controller.py" name="sauvc_controller" output="$(arg ros_output)" respawn="false">
+        <param name="front_camera" value="/front_camera/image_raw" />
+        <param name="bottom_camera" value="/bottom_camera/image_raw" />
+        <param name="test" value="True" />
+    </node>
+</launch>
