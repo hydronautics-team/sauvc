@@ -43,12 +43,12 @@ class TestMission(SAUVCMission):
             'move_first': {
                 'direction': 1,
                 'velocity': 0.5,
-                'duration': 5000
+                'duration': 50000
             },
             'move_second': {
-                'direction': 1,
+                'direction': 3,
                 'velocity': 0.5,
-                'duration': 5000
+                'duration': 50000
             },
             'move_clock': {
                 'direction': 1,
