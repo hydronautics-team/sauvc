@@ -1,7 +1,7 @@
 import rospy
 from sauvc_missions.drums import DrumsMission
 from sauvc_missions.gate_centering import GateMission
-from sauvc_missions.reach_submachine import ReachSub
+from stingray_tfsm.submachines.reach_submachine import ReachSub
 from stingray_tfsm.auv_controller import AUVController
 
 NODE_NAME = "sauvc_controller"
