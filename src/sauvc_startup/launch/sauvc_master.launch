@@ -44,11 +44,10 @@
 
 
     <!-- real camera input -->
-    <arg name="gate_vision" default="false" />
-    <arg name="gate_brute" default="false" />
-    <arg name="gate_centering" default="False" />
+    <arg name="gate" default="False" />
+    <arg name="flare" default="False" />
     <arg name="drums" default="False" />
-    <arg name="verbose" default="false" />
+    <arg name="verbose" default="False" />
     <arg name="test" default="False" />
 
     <include file="$(find stingray_startup)/launch/base.launch">
@@ -70,9 +69,8 @@
     <group unless="$(arg qr_launch)">
         <node pkg="sauvc_missions" type="sauvc_controller.py" name="sauvc_controller" output="$(arg ros_output)" respawn="false">
             <param name="verbose" value="$(arg verbose)" />
-            <param name="gate_vision" value="$(arg gate_vision)" />
-            <param name="gate_brute" value="$(arg gate_brute)" />
-            <param name="gate_centering" value="$(arg gate_centering)" />
+            <param name="gate" value="$(arg gate)" />
+            <param name="flare" value="$(arg flare)" />
             <param name="drums" value="$(arg drums)" />
             <param name="front_camera" value="$(arg front_camera)" />
             <param name="bottom_camera" value="$(arg bottom_camera)" />
