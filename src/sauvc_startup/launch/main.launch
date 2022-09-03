@@ -43,7 +43,7 @@
     <!-- Enable launch with qr codes -->
     <arg name="QR_LAUNCH" default="false" />
     <!-- Camera topic for qr code reader -->
-    <arg name="QR_CAMERA" default="false" />
+    <arg name="QR_CAMERA" default="$(arg FRONT_CAMERA_TOPIC)" />
     <!-- Package name with launch files -->
     <arg name="QR_LAUNCH_PACKAGE_NAME" default="sauvc_startup" />
     <!-- Filename pattern -->
