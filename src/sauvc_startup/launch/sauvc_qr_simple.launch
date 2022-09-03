@@ -5,8 +5,8 @@
     <!-- Enables connection with simulator -->
     <arg name="simulation" default="false" />\
     <!-- detected objects from front camera -->
-    <arg name="front_cam" default="/front_camera/image_raw/yolo_detector/objects" unless="$(arg simulation)" />
-    <arg name="front_cam" value="/rov_model_urdf/camera_front/image_raw/yolo_detector/objects" if="$(arg simulation)" />
+    <arg name="front_camera" default="/front_camera/image_raw/yolo_detector/objects" unless="$(arg simulation)" />
+    <arg name="front_camera" value="/rov_model_urdf/camera_front/image_raw/yolo_detector/objects" if="$(arg simulation)" />
 
     <!-- real camera input -->
     <arg name="gate_vision" default="false" />
@@ -21,7 +21,7 @@
         <param name="gate_brute" value="$(arg gate_brute)" />
         <param name="gate_centering" value="$(arg gate_centering)" />
         <param name="simulation" value="$(arg simulation)" />
-        <param name="front_cam" value="$(arg front_cam)" />
+        <param name="front_camera" value="$(arg front_cam)" />
         <param name="test" value="$(arg test)" />
     </node>
 </launch>
