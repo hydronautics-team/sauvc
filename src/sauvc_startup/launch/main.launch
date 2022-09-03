@@ -45,7 +45,7 @@
     <!-- Camera topic for qr code reader -->
     <arg name="QR_CAMERA" default="false" />
     <!-- Package name with launch files -->
-    <arg name="QR_LAUNCH_PACKAGE_NAME" default="stingray_startup" />
+    <arg name="QR_LAUNCH_PACKAGE_NAME" default="sauvc_startup" />
     <!-- Filename pattern -->
     <arg name="QR_NAME_PATTERN" default="sauvc_qr_" />
 
