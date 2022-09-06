@@ -96,7 +96,6 @@
     <include file="$(find stingray_startup)/launch/object_detection.launch">
         <arg name="IMAGE_TOPIC_LIST" value="$(arg FRONT_CAMERA_TOPIC) $(arg BOTTOM_CAMERA_TOPIC)" />
         <arg name="WEIGHTS_PACKAGE_NAME" value="$(arg WEIGHTS_PACKAGE_NAME)" />
-
         <arg name="ROS_OUTPUT" value="$(arg ROS_OUTPUT)" />
         <arg name="DEBUG" value="$(arg DEBUG)" />
     </include>
