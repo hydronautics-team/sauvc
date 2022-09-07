@@ -15,8 +15,8 @@ class SAUVCController(AUVController):
                  gate: bool,
                  flare: bool,
                  drums: bool,
-                 verbose: bool,
                  test: bool,
+                 verbose: bool,
                  front_camera: str,
                  bottom_camera: str
                  ):
@@ -24,6 +24,7 @@ class SAUVCController(AUVController):
         self.gate = gate
         self.yellow_flare = flare
         self.drums = drums
+        self.test = test
         self.verbose = verbose
 
         self.front_camera = front_camera
@@ -65,7 +66,6 @@ class SAUVCController(AUVController):
                 [self.machine.transition_end, self.last_mission, self.machine.state_end],
             ])
             print(f'{[self.machine.transition_end, self.last_mission, self.machine.state_end]}')
-        rospy.loginfo("Missions setup done")
 
 
     def setup_missions(self):
@@ -105,6 +105,16 @@ class SAUVCController(AUVController):
             )
             self.next_mission(drums_mission)
 
+        if self.test:
+            from sauvc_missions.uart_test_mission import TestMission
+            self.test_mission = TestMission("test_mission",
+                                              self.front_camera, self.bottom_camera)
+            self.add_mission(self.test_mission)
+            self.add_mission_transitions([
+                [self.machine.transition_start, self.machine.state_init, self.test_mission.name],
+                [self.machine.transition_end, self.test_mission.name, self.machine.state_end]
+            ])
+
         self.arrange_finish()
 
 
@@ -112,9 +122,9 @@ class SAUVCController(AUVController):
 if __name__ == '__main__':
     rospy.init_node(NODE_NAME)
 
-    gate = rospy.get_param("~gate", False)
+    gate = rospy.get_param("~gate")
     flare = rospy.get_param("~flare", False)
-    drums = rospy.get_param("~drums", False)
+    drums = rospy.get_param("~drums")
     verbose = rospy.get_param("~verbose", True)
     test = rospy.get_param("~test")
     front_camera = rospy.get_param("~front_camera")
@@ -124,8 +134,8 @@ if __name__ == '__main__':
         gate,
         flare,
         drums,
-        verbose,
         test,
+        verbose,
         front_camera,
         bottom_camera
     )
