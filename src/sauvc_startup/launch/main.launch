@@ -28,12 +28,15 @@
     <!-- CAMERA NAMES -->
     <arg name="FRONT_CAMERA" default="front_camera" unless="$(arg SIMULATION)"/>
     <arg name="BOTTOM_CAMERA" default="bottom_camera" unless="$(arg SIMULATION)"/>
+    
+    <arg name="FRONT_CAMERA_TOPIC" default="/$(arg FRONT_CAMERA)/image_raw" unless="$(arg SIMULATION)"/>
+    <arg name="BOTTOM_CAMERA_TOPIC" default="/$(arg BOTTOM_CAMERA)/image_raw" unless="$(arg SIMULATION)"/>
 
-    <arg name="FRONT_CAMERA" default="rov_model_urdf/camera_front" if="$(arg SIMULATION)"/>
-    <arg name="BOTTOM_CAMERA" default="rov_model_urdf/camera_bottom" if="$(arg SIMULATION)"/>
-
-    <arg name="FRONT_CAMERA_TOPIC" default="/$(arg FRONT_CAMERA)/image_raw"/>
-    <arg name="BOTTOM_CAMERA_TOPIC" default="/$(arg BOTTOM_CAMERA)/image_raw"/>
+    <arg name="FRONT_CAMERA" default="camera_front" if="$(arg SIMULATION)"/>
+    <arg name="BOTTOM_CAMERA" default="camera_bottom" if="$(arg SIMULATION)"/>
+    
+    <arg name="FRONT_CAMERA_TOPIC" default="/rov_model_urdf/$(arg FRONT_CAMERA)/image_raw" if="$(arg SIMULATION)"/>
+    <arg name="BOTTOM_CAMERA_TOPIC" default="/rov_model_urdf/$(arg BOTTOM_CAMERA)/image_raw" if="$(arg SIMULATION)"/>
 
     <!-- CAMERA PATHS -->
     <arg name="FRONT_CAMERA_PATH" default="/dev/v4l/by-path/platform-3530000.xhci-usb-0:2.4:1.0-video-index0"/>
@@ -119,8 +122,8 @@
             <param name="drums" value="$(arg DRUMS)" />
             <param name="test" value="$(arg TEST)" />
             <param name="verbose" value="$(arg VERBOSE)" />
-            <param name="front_camera" value="$(arg FRONT_CAMERA_TOPIC)" />
-            <param name="bottom_camera" value="$(arg BOTTOM_CAMERA_TOPIC)" />
+            <param name="front_camera" value="$(arg FRONT_CAMERA)" />
+            <param name="bottom_camera" value="$(arg BOTTOM_CAMERA)" />
         </node>
     </group>
 </launch>
