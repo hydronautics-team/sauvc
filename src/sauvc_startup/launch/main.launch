@@ -49,14 +49,12 @@
     <!-- Filename pattern -->
     <arg name="QR_NAME_PATTERN" default="sauvc_qr_" />
 
-
-    <!-- real camera input -->
-    <arg name="gate_vision" default="false" />
-    <arg name="gate_brute" default="false" />
-    <arg name="gate_centering" default="False" />
-    <arg name="drums" default="False" />
-    <arg name="verbose" default="false" />
-    <arg name="test" default="False" />
+    <!-- MISSIONS -->
+    <arg name="GATE" default="false" />
+    <arg name="FLARE" default="false" />
+    <arg name="DRUMS" default="False" />
+    <arg name="TEST" default="False" />
+    <arg name="VERBOSE" default="false" />
 
     <!-- FRONT CAMERA -->
     <include file="$(find stingray_startup)/launch/camera.launch">
@@ -116,14 +114,13 @@
     <!-- MISSIONS -->
     <group unless="$(arg QR_LAUNCH)">
         <node pkg="sauvc_missions" type="sauvc_controller.py" name="sauvc_controller" output="$(arg ROS_OUTPUT)" respawn="false">
-            <param name="verbose" value="$(arg verbose)" />
-            <param name="gate_vision" value="$(arg gate_vision)" />
-            <param name="gate_brute" value="$(arg gate_brute)" />
-            <param name="gate_centering" value="$(arg gate_centering)" />
-            <param name="drums" value="$(arg drums)" />
+            <param name="gate" value="$(arg GATE)" />
+            <param name="flare" value="$(arg FLARE)" />
+            <param name="drums" value="$(arg DRUMS)" />
+            <param name="test" value="$(arg TEST)" />
+            <param name="verbose" value="$(arg VERBOSE)" />
             <param name="front_camera" value="$(arg FRONT_CAMERA_TOPIC)" />
             <param name="bottom_camera" value="$(arg BOTTOM_CAMERA_TOPIC)" />
-            <param name="test" value="$(arg test)" />
         </node>
     </group>
 </launch>
