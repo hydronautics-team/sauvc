@@ -1,7 +1,5 @@
-import rospy
-from sauvc_missions.drums import DrumsMission
-from sauvc_missions.gate_centering import GateMission
 from stingray_tfsm.auv_controller import AUVController
+import rospy
 
 NODE_NAME = "sauvc_controller"
 
@@ -14,66 +12,120 @@ def setup(*args, **kwargs):
 
 class SAUVCController(AUVController):
     def __init__(self,
-                 gate_vision: bool,
-                 gate_brute: bool,
-                 gate_centering: bool,
+                 gate: bool,
+                 flare: bool,
                  drums: bool,
                  verbose: bool,
-                 centering_test: bool,
+                 test: bool,
                  front_camera: str,
                  bottom_camera: str
                  ):
-        self.gate_vision = gate_vision
-        self.gate_brute = gate_brute
-        self.gate_centering = gate_centering
+        self.test = test
+        self.gate = gate
+        self.yellow_flare = flare
         self.drums = drums
         self.verbose = verbose
-        self.centering_test = centering_test
+
         self.front_camera = front_camera
         self.bottom_camera = bottom_camera
+
+        self.gate_mission = None
+        self.flare_mission = None
+        self.drums_mission = None
+        self.last_mission = None
+
         super().__init__()
 
-    def setup_missions(self):
-        if self.gate_centering:
-            self.gate_mission = GateMission("gate_mission",
-                                            self.front_camera, self.bottom_camera)
-            self.add_mission(self.gate_mission)
+    def next_mission(self, mission):
+        self.add_mission(mission)
+        if self.last_mission is None:
             self.add_mission_transitions([
-                [self.machine.transition_start, self.machine.state_init, self.gate_mission.name],
-                [self.machine.transition_end, self.gate_mission.name, self.machine.state_end]
+                [self.machine.transition_start, self.machine.state_init, mission.name],
             ])
+            print(f'added{[self.machine.transition_start, self.machine.state_init, mission.name]}')
+            self.last_mission = mission.name
+        else:
+            self.add_mission_transitions([
+                [f"FROM_{self.last_mission}_TO_{mission.name}",
+                 self.last_mission, mission.name],
+            ])
+            print('added ' + f"[FROM_{self.last_mission}_TO_{mission.name}", self.last_mission, mission.name, ']')
+        self.last_mission = mission.name
+        print(f'added {self.last_mission}')
 
-        elif self.drums:
-            self.drums_mission = DrumsMission("drums_mission",
-                                              self.front_camera, self.bottom_camera)
-            self.add_mission(self.drums_mission)
+
+    def arrange_finish(self):
+        if self.last_mission is None:
             self.add_mission_transitions([
-                [self.machine.transition_start, self.machine.state_init, self.gate_mission.name],
-                ['finish_gate', self.gate_mission.name, self.drums_mission.name],
-                [self.machine.transition_end, self.drums_mission.name, self.machine.state_end],
+                ['skip', self.machine.state_init, self.machine.state_end],
             ])
+            print('no mission set')
+        else:
+            self.add_mission_transitions([
+                [self.machine.transition_end, self.last_mission, self.machine.state_end],
+            ])
+            print(f'{[self.machine.transition_end, self.last_mission, self.machine.state_end]}')
         rospy.loginfo("Missions setup done")
+
+
+    def setup_missions(self):
+        if self.test:
+            from sauvc_missions.hardware_test import test
+            test_mission = test
+            self.next_mission(test_mission)
+
+        if self.gate:
+            from sauvc_missions.gate import GateMission
+            gate_mission = GateMission(
+                GateMission.__name__,
+                self.front_camera,
+                self.bottom_camera,
+                rotate='left',
+                lag='left',
+            )
+            self.next_mission(gate_mission)
+
+        if self.yellow_flare:
+            from sauvc_missions.yellow import FlareMission
+            flare_mission = FlareMission(
+                FlareMission.__name__,
+                self.front_camera,
+                self.bottom_camera,
+                rotate='right',
+                lag='right',
+            )
+            self.next_mission(flare_mission)
+
+        if self.drums:
+            from sauvc_missions.drums import DrumsMission
+            drums_mission = DrumsMission(
+                DrumsMission.__name__,
+                self.front_camera,
+                self.bottom_camera
+            )
+            self.next_mission(drums_mission)
+
+        self.arrange_finish()
+
 
 
 if __name__ == '__main__':
     rospy.init_node(NODE_NAME)
 
-    gate_vision = rospy.get_param("~gate_vision")
-    gate_brute = rospy.get_param("~gate_brute", False)
-    gate_centering = rospy.get_param("~gate_centering")
-    drums = rospy.get_param("~drums")
+    gate = rospy.get_param("~gate", False)
+    flare = rospy.get_param("~flare", False)
+    drums = rospy.get_param("~drums", False)
     verbose = rospy.get_param("~verbose", True)
-    centering_test = rospy.get_param("~test")
+    test = rospy.get_param("~test")
     front_camera = rospy.get_param("~front_camera")
     bottom_camera = rospy.get_param("~bottom_camera")
 
     controller = SAUVCController(
-        gate_vision,
-        gate_brute,
-        gate_centering,
+        gate,
+        flare,
         drums,
         verbose,
-        centering_test,
+        test,
         front_camera,
         bottom_camera
     )

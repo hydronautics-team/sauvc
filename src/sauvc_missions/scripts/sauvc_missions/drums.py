@@ -25,12 +25,12 @@ class DrumsMission(SAUVCMission):
                 'rotate_clockwise', 'rotate_anticlockwise', 'move_march') + self.machine.default_states
 
     def setup_transitions(self):
-        return [     # Vision exhaustion loop
+        return [
             [self.machine.transition_start, [self.machine.state_init, 'rotate_clockwise',
                                      'move_march'], 'condition_drums'],
             ['condition_f', 'condition_drums', 'rotate_clockwise'],
             ['condition_s', 'condition_drums', 'move_march'],
-        ]  + self.machine.default_transitions
+        ] + self.machine.default_transitions
 
     def setup_scene(self):
         return {
@@ -66,15 +66,12 @@ class DrumsMission(SAUVCMission):
         rospy.sleep(2)
         if self.drums_detection_event.is_triggered():
             rospy.loginfo("DEBUG: drums detected by event")
-            self.EXHAUSTION = 0
             self.drums_detection_event.stop_listening()
             return 1
         else:
-            self.EXHAUSTION += 1
+
             rospy.loginfo("DEBUG: no drums detected")
             self.drums_detection_event.stop_listening()
-            if self.EXHAUSTION >= self.exhaust_max:
-                rospy.loginfo("it's time to stop, but i'll implement it later")
             return 0
 
 
