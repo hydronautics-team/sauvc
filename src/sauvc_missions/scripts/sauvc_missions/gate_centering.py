@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 
 from sauvc_missions.sauvc_mission import SAUVCMission
-from sauvc_missions.centering import CenteringMission
+from stingray_tfsm.submachines.centering_angle import CenteringAngleSub
 from stingray_object_detection.utils import get_objects_topic
 from stingray_tfsm.vision_events import ObjectDetectionEvent, ObjectIsCloseEvent
 import rospy
@@ -18,8 +18,7 @@ class GateMission(SAUVCMission):
                  mat="mat",
                  blue_bowl="blue_bowl",
                  red_bowl="red_bowl"):
-        self.exhaustion = 0
-        self.centering_submission = CenteringMission(
+        self.centering_submission = CenteringAngleSub(
             "centering", front_camera, gate)
         super().__init__(name, front_camera, bottom_camera, gate,
                          red_flare, yellow_flare, mat, blue_bowl, red_bowl)
@@ -96,10 +95,16 @@ class GateMission(SAUVCMission):
 
     def setup_events(self):
         self.gate_detection_event = ObjectDetectionEvent(
-            get_objects_topic(self.front_camera), self.gate, self.confirmation)
+            get_objects_topic(self.front_camera), self.gate, self.confirmation-1)
         self.flare_assession_event = ObjectIsCloseEvent(
             get_objects_topic(self.front_camera), self.red_flare, self.confirmation
         )
+        self.gate_proximity_event = ObjectIsCloseEvent(
+            get_objects_topic(self.front_camera), self.gate, self.confirmation
+        )
+        # self.gate_angle_event = ObjectOrtho(
+        #     get_objects_topic(self.front_camera), self.gate, self.confirmation
+        # )
 
     def gate_event_handler(self):
         self.gate_detection_event.start_listening()
@@ -113,8 +118,6 @@ class GateMission(SAUVCMission):
         else:
             rospy.loginfo("DEBUG: no gate detected")
             self.gate_detection_event.stop_listening()
-            if self.exhaustion >= self.exhaust_max:
-                rospy.loginfo("it's time to stop, but i'll implement it later")
             return 0
 
     def flare_event_handler(self, *args, **kwargs):
