@@ -69,11 +69,6 @@ class SAUVCController(AUVController):
 
 
     def setup_missions(self):
-        if self.test:
-            from sauvc_missions.hardware_test import test
-            test_mission = test
-            self.next_mission(test_mission)
-
         if self.gate:
             from sauvc_missions.gate import GateMission
             gate_mission = GateMission(

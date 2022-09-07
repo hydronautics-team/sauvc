@@ -122,8 +122,8 @@
             <param name="drums" value="$(arg DRUMS)" />
             <param name="test" value="$(arg TEST)" />
             <param name="verbose" value="$(arg VERBOSE)" />
-            <param name="front_camera" value="$(arg FRONT_CAMERA)" />
-            <param name="bottom_camera" value="$(arg BOTTOM_CAMERA)" />
+            <param name="front_camera" value="$(arg FRONT_CAMERA_TOPIC)" />
+            <param name="bottom_camera" value="$(arg BOTTOM_CAMERA_TOPIC)" />
         </node>
     </group>
 </launch>
