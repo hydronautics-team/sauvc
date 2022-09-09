@@ -1,13 +1,13 @@
 from stingray_tfsm.submachines.centering_angle import CenteringAngleSub
 from stingray_object_detection.utils import get_objects_topic
 from stingray_tfsm.vision_events import ObjectDetectionEvent, ObjectIsCloseEvent
-from stingray_tfsm.auv_mission import AUVMission
+from sauvc_missions.sauvc_mission import SAUVCMission
 from stingray_tfsm.auv_fsm import AUVStateMachine
 from stingray_tfsm.core.pure_fsm import PureStateMachine
 import rospy
 
 
-class QualificationMission(AUVMission):
+class QualificationMission(SAUVCMission):
     def __init__(self,
                  name: str,
                  camera: str,
@@ -23,7 +23,7 @@ class QualificationMission(AUVMission):
         self.confirmation = confirmation
 
         self.centering_submachine = CenteringAngleSub(
-            "centering", camera, target, tolerance=self.tolerance, confirmation=self.confirmation)
+            name + "_centering", camera, target, tolerance=self.tolerance, confirmation=self.confirmation)
         self.rotate_dir = 1 if rotate == "left" else -1
         self.target = target
 
@@ -57,11 +57,7 @@ class QualificationMission(AUVMission):
                 "args": (self.front_camera, True),
             },
             'condition_gate': {
-                'condition': self.gate_event_handler,
-                'args': ()
-            },
-            'condition_in_front': {
-                'condition': self.not_gates,
+                'condition': self.target_event_handler,
                 'args': ()
             },
             'rotate_search': {
@@ -69,7 +65,7 @@ class QualificationMission(AUVMission):
             },
             'condition_centering': {
                 'subFSM': True,
-                'condition': self.centering_submission,
+                'condition': self.centering_submachine,
                 'args': ()
             },
             'move_march': {
@@ -88,7 +84,7 @@ class QualificationMission(AUVMission):
         self.target_detection_event.start_listening()
         rospy.loginfo("DEBUG: started listening target detection")
 
-        rospy.sleep(0.5)
+        #rospy.sleep(0.5)
         if self.target_detection_event.is_triggered():
             rospy.loginfo("DEBUG: target detected by event")
             self.target_detection_event.stop_listening()
