@@ -38,7 +38,8 @@ class TestMission(SAUVCMission):
     def setup_scene(self):
         return {
             self.machine.state_init: {
-                'time': 5
+                'preps': self.enable_stabilization,
+                "args": (False, True, False),
             },
             'move_first': {
                 'direction': 1,
