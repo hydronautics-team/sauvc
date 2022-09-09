@@ -76,7 +76,7 @@ class SAUVCController(AUVController):
                 self.front_camera
             )
             self.next_mission(qual_mission)
-            pass
+
         if self.gate:
             from sauvc_missions.gate import GateMission
             gate_mission = GateMission(
