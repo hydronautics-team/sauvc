@@ -124,12 +124,12 @@ class SAUVCController(AUVController):
 if __name__ == '__main__':
     rospy.init_node(NODE_NAME)
 
-    gate = rospy.get_param("~gate")
+    gate = rospy.get_param("~gate", False)
     qual = rospy.get_param("~qual", False)
     flare = rospy.get_param("~flare", False)
-    drums = rospy.get_param("~drums")
+    drums = rospy.get_param("~drums", False)
     verbose = rospy.get_param("~verbose", True)
-    test = rospy.get_param("~test")
+    test = rospy.get_param("~test", False)
     front_camera = rospy.get_param("~front_camera")
     bottom_camera = rospy.get_param("~bottom_camera")
 

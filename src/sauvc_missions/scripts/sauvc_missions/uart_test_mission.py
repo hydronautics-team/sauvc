@@ -22,38 +22,37 @@ class TestMission(SAUVCMission):
 
     def setup_states(self):
         
-        return ('move_first', 'move_clock', 'move_second') + self.machine.default_states
+        return ('move_first', 'rotate_clock', 'move_second') + self.machine.default_states
 
     def setup_transitions(self):
         return [
 
             [self.machine.transition_start, self.machine.state_init, 'move_first'],
 
-            ['step_1', 'move_first', 'move_clock'],
+            ['step_1', 'move_first', 'move_second'],
 
-            ['step_2', 'move_clock', 'move_second'],
+            ['step_2', 'move_second', 'rotate_clock'],
 
         ] + self.machine.default_transitions
 
     def setup_scene(self):
         return {
             self.machine.state_init: {
-                'time': 5
+                'preps': self.enable_stabilization,
+                "args": (False, True, False),
             },
             'move_first': {
                 'direction': 1,
                 'velocity': 0.5,
-                'duration': 50000
+                'duration': 5000
             },
             'move_second': {
                 'direction': 3,
                 'velocity': 0.5,
-                'duration': 50000
-            },
-            'move_clock': {
-                'direction': 1,
-                'velocity': 0.5,
                 'duration': 5000
+            },
+            'rotate_clock': {
+                'angle': 10
             },
         }
 
