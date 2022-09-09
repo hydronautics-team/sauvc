@@ -56,6 +56,7 @@
     <arg name="GATE" default="false" />
     <arg name="FLARE" default="false" />
     <arg name="DRUMS" default="False" />
+    <arg name="QUAL" default="False" />
     <arg name="TEST" default="False" />
     <arg name="VERBOSE" default="false" />
 
@@ -120,6 +121,7 @@
             <param name="gate" value="$(arg GATE)" />
             <param name="flare" value="$(arg FLARE)" />
             <param name="drums" value="$(arg DRUMS)" />
+            <param name="qual" value="$(arg QUAL)" />
             <param name="test" value="$(arg TEST)" />
             <param name="verbose" value="$(arg VERBOSE)" />
             <param name="front_camera" value="$(arg FRONT_CAMERA_TOPIC)" />
