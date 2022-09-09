@@ -39,8 +39,8 @@
     <arg name="BOTTOM_CAMERA_TOPIC" default="/rov_model_urdf/$(arg BOTTOM_CAMERA)/image_raw" if="$(arg SIMULATION)"/>
 
     <!-- CAMERA PATHS -->
-    <arg name="FRONT_CAMERA_PATH" default="/dev/v4l/by-path/platform-3530000.xhci-usb-0:2.4:1.0-video-index0"/>
-    <arg name="BOTTOM_CAMERA_PATH" default="/dev/v4l/by-path/platform-3530000.xhci-usb-0:2.3:1.0-video-index0"/>
+    <arg name="FRONT_CAMERA_PATH" default="/dev/v4l/by-path/platform-3530000.xhci-usb-0:2.3:1.0-video-index0"/>
+    <arg name="BOTTOM_CAMERA_PATH" default="/dev/v4l/by-path/platform-3530000.xhci-usb-0:2.2:1.0-video-index0"/>
 
     <!-- QR TRIGGER -->
     <!-- Enable launch with qr codes -->
