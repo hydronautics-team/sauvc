@@ -16,6 +16,7 @@ class SAUVCController(AUVController):
                  flare: bool,
                  drums: bool,
                  test: bool,
+                 qual: bool,
                  verbose: bool,
                  front_camera: str,
                  bottom_camera: str
@@ -24,6 +25,7 @@ class SAUVCController(AUVController):
         self.gate = gate
         self.yellow_flare = flare
         self.drums = drums
+        self.qual = qual
         self.test = test
         self.verbose = verbose
 
@@ -54,7 +56,6 @@ class SAUVCController(AUVController):
         self.last_mission = mission.name
         print(f'added {self.last_mission}')
 
-
     def arrange_finish(self):
         if self.last_mission is None:
             self.add_mission_transitions([
@@ -67,8 +68,15 @@ class SAUVCController(AUVController):
             ])
             print(f'{[self.machine.transition_end, self.last_mission, self.machine.state_end]}')
 
-
     def setup_missions(self):
+        if self.qual:
+            from sauvc_missions.qualification import QualificationMission
+            qual_mission = QualificationMission(
+                QualificationMission.__name__,
+                self.front_camera
+            )
+            self.next_mission(qual_mission)
+
         if self.gate:
             from sauvc_missions.gate import GateMission
             gate_mission = GateMission(
@@ -113,11 +121,11 @@ class SAUVCController(AUVController):
         self.arrange_finish()
 
 
-
 if __name__ == '__main__':
     rospy.init_node(NODE_NAME)
 
     gate = rospy.get_param("~gate", False)
+    qual = rospy.get_param("~qual", False)
     flare = rospy.get_param("~flare", False)
     drums = rospy.get_param("~drums", False)
     verbose = rospy.get_param("~verbose", True)
@@ -130,6 +138,7 @@ if __name__ == '__main__':
         flare,
         drums,
         test,
+        qual,
         verbose,
         front_camera,
         bottom_camera
