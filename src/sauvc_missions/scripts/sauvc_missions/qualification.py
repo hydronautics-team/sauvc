@@ -50,11 +50,15 @@ class QualificationMission(SAUVCMission):
         ] + self.machine.default_transitions
         return transitions
 
+    def enable_fucking(self):
+        self.enable_object_detection(self.front_camera, True)
+        self.enable_stabilization(False, True, False)
+
     def setup_scene(self):
         scene = {
             self.machine.state_init: {
-                'preps': self.enable_object_detection,
-                "args": (self.front_camera, True),
+                'preps': self.enable_fucking,
+                "args": (),
             },
             'condition_gate': {
                 'condition': self.target_event_handler,
@@ -84,7 +88,7 @@ class QualificationMission(SAUVCMission):
         self.target_detection_event.start_listening()
         rospy.loginfo("DEBUG: started listening target detection")
 
-        #rospy.sleep(0.5)
+        rospy.sleep(3.5)
         if self.target_detection_event.is_triggered():
             rospy.loginfo("DEBUG: target detected by event")
             self.target_detection_event.stop_listening()
