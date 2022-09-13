@@ -113,12 +113,12 @@ class TestMission(SAUVCMission):
         return {
             self.machine.state_init: {
                 # 'time': 7,
-                'preps': self.enable_stabilization,
-                "args": (False, True, False),
+                'preps': self.suka,
+                "args": (),
             },
             'move_1': {
                 'direction': 1,
-                'velocity': 0.65,
+                'velocity': 0.5,
                 'duration': 5000
             },
             'rotate_1': {
@@ -126,7 +126,7 @@ class TestMission(SAUVCMission):
             },
             'move_2': {
                 'direction': 1,
-                'velocity': 0.65,
+                'velocity': 0.5,
                 'duration': 5000
             },
             'rotate_2': {
@@ -134,7 +134,7 @@ class TestMission(SAUVCMission):
             },
             'move_3': {
                 'direction': 1,
-                'velocity': 0.65,
+                'velocity': 0.5,
                 'duration': 5000
             },
             'rotate_3': {
@@ -142,13 +142,21 @@ class TestMission(SAUVCMission):
             },
             'move_4': {
                 'direction': 1,
-                'velocity': 0.65,
+                'velocity': 0.5,
                 'duration': 5000
             },
             'rotate_4': {
                 'angle': 90
             },
         }
+
+    def suka(self):
+        self.machine.auv.execute_move_goal({
+                'direction': 1,
+                'velocity': 0.0,
+                'duration': 1000
+            })
+        self.enable_stabilization(False, True, False)
 
     def setup_events(self):
         self.gate_detection_event = ObjectDetectionEvent(
