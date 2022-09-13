@@ -47,9 +47,7 @@ class TestMission(SAUVCMission):
     def setup_scene(self):
         return {
             self.machine.state_init: {
-                # 'time': 7,
-                'preps': self.suka,
-                "args": (),
+                'time': 7,
             },
             'move_1': {
                 'direction': 1,
@@ -84,14 +82,6 @@ class TestMission(SAUVCMission):
                 'angle': 90
             },
         }
-
-    def suka(self):
-        self.machine.auv.execute_move_goal({
-            'direction': 1,
-            'velocity': 0.0,
-            'duration': 1000
-        })
-        self.enable_stabilization(False, True, False)
 
     def setup_events(self):
         self.gate_detection_event = ObjectDetectionEvent(

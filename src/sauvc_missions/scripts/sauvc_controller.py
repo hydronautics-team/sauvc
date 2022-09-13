@@ -85,9 +85,9 @@ class SAUVCController(AUVMissionsController):
             self.add_mission(drums_mission)
 
         if self.test:
-            from sauvc_missions.uart_test_mission import TestMission
+            from sauvc_missions.scripts.sauvc_missions.test_mission import TestMission
             self.test_mission = TestMission(
-                "test_mission",
+                TestMission.__name__,
                 self.front_camera,
                 self.bottom_camera
             )
