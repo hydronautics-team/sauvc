@@ -22,7 +22,7 @@ class DrumsMission(SAUVCMission):
 
     def setup_states(self):
         return ('condition_drums', 'custom_setup',
-                'rotate_clockwise', 'rotate_anticlockwise', 'move_march') + self.machine.default_states
+                'rotate_clockwise', 'rotate_anticlockwise', 'move_march')
 
     def setup_transitions(self):
         return [
@@ -30,7 +30,7 @@ class DrumsMission(SAUVCMission):
                                      'move_march'], 'condition_drums'],
             ['condition_f', 'condition_drums', 'rotate_clockwise'],
             ['condition_s', 'condition_drums', 'move_march'],
-        ] + self.machine.default_transitions
+        ]
 
     def setup_scene(self):
         return {

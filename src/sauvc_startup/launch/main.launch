@@ -24,23 +24,23 @@
     <!-- OBJECT DETECTION -->
     <!-- Package name with weights -->
     <arg name="WEIGHTS_PACKAGE_NAME" default="sauvc_vision" />
-    
-    <!-- CAMERA NAMES -->
-    <arg name="FRONT_CAMERA" default="front_camera" unless="$(arg SIMULATION)"/>
-    <arg name="BOTTOM_CAMERA" default="bottom_camera" unless="$(arg SIMULATION)"/>
-    
-    <arg name="FRONT_CAMERA_TOPIC" default="/$(arg FRONT_CAMERA)/image_raw" unless="$(arg SIMULATION)"/>
-    <arg name="BOTTOM_CAMERA_TOPIC" default="/$(arg BOTTOM_CAMERA)/image_raw" unless="$(arg SIMULATION)"/>
 
-    <arg name="FRONT_CAMERA" default="camera_front" if="$(arg SIMULATION)"/>
-    <arg name="BOTTOM_CAMERA" default="camera_bottom" if="$(arg SIMULATION)"/>
-    
-    <arg name="FRONT_CAMERA_TOPIC" default="/rov_model_urdf/$(arg FRONT_CAMERA)/image_raw" if="$(arg SIMULATION)"/>
-    <arg name="BOTTOM_CAMERA_TOPIC" default="/rov_model_urdf/$(arg BOTTOM_CAMERA)/image_raw" if="$(arg SIMULATION)"/>
+    <!-- CAMERA NAMES -->
+    <arg name="FRONT_CAMERA" default="front_camera" unless="$(arg SIMULATION)" />
+    <arg name="BOTTOM_CAMERA" default="bottom_camera" unless="$(arg SIMULATION)" />
+
+    <arg name="FRONT_CAMERA_TOPIC" default="/$(arg FRONT_CAMERA)/image_raw" unless="$(arg SIMULATION)" />
+    <arg name="BOTTOM_CAMERA_TOPIC" default="/$(arg BOTTOM_CAMERA)/image_raw" unless="$(arg SIMULATION)" />
+
+    <arg name="FRONT_CAMERA" default="camera_front" if="$(arg SIMULATION)" />
+    <arg name="BOTTOM_CAMERA" default="camera_bottom" if="$(arg SIMULATION)" />
+
+    <arg name="FRONT_CAMERA_TOPIC" default="/rov_model_urdf/$(arg FRONT_CAMERA)/image_raw" if="$(arg SIMULATION)" />
+    <arg name="BOTTOM_CAMERA_TOPIC" default="/rov_model_urdf/$(arg BOTTOM_CAMERA)/image_raw" if="$(arg SIMULATION)" />
 
     <!-- CAMERA PATHS -->
-    <arg name="FRONT_CAMERA_PATH" default="/dev/v4l/by-path/platform-3530000.xhci-usb-0:2.3:1.0-video-index0"/>
-    <arg name="BOTTOM_CAMERA_PATH" default="/dev/v4l/by-path/platform-3530000.xhci-usb-0:2.2:1.0-video-index0"/>
+    <arg name="FRONT_CAMERA_PATH" default="/dev/v4l/by-path/platform-3530000.xhci-usb-0:2.3:1.0-video-index0" />
+    <arg name="BOTTOM_CAMERA_PATH" default="/dev/v4l/by-path/platform-3530000.xhci-usb-0:2.2:1.0-video-index0" />
 
     <!-- QR TRIGGER -->
     <!-- Enable launch with qr codes -->
@@ -59,11 +59,15 @@
     <arg name="QUAL" default="False" />
     <arg name="TEST" default="False" />
     <arg name="VERBOSE" default="false" />
+    <arg name="DEPTH_STABILIZTION" default="false" />
+    <arg name="YAW_STABILIZTION" default="true" />
+    <arg name="LAG_STABILIZTION" default="false" />
+    <arg name="RESET_IMU" default="false" />
 
     <!-- FRONT CAMERA -->
     <include file="$(find stingray_startup)/launch/camera.launch">
-        <arg name="REAL_CAM" value="true" unless="$(arg SIMULATION)"/>
-        <arg name="SIMULATION_CAM" value="true" if="$(arg SIMULATION)"/>
+        <arg name="REAL_CAM" value="true" unless="$(arg SIMULATION)" />
+        <arg name="SIMULATION_CAM" value="true" if="$(arg SIMULATION)" />
 
         <arg name="CAMERA_NAME" value="$(arg FRONT_CAMERA)" />
         <arg name="CAMERA_PATH" value="$(arg FRONT_CAMERA_PATH)" />
@@ -79,8 +83,8 @@
 
     <!-- BOTTOM CAMERA -->
     <include file="$(find stingray_startup)/launch/camera.launch">
-        <arg name="REAL_CAM" value="true" unless="$(arg SIMULATION)"/>
-        <arg name="SIMULATION_CAM" value="true" if="$(arg SIMULATION)"/>
+        <arg name="REAL_CAM" value="true" unless="$(arg SIMULATION)" />
+        <arg name="SIMULATION_CAM" value="true" if="$(arg SIMULATION)" />
 
         <arg name="CAMERA_NAME" value="$(arg BOTTOM_CAMERA)" />
         <arg name="CAMERA_PATH" value="$(arg BOTTOM_CAMERA_PATH)" />
@@ -126,6 +130,10 @@
             <param name="verbose" value="$(arg VERBOSE)" />
             <param name="front_camera" value="$(arg FRONT_CAMERA_TOPIC)" />
             <param name="bottom_camera" value="$(arg BOTTOM_CAMERA_TOPIC)" />
+            <param name="depth_stabilization" value="$(arg DEPTH_STABILIZTION)" />
+            <param name="yaw_stabilization" value="$(arg YAW_STABILIZTION)" />
+            <param name="lag_stabilization" value="$(arg LAG_STABILIZTION)" />
+            <param name="reset_imu" value="$(arg RESET_IMU)" />
         </node>
     </group>
 </launch>

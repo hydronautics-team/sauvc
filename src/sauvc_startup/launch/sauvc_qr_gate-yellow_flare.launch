@@ -6,5 +6,8 @@
         <param name="bottom_camera" value="/bottom_camera/image_raw" />
         <param name="gate" value="True" />
         <param name="yellow_flare" value="True" />
+        <param name="depth_stabilization" value="False" />
+        <param name="yaw_stabilization" value="True" />
+        <param name="reset_imu" value="False" />
     </node>
 </launch>

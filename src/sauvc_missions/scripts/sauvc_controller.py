@@ -1,4 +1,4 @@
-from stingray_tfsm.auv_controller import AUVController
+from stingray_tfsm.auv_missions_controller import AUVMissionsController
 import rospy
 
 NODE_NAME = "sauvc_controller"
@@ -10,7 +10,7 @@ def setup(*args, **kwargs):
     pass
 
 
-class SAUVCController(AUVController):
+class SAUVCController(AUVMissionsController):
     def __init__(self,
                  gate: bool,
                  flare: bool,
@@ -19,7 +19,11 @@ class SAUVCController(AUVController):
                  qual: bool,
                  verbose: bool,
                  front_camera: str,
-                 bottom_camera: str
+                 bottom_camera: str,
+                 depth_stabilization: bool,
+                 yaw_stabilization: bool,
+                 lag_stabilization: bool,
+                 reset_imu: bool,
                  ):
         self.test = test
         self.gate = gate
@@ -31,51 +35,23 @@ class SAUVCController(AUVController):
 
         self.front_camera = front_camera
         self.bottom_camera = bottom_camera
+        self.depth_stabilization = depth_stabilization
+        self.yaw_stabilization = yaw_stabilization
+        self.lag_stabilization = lag_stabilization
+        self.reset_imu = reset_imu
 
-        self.gate_mission = None
-        self.flare_mission = None
-        self.drums_mission = None
-        self.last_mission = None
-
-        super().__init__()
-
-    def next_mission(self, mission):
-        self.add_mission(mission)
-        if self.last_mission is None:
-            self.add_mission_transitions([
-                [self.machine.transition_start, self.machine.state_init, mission.name],
-            ])
-            print(f'added{[self.machine.transition_start, self.machine.state_init, mission.name]}')
-            self.last_mission = mission.name
-        else:
-            self.add_mission_transitions([
-                [f"FROM_{self.last_mission}_TO_{mission.name}",
-                 self.last_mission, mission.name],
-            ])
-            print('added ' + f"[FROM_{self.last_mission}_TO_{mission.name}", self.last_mission, mission.name, ']')
-        self.last_mission = mission.name
-        print(f'added {self.last_mission}')
-
-    def arrange_finish(self):
-        if self.last_mission is None:
-            self.add_mission_transitions([
-                ['skip', self.machine.state_init, self.machine.state_end],
-            ])
-            print('no mission set')
-        else:
-            self.add_mission_transitions([
-                [self.machine.transition_end, self.last_mission, self.machine.state_end],
-            ])
-            print(f'{[self.machine.transition_end, self.last_mission, self.machine.state_end]}')
+        super().__init__(self.depth_stabilization, self.yaw_stabilization,
+                         self.lag_stabilization, self.reset_imu)
 
     def setup_missions(self):
+        super().setup_missions()
         if self.qual:
             from sauvc_missions.qualification import QualificationMission
             qual_mission = QualificationMission(
                 QualificationMission.__name__,
                 self.front_camera
             )
-            self.next_mission(qual_mission)
+            self.add_mission(qual_mission)
 
         if self.gate:
             from sauvc_missions.gate import GateMission
@@ -86,7 +62,7 @@ class SAUVCController(AUVController):
                 rotate='left',
                 lag='left',
             )
-            self.next_mission(gate_mission)
+            self.add_mission(gate_mission)
 
         if self.yellow_flare:
             from sauvc_missions.yellow import FlareMission
@@ -97,7 +73,7 @@ class SAUVCController(AUVController):
                 rotate='right',
                 lag='right',
             )
-            self.next_mission(flare_mission)
+            self.add_mission(flare_mission)
 
         if self.drums:
             from sauvc_missions.drums import DrumsMission
@@ -106,19 +82,16 @@ class SAUVCController(AUVController):
                 self.front_camera,
                 self.bottom_camera
             )
-            self.next_mission(drums_mission)
+            self.add_mission(drums_mission)
 
         if self.test:
             from sauvc_missions.uart_test_mission import TestMission
-            self.test_mission = TestMission("test_mission",
-                                              self.front_camera, self.bottom_camera)
+            self.test_mission = TestMission(
+                "test_mission",
+                self.front_camera,
+                self.bottom_camera
+            )
             self.add_mission(self.test_mission)
-            self.add_mission_transitions([
-                [self.machine.transition_start, self.machine.state_init, self.test_mission.name],
-                [self.machine.transition_end, self.test_mission.name, self.machine.state_end]
-            ])
-
-        self.arrange_finish()
 
 
 if __name__ == '__main__':
@@ -132,6 +105,10 @@ if __name__ == '__main__':
     test = rospy.get_param("~test", False)
     front_camera = rospy.get_param("~front_camera")
     bottom_camera = rospy.get_param("~bottom_camera")
+    depth_stabilization = rospy.get_param("~depth_stabilization", False)
+    yaw_stabilization = rospy.get_param("~yaw_stabilization", False)
+    lag_stabilization = rospy.get_param("~lag_stabilization", False)
+    reset_imu = rospy.get_param("~reset_imu", False)
 
     controller = SAUVCController(
         gate,
@@ -141,6 +118,10 @@ if __name__ == '__main__':
         qual,
         verbose,
         front_camera,
-        bottom_camera
+        bottom_camera,
+        depth_stabilization,
+        yaw_stabilization,
+        lag_stabilization,
+        reset_imu,
     )
     controller.run()

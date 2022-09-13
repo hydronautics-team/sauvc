@@ -47,7 +47,7 @@ class QualificationMission(SAUVCMission):
               ['condition_s', 'condition_centering', 'move_march'],
 
 
-        ] + self.machine.default_transitions
+        ]
         return transitions
 
     def enable_fucking(self):

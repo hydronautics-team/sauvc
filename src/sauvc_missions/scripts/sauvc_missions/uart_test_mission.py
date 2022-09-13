@@ -24,7 +24,7 @@ class TestMission(SAUVCMission):
         return ('move_1', 'rotate_1',
                 'move_2', 'rotate_2',
                 'move_3', 'rotate_3',
-                'move_4', 'rotate_4',) + self.machine.default_states
+                'move_4', 'rotate_4',)
 
     def setup_transitions(self):
         return [
@@ -42,7 +42,7 @@ class TestMission(SAUVCMission):
 
             ['step_42', 'rotate_4', 'move_1'],
 
-        ] + self.machine.default_transitions
+        ]
 
     def setup_scene(self):
         return {

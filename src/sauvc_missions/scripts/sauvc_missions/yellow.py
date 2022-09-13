@@ -17,7 +17,7 @@ class FlareMission(SAUVCMission):
         super().__init__(name, front_camera, bottom_camera)
 
     def setup_states(self):
-        return ('custom_reach_flare', 'move_march') + self.machine.default_states
+        return ('custom_reach_flare', 'move_march')
 
     def setup_transitions(self):
         return [
@@ -25,7 +25,7 @@ class FlareMission(SAUVCMission):
 
                    ['pass_through', 'custom_reach_flare', 'move_march'],
 
-               ] + self.machine.default_transitions
+               ]
 
     def setup_scene(self):
         return {
