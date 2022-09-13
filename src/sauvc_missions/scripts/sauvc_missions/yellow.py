@@ -1,5 +1,6 @@
 from sauvc_missions.sauvc_mission import SAUVCMission
 from stingray_tfsm.submachines.reach_submachine import ReachSub
+from stingray_tfsm.core.pure_fsm import PureStateMachine
 
 
 class FlareMission(SAUVCMission):
@@ -13,7 +14,7 @@ class FlareMission(SAUVCMission):
                  lag='left',
                  ):
 
-        self.reach_sub = ReachSub(name + "_reach_flare", front_camera, target, avoid, rotate, lag)
+        self.reach_sub = ReachSub(PureStateMachine.construct_name('ReachFlare', name), front_camera, target, avoid, rotate, lag)
         super().__init__(name, front_camera, bottom_camera)
 
     def setup_states(self):

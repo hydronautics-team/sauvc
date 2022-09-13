@@ -22,8 +22,8 @@ class QualificationMission(SAUVCMission):
         self.tolerance = tolerance
         self.confirmation = confirmation
 
-        self.centering_submachine = CenteringAngleSub(
-            name + "_centering", camera, target, tolerance=self.tolerance, confirmation=self.confirmation)
+        self.centering_submachine = CenteringAngleSub(PureStateMachine.construct_name(
+            'CenteringGate', name), camera, target, tolerance=self.tolerance, confirmation=self.confirmation)
         self.rotate_dir = 1 if rotate == "left" else -1
         self.target = target
 
@@ -36,29 +36,25 @@ class QualificationMission(SAUVCMission):
 
     def setup_transitions(self):
         transitions = [
-              [self.machine.transition_start, [self.machine.state_init,
-                                               'rotate_search', ], 'condition_gate'],
+            [self.machine.transition_start, [self.machine.state_init,
+                                             'rotate_search', ], 'condition_gate'],
 
 
-              ['condition_f', 'condition_gate', 'rotate_search'],
-              ['condition_s', 'condition_gate', 'condition_centering'],
+            ['condition_f', 'condition_gate', 'rotate_search'],
+            ['condition_s', 'condition_gate', 'condition_centering'],
 
-              ['condition_f', 'condition_centering', 'condition_gate'],
-              ['condition_s', 'condition_centering', 'move_march'],
+            ['condition_f', 'condition_centering', 'condition_gate'],
+            ['condition_s', 'condition_centering', 'move_march'],
 
 
         ]
         return transitions
 
-    def enable_fucking(self):
-        self.enable_object_detection(self.front_camera, True)
-        self.enable_stabilization(False, True, False)
-
     def setup_scene(self):
         scene = {
             self.machine.state_init: {
-                'preps': self.enable_fucking,
-                "args": (),
+                'preps': self.enable_object_detection,
+                "args": (self.front_camera, True),
             },
             'condition_gate': {
                 'condition': self.target_event_handler,
@@ -82,7 +78,7 @@ class QualificationMission(SAUVCMission):
 
     def setup_events(self):
         self.target_detection_event = ObjectDetectionEvent(
-            get_objects_topic(self.camera), self.target, self.confirmation )
+            get_objects_topic(self.camera), self.target, self.confirmation)
 
     def target_event_handler(self):
         self.target_detection_event.start_listening()

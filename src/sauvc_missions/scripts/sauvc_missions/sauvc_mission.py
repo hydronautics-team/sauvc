@@ -17,7 +17,6 @@ class SAUVCMission(AUVMission):
                  mat="mat",
                  blue_bowl="blue_bowl",
                  red_bowl="red_bowl",
-                 parent_mission_name: str = None
                  ):
         """ Abstract class to implement AUV missions for SAUVC competitnion
 
@@ -44,4 +43,4 @@ class SAUVCMission(AUVMission):
         self.bottom_camera = bottom_camera
 
         self.confirmation = 5
-        super().__init__(name, parent_mission_name)
+        super().__init__(name)
