@@ -11,9 +11,10 @@ class FlareMission(SAUVCMission):
                  avoid=['red_flare', 'gate'],
                  rotate='left',
                  lag='left',
+                 speed: int = 800,
                  ):
 
-        self.reach_sub = ReachSub(name + "_reach_flare", front_camera, target, avoid, rotate, lag)
+        self.reach_sub = ReachSub(name + "_reach_flare", front_camera, target, avoid, rotate, lag, speed)
         super().__init__(name, front_camera, bottom_camera)
 
     def setup_states(self):

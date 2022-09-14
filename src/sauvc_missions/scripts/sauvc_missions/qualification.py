@@ -13,7 +13,7 @@ class QualificationMission(SAUVCMission):
                  camera: str,
                  target: str = 'gate',
                  rotate='left',
-                 confirmation: int = 3,
+                 confirmation: int = 2,
                  tolerance: int = 3,
                  ):
 
@@ -25,7 +25,7 @@ class QualificationMission(SAUVCMission):
         self.centering_submachine = CenteringAngleSub(
             name + "_centering", camera, target, tolerance=self.tolerance, confirmation=self.confirmation)
         self.rotate_dir = 1 if rotate == "left" else -1
-        self.target = target
+        self.target_detection_event = None
 
         super().__init__(name, camera, '')
 
@@ -69,9 +69,9 @@ class QualificationMission(SAUVCMission):
                 'args': ()
             },
             'move_march': {
-                'direction': 3,
+                'direction': 1,
                 'velocity': 1,
-                'duration': 15000
+                'duration': 5000
             },
         }
         return scene
@@ -84,7 +84,7 @@ class QualificationMission(SAUVCMission):
         self.target_detection_event.start_listening()
         rospy.loginfo("DEBUG: started listening target detection")
 
-        #rospy.sleep(0.5)
+        rospy.sleep(0.5)
         if self.target_detection_event.is_triggered():
             rospy.loginfo("DEBUG: target detected by event")
             self.target_detection_event.stop_listening()
