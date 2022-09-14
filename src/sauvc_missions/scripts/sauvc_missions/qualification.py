@@ -44,7 +44,9 @@ class QualificationMission(SAUVCMission):
             ['condition_s', 'condition_gate', 'condition_centering_on_move'],
 
             ['condition_f', 'condition_centering_on_move', 'condition_gate'],
-            # ['condition_s', 'condition_centering_on_move', 'move_march'],
+            ['condition_s', 'condition_centering_on_move', 'move_march'],
+
+            [self.machine.transition_end, 'condition_centering_on_move', self.machine.state_end],
 
 
         ]
@@ -73,11 +75,16 @@ class QualificationMission(SAUVCMission):
                 'args': ()
             },
             'move_march': {
-                'march': 1.0,
+                'march': 0.3,
                 'lag': 0.0,
                 'yaw': 0,
-                'wait': 15,
+                'wait': 3,
             },
+            self.machine.state_end: {
+                'preps': self.machine.auv.execute_stop_goal,
+                "args": (),
+            },
+
         }
         return scene
 

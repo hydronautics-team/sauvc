@@ -17,6 +17,7 @@ class SAUVCController(AUVMissionsController):
                  drums: bool,
                  test: bool,
                  qual: bool,
+                 qual_stupid: bool,
                  verbose: bool,
                  front_camera: str,
                  bottom_camera: str,
@@ -30,6 +31,7 @@ class SAUVCController(AUVMissionsController):
         self.yellow_flare = flare
         self.drums = drums
         self.qual = qual
+        self.qual_stupid = qual_stupid
         self.test = test
         self.verbose = verbose
 
@@ -52,6 +54,14 @@ class SAUVCController(AUVMissionsController):
                 self.front_camera
             )
             self.add_mission(qual_mission)
+        
+        if self.qual_stupid:
+            from sauvc_missions.qualification_stupid import QualificationStupidMission
+            qual_stupid_mission = QualificationStupidMission(
+                QualificationStupidMission.__name__,
+                self.front_camera
+            )
+            self.add_mission(qual_stupid_mission)
 
         if self.gate:
             from sauvc_missions.gate import GateMission
@@ -99,6 +109,7 @@ if __name__ == '__main__':
 
     gate = rospy.get_param("~gate", False)
     qual = rospy.get_param("~qual", False)
+    qual_stupid = rospy.get_param("~qual_stupid", False)
     flare = rospy.get_param("~flare", False)
     drums = rospy.get_param("~drums", False)
     verbose = rospy.get_param("~verbose", True)
@@ -116,6 +127,7 @@ if __name__ == '__main__':
         drums,
         test,
         qual,
+        qual_stupid,
         verbose,
         front_camera,
         bottom_camera,
