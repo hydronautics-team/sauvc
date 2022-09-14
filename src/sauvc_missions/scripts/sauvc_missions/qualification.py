@@ -84,7 +84,7 @@ class QualificationMission(SAUVCMission):
         self.target_detection_event.start_listening()
         rospy.loginfo("DEBUG: started listening target detection")
 
-        rospy.sleep(0.5)
+        #rospy.sleep(0.5)
         if self.target_detection_event.is_triggered():
             rospy.loginfo("DEBUG: target detected by event")
             self.target_detection_event.stop_listening()

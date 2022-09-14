@@ -22,38 +22,62 @@ class TestMission(SAUVCMission):
 
     def setup_states(self):
         
-        return ('move_first', 'move_clock', 'move_second') + self.machine.default_states
+        return ('move_1', 'rotate_1', 'move_stop_1', 'move_2','rotate_2', 'move_stop_2', 'move_stop', 'rotate_reset') + self.machine.default_states
 
     def setup_transitions(self):
         return [
 
-            [self.machine.transition_start, self.machine.state_init, 'move_first'],
+            [self.machine.transition_start, self.machine.state_init, 'move_1'],
 
-            ['step_1', 'move_first', 'move_clock'],
+            ['step_0', 'move_1', 'rotate_1'],
 
-            ['step_2', 'move_clock', 'move_second'],
+            ['step_1', 'rotate_1', 'move_stop_1'],
+            
+            ['step_2', 'move_stop_1', 'move_2'],
+
+            ['step_3', 'move_2', 'rotate_2'],
+            
+            ['step_4', 'rotate_2', 'move_stop_2'],
 
         ] + self.machine.default_transitions
 
     def setup_scene(self):
         return {
             self.machine.state_init: {
-                'time': 5
+                'preps': self.enable_stabilization,
+                "args": (False, True, False),
             },
-            'move_first': {
+            'rotate_reset_0': {
+                'angle': 0
+            },
+            'move_1': {
                 'direction': 1,
-                'velocity': 0.5,
-                'duration': 50000
-            },
-            'move_second': {
-                'direction': 3,
-                'velocity': 0.5,
-                'duration': 50000
-            },
-            'move_clock': {
-                'direction': 1,
-                'velocity': 0.5,
+                'velocity': 0.7,
                 'duration': 5000
+            },
+            'rotate_1': {
+                'angle': 200,
+            },
+            'move_stop_1': {
+                'direction': 1,
+                'velocity': 0.0,
+                'duration': 5000
+            },
+            'move_2': {
+                'direction': 1,
+                'velocity': 0.7,
+                'duration': 5000
+            },
+            'rotate_2': {
+                'angle': 200
+            },
+            'move_stop_2': {
+                'direction': 1,
+                'velocity': 0.0,
+                'duration': 5000
+            },
+            'rotate_reset': {
+                'angle': 0
             },
         }
 
