@@ -1,0 +1,12 @@
+<launch>
+    <arg name="ROS_OUTPUT" default="screen" />
+    
+    <node pkg="sauvc_missions" type="sauvc_controller.py" name="sauvc_controller" output="$(arg ROS_OUTPUT)" respawn="false">
+        <param name="front_camera" value="/front_camera/image_raw" />
+        <param name="bottom_camera" value="/bottom_camera/image_raw" />
+        <param name="qual_stupid" value="True" />
+        <param name="depth_stabilization" value="True" />
+        <param name="yaw_stabilization" value="True" />
+        <param name="reset_imu" value="False" />
+    </node>
+</launch>

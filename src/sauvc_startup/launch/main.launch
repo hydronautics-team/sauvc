@@ -57,6 +57,7 @@
     <arg name="FLARE" default="false" />
     <arg name="DRUMS" default="False" />
     <arg name="QUAL" default="False" />
+    <arg name="QUAL_STUPID" default="False" />
     <arg name="TEST" default="False" />
     <arg name="VERBOSE" default="false" />
     <arg name="DEPTH_STABILIZTION" default="false" />
@@ -126,6 +127,7 @@
             <param name="flare" value="$(arg FLARE)" />
             <param name="drums" value="$(arg DRUMS)" />
             <param name="qual" value="$(arg QUAL)" />
+            <param name="qual_stupid" value="$(arg QUAL_STUPID)" />
             <param name="test" value="$(arg TEST)" />
             <param name="verbose" value="$(arg VERBOSE)" />
             <param name="front_camera" value="$(arg FRONT_CAMERA_TOPIC)" />
