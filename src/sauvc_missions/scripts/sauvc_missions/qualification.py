@@ -52,11 +52,17 @@ class QualificationMission(SAUVCMission):
         ]
         return transitions
 
+    def run_qual(self):
+        self.enable_object_detection(self.front_camera, True)
+        self.machine.auv.execute_dive_goal({
+                    'depth': 1400,
+                })
+
     def setup_scene(self):
         scene = {
             self.machine.state_init: {
-                'preps': self.enable_object_detection,
-                "args": (self.front_camera, True),
+                'preps': self.run_qual,
+                "args": (),
             },
             'condition_gate': {
                 'condition': self.target_event_handler,
@@ -65,7 +71,7 @@ class QualificationMission(SAUVCMission):
             'move_rotate_search': {
                 'march': 0.0,
                 'lag': 0.0,
-                'yaw': 30,
+                'yaw': -30,
                 # 'check_yaw': True,
                 'wait': 0.5,
             },

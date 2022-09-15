@@ -26,14 +26,43 @@ class QualificationStupidMission(SAUVCMission):
 
     def run_qual(self):
         self.machine.auv.execute_dive_goal({
-                    'depth': 0,
+                    'depth': 1300,
                 })
         self.machine.auv.execute_move_goal({
                     'march': 1.0,
                     'lag': 0.0,
                     'yaw': 0,
-                    'wait': 15,
+                    'wait': 25,
                 })
+        # self.machine.auv.execute_dive_goal({
+        #             'depth': 400,
+        #         })
+        # self.machine.auv.execute_move_goal({
+        #             'march': 1.0,
+        #             'lag': 0.0,
+        #             'yaw': 0,
+        #             'wait': 4,
+        #         })
+        # self.machine.auv.execute_dive_goal({
+        #             'depth': 600,
+        #         })
+        # self.machine.auv.execute_move_goal({
+        #             'march': 1.0,
+        #             'lag': 0.0,
+        #             'yaw': 0,
+        #             'wait': 4,
+        #         })
+        # self.machine.auv.execute_dive_goal({
+        #             'depth': 800,
+        #         })
+        # self.machine.auv.execute_move_goal({
+        #             'march': 1.0,
+        #             'lag': 0.0,
+        #             'yaw': 0,
+        #             'wait': 4,
+        #         })
+
+
 
     def setup_scene(self):
         scene = {
