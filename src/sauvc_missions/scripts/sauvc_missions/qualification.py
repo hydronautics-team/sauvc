@@ -1,4 +1,4 @@
-from stingray_tfsm.submachines.centering_angle import CenteringAngleSub
+from stingray_tfsm.submachines.centering_on_move import CenteringOnMoveSub
 from stingray_object_detection.utils import get_objects_topic
 from stingray_tfsm.vision_events import ObjectDetectionEvent, ObjectIsCloseEvent
 from sauvc_missions.sauvc_mission import SAUVCMission
@@ -22,7 +22,7 @@ class QualificationMission(SAUVCMission):
         self.tolerance = tolerance
         self.confirmation = confirmation
 
-        self.centering_submachine = CenteringAngleSub(
+        self.centering_submachine = CenteringOnMoveSub(
             name + "_centering", camera, target, tolerance=self.tolerance, confirmation=self.confirmation)
         self.rotate_dir = 1 if rotate == "left" else -1
         self.target_detection_event = None
@@ -31,23 +31,23 @@ class QualificationMission(SAUVCMission):
 
     def setup_states(self):
         return ('condition_gate', 'move_march',
-                'rotate_search', 'condition_centering',
+                'move_rotate_search', 'condition_centering_on_move',
                 )
 
     def setup_transitions(self):
         transitions = [
-              [self.machine.transition_start, [self.machine.state_init,
-                                               'rotate_search', ], 'condition_gate'],
+            [self.machine.transition_start, [self.machine.state_init,
+                                             'move_rotate_search', ], 'condition_gate'],
 
 
-              ['condition_f', 'condition_gate', 'rotate_search'],
-              ['condition_s', 'condition_gate', 'condition_centering'],
+            ['condition_f', 'condition_gate', 'move_rotate_search'],
+            ['condition_s', 'condition_gate', 'condition_centering_on_move'],
 
-              ['condition_f', 'condition_centering', 'condition_gate'],
-              ['condition_s', 'condition_centering', 'move_march'],
+            ['condition_f', 'condition_centering_on_move', 'condition_gate'],
+            # ['condition_s', 'condition_centering_on_move', 'move_march'],
 
 
-        ] + self.machine.default_transitions
+        ]
         return transitions
 
     def setup_scene(self):
@@ -60,31 +60,36 @@ class QualificationMission(SAUVCMission):
                 'condition': self.target_event_handler,
                 'args': ()
             },
-            'rotate_search': {
-                'angle': 5
+            'move_rotate_search': {
+                'march': 0.0,
+                'lag': 0.0,
+                'yaw': 30,
+                # 'check_yaw': True,
+                'wait': 0.5,
             },
-            'condition_centering': {
+            'condition_centering_on_move': {
                 'subFSM': True,
                 'condition': self.centering_submachine,
                 'args': ()
             },
             'move_march': {
-                'direction': 1,
-                'velocity': 1,
-                'duration': 5000
+                'march': 1.0,
+                'lag': 0.0,
+                'yaw': 0,
+                'wait': 15,
             },
         }
         return scene
 
     def setup_events(self):
         self.target_detection_event = ObjectDetectionEvent(
-            get_objects_topic(self.camera), self.target, self.confirmation )
+            get_objects_topic(self.camera), self.target, self.confirmation)
 
     def target_event_handler(self):
         self.target_detection_event.start_listening()
         rospy.loginfo("DEBUG: started listening target detection")
 
-        #rospy.sleep(0.5)
+        rospy.sleep(3.5)
         if self.target_detection_event.is_triggered():
             rospy.loginfo("DEBUG: target detected by event")
             self.target_detection_event.stop_listening()
