@@ -60,9 +60,10 @@
     <arg name="QUAL_STUPID" default="False" />
     <arg name="TEST" default="False" />
     <arg name="VERBOSE" default="false" />
-    <arg name="DEPTH_STABILIZTION" default="true" />
-    <arg name="YAW_STABILIZTION" default="true" />
-    <arg name="LAG_STABILIZTION" default="false" />
+    <arg name="DEPTH_STABILIZATION" default="true" />
+    <arg name="PITCH_STABILIZATION" default="true" />
+    <arg name="YAW_STABILIZATION" default="true" />
+    <arg name="LAG_STABILIZATION" default="false" />
     <arg name="RESET_IMU" default="false" />
 
     <!-- FRONT CAMERA -->
@@ -132,9 +133,10 @@
             <param name="verbose" value="$(arg VERBOSE)" />
             <param name="front_camera" value="$(arg FRONT_CAMERA_TOPIC)" />
             <param name="bottom_camera" value="$(arg BOTTOM_CAMERA_TOPIC)" />
-            <param name="depth_stabilization" value="$(arg DEPTH_STABILIZTION)" />
-            <param name="yaw_stabilization" value="$(arg YAW_STABILIZTION)" />
-            <param name="lag_stabilization" value="$(arg LAG_STABILIZTION)" />
+            <param name="depth_stabilization" value="$(arg DEPTH_STABILIZATION)" />
+            <param name="pitch_stabilization" value="$(arg PITCH_STABILIZATION)" />
+            <param name="yaw_stabilization" value="$(arg YAW_STABILIZATION)" />
+            <param name="lag_stabilization" value="$(arg LAG_STABILIZATION)" />
             <param name="reset_imu" value="$(arg RESET_IMU)" />
         </node>
     </group>

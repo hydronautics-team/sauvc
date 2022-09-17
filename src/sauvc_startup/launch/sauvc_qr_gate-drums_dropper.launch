@@ -8,6 +8,7 @@
         <param name="drums_dropper" value="True" />
         <param name="yellow_flare" value="True" />
         <param name="depth_stabilization" value="False" />
+        <param name="pitch_stabilization" value="True" />
         <param name="yaw_stabilization" value="True" />
         <param name="reset_imu" value="False" />
     </node>

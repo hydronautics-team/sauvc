@@ -22,6 +22,7 @@ class SAUVCController(AUVMissionsController):
                  front_camera: str,
                  bottom_camera: str,
                  depth_stabilization: bool,
+                 pitch_stabilization: bool,
                  yaw_stabilization: bool,
                  lag_stabilization: bool,
                  reset_imu: bool,
@@ -38,11 +39,12 @@ class SAUVCController(AUVMissionsController):
         self.front_camera = front_camera
         self.bottom_camera = bottom_camera
         self.depth_stabilization = depth_stabilization
+        self.pitch_stabilization = pitch_stabilization
         self.yaw_stabilization = yaw_stabilization
         self.lag_stabilization = lag_stabilization
         self.reset_imu = reset_imu
 
-        super().__init__(self.depth_stabilization, self.yaw_stabilization,
+        super().__init__(self.depth_stabilization, self.pitch_stabilization, self.yaw_stabilization,
                          self.lag_stabilization, self.reset_imu)
 
     def setup_missions(self):
@@ -64,7 +66,7 @@ class SAUVCController(AUVMissionsController):
                 self.front_camera
             )
             self.add_mission(qual_mission)
-        
+
         if self.qual_stupid:
             from sauvc_missions.qualification_stupid import QualificationStupidMission
             qual_stupid_mission = QualificationStupidMission(
@@ -118,6 +120,7 @@ if __name__ == '__main__':
     front_camera = rospy.get_param("~front_camera")
     bottom_camera = rospy.get_param("~bottom_camera")
     depth_stabilization = rospy.get_param("~depth_stabilization", False)
+    pitch_stabilization = rospy.get_param("~pitch_stabilization", False)
     yaw_stabilization = rospy.get_param("~yaw_stabilization", False)
     lag_stabilization = rospy.get_param("~lag_stabilization", False)
     reset_imu = rospy.get_param("~reset_imu", False)
@@ -133,6 +136,7 @@ if __name__ == '__main__':
         front_camera,
         bottom_camera,
         depth_stabilization,
+        pitch_stabilization,
         yaw_stabilization,
         lag_stabilization,
         reset_imu,
