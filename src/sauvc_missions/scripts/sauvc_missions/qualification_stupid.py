@@ -23,46 +23,16 @@ class QualificationStupidMission(SAUVCMission):
     def setup_transitions(self):
         return []
 
-
     def run_qual(self):
         self.machine.auv.execute_dive_goal({
-                    'depth': 1300,
-                })
+            'depth': 1300,
+        })
         self.machine.auv.execute_move_goal({
-                    'march': 1.0,
-                    'lag': 0.0,
-                    'yaw': 0,
-                    'wait': 25,
-                })
-        # self.machine.auv.execute_dive_goal({
-        #             'depth': 400,
-        #         })
-        # self.machine.auv.execute_move_goal({
-        #             'march': 1.0,
-        #             'lag': 0.0,
-        #             'yaw': 0,
-        #             'wait': 4,
-        #         })
-        # self.machine.auv.execute_dive_goal({
-        #             'depth': 600,
-        #         })
-        # self.machine.auv.execute_move_goal({
-        #             'march': 1.0,
-        #             'lag': 0.0,
-        #             'yaw': 0,
-        #             'wait': 4,
-        #         })
-        # self.machine.auv.execute_dive_goal({
-        #             'depth': 800,
-        #         })
-        # self.machine.auv.execute_move_goal({
-        #             'march': 1.0,
-        #             'lag': 0.0,
-        #             'yaw': 0,
-        #             'wait': 4,
-        #         })
-
-
+            'march': 1.0,
+            'lag': 0.0,
+            'yaw': 0,
+            'wait': 25,
+        })
 
     def setup_scene(self):
         scene = {
@@ -75,27 +45,3 @@ class QualificationStupidMission(SAUVCMission):
 
     def setup_events(self):
         pass
-
-    def check_machine(self):
-        if type(self.machine) is AUVStateMachine or \
-                type(self.machine) is PureStateMachine:
-            return 1
-        else:
-            raise TypeError("machine was not initialized")
-
-    def set_init_state(self, ):
-        if self.check_machine():
-            self.machine.set_state(self.machine.state_init)
-
-    def set_state(self, state):
-        if self.check_machine():
-            self.machine.set_state(state)
-
-    def run(self):
-        if self.check_machine():
-            value = self.machine.run()
-            return value
-
-    def verbose(self, verbose):
-        if self.check_machine():
-            self.machine.verbose(verbose)
