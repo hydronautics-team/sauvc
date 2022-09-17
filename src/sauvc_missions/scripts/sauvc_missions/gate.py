@@ -17,17 +17,16 @@ class GateMission(SAUVCMission):
         super().__init__(name, front_camera, bottom_camera)
 
     def setup_states(self):
-
-        return ('custom_reach_gate', 'custom_stub', 'move_march')
+        return 'custom_reach_gate', 'custom_stub', 'move_march', 'move_stop'
 
     def setup_transitions(self):
         return [
-                   [self.machine.transition_start, [self.machine.state_init, ], 'custom_reach_gate'],
+            [self.machine.transition_start, [self.machine.state_init, ], 'custom_reach_gate'],
 
+            ['pass_through', 'custom_reach_gate', 'move_march'],
 
-                   ['pass_through', 'custom_reach_gate', 'move_march'],
-
-               ]
+            ['finish', 'move_march', 'move_stop']
+        ]
 
     def setup_scene(self):
         return {
@@ -41,9 +40,16 @@ class GateMission(SAUVCMission):
                 'args': ()
             },
             'move_march': {
-                'direction': 3,
-                'velocity': 0.42,
-                'duration': 2200
+                'march': 1,
+                'lag': 0.0,
+                'yaw': 0,
+                'wait': 0.5
+            },
+            'move_stop': {
+                'march': 0,
+                'lag': 0.0,
+                'yaw': 0,
+                'wait': 1
             },
         }
 

@@ -46,7 +46,17 @@ class SAUVCController(AUVMissionsController):
                          self.lag_stabilization, self.reset_imu)
 
     def setup_missions(self):
+
         super().setup_missions()
+        if self.test:
+            from sauvc_missions.devices_test import TestMission
+            test_mission = TestMission(
+                TestMission.__name__,
+                self.front_camera,
+                self.bottom_camera
+            )
+            self.add_mission(test_mission)
+
         if self.qual:
             from sauvc_missions.qualification import QualificationMission
             qual_mission = QualificationMission(
@@ -93,15 +103,6 @@ class SAUVCController(AUVMissionsController):
                 self.bottom_camera
             )
             self.add_mission(drums_mission)
-
-        if self.test:
-            from sauvc_missions.test_mission import TestMission
-            self.test_mission = TestMission(
-                TestMission.__name__,
-                self.front_camera,
-                self.bottom_camera
-            )
-            self.add_mission(self.test_mission)
 
 
 if __name__ == '__main__':

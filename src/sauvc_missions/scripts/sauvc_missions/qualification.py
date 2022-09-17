@@ -13,7 +13,7 @@ class QualificationMission(SAUVCMission):
                  camera: str,
                  target: str = 'gate',
                  rotate='left',
-                 confirmation: int = 3,
+                 confirmation: int = 2,
                  tolerance: int = 3,
                  ):
 
@@ -22,10 +22,10 @@ class QualificationMission(SAUVCMission):
         self.tolerance = tolerance
         self.confirmation = confirmation
 
-        self.centering_submachine = CenteringOnMoveSub(PureStateMachine.construct_name(
-            'CenteringGate', name), camera, target, tolerance=self.tolerance, confirmation=self.confirmation)
+        self.centering_submachine = CenteringOnMoveSub(
+            name + "_centering", camera, target, tolerance=self.tolerance, confirmation=self.confirmation)
         self.rotate_dir = 1 if rotate == "left" else -1
-        self.target = target
+        self.target_detection_event = None
 
         super().__init__(name, camera, '')
 

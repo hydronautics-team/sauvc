@@ -3,6 +3,9 @@
 from sauvc_missions.sauvc_mission import SAUVCMission
 from stingray_object_detection.utils import get_objects_topic
 from stingray_tfsm.vision_events import ObjectDetectionEvent
+from stingray_tfsm.reach_submachine import ReachSub
+from stingray_tfsm.centering_planar import PlanarCenteringSub
+
 import rospy
 
 
@@ -11,26 +14,51 @@ class DrumsMission(SAUVCMission):
                  name: str,
                  front_camera: str,
                  bottom_camera: str,
-                 gate="gate",
-                 red_flare="red_flare",
-                 yellow_flare="yellow_flare",
-                 mat="mat",
-                 blue_bowl="blue_bowl",
-                 red_bowl="red_bowl"):
-        super().__init__(name, front_camera, bottom_camera, gate,
-                         red_flare, yellow_flare, mat, blue_bowl, red_bowl)
+                 avoid=['red_flare', 'gate', 'yellow_flare'],
+                 acoustics=False,
+                 ):
+
+        self.reach_sub = ReachSub(
+            name + "_reach_mat", front_camera, 'mat', avoid, 'left', 'right')
+        self.centering_red = PlanarCenteringSub(
+            name + "_center_red_drum", bottom_camera, 'red_drum', offset=(0, 0), bottom=True)
+        self.centering_red = PlanarCenteringSub(
+            name + "_center_red_drum", bottom_camera, 'red_drum', offset=(0, 0), bottom=True)
+
+        self.memory = {
+            'blue_drum_0': {
+                'visited': False
+            },
+            'red_drum_1': {
+                'visited': False,
+                'has_pinger': False,
+                'has_ball': False,
+            },
+            'red_drum_2': {
+                'visited': False,
+                'has_pinger': False,
+                'has_ball': False,
+            },
+            'red_drum_3': {
+                'visited': False,
+                'has_pinger': False,
+                'has_ball': False,
+            },
+        }  # is it necessary?
+
+        super().__init__(name, front_camera, bottom_camera)
 
     def setup_states(self):
-        return ('condition_drums', 'custom_setup',
-                'rotate_clockwise', 'rotate_anticlockwise', 'move_march')
+        return ('condition_drums', 'custom_reach_mat',
+                'condition_planar', 'rotate_anticlockwise', 'move_march')
 
     def setup_transitions(self):
         return [
-            [self.machine.transition_start, [self.machine.state_init, 'rotate_clockwise',
-                                     'move_march'], 'condition_drums'],
-            ['condition_f', 'condition_drums', 'rotate_clockwise'],
-            ['condition_s', 'condition_drums', 'move_march'],
-        ]
+                   [self.machine.transition_start, [self.machine.state_init, 'rotate_clockwise',
+                                                    'move_march'], 'condition_drums'],
+                   ['condition_f', 'condition_drums', 'rotate_clockwise'],
+                   ['condition_s', 'condition_drums', 'move_march'],
+               ]
 
     def setup_scene(self):
         return {
@@ -38,47 +66,14 @@ class DrumsMission(SAUVCMission):
                 'preps': self.enable_object_detection,
                 "args": (self.front_camera, True),
             },
-            'condition_drums': {
-                'condition': self.drums_event_handler,
-                'args': ()
-            },
-            'rotate_clockwise': {
-                'angle': 10
-            },
-            'rotate_anticlockwise': {
-                'angle': -10
-            },
-            'move_march': {
-                'direction': 3,
-                'velocity': 0.4,
-                'duration': 1000
-            },
+
+            '': {},
+
             'done': {},
             'aborted': {}
         }
 
     def setup_events(self):
-        self.drums_detection_event = ObjectDetectionEvent(
-            get_objects_topic(self.front_camera), self.mat, self.confirmation)
-
-    def drums_event_handler(self):
-        self.drums_detection_event.start_listening()
-        rospy.sleep(2)
-        if self.drums_detection_event.is_triggered():
-            rospy.loginfo("DEBUG: drums detected by event")
-            self.drums_detection_event.stop_listening()
-            return 1
-        else:
-
-            rospy.loginfo("DEBUG: no drums detected")
-            self.drums_detection_event.stop_listening()
-            return 0
+        pass
 
 
-if __name__ == '__main__':
-    rospy.init_node("drums_centering_fsm")
-    front_camera_topic = rospy.get_param('~front_camera_topic')
-    bottom_camera_topic = rospy.get_param('~front_camera_topic')
-
-    drums_mission = DrumsMission(front_camera_topic, bottom_camera_topic)
-    drums_mission.run()
