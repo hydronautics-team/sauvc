@@ -51,7 +51,7 @@ class SAUVCController(AUVMissionsController):
 
         super().setup_missions()
         if self.test:
-            from sauvc_missions.devices_test import TestMission
+            from sauvc_missions.test_mission import TestMission
             test_mission = TestMission(
                 TestMission.__name__,
                 self.front_camera,
