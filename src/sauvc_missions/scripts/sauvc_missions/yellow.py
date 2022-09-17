@@ -18,15 +18,16 @@ class FlareMission(SAUVCMission):
         super().__init__(name, front_camera, bottom_camera)
 
     def setup_states(self):
-        return ('custom_reach_flare', 'move_march')
+        return ('custom_reach_flare', 'move_march', 'move_stop')
 
     def setup_transitions(self):
         return [
-                   [self.machine.transition_start, [self.machine.state_init, ], 'custom_reach_flare'],
+            [self.machine.transition_start, [self.machine.state_init, ], 'custom_reach_flare'],
 
-                   ['pass_through', 'custom_reach_flare', 'move_march'],
+            ['pass_through', 'custom_reach_flare', 'move_march'],
 
-               ]
+            ['finish', 'move_march', 'move_stop']
+        ]
 
     def setup_scene(self):
         return {
@@ -40,9 +41,16 @@ class FlareMission(SAUVCMission):
                 'args': ()
             },
             'move_march': {
-                'direction': 3,
-                'velocity': 0.41,
-                'duration': 2200
+                'march': 1,
+                'lag': 0.0,
+                'yaw': 0,
+                'wait': 0.5
+            },
+            'move_stop': {
+                'march': 0,
+                'lag': 0.0,
+                'yaw': 0,
+                'wait': 1
             },
         }
 
