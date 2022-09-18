@@ -33,8 +33,7 @@ class QualificationMission(SAUVCMission):
 
     def setup_transitions(self):
         transitions = [
-            [self.machine.transition_start, self.machine.state_init,
-                'condition_centering_on_move'],
+            [self.machine.transition_start, self.machine.state_init, 'condition_centering_on_move'],
 
             ['condition_f', 'condition_centering_on_move', 'condition_centering_on_move'],
             ['condition_s', 'condition_centering_on_move', 'move_march'],
