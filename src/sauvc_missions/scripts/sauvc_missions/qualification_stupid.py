@@ -1,9 +1,4 @@
-from stingray_tfsm.submachines.centering_on_move import CenteringOnMoveSub
-from stingray_object_detection.utils import get_objects_topic
-from stingray_tfsm.vision_events import ObjectDetectionEvent, ObjectIsCloseEvent
 from sauvc_missions.sauvc_mission import SAUVCMission
-from stingray_tfsm.auv_fsm import AUVStateMachine
-from stingray_tfsm.core.pure_fsm import PureStateMachine
 import rospy
 
 
