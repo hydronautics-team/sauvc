@@ -4,6 +4,7 @@ from stingray_tfsm.vision_events import ObjectDetectionEvent, ObjectIsCloseEvent
 from sauvc_missions.sauvc_mission import SAUVCMission
 from stingray_tfsm.auv_fsm import AUVStateMachine
 from stingray_tfsm.core.pure_fsm import PureStateMachine
+from stingray_tfsm.auv_control import AUVControl
 import rospy
 
 
@@ -11,6 +12,7 @@ class QualificationMission(SAUVCMission):
     def __init__(self,
                  name: str,
                  camera: str,
+                 auv: AUVControl,
                  target: str = 'gate',
                  confirmation: int = 2,
                  tolerance: int = 3,
@@ -24,9 +26,9 @@ class QualificationMission(SAUVCMission):
         self.confidence = confidence
 
         self.centering_submachine = CenteringOnMoveSub(
-            name + "_centering", camera, target, tolerance=self.tolerance, confirmation=self.confirmation, confidence=self.confidence)
+            name + "_centering", camera, auv, target, tolerance=self.tolerance, confirmation=self.confirmation, confidence=self.confidence)
 
-        super().__init__(name, camera, '')
+        super().__init__(name, camera, '', auv)
 
     def setup_states(self):
         return ('move_march', 'condition_centering_on_move')
@@ -43,15 +45,14 @@ class QualificationMission(SAUVCMission):
         return transitions
 
     def prerun(self):
-        self.enable_object_detection(self.front_camera, True)
         self.machine.auv.execute_dive_goal({
-            'depth': 1100,
+            'depth': 1500,
         })
         self.machine.auv.execute_move_goal({
             'march': 1.0,
             'lag': 0.0,
             'yaw': 0,
-            'wait': 7,
+            'wait': 25,
         })
 
     def setup_scene(self):

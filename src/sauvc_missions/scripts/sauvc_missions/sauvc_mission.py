@@ -2,6 +2,7 @@
 
 from abc import abstractmethod
 from stingray_tfsm.auv_mission import AUVMission
+from stingray_tfsm.auv_control import AUVControl
 
 
 class SAUVCMission(AUVMission):
@@ -11,6 +12,7 @@ class SAUVCMission(AUVMission):
                  name: str,
                  front_camera: str,
                  bottom_camera: str,
+                 auv: AUVControl,
                  gate="gate",
                  red_flare="red_flare",
                  yellow_flare="yellow_flare",
@@ -43,4 +45,4 @@ class SAUVCMission(AUVMission):
         self.bottom_camera = bottom_camera
 
         self.confirmation = 5
-        super().__init__(name)
+        super().__init__(name, auv)

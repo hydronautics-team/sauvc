@@ -1,4 +1,5 @@
 from stingray_tfsm.auv_missions_controller import AUVMissionsController
+from stingray_tfsm.auv_control import AUVControl
 import rospy
 
 NODE_NAME = "sauvc_controller"
@@ -43,8 +44,10 @@ class SAUVCController(AUVMissionsController):
         self.yaw_stabilization = yaw_stabilization
         self.lag_stabilization = lag_stabilization
         self.reset_imu = reset_imu
+        self.auv = AUVControl(self.verbose)
 
-        super().__init__(self.depth_stabilization, self.pitch_stabilization, self.yaw_stabilization,
+
+        super().__init__(self.front_camera, self.auv, self.depth_stabilization, self.pitch_stabilization, self.yaw_stabilization,
                          self.lag_stabilization, self.reset_imu)
 
     def setup_missions(self):
@@ -55,7 +58,8 @@ class SAUVCController(AUVMissionsController):
             test_mission = TestMission(
                 TestMission.__name__,
                 self.front_camera,
-                self.bottom_camera
+                self.bottom_camera,
+                auv=self.auv
             )
             self.add_mission(test_mission)
 
@@ -64,6 +68,7 @@ class SAUVCController(AUVMissionsController):
             qual_mission = QualificationMission(
                 QualificationMission.__name__,
                 self.front_camera,
+                auv=self.auv
             )
             self.add_mission(qual_mission)
 
@@ -71,7 +76,8 @@ class SAUVCController(AUVMissionsController):
             from sauvc_missions.qualification_stupid import QualificationStupidMission
             qual_stupid_mission = QualificationStupidMission(
                 QualificationStupidMission.__name__,
-                self.front_camera
+                self.front_camera,
+                auv=self.auv
             )
             self.add_mission(qual_stupid_mission)
 

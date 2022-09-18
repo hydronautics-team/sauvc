@@ -3,6 +3,7 @@
 from sauvc_missions.sauvc_mission import SAUVCMission
 from stingray_object_detection.utils import get_objects_topic
 from stingray_tfsm.vision_events import ObjectDetectionEvent, ObjectIsCloseEvent
+from stingray_tfsm.auv_control import AUVControl
 import rospy
 
 
@@ -11,13 +12,14 @@ class TestMission(SAUVCMission):
                  name: str,
                  front_camera: str,
                  bottom_camera: str,
+                 auv: AUVControl,
                  gate="gate",
                  red_flare="red_flare",
                  yellow_flare="yellow_flare",
                  mat="mat",
                  blue_bowl="blue_bowl",
                  red_bowl="red_bowl"):
-        super().__init__(name, front_camera, bottom_camera, gate,
+        super().__init__(name, front_camera, bottom_camera, auv, gate,
                          red_flare, yellow_flare, mat, blue_bowl, red_bowl)
 
     def setup_states(self):
