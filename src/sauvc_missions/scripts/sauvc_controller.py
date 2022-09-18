@@ -60,11 +60,10 @@ class SAUVCController(AUVMissionsController):
             self.add_mission(test_mission)
 
         if self.qual:
-            from stingray_tfsm.submachines.centering_on_move import CenteringOnMoveSub
-            qual_mission = CenteringOnMoveSub(
-                CenteringOnMoveSub.__name__,
+            from sauvc_missions.qualification import QualificationMission
+            qual_mission = QualificationMission(
+                QualificationMission.__name__,
                 self.front_camera,
-                "gate",
             )
             self.add_mission(qual_mission)
 
