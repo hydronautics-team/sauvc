@@ -1,16 +1,18 @@
 from sauvc_missions.sauvc_mission import SAUVCMission
+from stingray_tfsm.auv_control import AUVControl
 import rospy
 
 
 class QualificationStupidMission(SAUVCMission):
     def __init__(self,
                  name: str,
+                 auv: AUVControl,
                  camera: str,
                  ):
 
         self.camera = camera
 
-        super().__init__(name, camera, '')
+        super().__init__(name, auv, camera, '')
 
     def setup_states(self):
         return ()

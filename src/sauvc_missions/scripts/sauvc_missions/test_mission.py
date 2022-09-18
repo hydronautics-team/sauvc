@@ -10,17 +10,9 @@ import rospy
 class TestMission(SAUVCMission):
     def __init__(self,
                  name: str,
-                 front_camera: str,
-                 bottom_camera: str,
-                 auv: AUVControl,
-                 gate="gate",
-                 red_flare="red_flare",
-                 yellow_flare="yellow_flare",
-                 mat="mat",
-                 blue_bowl="blue_bowl",
-                 red_bowl="red_bowl"):
-        super().__init__(name, front_camera, bottom_camera, auv, gate,
-                         red_flare, yellow_flare, mat, blue_bowl, red_bowl)
+                 auv: AUVControl = None,
+                 ):
+        super().__init__(name, auv)
 
     def setup_states(self):
         return ('dive_0', 'move_march_1', 'move_yaw_1',
@@ -55,7 +47,7 @@ class TestMission(SAUVCMission):
             'dive_0': {
                 'depth': 600,
                 'check_depth': True
-                
+
             },
             'move_march_1': {
                 'march': 0.7,

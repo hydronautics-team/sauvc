@@ -11,12 +11,13 @@ import rospy
 class QualificationMission(SAUVCMission):
     def __init__(self,
                  name: str,
-                 camera: str,
                  auv: AUVControl,
+                 camera: str,
                  target: str = 'gate',
                  confirmation: int = 2,
                  tolerance: int = 3,
                  confidence: float = 0.3,
+                 verbose: bool = False,
                  ):
 
         self.camera = camera
@@ -26,18 +27,26 @@ class QualificationMission(SAUVCMission):
         self.confidence = confidence
 
         self.centering_submachine = CenteringOnMoveSub(
-            name + "_centering", camera, auv, target, tolerance=self.tolerance, confirmation=self.confirmation, confidence=self.confidence)
+            PureStateMachine.construct_name('CenteringOnMove', name),
+            auv,
+            camera,
+            target,
+            tolerance=self.tolerance,
+            confirmation=self.confirmation,
+            confidence=self.confidence)
 
-        super().__init__(name, camera, '', auv)
+        super().__init__(name, auv, camera, '')
 
     def setup_states(self):
         return ('move_march', 'condition_centering_on_move')
 
     def setup_transitions(self):
         transitions = [
-            [self.machine.transition_start, self.machine.state_init, 'condition_centering_on_move'],
+            [self.machine.transition_start, self.machine.state_init,
+                'condition_centering_on_move'],
 
-            ['condition_f', 'condition_centering_on_move', 'condition_centering_on_move'],
+            ['condition_f', 'condition_centering_on_move',
+                'condition_centering_on_move'],
             ['condition_s', 'condition_centering_on_move', 'move_march'],
 
             [self.machine.transition_end, 'move_march', self.machine.state_end],

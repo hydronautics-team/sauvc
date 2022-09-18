@@ -19,14 +19,14 @@ class SAUVCController(AUVMissionsController):
                  test: bool,
                  qual: bool,
                  qual_stupid: bool,
-                 verbose: bool,
                  front_camera: str,
                  bottom_camera: str,
-                 depth_stabilization: bool,
-                 pitch_stabilization: bool,
-                 yaw_stabilization: bool,
-                 lag_stabilization: bool,
-                 reset_imu: bool,
+                 depth_stabilization: bool = False,
+                 pitch_stabilization: bool = False,
+                 yaw_stabilization: bool = False,
+                 lag_stabilization: bool = False,
+                 reset_imu: bool = False,
+                 verbose: bool = False,
                  ):
         self.test = test
         self.gate = gate
@@ -35,20 +35,12 @@ class SAUVCController(AUVMissionsController):
         self.qual = qual
         self.qual_stupid = qual_stupid
         self.test = test
-        self.verbose = verbose
 
         self.front_camera = front_camera
         self.bottom_camera = bottom_camera
-        self.depth_stabilization = depth_stabilization
-        self.pitch_stabilization = pitch_stabilization
-        self.yaw_stabilization = yaw_stabilization
-        self.lag_stabilization = lag_stabilization
-        self.reset_imu = reset_imu
-        self.auv = AUVControl(self.verbose)
 
-
-        super().__init__(self.front_camera, self.auv, self.depth_stabilization, self.pitch_stabilization, self.yaw_stabilization,
-                         self.lag_stabilization, self.reset_imu)
+        super().__init__(depth_stabilization, pitch_stabilization, yaw_stabilization,
+                         lag_stabilization, reset_imu, verbose)
 
     def setup_missions(self):
         self.add_init_mission()
@@ -57,9 +49,7 @@ class SAUVCController(AUVMissionsController):
             from sauvc_missions.test_mission import TestMission
             test_mission = TestMission(
                 TestMission.__name__,
-                self.front_camera,
-                self.bottom_camera,
-                auv=self.auv
+                self.auv
             )
             self.add_mission(test_mission)
 
@@ -67,8 +57,9 @@ class SAUVCController(AUVMissionsController):
             from sauvc_missions.qualification import QualificationMission
             qual_mission = QualificationMission(
                 QualificationMission.__name__,
+                self.auv,
                 self.front_camera,
-                auv=self.auv
+                verbose = self.verbose
             )
             self.add_mission(qual_mission)
 
@@ -76,19 +67,21 @@ class SAUVCController(AUVMissionsController):
             from sauvc_missions.qualification_stupid import QualificationStupidMission
             qual_stupid_mission = QualificationStupidMission(
                 QualificationStupidMission.__name__,
+                self.auv,
                 self.front_camera,
-                auv=self.auv
             )
             self.add_mission(qual_stupid_mission)
 
         if self.gate:
-            from sauvc_missions.gate import GateMission
+            from sauvc_missions.gate_on_move import GateMission
             gate_mission = GateMission(
                 GateMission.__name__,
+                self.auv,
                 self.front_camera,
                 self.bottom_camera,
                 rotate='left',
                 lag='left',
+                verbose = self.verbose
             )
             self.add_mission(gate_mission)
 
@@ -140,7 +133,6 @@ if __name__ == '__main__':
         test,
         qual,
         qual_stupid,
-        verbose,
         front_camera,
         bottom_camera,
         depth_stabilization,
@@ -148,5 +140,6 @@ if __name__ == '__main__':
         yaw_stabilization,
         lag_stabilization,
         reset_imu,
+        verbose,
     )
     controller.run()

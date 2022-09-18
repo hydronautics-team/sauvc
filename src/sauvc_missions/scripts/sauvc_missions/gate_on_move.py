@@ -1,11 +1,13 @@
 from sauvc_missions.sauvc_mission import SAUVCMission
 from stingray_tfsm.submachines.reach_on_move_submachine import ReachOnMoveSub
 from stingray_tfsm.core.pure_fsm import PureStateMachine
+from stingray_tfsm.auv_control import AUVControl
 
 
 class GateMission(SAUVCMission):
     def __init__(self,
                  name: str,
+                 auv: AUVControl,
                  front_camera: str,
                  bottom_camera: str,
                  target='gate',
@@ -13,32 +15,40 @@ class GateMission(SAUVCMission):
                  rotate='left',
                  lag='left',
                  ):
-        self.reach_sub = ReachOnMoveSub(PureStateMachine.construct_name('ReachGate', name), front_camera, target, avoid, rotate, lag)
-        super().__init__(name, front_camera, bottom_camera)
+        self.reach_sub = ReachOnMoveSub(
+            PureStateMachine.construct_name('ReachGate', name),
+            auv,
+            front_camera,
+            target,
+            avoid,
+            rotate,
+            lag)
+        super().__init__(name, auv, front_camera, bottom_camera)
 
     def setup_states(self):
-        return 'custom_reach_gate', 'custom_stub', 'move_march', 'move_stop', 
+        return 'custom_reach_gate', 'custom_stub', 'move_march', 'move_stop',
 
     def setup_transitions(self):
         return [
-            [self.machine.transition_start, [self.machine.state_init, ], 'custom_reach_gate'],
+            [self.machine.transition_start, [
+                self.machine.state_init, ], 'custom_reach_gate'],
 
             ['pass_through', 'custom_reach_gate', 'move_march'],
 
             [self.machine.transition_end, 'move_march', self.machine.state_end]
         ]
-    
+
     def prerun(self):
         self.enable_object_detection(self.front_camera, True)
         self.machine.auv.execute_dive_goal({
-                    'depth': 1700,
-                })
+            'depth': 1700,
+        })
         self.machine.auv.execute_move_goal({
-                    'march': 0.7,
-                    'lag': 0.0,
-                    'yaw': 0,
-                    'wait': 10
-                })
+            'march': 0.7,
+            'lag': 0.0,
+            'yaw': 0,
+            'wait': 10
+        })
 
     def setup_scene(self):
         return {
