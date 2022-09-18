@@ -61,7 +61,7 @@
     <arg name="TEST" default="False" />
     <arg name="VERBOSE" default="false" />
     <arg name="DEPTH_STABILIZATION" default="true" />
-    <arg name="PITCH_STABILIZATION" default="true" />
+    <arg name="PITCH_STABILIZATION" default="false" />
     <arg name="YAW_STABILIZATION" default="true" />
     <arg name="LAG_STABILIZATION" default="false" />
     <arg name="RESET_IMU" default="false" />
@@ -95,7 +95,7 @@
         <arg name="ROS_OUTPUT" value="$(arg ROS_OUTPUT)" />
         <arg name="SHOW" value="$(arg SHOW)" />
         <arg name="DEBUG" value="$(arg DEBUG)" />
-        <arg name="RECORD_RAW" value="$(arg RECORD_RAW)" />
+        <arg name="RECORD_RAW" value="false" />
         <arg name="RECORD_OUTPUT" value="$(arg RECORD_OUTPUT)" />
         <arg name="RECORD_DIR" value="$(arg RECORD_DIR)" />
     </include>

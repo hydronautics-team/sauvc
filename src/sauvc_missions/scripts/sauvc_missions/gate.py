@@ -17,7 +17,7 @@ class GateMission(SAUVCMission):
         super().__init__(name, front_camera, bottom_camera)
 
     def setup_states(self):
-        return 'custom_reach_gate', 'custom_stub', 'move_march', 'move_stop'
+        return 'custom_reach_gate', 'custom_stub', 'move_march', 'move_stop', 
 
     def setup_transitions(self):
         return [
@@ -27,11 +27,22 @@ class GateMission(SAUVCMission):
 
             ['finish', 'move_march', 'move_stop']
         ]
+    
+    def preparation(self):
+        self.machine.auv.execute_dive_goal({
+                    'depth': 1111,
+                })
+        self.machine.auv.execute_move_goal({
+                    'march': 0.7,
+                    'lag': 0.0,
+                    'yaw': 0,
+                    'wait': 10
+                })
 
     def setup_scene(self):
         return {
             self.machine.state_init: {
-                'preps': print,
+                'preps': self.preparation,
                 "args": (),
             },
             'custom_reach_gate': {
