@@ -1,61 +1,89 @@
+from stingray_tfsm.submachines.centering_on_move import CenteringOnMoveSub
+from stingray_object_detection.utils import get_objects_topic
+from stingray_tfsm.vision_events import ObjectDetectionEvent, ObjectIsCloseEvent
 from sauvc_missions.sauvc_mission import SAUVCMission
-from stingray_tfsm.submachines.reach_submachine import ReachSub
+from stingray_tfsm.auv_fsm import AUVStateMachine
+from stingray_tfsm.core.pure_fsm import PureStateMachine
+from stingray_tfsm.auv_control import AUVControl
+import rospy
 
 
-class FlareOnMoveMission(SAUVCMission):
+class FlareMission(SAUVCMission):
     def __init__(self,
                  name: str,
-                 front_camera: str,
-                 bottom_camera: str,
-                 target='yellow_flare',
-                 avoid=['red_flare', 'gate'],
-                 rotate='left',
-                 lag='left',
-                 speed: int = 800,
+                 auv: AUVControl,
+                 camera: str,
+                 target: str = 'yellow_flare',
+                 confirmation: int = 2,
+                 tolerance: int = 5,
+                 confidence: float = 0.3,
+                 verbose: bool = False,
                  ):
 
-        self.reach_sub = ReachSub(name + "_reach_flare", front_camera, target, avoid, rotate, lag, speed)
-        super().__init__(name, front_camera, bottom_camera)
+        self.camera = camera
+        self.target = target
+        self.tolerance = tolerance
+        self.confirmation = confirmation
+        self.confidence = confidence
+
+        self.centering_submachine = CenteringOnMoveSub(
+            PureStateMachine.construct_name('CenteringOnMove', name),
+            auv,
+            camera,
+            target,
+            tolerance=self.tolerance,
+            confirmation=self.confirmation,
+            confidence=self.confidence)
+
+        super().__init__(name, auv, camera, '')
 
     def setup_states(self):
-        return ('custom_reach_flare', 'move_march', 'move_stop')
+        return ('move_march', 'condition_centering_on_move')
 
     def setup_transitions(self):
-        return [
-            [self.machine.transition_start, [self.machine.state_init, ], 'custom_reach_flare'],
+        transitions = [
+            [self.machine.transition_start, self.machine.state_init,
+                'condition_centering_on_move'],
 
-            ['pass_through', 'custom_reach_flare', 'move_march'],
+            ['condition_f', 'condition_centering_on_move',
+                'condition_centering_on_move'],
+            ['condition_s', 'condition_centering_on_move', 'move_march'],
 
-            ['finish', 'move_march', 'move_stop']
+            [self.machine.transition_end, 'move_march', self.machine.state_end],
         ]
+        return transitions
+
+    def prerun(self):
+        self.enable_object_detection(self.front_camera, True)
+        self.machine.auv.execute_dive_goal({
+            'depth': 1700,
+        })
+        # self.machine.auv.execute_move_goal({
+        #     'march': 0.6,
+        #     'lag': 0.0,
+        #     'yaw': 0,
+        #     'wait': 15,
+        # })
 
     def setup_scene(self):
-        return {
+        scene = {
             self.machine.state_init: {
-                'preps': print,
+                'preps': self.prerun,
                 "args": (),
             },
-            'custom_reach_flare': {
+            'condition_centering_on_move': {
                 'subFSM': True,
-                'custom': self.reach_sub,
+                'condition': self.centering_submachine,
                 'args': ()
             },
             'move_march': {
-                'march': 1,
+                'march': 0.6,
                 'lag': 0.0,
                 'yaw': 0,
-                'wait': 0.5
-            },
-            'move_stop': {
-                'march': 0,
-                'lag': 0.0,
-                'yaw': 0,
-                'wait': 1
+                'wait': 5,
             },
         }
+        return scene
 
     def setup_events(self):
-        pass
-
-    def gate_event_handler(self):
         pass

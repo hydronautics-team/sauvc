@@ -60,11 +60,11 @@
     <arg name="QUAL_STUPID" default="False" />
     <arg name="TEST" default="False" />
     <arg name="VERBOSE" default="false" />
-    <arg name="DEPTH_STABILIZATION" default="false" />
-    <arg name="PITCH_STABILIZATION" default="false" />
+    <arg name="DEPTH_STABILIZATION" default="true" />
+    <arg name="PITCH_STABILIZATION" default="true" />
     <arg name="YAW_STABILIZATION" default="true" />
     <arg name="LAG_STABILIZATION" default="false" />
-    <arg name="RESET_IMU" default="true" />
+    <arg name="RESET_IMU" default="false" />
 
     <!-- FRONT CAMERA -->
     <include file="$(find stingray_startup)/launch/camera.launch">

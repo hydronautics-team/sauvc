@@ -86,13 +86,12 @@ class SAUVCController(AUVMissionsController):
             self.add_mission(gate_mission)
 
         if self.yellow_flare:
-            from sauvc_missions.yellow import FlareMission
+            from sauvc_missions.yellow_on_move import FlareMission
             flare_mission = FlareMission(
                 FlareMission.__name__,
+                self.auv,
                 self.front_camera,
-                self.bottom_camera,
-                rotate='right',
-                lag='right',
+                verbose = self.verbose
             )
             self.add_mission(flare_mission)
 

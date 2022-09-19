@@ -56,13 +56,13 @@ class QualificationMission(SAUVCMission):
     def prerun(self):
         self.enable_object_detection(self.front_camera, True)
         self.machine.auv.execute_dive_goal({
-            'depth': 1500,
+            'depth': 1200,
         })
         self.machine.auv.execute_move_goal({
-            'march': 0.5,
+            'march': 0.6,
             'lag': 0.0,
             'yaw': 0,
-            'wait': 3,
+            'wait': 15,
         })
 
     def setup_scene(self):

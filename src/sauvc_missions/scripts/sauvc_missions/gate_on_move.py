@@ -14,6 +14,7 @@ class GateMission(SAUVCMission):
                  avoid=['red_flare', ],
                  rotate='left',
                  lag='left',
+                 verbose: bool = False,
                  ):
         self.reach_sub = ReachOnMoveSub(
             PureStateMachine.construct_name('ReachGate', name),
@@ -22,7 +23,9 @@ class GateMission(SAUVCMission):
             target,
             avoid,
             rotate,
-            lag)
+            lag,
+            verbose=verbose
+            )
         super().__init__(name, auv, front_camera, bottom_camera)
 
     def setup_states(self):
@@ -41,13 +44,13 @@ class GateMission(SAUVCMission):
     def prerun(self):
         self.enable_object_detection(self.front_camera, True)
         self.machine.auv.execute_dive_goal({
-            'depth': 1700,
+            'depth': 1200,
         })
         self.machine.auv.execute_move_goal({
-            'march': 0.7,
+            'march': 0.6,
             'lag': 0.0,
             'yaw': 0,
-            'wait': 10
+            'wait': 5
         })
 
     def setup_scene(self):
@@ -62,10 +65,10 @@ class GateMission(SAUVCMission):
                 'args': ()
             },
             'move_march': {
-                'march': 1,
+                'march': 0.7,
                 'lag': 0.0,
                 'yaw': 0,
-                'wait': 0.5
+                'wait': 10
             },
         }
 
