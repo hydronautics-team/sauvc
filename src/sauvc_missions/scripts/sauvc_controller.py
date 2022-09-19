@@ -52,7 +52,7 @@ class SAUVCController(AUVMissionsController):
         self.add_init_mission()
 
         if self.test:
-            from sauvc_missions.test_mission import TestMission
+            from sauvc_missions.planar_test import TestMission
             test_mission = TestMission(
                 TestMission.__name__,
                 self.front_camera,
