@@ -49,10 +49,10 @@ class QualificationMission(SAUVCMission):
             'depth': 1500,
         })
         self.machine.auv.execute_move_goal({
-            'march': 1.0,
+            'march': 0.1,
             'lag': 0.0,
             'yaw': 0,
-            'wait': 25,
+            'wait': 0.5,
         })
 
     def setup_scene(self):

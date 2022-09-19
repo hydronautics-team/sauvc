@@ -12,13 +12,13 @@ class SAUVCMission(AUVMission):
                  name: str,
                  front_camera: str,
                  bottom_camera: str,
-                 auv: AUVControl,
                  gate="gate",
                  red_flare="red_flare",
                  yellow_flare="yellow_flare",
                  mat="mat",
                  blue_bowl="blue_bowl",
                  red_bowl="red_bowl",
+                 *args, **kwargs
                  ):
         """ Abstract class to implement AUV missions for SAUVC competitnion
 
@@ -45,4 +45,5 @@ class SAUVCMission(AUVMission):
         self.bottom_camera = bottom_camera
 
         self.confirmation = 5
-        super().__init__(name, auv)
+
+        super().__init__(name,)
