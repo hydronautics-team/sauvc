@@ -37,7 +37,7 @@ class GateMission(SAUVCMission):
                     'march': 0.7,
                     'lag': 0.0,
                     'yaw': 0,
-                    'wait': 10
+                    'wait': 0.2
                 })
 
     def setup_scene(self):

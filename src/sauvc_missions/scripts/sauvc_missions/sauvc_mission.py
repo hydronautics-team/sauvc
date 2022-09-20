@@ -46,4 +46,5 @@ class SAUVCMission(AUVMission):
         self.bottom_camera = bottom_camera
 
         self.confirmation = 5
-        super().__init__(name, auv)
+
+        super().__init__(name,)
