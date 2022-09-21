@@ -47,4 +47,4 @@ class SAUVCMission(AUVMission):
 
         self.confirmation = 5
 
-        super().__init__(name,)
+        super().__init__(name, auv)

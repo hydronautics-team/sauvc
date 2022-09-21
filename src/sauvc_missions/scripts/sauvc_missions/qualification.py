@@ -1,4 +1,4 @@
-from stingray_tfsm.submachines.centering_on_move import CenteringOnMoveSub
+from stingray_tfsm.submachines.centering_on_move import CenteringWithAvoidSub
 from stingray_object_detection.utils import get_objects_topic
 from stingray_tfsm.vision_events import ObjectDetectionEvent, ObjectIsCloseEvent
 from sauvc_missions.sauvc_mission import SAUVCMission
@@ -26,28 +26,27 @@ class QualificationMission(SAUVCMission):
         self.confirmation = confirmation
         self.confidence = confidence
 
-        self.centering_submachine = CenteringOnMoveSub(
+        self.centering_submachine = CenteringWithAvoidSub(
             PureStateMachine.construct_name('CenteringOnMove', name),
             auv,
             camera,
             target,
-            tolerance=self.tolerance,
-            confirmation=self.confirmation,
-            confidence=self.confidence)
+            confirmation,
+            tolerance,
+            confidence,
+            verbose,
+        )
 
         super().__init__(name, auv, camera, '')
 
     def setup_states(self):
-        return ('move_march', 'condition_centering_on_move')
+        return ('move_march', 'custom_centering_gate')
 
     def setup_transitions(self):
         transitions = [
-            [self.machine.transition_start, self.machine.state_init,
-                'condition_centering_on_move'],
+            [self.machine.transition_start, self.machine.state_init, 'custom_centering_gate'],
 
-            ['condition_f', 'condition_centering_on_move',
-                'condition_centering_on_move'],
-            ['condition_s', 'condition_centering_on_move', 'move_march'],
+            ['pass_through', 'custom_centering_gate', 'move_march'],
 
             [self.machine.transition_end, 'move_march', self.machine.state_end],
         ]
@@ -62,7 +61,7 @@ class QualificationMission(SAUVCMission):
             'march': 0.6,
             'lag': 0.0,
             'yaw': 0,
-            'wait': 15,
+            'wait': 5,
         })
 
     def setup_scene(self):
@@ -71,9 +70,9 @@ class QualificationMission(SAUVCMission):
                 'preps': self.prerun,
                 "args": (),
             },
-            'condition_centering_on_move': {
+            'custom_centering_gate': {
                 'subFSM': True,
-                'condition': self.centering_submachine,
+                'custom': self.centering_submachine,
                 'args': ()
             },
             'move_march': {
