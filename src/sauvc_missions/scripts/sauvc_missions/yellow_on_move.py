@@ -46,7 +46,10 @@ class FlareMission(SAUVCMission):
             target,
             tolerance=self.tolerance,
             confirmation=self.confirmation,
-            confidence=self.confidence)
+            confidence=self.confidence,
+            speed=0.5,
+            wait=3,
+            )
 
         super().__init__(name, auv, camera, '', verbose=verbose)
 
