@@ -1,16 +1,18 @@
 from sauvc_missions.sauvc_mission import SAUVCMission
 from stingray_tfsm.submachines.centering_planar import CenteringPlanarSub
+from stingray_tfsm.auv_control import AUVControl
 
 
 class TestMission(SAUVCMission):
     def __init__(self,
                  name: str,
-                 front_cam,
-                 camera: str,
+                 front_cam: str = None,
+                 camera: str = None,
                  *args,
                  **kwargs
                  ):
         self.camera = camera  # bottom
+
 
         self.planar_submachine = CenteringPlanarSub(
             'planar',
@@ -29,11 +31,17 @@ class TestMission(SAUVCMission):
                       ] + self.machine.default_transitions
         return transitions
 
+    def preparations(self, *args, **kwargs):
+        self.enable_object_detection(self.camera, True)
+        # self.machine.auv.execute_dive_goal({
+        #     'depth': 100
+        # })
+
     def setup_scene(self):
         scene = {
             self.machine.state_init: {
-                'preps': self.enable_object_detection,
-                "args": (self.camera, True),
+                'preps': self.preparations,
+                "args": (),
             },
             'custom_centering': {
                 'subFSM': True,
