@@ -15,7 +15,7 @@ class QualificationMission(SAUVCMission):
                  camera: str,
                  target: str = 'gate',
                  confirmation: int = 2,
-                 tolerance: int = 3,
+                 tolerance: int = 1,
                  confidence: float = 0.3,
                  verbose: bool = False,
                  ):
@@ -55,7 +55,7 @@ class QualificationMission(SAUVCMission):
     def prerun(self):
         self.enable_object_detection(self.front_camera, True)
         self.machine.auv.execute_dive_goal({
-            'depth': 800,
+            'depth': 1000,
         })
         self.machine.auv.execute_move_goal({
             'march': 1.0,
