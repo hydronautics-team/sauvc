@@ -45,15 +45,15 @@ class SAUVCController(AUVMissionsController):
     def setup_missions(self):
         self.add_init_mission()
 
-        if self.qual:
-            from sauvc_missions.devices_test import TestMission
+        if self.test:
+            from sauvc_missions.test_mission import TestMission
             test_mission = TestMission(
                 TestMission.__name__,
                 self.auv
             )
             self.add_mission(test_mission)
 
-        if self.test:
+        if self.qual:
             from sauvc_missions.qualification import QualificationMission
             qual_mission = QualificationMission(
                 QualificationMission.__name__,
