@@ -1,4 +1,4 @@
-from stingray_tfsm.submachines.centering_on_move import CenteringWithAvoidSub
+from stingray_tfsm.submachines.centering_on_move_qualification import CenteringWithAvoidSub
 from stingray_object_detection.utils import get_objects_topic
 from stingray_tfsm.vision_events import ObjectDetectionEvent, ObjectIsCloseEvent
 from sauvc_missions.sauvc_mission import SAUVCMission
@@ -15,7 +15,7 @@ class QualificationMission(SAUVCMission):
                  camera: str,
                  target: str = 'gate',
                  confirmation: int = 2,
-                 tolerance: int = 3,
+                 tolerance: int = 1,
                  confidence: float = 0.3,
                  verbose: bool = False,
                  ):
@@ -55,10 +55,10 @@ class QualificationMission(SAUVCMission):
     def prerun(self):
         self.enable_object_detection(self.front_camera, True)
         self.machine.auv.execute_dive_goal({
-            'depth': 1200,
+            'depth': 1000,
         })
         self.machine.auv.execute_move_goal({
-            'march': 0.6,
+            'march': 1.0,
             'lag': 0.0,
             'yaw': 0,
             'wait': 5,

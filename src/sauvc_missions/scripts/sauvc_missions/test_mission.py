@@ -24,6 +24,7 @@ class TestMission(SAUVCMission):
         return [
             [self.machine.transition_start, self.machine.state_init, 'dive_0'],
             ['step_0', 'dive_0', 'move_march_1'],
+            # ['step_11', 'move_march_1', 'move_march_1'],
             ['step_11', 'move_march_1', 'move_yaw_1'],
 
             ['step_21', 'move_yaw_1', 'move_march_2'],
@@ -53,52 +54,52 @@ class TestMission(SAUVCMission):
                 'march': 0.7,
                 'lag': 0.0,
                 'yaw': 0,
-                'wait': 4,
+                'wait': 3,
             },
             'move_yaw_1': {
                 'march': 0.0,
                 'lag': 0.0,
                 'yaw': 90,
-                'wait': 4,
+                'wait': 6,
                 # 'check_yaw': True
             },
             'move_march_2': {
                 'march': 0.7,
                 'lag': 0.0,
                 'yaw': 0,
-                'wait': 4,
+                'wait': 3,
             },
             'move_yaw_2': {
                 'march': 0.0,
                 'lag': 0.0,
                 'yaw': 90,
-                'wait': 4,
+                'wait': 6,
                 # 'check_yaw': True
             },
             'move_march_3': {
                 'march': 0.7,
                 'lag': 0.0,
                 'yaw': 0,
-                'wait': 4,
+                'wait': 3,
             },
             'move_yaw_3': {
                 'march': 0.0,
                 'lag': 0.0,
                 'yaw': 90,
-                'wait': 4,
+                'wait': 6,
                 # 'check_yaw': True
             },
             'move_march_4': {
                 'march': 0.7,
                 'lag': 0.0,
                 'yaw': 0,
-                'wait': 4,
+                'wait': 3,
             },
             'move_yaw_4': {
                 'march': 0.0,
                 'lag': 0.0,
                 'yaw': 90,
-                'wait': 4,
+                'wait': 6,
                 # 'check_yaw': True
             },
         }
