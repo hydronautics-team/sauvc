@@ -25,7 +25,7 @@ class QualificationStupidMission(SAUVCMission):
             'depth': 1100,
         })
         self.machine.auv.execute_move_goal({
-            'march': 1.0,
+            'march': 0.5,
             'lag': 0.0,
             'yaw': 0,
             'wait': 35,

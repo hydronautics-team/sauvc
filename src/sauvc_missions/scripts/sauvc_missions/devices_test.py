@@ -15,11 +15,12 @@ class TestMission(SAUVCMission):
         super().__init__(name, camera, '')
 
     def setup_states(self):
-        return 'custom_lower', 'custom_lift', 'custom_drop'
+        return 'custom_lower', 'custom_lift', 'custom_dropper_open', 'custom_dropper_close'
 
     def setup_transitions(self):
         transitions = [
-            [self.machine.transition_start, [self.machine.state_init, ], 'custom_lower'],
+            [self.machine.transition_start, [self.machine.state_init, "custom_dropper_close"], 'custom_dropper_open'],
+            ['dropper_close', 'custom_dropper_open', 'custom_dropper_close'],
             ['grab', 'custom_lower', 'custom_lift'],
             ['drop', 'custom_lift', 'custom_drop'],
         ]
@@ -33,7 +34,10 @@ class TestMission(SAUVCMission):
         )
 
     def drop(self):
-        self.machine.auv.execute_dropper_goal()
+        self.machine.auv.execute_dropper_goal(velocity=100)
+
+    def dropper_close(self):
+        self.machine.auv.execute_dropper_goal(velocity=0)
 
     def lower(self):
         self.machine.auv.execute_lifter_goal(
@@ -51,10 +55,13 @@ class TestMission(SAUVCMission):
             'custom_lift': {
                 'custom': self.lift,
                 'args': ()
-
             },
-            'custom_drop': {
+            'custom_dropper_open': {
                 'custom': self.drop,
+                'args': ()
+            },
+            'custom_dropper_close': {
+                'custom': self.dropper_close,
                 'args': ()
             },
             'custom_lower': {
