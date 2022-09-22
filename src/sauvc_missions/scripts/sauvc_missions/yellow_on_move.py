@@ -1,4 +1,5 @@
-from stingray_tfsm.submachines.centering_on_move import CenteringOnMoveSub
+from stingray_tfsm.submachines.centering_on_move import CenteringWithAvoidSub
+from stingray_tfsm.submachines.search_submachine import SearchSub
 from stingray_object_detection.utils import get_objects_topic
 from stingray_tfsm.vision_events import ObjectDetectionEvent, ObjectIsCloseEvent
 from sauvc_missions.sauvc_mission import SAUVCMission
@@ -18,6 +19,7 @@ class FlareMission(SAUVCMission):
                  tolerance: int = 5,
                  confidence: float = 0.3,
                  verbose: bool = False,
+                 rotate='left',
                  ):
 
         self.camera = camera
@@ -26,7 +28,18 @@ class FlareMission(SAUVCMission):
         self.confirmation = confirmation
         self.confidence = confidence
 
-        self.centering_submachine = CenteringOnMoveSub(
+        self.search_submachine = SearchSub(
+            PureStateMachine.construct_name('SearchFlare', name),
+            auv,
+            camera,
+            target,
+            tolerance=self.tolerance,
+            confirmation=self.confirmation,
+            confidence=self.confidence,
+            rotate='right',
+            )
+
+        self.centering_submachine = CenteringWithAvoidSub(
             PureStateMachine.construct_name('CenteringOnMove', name),
             auv,
             camera,
@@ -35,19 +48,24 @@ class FlareMission(SAUVCMission):
             confirmation=self.confirmation,
             confidence=self.confidence)
 
-        super().__init__(name, auv, camera, '')
+        super().__init__(name, auv, camera, '', verbose=verbose)
 
     def setup_states(self):
-        return ('move_march', 'condition_centering_on_move')
+        return ('move_march', 'condition_search_yellow_flare', 'condition_centering_yellow_flare')
 
     def setup_transitions(self):
         transitions = [
             [self.machine.transition_start, self.machine.state_init,
-                'condition_centering_on_move'],
+                'condition_search_yellow_flare'],
 
-            ['condition_f', 'condition_centering_on_move',
-                'condition_centering_on_move'],
-            ['condition_s', 'condition_centering_on_move', 'move_march'],
+            ['condition_f', 'condition_search_yellow_flare',
+                self.machine.state_aborted],
+            ['condition_s', 'condition_search_yellow_flare',
+                'condition_centering_yellow_flare'],
+
+            ['condition_f', 'condition_centering_yellow_flare',
+                'condition_centering_yellow_flare'],
+            ['condition_s', 'condition_centering_yellow_flare', 'move_march'],
 
             [self.machine.transition_end, 'move_march', self.machine.state_end],
         ]
@@ -56,7 +74,7 @@ class FlareMission(SAUVCMission):
     def prerun(self):
         self.enable_object_detection(self.front_camera, True)
         self.machine.auv.execute_dive_goal({
-            'depth': 1700,
+            'depth': 800,
         })
         # self.machine.auv.execute_move_goal({
         #     'march': 0.6,
@@ -71,7 +89,12 @@ class FlareMission(SAUVCMission):
                 'preps': self.prerun,
                 "args": (),
             },
-            'condition_centering_on_move': {
+            'condition_search_yellow_flare': {
+                'subFSM': True,
+                'condition': self.search_submachine,
+                'args': ()
+            },
+            'condition_centering_yellow_flare': {
                 'subFSM': True,
                 'condition': self.centering_submachine,
                 'args': ()

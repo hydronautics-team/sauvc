@@ -1,6 +1,5 @@
 from sauvc_missions.sauvc_mission import SAUVCMission
 from stingray_tfsm.submachines.centering_on_move import CenteringWithAvoidSub
-from stingray_tfsm.submachines.reach_on_move import ReachSub
 from stingray_tfsm.core.pure_fsm import PureStateMachine
 from stingray_tfsm.auv_control import AUVControl
 
@@ -20,6 +19,8 @@ class GateMission(SAUVCMission):
                  avoid_confidence: float = 0.3,
                  verbose: bool = False,
                  ):
+        self.camera = camera
+        
         self.centering_gate_sub = CenteringWithAvoidSub(
             PureStateMachine.construct_name('CenteringAvoid', name),
             auv,

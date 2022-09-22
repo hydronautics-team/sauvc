@@ -79,8 +79,6 @@ class SAUVCController(AUVMissionsController):
                 self.auv,
                 self.front_camera,
                 self.bottom_camera,
-                rotate='left',
-                lag='left',
                 verbose = self.verbose
             )
             self.add_mission(gate_mission)
@@ -91,6 +89,7 @@ class SAUVCController(AUVMissionsController):
                 FlareMission.__name__,
                 self.auv,
                 self.front_camera,
+                rotate='right',
                 verbose = self.verbose
             )
             self.add_mission(flare_mission)
