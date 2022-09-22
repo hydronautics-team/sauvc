@@ -15,14 +15,14 @@ class TestMission(SAUVCMission):
         super().__init__(name, camera, '')
 
     def setup_states(self):
-        return 'custom_lower', 'custom_lift', 'custom_dropper_open', 'custom_dropper_close'
+        return 'custom_lower', 'custom_lift', 'custom_dropper_open', 'custom_dropper_close', 'custom_FUCK'
 
     def setup_transitions(self):
         transitions = [
-            [self.machine.transition_start, [self.machine.state_init, "custom_dropper_close"], 'custom_dropper_open'],
-            ['dropper_close', 'custom_dropper_open', 'custom_dropper_close'],
-            ['grab', 'custom_lower', 'custom_lift'],
-            ['drop', 'custom_lift', 'custom_drop'],
+            [self.machine.transition_start, [self.machine.state_init], 'custom_FUCK'],
+            # ['dropper_close', 'custom_dropper_open', 'custom_dropper_close'],
+            # ['grab', 'custom_lower', 'custom_lift'],
+            # ['drop', 'custom_lift', 'custom_drop'],
         ]
         return transitions
 
@@ -47,13 +47,16 @@ class TestMission(SAUVCMission):
             }
         )
 
+    def ya_ebu(self):
+        self.machine.auv.execute_FUCKING_RANDOM_GOAL()
+
     def setup_scene(self):
         scene = {
             self.machine.state_init: {
                 'wait': 1
             },
-            'custom_lift': {
-                'custom': self.lift,
+            'custom_FUCK': {
+                'custom': self.ya_ebu,
                 'args': ()
             },
             'custom_dropper_open': {

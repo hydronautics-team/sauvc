@@ -45,23 +45,25 @@ class SAUVCController(AUVMissionsController):
     def setup_missions(self):
         self.add_init_mission()
 
-        if self.qual:
-            from sauvc_missions.devices_test import TestMission
-            test_mission = TestMission(
-                TestMission.__name__,
-                self.auv
-            )
-            self.add_mission(test_mission)
-
         if self.test:
+            from sauvc_missions.devices_test import TestMission
+            qual_mission = TestMission(
+                TestMission.__name__,
+                self.auv,
+                self.bottom_camera,
+                verbose=self.verbose
+            )
+            self.add_mission(qual_mission)
+
+        if self.qual:
             from sauvc_missions.qualification import QualificationMission
-            qual_mission = QualificationMission(
+            test_mission = QualificationMission(
                 QualificationMission.__name__,
                 self.auv,
                 self.front_camera,
-                verbose = self.verbose
+
             )
-            self.add_mission(qual_mission)
+            self.add_mission(test_mission)
 
         if self.qual_stupid:
             from sauvc_missions.qualification_stupid import QualificationStupidMission
