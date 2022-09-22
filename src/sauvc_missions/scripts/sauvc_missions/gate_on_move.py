@@ -12,7 +12,7 @@ class GateMission(SAUVCMission):
                  target: str = 'gate',
                  confirmation: int = 2,
                  tolerance: int = 20,
-                 confidence: float = 0.5,
+                 confidence: float = 0.3,
                  avoid: str = 'red_flare',
                  avoid_confirmation: int = 2,
                  avoid_tolerance: int = 20,
@@ -34,7 +34,7 @@ class GateMission(SAUVCMission):
             avoid_tolerance,
             avoid_confidence,
             verbose,
-            speed=0.5
+            speed=0.3
         )
         super().__init__(name, auv, camera, '')
 
@@ -56,7 +56,7 @@ class GateMission(SAUVCMission):
             'depth': 800,
         })
         self.machine.auv.execute_move_goal({
-            'march': 0.6,
+            'march': 0.3,
             'lag': 0.0,
             'yaw': 0,
             'wait': 5
@@ -77,12 +77,10 @@ class GateMission(SAUVCMission):
                 'march': 0.7,
                 'lag': 0.0,
                 'yaw': 0,
-                'wait': 10
+                'wait': 5
             },
         }
 
     def setup_events(self):
         pass
 
-    def gate_event_handler(self):
-        pass

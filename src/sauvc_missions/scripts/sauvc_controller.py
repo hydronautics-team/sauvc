@@ -78,7 +78,6 @@ class SAUVCController(AUVMissionsController):
                 GateMission.__name__,
                 self.auv,
                 self.front_camera,
-                self.bottom_camera,
                 verbose = self.verbose
             )
             self.add_mission(gate_mission)
