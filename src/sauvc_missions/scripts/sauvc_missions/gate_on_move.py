@@ -34,7 +34,9 @@ class GateMission(SAUVCMission):
             avoid_tolerance,
             avoid_confidence,
             verbose,
-            speed=0.3
+            wait=3,
+            speed=0.3,
+            lag='left'
         )
         super().__init__(name, auv, camera, '')
 
