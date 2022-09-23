@@ -22,7 +22,7 @@ class QualificationStupidMission(SAUVCMission):
 
     def run_qual(self):
         self.machine.auv.execute_dive_goal({
-            'depth': 1100,
+            'depth': 800,
         })
         self.machine.auv.execute_move_goal({
             'march': 0.5,

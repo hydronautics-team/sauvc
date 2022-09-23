@@ -34,14 +34,15 @@ class GateMission(SAUVCMission):
             avoid_tolerance,
             avoid_confidence,
             verbose,
-            wait=3,
+            wait=2,
             speed=0.3,
-            lag='left'
+            lag='right',
+            is_big_value=0.5,
         )
         super().__init__(name, auv, camera, '')
 
     def setup_states(self):
-        return ['custom_centering_gate', 'move_march']
+        return ['custom_centering_gate', 'move_march', 'custom_stop']
 
     def setup_transitions(self):
         return [
@@ -49,7 +50,9 @@ class GateMission(SAUVCMission):
 
             ['pass_through', 'custom_centering_gate', 'move_march'],
 
-            [self.machine.transition_end, 'move_march', self.machine.state_end]
+            ['go_gate', 'move_march', 'custom_stop'],
+
+            [self.machine.transition_end, 'custom_stop', self.machine.state_end],
         ]
 
     def prerun(self):
@@ -80,6 +83,10 @@ class GateMission(SAUVCMission):
                 'lag': 0.0,
                 'yaw': 0,
                 'wait': 5
+            },
+            'custom_stop': {
+                'custom': self.machine.auv.execute_stop_goal,
+                'args': ()
             },
         }
 
