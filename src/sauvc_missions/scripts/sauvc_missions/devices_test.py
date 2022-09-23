@@ -19,7 +19,8 @@ class TestMission(SAUVCMission):
 
     def setup_transitions(self):
         transitions = [
-            [self.machine.transition_start, [self.machine.state_init], 'custom_dropper_open'],
+            [self.machine.transition_start, [self.machine.state_init], 'custom_FUCK'],
+            ['FFFFFF', 'custom_FUCK', 'custom_dropper_open'],
              ['dropper_close', 'custom_dropper_open', 'custom_dropper_close'],
              ['grab', 'custom_lower', 'custom_lift'],
              ['drop', 'custom_lift', 'custom_drop'],
@@ -55,10 +56,10 @@ class TestMission(SAUVCMission):
             self.machine.state_init: {
                 'wait': 1
             },
-            #'custom_FUCK': {
-            #    'custom': self.ya_ebu,
-            #    'args': ()
-            #},
+            'custom_FUCK': {
+                'custom': self.ya_ebu,
+                'args': ()
+            },
             'custom_dropper_open': {
                 'custom': self.drop,
                 'args': ()

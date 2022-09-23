@@ -53,7 +53,7 @@ class SAUVCController(AUVMissionsController):
                 self.bottom_camera,
                 verbose=self.verbose
             )
-            self.add_mission(qual_mission)
+            # self.add_mission(qual_mission)
 
         if self.qual:
             from sauvc_missions.qualification import QualificationMission
