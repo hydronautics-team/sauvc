@@ -7,9 +7,6 @@ class TestMission(SAUVCMission):
                  name: str,
                  front_cam: str = None,
                  camera: str = None,
-                 simulation=True,
-                 *args,
-                 **kwargs
                  ):
         self.camera = camera  # bottom
 
@@ -17,7 +14,6 @@ class TestMission(SAUVCMission):
             'planar',
             camera,  # bottom needed
             'red_bowl',
-            simulation=simulation
             )
 
         super().__init__(name, front_cam, camera)
