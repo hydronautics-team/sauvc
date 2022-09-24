@@ -45,7 +45,7 @@ class DrumsMission(SAUVCMission):
         self.centering_submachine = CenteringWithAvoidSub(
             PureStateMachine.construct_name('CenteringOnMove', name),
             auv,
-            bottom_camera,
+            camera,
             target,
             confirmation,
             tolerance,
@@ -58,7 +58,7 @@ class DrumsMission(SAUVCMission):
 
         self.centering_bottom_submachine = CenteringPlanarSub(
             'planar',
-            camera,  # bottom needed
+            bottom_camera,  # bottom needed
             'blue_bowl',
             auv=auv,
             )
@@ -66,7 +66,7 @@ class DrumsMission(SAUVCMission):
         super().__init__(name, auv, camera, '', verbose=verbose)
 
     def setup_states(self):
-        return ('move_march', 'condition_search_drums', 'condition_centering_drums', 'custom_stop', 'custom_centering')
+        return ('move_march', 'condition_search_drums', 'condition_centering_drums', 'custom_stop', 'custom_centering', 'custom_drop')
 
     def setup_transitions(self):
         transitions = [
@@ -76,15 +76,44 @@ class DrumsMission(SAUVCMission):
             ['condition_s', 'condition_search_drums', 'condition_centering_drums'],
 
             ['condition_f', 'condition_centering_drums', 'condition_centering_drums'],
-            ['condition_s', 'condition_centering_drums', 'custom_stop'],
+            ['condition_s', 'condition_centering_drums', 'move_march'],
 
-            ['go_centering', 'custom_stop', 'custom_centering'],
+            ['go_centering', 'move_march', 'custom_drop'],
 
-            [self.machine.transition_end, 'custom_centering', self.machine.state_end],
+            [self.machine.transition_end, 'custom_drop', self.machine.state_end],
         ]
         return transitions
+    
+    def drop(self):
+        self.machine.auv.execute_dropper_goal()
+
+    def dropper_close(self):
+        self.machine.auv.execute_dropper_goal(velocity=0)
+    
+    def lift(self):
+        self.machine.auv.execute_lifter_goal(
+            {
+                "lift": True,
+            }
+        )
+    
+    def lower(self):
+        self.machine.auv.execute_lifter_goal(
+            {
+                "lift": True,
+                "wait": 2
+            }
+        )
 
     def prerun(self):
+        self.lower()
+        rospy.sleep(5)
+        self.lift()
+        rospy.sleep(5)
+
+        self.drop()
+        rospy.sleep(5)
+        self.dropper_close()
         self.enable_object_detection(self.front_camera, True)
         self.machine.auv.execute_dive_goal({
             'depth': 600,
@@ -119,7 +148,7 @@ class DrumsMission(SAUVCMission):
                 'args': ()
             },
             'move_march': {
-                'march': 0.6,
+                'march': 0.2,
                 'lag': 0.0,
                 'yaw': 0,
                 'wait': 5,
@@ -128,9 +157,13 @@ class DrumsMission(SAUVCMission):
                 'custom': self.machine.auv.execute_stop_goal,
                 'args': ()
             },
+            'custom_drop': {
+                'custom': self.drop,
+                'args': ()
+            },
             'custom_centering': {
                 'subFSM': True,
-                'condition': self.centering_bottom_submachine,
+                'custom': self.centering_bottom_submachine,
                 'args': ()
             },
         }

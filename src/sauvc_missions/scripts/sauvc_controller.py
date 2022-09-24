@@ -96,9 +96,10 @@ class SAUVCController(AUVMissionsController):
             self.add_mission(flare_mission)
 
         if self.drums:
-            from sauvc_missions.drums import DrumsMission
+            from sauvc_missions.drums_on_move import DrumsMission
             drums_mission = DrumsMission(
                 DrumsMission.__name__,
+                self.auv,
                 self.front_camera,
                 self.bottom_camera
             )
