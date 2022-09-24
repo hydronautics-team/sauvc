@@ -22,6 +22,8 @@ class DrumsMission(SAUVCMission):
                  confidence: float = 0.3,
                  rotate='left',
                  verbose: bool = False,
+                 chit_angle: int = 45,
+                 chit_wait: int = 2,
                  ):
 
         self.camera = camera
@@ -30,6 +32,8 @@ class DrumsMission(SAUVCMission):
         self.tolerance = tolerance
         self.confirmation = confirmation
         self.confidence = confidence
+        self.chit_angle = chit_angle
+        self.chit_wait = chit_wait
 
         self.search_submachine = SearchSub(
             PureStateMachine.construct_name('SearchMat', name),
@@ -116,14 +120,14 @@ class DrumsMission(SAUVCMission):
         self.machine.auv.execute_move_goal({
             'march': 0.0,
             'lag': 0.0,
-            'yaw': -70,
+            'yaw': self.chit_angle,
             'wait': 2,
         })
         self.machine.auv.execute_move_goal({
             'march': 0.6,
             'lag': 0.0,
             'yaw': 0,
-            'wait': 5,
+            'wait': self.chit_wait,
         })
 
     def setup_scene(self):

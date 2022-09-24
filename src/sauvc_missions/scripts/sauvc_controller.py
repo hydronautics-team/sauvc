@@ -81,7 +81,7 @@ class SAUVCController(AUVMissionsController):
                 self.auv,
                 self.front_camera,
                 self.bottom_camera,
-                verbose = self.verbose
+                verbose=self.verbose
             )
             self.add_mission(gate_mission)
 
@@ -91,7 +91,10 @@ class SAUVCController(AUVMissionsController):
                 FlareMission.__name__,
                 self.auv,
                 self.front_camera,
-                verbose = self.verbose
+                verbose=self.verbose,
+                rotate='left',
+                chit_angle=60,
+                chit_wait=10
             )
             self.add_mission(flare_mission)
 
@@ -101,7 +104,10 @@ class SAUVCController(AUVMissionsController):
                 DrumsMission.__name__,
                 self.auv,
                 self.front_camera,
-                self.bottom_camera
+                self.bottom_camera,
+                rotate='left',
+                chit_angle=-90,
+                chit_wait=10
             )
             self.add_mission(drums_mission)
 
