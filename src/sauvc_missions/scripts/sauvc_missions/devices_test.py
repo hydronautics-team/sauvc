@@ -35,7 +35,7 @@ class TestMission(SAUVCMission):
         )
 
     def drop(self):
-        self.machine.auv.execute_dropper_goal(velocity=100)
+        self.machine.auv.execute_dropper_goal()
 
     def dropper_close(self):
         self.machine.auv.execute_dropper_goal(velocity=0)
