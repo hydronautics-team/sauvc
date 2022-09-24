@@ -108,6 +108,10 @@
         <arg name="DEBUG" value="$(arg DEBUG)" />
     </include>
 
+    <include file="$(find marker_finder)/launch/marker_finder.launch">
+        <arg name="CAMERA" value="$(arg BOTTOM_CAMERA_TOPIC)">
+    </include>
+
     <!-- MAIN -->
     <include file="$(find stingray_startup)/launch/main.launch">
         <arg name="ROS_OUTPUT" value="$(arg ROS_OUTPUT)" />
