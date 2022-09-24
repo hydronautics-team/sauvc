@@ -80,7 +80,9 @@ class DrumsMission(SAUVCMission):
                 'condition_centering_drums'],
             ['condition_s', 'condition_centering_drums', 'move_march'],
 
-            ['go_drop', 'move_march', 'custom_drop'],
+            ['go_centering', 'move_march', 'custom_centering'],
+
+            ['go_drop', 'custom_centering', 'custom_drop'],
 
             ['go_back', 'custom_drop', 'move_back'],
 
