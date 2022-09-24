@@ -16,7 +16,7 @@ class FlareMission(SAUVCMission):
                  camera: str,
                  target: str = 'yellow_flare',
                  confirmation: int = 2,
-                 tolerance: int = 5,
+                 tolerance: int = 10,
                  confidence: float = 0.3,
                  rotate='right',
                  verbose: bool = False,
@@ -40,15 +40,16 @@ class FlareMission(SAUVCMission):
         )
 
         self.centering_submachine = CenteringWithAvoidSub(
-            PureStateMachine.construct_name('CenteringOnMove', name),
+            PureStateMachine.construct_name('CenteringOnMoveFlare', name),
             auv,
             camera,
             target,
+            confirmation,
             tolerance,
             confidence,
             verbose=verbose,
-            wait=1,
-            speed=0.5,
+            wait=3,
+            speed=0.3,
             is_big_h=0.5,
             is_big_method='height',
         )
@@ -75,14 +76,20 @@ class FlareMission(SAUVCMission):
     def prerun(self):
         self.enable_object_detection(self.front_camera, True)
         self.machine.auv.execute_dive_goal({
-            'depth': 1100,
+            'depth': 800,
         })
-        # self.machine.auv.execute_move_goal({
-        #     'march': 0.6,
-        #     'lag': 0.0,
-        #     'yaw': 0,
-        #     'wait': 15,
-        # })
+        self.machine.auv.execute_move_goal({
+            'march': 0.0,
+            'lag': 0.0,
+            'yaw': -90,
+            'wait': 2,
+        })
+        self.machine.auv.execute_move_goal({
+            'march': 0.6,
+            'lag': 0.0,
+            'yaw': 0,
+            'wait': 2,
+        })
 
     def setup_scene(self):
         scene = {
@@ -92,7 +99,7 @@ class FlareMission(SAUVCMission):
             },
             'custom_search_yellow_flare': {
                 'subFSM': True,
-                'condition': self.search_submachine,
+                'custom': self.search_submachine,
                 'args': ()
             },
             'custom_centering_yellow_flare': {

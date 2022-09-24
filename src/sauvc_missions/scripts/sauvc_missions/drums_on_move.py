@@ -32,7 +32,7 @@ class DrumsMission(SAUVCMission):
             PureStateMachine.construct_name('SearchMat', name),
             auv,
             camera,
-            "mat",
+            "blue_bowl",
             tolerance=self.tolerance,
             confirmation=self.confirmation,
             confidence=self.confidence,
@@ -44,12 +44,13 @@ class DrumsMission(SAUVCMission):
             auv,
             camera,
             target,
+            confirmation,
             tolerance,
             confidence,
             verbose=verbose,
-            wait=1,
-            speed=0.3,
-            is_big_w=0.5,
+            wait=4,
+            speed=0.2,
+            is_big_w=0.2,
             )
 
         super().__init__(name, auv, camera, '', verbose=verbose)
@@ -65,7 +66,7 @@ class DrumsMission(SAUVCMission):
             ['condition_s', 'condition_search_drums', 'condition_centering_drums'],
 
             ['condition_f', 'condition_centering_drums', 'condition_centering_drums'],
-            ['condition_s', 'condition_centering_drums', 'move_march'],
+            ['condition_s', 'condition_centering_drums', 'custom_stop'],
 
             ['go_yellow', 'move_march', 'custom_stop'],
 
@@ -76,14 +77,20 @@ class DrumsMission(SAUVCMission):
     def prerun(self):
         self.enable_object_detection(self.front_camera, True)
         self.machine.auv.execute_dive_goal({
-            'depth': 1100,
+            'depth': 800,
         })
-        # self.machine.auv.execute_move_goal({
-        #     'march': 0.6,
-        #     'lag': 0.0,
-        #     'yaw': 0,
-        #     'wait': 15,
-        # })
+        self.machine.auv.execute_move_goal({
+            'march': 0.0,
+            'lag': 0.0,
+            'yaw': -70,
+            'wait': 2,
+        })
+        self.machine.auv.execute_move_goal({
+            'march': 0.6,
+            'lag': 0.0,
+            'yaw': 0,
+            'wait': 5,
+        })
 
     def setup_scene(self):
         scene = {

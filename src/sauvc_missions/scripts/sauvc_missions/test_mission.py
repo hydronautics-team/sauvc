@@ -46,7 +46,7 @@ class TestMission(SAUVCMission):
                 'time': 2,
             },
             'dive_0': {
-                'depth': 600,
+                'depth': 1800,
                 'check_depth': True
 
             },
@@ -54,7 +54,7 @@ class TestMission(SAUVCMission):
                 'march': 0.7,
                 'lag': 0.0,
                 'yaw': 0,
-                'wait': 3,
+                'wait': 45,
             },
             'move_yaw_1': {
                 'march': 0.0,
@@ -67,7 +67,7 @@ class TestMission(SAUVCMission):
                 'march': 0.7,
                 'lag': 0.0,
                 'yaw': 0,
-                'wait': 3,
+                'wait': 30,
             },
             'move_yaw_2': {
                 'march': 0.0,
@@ -80,7 +80,7 @@ class TestMission(SAUVCMission):
                 'march': 0.7,
                 'lag': 0.0,
                 'yaw': 0,
-                'wait': 3,
+                'wait': 15,
             },
             'move_yaw_3': {
                 'march': 0.0,
@@ -93,7 +93,7 @@ class TestMission(SAUVCMission):
                 'march': 0.7,
                 'lag': 0.0,
                 'yaw': 0,
-                'wait': 3,
+                'wait': 30,
             },
             'move_yaw_4': {
                 'march': 0.0,

@@ -35,7 +35,7 @@ class GateMission(SAUVCMission):
             avoid_confidence,
             verbose,
             wait=2,
-            speed=0.5,
+            speed=0.3,
             lag='left',
             is_big_h=0.5,
             is_big_h_avoid=0.3,
@@ -67,7 +67,7 @@ class GateMission(SAUVCMission):
             'march': 0.5,
             'lag': 0.0,
             'yaw': 0,
-            'wait': 3
+            'wait': 1
         })
 
     def setup_scene(self):

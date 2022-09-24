@@ -46,12 +46,10 @@ class SAUVCController(AUVMissionsController):
         self.add_init_mission()
 
         if self.test:
-            from sauvc_missions.devices_test import TestMission
+            from sauvc_missions.test_mission import TestMission
             qual_mission = TestMission(
                 TestMission.__name__,
                 self.auv,
-                self.bottom_camera,
-                verbose=self.verbose
             )
             self.add_mission(qual_mission)
 
