@@ -12,7 +12,7 @@ class GateMission(SAUVCMission):
                  target: str = 'gate',
                  confirmation: int = 2,
                  tolerance: int = 20,
-                 confidence: float = 0.5,
+                 confidence: float = 0.3,
                  avoid: str = 'red_flare',
                  avoid_confirmation: int = 2,
                  avoid_tolerance: int = 20,
@@ -34,12 +34,18 @@ class GateMission(SAUVCMission):
             avoid_tolerance,
             avoid_confidence,
             verbose,
-            speed=0.5
+            wait=2,
+            speed=0.3,
+            lag='left',
+            is_big_h=0.5,
+            is_big_h_avoid=0.3,
+            is_big_method='height',
+            is_big_method_avoid='height',
         )
         super().__init__(name, auv, camera, '')
 
     def setup_states(self):
-        return ['custom_centering_gate', 'move_march']
+        return ['custom_centering_gate', 'move_march', 'custom_stop']
 
     def setup_transitions(self):
         return [
@@ -47,7 +53,9 @@ class GateMission(SAUVCMission):
 
             ['pass_through', 'custom_centering_gate', 'move_march'],
 
-            [self.machine.transition_end, 'move_march', self.machine.state_end]
+            ['go_gate', 'move_march', 'custom_stop'],
+
+            [self.machine.transition_end, 'custom_stop', self.machine.state_end],
         ]
 
     def prerun(self):
@@ -56,10 +64,10 @@ class GateMission(SAUVCMission):
             'depth': 800,
         })
         self.machine.auv.execute_move_goal({
-            'march': 0.6,
+            'march': 0.5,
             'lag': 0.0,
             'yaw': 0,
-            'wait': 5
+            'wait': 1
         })
 
     def setup_scene(self):
@@ -77,12 +85,14 @@ class GateMission(SAUVCMission):
                 'march': 0.7,
                 'lag': 0.0,
                 'yaw': 0,
-                'wait': 10
+                'wait': 5
+            },
+            'custom_stop': {
+                'custom': self.machine.auv.execute_stop_goal,
+                'args': ()
             },
         }
 
     def setup_events(self):
         pass
 
-    def gate_event_handler(self):
-        pass

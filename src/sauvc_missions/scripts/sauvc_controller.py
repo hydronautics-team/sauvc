@@ -46,12 +46,10 @@ class SAUVCController(AUVMissionsController):
         self.add_init_mission()
 
         if self.test:
-            from sauvc_missions.devices_test import TestMission
+            from sauvc_missions.test_mission import TestMission
             qual_mission = TestMission(
                 TestMission.__name__,
                 self.auv,
-                self.bottom_camera,
-                verbose=self.verbose
             )
             # self.add_mission(qual_mission)
 
@@ -80,10 +78,7 @@ class SAUVCController(AUVMissionsController):
                 GateMission.__name__,
                 self.auv,
                 self.front_camera,
-                self.bottom_camera,
-                rotate='left',
-                lag='left',
-                verbose = self.verbose
+                verbose=self.verbose
             )
             self.add_mission(gate_mission)
 
@@ -93,16 +88,19 @@ class SAUVCController(AUVMissionsController):
                 FlareMission.__name__,
                 self.auv,
                 self.front_camera,
-                verbose = self.verbose
+                rotate='right',
+                verbose=self.verbose
             )
             self.add_mission(flare_mission)
 
         if self.drums:
-            from sauvc_missions.drums import DrumsMission
+            from sauvc_missions.drums_on_move import DrumsMission
             drums_mission = DrumsMission(
                 DrumsMission.__name__,
+                self.auv,
                 self.front_camera,
-                self.bottom_camera
+                rotate='left',
+                verbose=self.verbose
             )
             self.add_mission(drums_mission)
 

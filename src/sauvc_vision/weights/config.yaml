@@ -14,5 +14,5 @@ val: eval/images  # val images (relative to 'path') 128 images
 test:  test/images # test images (optional)
 
 # Classes
-nc: 6  # number of classes
-names: ['gate','red_flare','yellow_flare','mat','red_bowl','blue_bowl']  # class names
+nc: 7  # number of classes
+names: ['gate','red_flare','yellow_flare','mat','red_bowl','blue_bowl', 'gate_qualification']  # class names
