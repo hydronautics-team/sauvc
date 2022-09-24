@@ -51,10 +51,9 @@ class SAUVCController(AUVMissionsController):
                 TestMission.__name__,
                 self.auv,
                 self.bottom_camera,
-                verbose=self.verbose,
-                simulation=True
+                verbose=self.verbose
             )
-            # self.add_mission(qual_mission)
+            self.add_mission(qual_mission)
 
         if self.qual:
             from sauvc_missions.qualification import QualificationMission

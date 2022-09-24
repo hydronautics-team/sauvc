@@ -18,8 +18,8 @@ class FlareMission(SAUVCMission):
                  confirmation: int = 2,
                  tolerance: int = 5,
                  confidence: float = 0.3,
-                 verbose: bool = False,
                  rotate='left',
+                 verbose: bool = False,
                  ):
 
         self.camera = camera
@@ -44,40 +44,39 @@ class FlareMission(SAUVCMission):
             auv,
             camera,
             target,
-            tolerance=self.tolerance,
-            confirmation=self.confirmation,
-            confidence=self.confidence,
-            speed=0.5,
-            wait=3,
+            tolerance,
+            confidence,
+            verbose=verbose,
+            wait=1,
+            speed=0.3,
+            is_big_value=0.5,
             )
 
         super().__init__(name, auv, camera, '', verbose=verbose)
 
     def setup_states(self):
-        return ('move_march', 'condition_search_yellow_flare', 'condition_centering_yellow_flare')
+        return ('move_march', 'condition_search_yellow_flare', 'condition_centering_yellow_flare', 'custom_stop')
 
     def setup_transitions(self):
         transitions = [
-            [self.machine.transition_start, self.machine.state_init,
-                'condition_search_yellow_flare'],
+            [self.machine.transition_start, self.machine.state_init, 'condition_search_yellow_flare'],
 
-            ['condition_f', 'condition_search_yellow_flare',
-                self.machine.state_aborted],
-            ['condition_s', 'condition_search_yellow_flare',
-                'condition_centering_yellow_flare'],
+            ['condition_f', 'condition_search_yellow_flare', self.machine.state_aborted],
+            ['condition_s', 'condition_search_yellow_flare', 'condition_centering_yellow_flare'],
 
-            ['condition_f', 'condition_centering_yellow_flare',
-                'condition_centering_yellow_flare'],
+            ['condition_f', 'condition_centering_yellow_flare', 'condition_centering_yellow_flare'],
             ['condition_s', 'condition_centering_yellow_flare', 'move_march'],
 
-            [self.machine.transition_end, 'move_march', self.machine.state_end],
+            ['go_yellow', 'move_march', 'custom_stop'],
+
+            [self.machine.transition_end, 'custom_stop', self.machine.state_end],
         ]
         return transitions
 
     def prerun(self):
         self.enable_object_detection(self.front_camera, True)
         self.machine.auv.execute_dive_goal({
-            'depth': 800,
+            'depth': 1100,
         })
         # self.machine.auv.execute_move_goal({
         #     'march': 0.6,
@@ -107,6 +106,10 @@ class FlareMission(SAUVCMission):
                 'lag': 0.0,
                 'yaw': 0,
                 'wait': 5,
+            },
+            'custom_stop': {
+                'custom': self.machine.auv.execute_stop_goal,
+                'args': ()
             },
         }
         return scene
