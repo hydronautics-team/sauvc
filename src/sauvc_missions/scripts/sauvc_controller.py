@@ -46,7 +46,7 @@ class SAUVCController(AUVMissionsController):
         self.add_init_mission()
 
         if self.test:
-            from sauvc_missions.devices_test import TestMission
+            from sauvc_missions.planar_test import TestMission
             qual_mission = TestMission(
                 TestMission.__name__,
                 self.auv,

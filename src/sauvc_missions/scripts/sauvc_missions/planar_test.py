@@ -16,7 +16,7 @@ class TestMission(SAUVCMission):
         self.planar_submachine = CenteringPlanarSub(
             'planar',
             camera,  # bottom needed
-            'red_bowl',
+            'blue_bowl',
             simulation=simulation
             )
 
