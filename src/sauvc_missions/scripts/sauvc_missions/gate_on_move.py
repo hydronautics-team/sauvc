@@ -36,8 +36,11 @@ class GateMission(SAUVCMission):
             verbose,
             wait=2,
             speed=0.3,
-            lag='right',
-            is_big_value=0.5,
+            lag='left',
+            is_big_h=0.5,
+            is_big_h_avoid=0.3,
+            is_big_method='height',
+            is_big_method_avoid='height',
         )
         super().__init__(name, auv, camera, '')
 
@@ -61,10 +64,10 @@ class GateMission(SAUVCMission):
             'depth': 800,
         })
         self.machine.auv.execute_move_goal({
-            'march': 0.3,
+            'march': 0.5,
             'lag': 0.0,
             'yaw': 0,
-            'wait': 5
+            'wait': 1
         })
 
     def setup_scene(self):
