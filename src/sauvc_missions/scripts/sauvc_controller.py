@@ -80,7 +80,7 @@ class SAUVCController(AUVMissionsController):
                 GateMission.__name__,
                 self.auv,
                 self.front_camera,
-                verbose = self.verbose
+                verbose=self.verbose
             )
             self.add_mission(gate_mission)
 
@@ -90,7 +90,8 @@ class SAUVCController(AUVMissionsController):
                 FlareMission.__name__,
                 self.auv,
                 self.front_camera,
-                verbose = self.verbose
+                rotate='right',
+                verbose=self.verbose
             )
             self.add_mission(flare_mission)
 

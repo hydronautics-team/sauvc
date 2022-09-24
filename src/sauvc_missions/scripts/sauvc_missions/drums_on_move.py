@@ -9,16 +9,16 @@ from stingray_tfsm.auv_control import AUVControl
 import rospy
 
 
-class FlareMission(SAUVCMission):
+class DrumsMission(SAUVCMission):
     def __init__(self,
                  name: str,
                  auv: AUVControl,
                  camera: str,
-                 target: str = 'yellow_flare',
+                 target: str = 'blue_bowl',
                  confirmation: int = 2,
                  tolerance: int = 5,
                  confidence: float = 0.3,
-                 rotate='right',
+                 rotate='left',
                  verbose: bool = False,
                  ):
 
@@ -29,15 +29,15 @@ class FlareMission(SAUVCMission):
         self.confidence = confidence
 
         self.search_submachine = SearchSub(
-            PureStateMachine.construct_name('SearchFlare', name),
+            PureStateMachine.construct_name('SearchMat', name),
             auv,
             camera,
-            target,
+            "mat",
             tolerance=self.tolerance,
             confirmation=self.confirmation,
             confidence=self.confidence,
             rotate=rotate,
-        )
+            )
 
         self.centering_submachine = CenteringWithAvoidSub(
             PureStateMachine.construct_name('CenteringOnMove', name),
@@ -48,23 +48,24 @@ class FlareMission(SAUVCMission):
             confidence,
             verbose=verbose,
             wait=1,
-            speed=0.5,
-            is_big_h=0.5,
-            is_big_method='height',
-        )
+            speed=0.3,
+            is_big_w=0.5,
+            )
 
         super().__init__(name, auv, camera, '', verbose=verbose)
 
     def setup_states(self):
-        return ('move_march', 'custom_search_yellow_flare', 'custom_centering_yellow_flare', 'custom_stop')
+        return ('move_march', 'condition_search_drums', 'condition_centering_drums', 'custom_stop')
 
     def setup_transitions(self):
         transitions = [
-            [self.machine.transition_start, self.machine.state_init,'custom_search_yellow_flare'],
+            [self.machine.transition_start, self.machine.state_init, 'condition_search_drums'],
 
-            ['go_search_yellow', 'custom_search_yellow_flare', 'custom_centering_yellow_flare'],
+            ['condition_f', 'condition_search_drums', self.machine.state_aborted],
+            ['condition_s', 'condition_search_drums', 'condition_centering_drums'],
 
-            ['go_centering_flare', 'custom_centering_yellow_flare', 'move_march'],
+            ['condition_f', 'condition_centering_drums', 'condition_centering_drums'],
+            ['condition_s', 'condition_centering_drums', 'move_march'],
 
             ['go_yellow', 'move_march', 'custom_stop'],
 
@@ -90,14 +91,14 @@ class FlareMission(SAUVCMission):
                 'preps': self.prerun,
                 "args": (),
             },
-            'custom_search_yellow_flare': {
+            'condition_search_drums': {
                 'subFSM': True,
                 'condition': self.search_submachine,
                 'args': ()
             },
-            'custom_centering_yellow_flare': {
+            'condition_centering_drums': {
                 'subFSM': True,
-                'custom': self.centering_submachine,
+                'condition': self.centering_submachine,
                 'args': ()
             },
             'move_march': {
