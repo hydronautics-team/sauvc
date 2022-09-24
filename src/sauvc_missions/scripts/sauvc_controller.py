@@ -51,7 +51,8 @@ class SAUVCController(AUVMissionsController):
                 TestMission.__name__,
                 self.auv,
                 self.bottom_camera,
-                verbose=self.verbose
+                verbose=self.verbose,
+                simulation=True
             )
             # self.add_mission(qual_mission)
 
@@ -81,8 +82,6 @@ class SAUVCController(AUVMissionsController):
                 self.auv,
                 self.front_camera,
                 self.bottom_camera,
-                rotate='left',
-                lag='left',
                 verbose = self.verbose
             )
             self.add_mission(gate_mission)

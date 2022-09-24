@@ -1,6 +1,5 @@
 from sauvc_missions.sauvc_mission import SAUVCMission
-from stingray_tfsm.submachines.centering_planar import CenteringPlanarSub
-from stingray_tfsm.auv_control import AUVControl
+from stingray_tfsm.submachines.planar_submachine import CenteringPlanarSub
 
 
 class TestMission(SAUVCMission):
@@ -8,16 +7,17 @@ class TestMission(SAUVCMission):
                  name: str,
                  front_cam: str = None,
                  camera: str = None,
+                 simulation=True,
                  *args,
                  **kwargs
                  ):
         self.camera = camera  # bottom
 
-
         self.planar_submachine = CenteringPlanarSub(
             'planar',
             camera,  # bottom needed
             'red_bowl',
+            simulation=simulation
             )
 
         super().__init__(name, front_cam, camera)
@@ -33,9 +33,10 @@ class TestMission(SAUVCMission):
 
     def preparations(self, *args, **kwargs):
         self.enable_object_detection(self.camera, True)
-        # self.machine.auv.execute_dive_goal({
-        #     'depth': 100
-        # })
+        self.machine.auv.execute_dive_goal({
+            'depth': 4  # 4 for sim, 500 for hard
+        })
+        pass
 
     def setup_scene(self):
         scene = {
