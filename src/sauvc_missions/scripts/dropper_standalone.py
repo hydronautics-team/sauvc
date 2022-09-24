@@ -15,14 +15,14 @@ class DropperStandalone(SAUVCMission):
         else:
             self.auv = auv
 
-        super().__init__(name, '', '', auv=self.auv)
+        super().__init__(name, self.auv, '', '')
 
     def setup_states(self):
-        return 'custom_dropper_open'
+        return ['custom_dropper_open', 'custom_dropper_close']
 
     def setup_transitions(self):
         transitions = [
-            [self.machine.transition_start, [self.machine.state_init], 'custom_dropper_close'],
+            [self.machine.transition_start, [self.machine.state_init], 'custom_dropper_open'],
         ]
         return transitions
 
@@ -34,9 +34,9 @@ class DropperStandalone(SAUVCMission):
         )
 
     def dropper_open(self):
-        self.machine.auv.execute_dropper_goal(velocity=50)
-        rospy.sleep(3)
         self.machine.auv.execute_dropper_goal(velocity=100)
+        rospy.sleep(3)
+        self.machine.auv.execute_dropper_goal(velocity=50)
 
     def setup_scene(self):
         scene = {
