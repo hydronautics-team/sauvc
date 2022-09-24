@@ -6,6 +6,7 @@
         <param name="bottom_camera" value="/bottom_camera/image_raw" />
         <param name="gate" value="True" />
         <param name="flare" value="True" />
+        <param name="drums" value="True" />
         <param name="depth_stabilization" value="True" />
         <param name="pitch_stabilization" value="True" />
         <param name="yaw_stabilization" value="True" />
