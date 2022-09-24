@@ -95,7 +95,7 @@ class DrumsMission(SAUVCMission):
         return transitions
 
     def drop(self):
-        self.machine.auv.execute_dropper_goal(velocity=50)
+        self.machine.auv.execute_dropper_goal(velocity=100)
 
     def lift(self):
         self.machine.auv.execute_lifter_goal(
