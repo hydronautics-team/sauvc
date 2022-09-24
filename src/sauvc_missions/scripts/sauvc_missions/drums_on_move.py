@@ -77,7 +77,7 @@ class DrumsMission(SAUVCMission):
     def prerun(self):
         self.enable_object_detection(self.front_camera, True)
         self.machine.auv.execute_dive_goal({
-            'depth': 800,
+            'depth': 600,
         })
         self.machine.auv.execute_move_goal({
             'march': 0.0,
