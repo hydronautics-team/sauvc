@@ -109,7 +109,7 @@
     </include>
 
     <include file="$(find marker_finder)/launch/marker_finder.launch">
-        <arg name="CAMERA" value="$(arg BOTTOM_CAMERA_TOPIC)">
+        <arg name="CAMERA" value="$(arg BOTTOM_CAMERA_TOPIC)"/>
     </include>
 
     <!-- MAIN -->
