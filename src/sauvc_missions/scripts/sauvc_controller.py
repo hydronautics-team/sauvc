@@ -99,6 +99,7 @@ class SAUVCController(AUVMissionsController):
                 DrumsMission.__name__,
                 self.auv,
                 self.front_camera,
+                self.bottom_camera,
                 rotate='left',
                 verbose=self.verbose
             )

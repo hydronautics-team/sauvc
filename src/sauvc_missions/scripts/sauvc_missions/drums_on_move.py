@@ -6,6 +6,7 @@ from sauvc_missions.sauvc_mission import SAUVCMission
 from stingray_tfsm.auv_fsm import AUVStateMachine
 from stingray_tfsm.core.pure_fsm import PureStateMachine
 from stingray_tfsm.auv_control import AUVControl
+from stingray_tfsm.submachines.planar_submachine import CenteringPlanarSub
 import rospy
 
 
@@ -14,6 +15,7 @@ class DrumsMission(SAUVCMission):
                  name: str,
                  auv: AUVControl,
                  camera: str,
+                 bottom_camera: str,
                  target: str = 'blue_bowl',
                  confirmation: int = 2,
                  tolerance: int = 5,
@@ -23,6 +25,7 @@ class DrumsMission(SAUVCMission):
                  ):
 
         self.camera = camera
+        self.bottom_camera = bottom_camera
         self.target = target
         self.tolerance = tolerance
         self.confirmation = confirmation
@@ -42,7 +45,7 @@ class DrumsMission(SAUVCMission):
         self.centering_submachine = CenteringWithAvoidSub(
             PureStateMachine.construct_name('CenteringOnMove', name),
             auv,
-            camera,
+            bottom_camera,
             target,
             confirmation,
             tolerance,
@@ -53,10 +56,17 @@ class DrumsMission(SAUVCMission):
             is_big_w=0.2,
             )
 
+        self.centering_bottom_submachine = CenteringPlanarSub(
+            'planar',
+            camera,  # bottom needed
+            'blue_bowl',
+            auv=auv,
+            )
+
         super().__init__(name, auv, camera, '', verbose=verbose)
 
     def setup_states(self):
-        return ('move_march', 'condition_search_drums', 'condition_centering_drums', 'custom_stop')
+        return ('move_march', 'condition_search_drums', 'condition_centering_drums', 'custom_stop', 'custom_centering')
 
     def setup_transitions(self):
         transitions = [
@@ -68,9 +78,9 @@ class DrumsMission(SAUVCMission):
             ['condition_f', 'condition_centering_drums', 'condition_centering_drums'],
             ['condition_s', 'condition_centering_drums', 'custom_stop'],
 
-            ['go_yellow', 'move_march', 'custom_stop'],
+            ['go_centering', 'custom_stop', 'custom_centering'],
 
-            [self.machine.transition_end, 'custom_stop', self.machine.state_end],
+            [self.machine.transition_end, 'custom_centering', self.machine.state_end],
         ]
         return transitions
 
@@ -116,6 +126,11 @@ class DrumsMission(SAUVCMission):
             },
             'custom_stop': {
                 'custom': self.machine.auv.execute_stop_goal,
+                'args': ()
+            },
+            'custom_centering': {
+                'subFSM': True,
+                'condition': self.centering_bottom_submachine,
                 'args': ()
             },
         }
