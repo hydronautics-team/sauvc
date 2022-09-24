@@ -35,6 +35,8 @@ class DropperStandalone(SAUVCMission):
 
     def dropper_open(self):
         self.machine.auv.execute_dropper_goal(velocity=50)
+        rospy.sleep(3)
+        self.machine.auv.execute_dropper_goal(velocity=100)
 
     def setup_scene(self):
         scene = {
