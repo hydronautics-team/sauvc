@@ -13,7 +13,7 @@ class QualificationMission(SAUVCMission):
                  name: str,
                  auv: AUVControl,
                  camera: str,
-                 target: str = 'gate',
+                 target: str = 'gate_qualification',
                  confirmation: int = 2,
                  tolerance: int = 1,
                  confidence: float = 0.3,
@@ -55,7 +55,7 @@ class QualificationMission(SAUVCMission):
     def prerun(self):
         self.enable_object_detection(self.front_camera, True)
         self.machine.auv.execute_dive_goal({
-            'depth': 800,
+            'depth': 900,
         })
         self.machine.auv.execute_move_goal({
             'march': 1.0,
