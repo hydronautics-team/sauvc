@@ -59,14 +59,6 @@ class DrumsMission(SAUVCMission):
             speed=0.2,
             is_big_w=0.2,
         )
-
-        self.centering_bottom_submachine = CenteringPlanarSub(
-            PureStateMachine.construct_name('CenteringPlanarDrum', name),
-            bottom_camera,  # bottom needed
-            'blue_bowl',
-            auv=auv,
-        )
-
         super().__init__(name, auv, camera, '', verbose=verbose)
 
     def setup_states(self):
@@ -158,11 +150,6 @@ class DrumsMission(SAUVCMission):
             },
             'custom_drop': {
                 'custom': self.drop,
-                'args': ()
-            },
-            'custom_centering': {
-                'subFSM': True,
-                'custom': self.centering_bottom_submachine,
                 'args': ()
             },
             'move_back': {

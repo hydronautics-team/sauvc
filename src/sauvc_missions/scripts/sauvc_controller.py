@@ -106,7 +106,7 @@ class SAUVCController(AUVMissionsController):
                 self.front_camera,
                 self.bottom_camera,
                 rotate='left',
-                chit_angle=-90,
+                chit_angle=0,
                 chit_wait=10
             )
             self.add_mission(drums_mission)
