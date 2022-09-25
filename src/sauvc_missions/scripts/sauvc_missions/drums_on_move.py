@@ -153,7 +153,7 @@ class DrumsMission(SAUVCMission):
                 'args': ()
             },
             'move_back': {
-                'march': -0.5,
+                'march': -0.2,
                 'lag': 0.0,
                 'yaw': 0,
                 'wait': 5,

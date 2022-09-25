@@ -1,0 +1,4 @@
+<launch>
+    <node pkg="sauvc_missions" type="lifter_standalone.py" name="open_lifter_node" output="screen" respawn="false">
+        </node>
+</launch>

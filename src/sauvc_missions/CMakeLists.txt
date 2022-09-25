@@ -26,6 +26,7 @@ include
 catkin_install_python(PROGRAMS
         scripts/sauvc_controller.py
         scripts/dropper_standalone.py
+        scripts/lifter_standalone.py
         DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
         )
 catkin_python_setup()

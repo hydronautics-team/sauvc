@@ -110,6 +110,14 @@ class SAUVCController(AUVMissionsController):
                 chit_wait=10
             )
             self.add_mission(drums_mission)
+        
+        if self.drums_lift:
+            from sauvc_missions.drums_on_move import DrumsMission
+            drums_mission = DrumsMission(
+                DrumsMission.__name__,
+                self.auv,
+            )
+            self.add_mission(drums_mission)
 
         self.add_end_mission()
 
