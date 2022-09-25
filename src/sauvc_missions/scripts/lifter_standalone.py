@@ -42,7 +42,6 @@ class LifterStandalone(SAUVCMission):
 
     def lifter_open(self):
         self.lower()
-        rospy.sleep(6)
         self.lift()
 
     def setup_scene(self):
