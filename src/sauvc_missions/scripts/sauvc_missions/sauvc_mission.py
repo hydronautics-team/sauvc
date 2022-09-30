@@ -3,6 +3,10 @@
 from abc import abstractmethod
 from stingray_tfsm.auv_mission import AUVMission
 from stingray_tfsm.auv_control import AUVControl
+from marker_finder.srv import EnableMarkerDetection
+from stingray_object_detection.utils import get_objects_topic
+from stingray_object_detection_msgs.msg import ObjectsArray
+import rospy
 
 
 class SAUVCMission(AUVMission):
@@ -48,3 +52,19 @@ class SAUVCMission(AUVMission):
         self.confirmation = 5
 
         super().__init__(name, auv)
+
+    def enable_marker_detection(self, camera: str, enable: bool = True):
+        """ method to enable object detection for specific camera
+
+        Args:
+            camera (str): camera topic name
+        """
+
+        srv_name = self.ros_config["services"]["set_enable_marker"]
+        rospy.wait_for_service(srv_name)
+        set_camera = rospy.ServiceProxy(srv_name, EnableMarkerDetection)
+        response = set_camera(camera, enable)
+        received = rospy.wait_for_message(
+            get_objects_topic(camera), ObjectsArray)
+        rospy.loginfo(
+            f"Object detection enabled: {response.success} for camera: {camera} ")
