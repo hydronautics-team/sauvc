@@ -8,6 +8,7 @@ import numpy as np
 import imutils
 
 from marker_finder.msg import MarkerBoundingBox as marker_msg
+from marker_finder.msg import ObjectsArray
 from marker_finder.srv import EnableMarkerDetection as detector_toggle_srv
 from marker_finder.srv import EnableMarkerDetectionRequest as detector_toggle_req
 from marker_finder.srv import EnableMarkerDetectionResponse as detector_toggle_res
@@ -15,7 +16,7 @@ from marker_finder.srv import EnableMarkerDetectionResponse as detector_toggle_r
 class MarkerDetector:
     def __init__(self, input_image_topic, box_topic, debug, debug_image_topic, ksize, sigma, closure, obj_light, obj_gray) -> None:
         self.image_sub = rospy.Subscriber(input_image_topic, Image, self.image_callback, callback_args=input_image_topic, queue_size = 1)
-        self.box_topic = rospy.Publisher(box_topic, marker_msg, queue_size = 1)
+        self.box_topic = rospy.Publisher(box_topic, ObjectsArray, queue_size=1)
         
         service = rospy.Service("marker_detection_switch", detector_toggle_srv, self.enable_detector)
         self.detection_enabled = False
@@ -41,7 +42,9 @@ class MarkerDetector:
             rect = self.detect_marker(cv_image)
             if bool(rect):
                 msg = self.form_message(rect)
-                self.box_topic.publish(msg)
+                msg_arr = ObjectsArray()
+                msg_arr.objects.append(msg)
+                self.box_topic.publish(msg_arr)
                 
                 if self.debug:
                     cv_image = self.draw_boundary(cv_image, rect)
@@ -111,7 +114,7 @@ class MarkerDetector:
     def form_message(self, bounding_rectangle) -> marker_msg:
         msg = marker_msg()
         msg.name = "marker"
-        msg.confidence = 100
+        msg.confidence = 1
         msg.top_left_x = int(bounding_rectangle[0])
         msg.top_left_y = int(bounding_rectangle[1])
         msg.bottom_right_x = int(bounding_rectangle[0] + bounding_rectangle[2])

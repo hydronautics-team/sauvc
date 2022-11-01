@@ -1,5 +1,4 @@
 from stingray_tfsm.auv_missions_controller import AUVMissionsController
-from stingray_tfsm.auv_control import AUVControl
 import rospy
 
 NODE_NAME = "sauvc_controller"

@@ -54,6 +54,8 @@ catkin_python_setup()
 add_message_files(
   FILES
   MarkerBoundingBox.msg
+  ObjectsArray.msg
+
 )
 
 ## Generate services in the 'srv' folder
