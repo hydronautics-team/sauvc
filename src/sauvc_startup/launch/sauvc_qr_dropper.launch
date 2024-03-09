@@ -1,4 +1,0 @@
-<launch>
-    <node pkg="sauvc_missions" type="dropper_standalone.py" name="open_dropper_node" output="screen" respawn="false">
-        </node>
-</launch>
