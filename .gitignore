@@ -112,6 +112,3 @@ CATKIN_IGNORE
 
 /**/.idea/
 /**/cmake-build-debug/
-
-# Visual Studio Code
-/.vscode
