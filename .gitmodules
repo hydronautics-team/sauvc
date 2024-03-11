@@ -1,0 +1,3 @@
+[submodule "stingray"]
+	path = stingray
+	url = git@github.com:hydronautics-team/stingray.git
