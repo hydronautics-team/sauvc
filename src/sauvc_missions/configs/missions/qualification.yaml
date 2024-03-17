@@ -8,7 +8,7 @@ states:
       depth: 0.0
       roll: 0.0
       pitch: 0.0
-      yaw: 
+      yaw: 0.0
 transitions:
   - { trigger: ok, source: MOVE_TO_GATE, dest: OK }
   - { trigger: failed, source: MOVE_TO_GATE, dest: FAILED }
