@@ -1,0 +1,12 @@
+initial: INIT
+missions:
+  INIT:
+    config_name: init
+    package_name: stingray_missions
+  QUALIFICATION:
+    config_name: qualification
+    package_name: stingray_missions
+transitions:
+  - { source: INIT, outcome: OK, dest: QUALIFICATION }
+  - { source: QUALIFICATION, outcome: OK, dest: OK }
+  - { source: [INIT, QUALIFICATION], outcome: FAILED, dest: FAILED }
