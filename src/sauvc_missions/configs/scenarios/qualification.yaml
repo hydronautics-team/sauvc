@@ -5,7 +5,7 @@ missions:
     package_name: stingray_missions
   QUALIFICATION:
     config_name: qualification
-    package_name: stingray_missions
+    package_name: sauvc_missions
 transitions:
   - { source: INIT, outcome: OK, dest: QUALIFICATION }
   - { source: QUALIFICATION, outcome: OK, dest: OK }

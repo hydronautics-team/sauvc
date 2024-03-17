@@ -1,5 +1,14 @@
-initial: QUALIFICATION
+initial: SUBMERGE
 states:
+  SUBMERGE:
+    action: 
+      type: Move
+      surge: 0.0
+      sway: 0.0
+      depth: 1.0
+      roll: 0.0
+      pitch: 0.0
+      yaw: 0.0
   MOVE_TO GATE:
     action: 
       type: Move
@@ -9,6 +18,8 @@ states:
       roll: 0.0
       pitch: 0.0
       yaw: 0.0
+      duration: 15
 transitions:
+  - { trigger: ok, source: SUBMERGE, dest: MOVE_TO_GATE }
   - { trigger: ok, source: MOVE_TO_GATE, dest: OK }
   - { trigger: failed, source: MOVE_TO_GATE, dest: FAILED }
