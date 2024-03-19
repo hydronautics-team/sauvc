@@ -9,7 +9,7 @@ states:
       roll: 0.0
       pitch: 0.0
       yaw: 0.0
-  MOVE_TO GATE:
+  MOVE_TO_GATE:
     action: 
       type: Move
       surge: 10.0

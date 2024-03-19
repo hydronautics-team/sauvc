@@ -32,6 +32,11 @@ def generate_launch_description():
         "weights_pkg_name", default_value='sauvc_object_detection'
     )
 
+    # missions
+    mission_package_names_arg = DeclareLaunchArgument(
+        "mission_package_names", default_value='sauvc_missions stingray_missions'
+    )
+
     # core
     uv_state_topic_arg = DeclareLaunchArgument(
         "uv_state_topic", default_value='/stingray/topics/uv_state'
@@ -61,6 +66,7 @@ def generate_launch_description():
         front_camera_path_arg,
         image_topic_list_arg,
         weights_pkg_name_arg,
+        mission_package_names_arg,
         uv_state_topic_arg,
         set_twist_srv_arg,
         device_state_array_topic_arg,
@@ -88,6 +94,7 @@ def generate_launch_description():
             PythonLaunchDescriptionSource(str(Path(
                 get_package_share_directory('stingray_launch'), 'main.launch.py'))),
             launch_arguments={
+                'mission_package_names': LaunchConfiguration("mission_package_names"),
                 'uv_state_topic': LaunchConfiguration("uv_state_topic"),
                 'device_state_array_topic': LaunchConfiguration("device_state_array_topic"),
                 'set_twist_srv': LaunchConfiguration("set_twist_srv"),
