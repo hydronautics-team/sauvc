@@ -1,25 +1,25 @@
-initial: SUBMERGE
+initial: MOVE_TO_GATE
 states:
-  SUBMERGE:
+  MOVE_TO_GATE:
+    action: 
+      type: Move
+      surge: 30.0
+      sway: 0.0
+      depth: 400.0
+      roll: 0.0
+      pitch: 0.0
+      yaw: 0.0
+      duration: 2.0
+  EMERGE:
     action: 
       type: Move
       surge: 0.0
       sway: 0.0
-      depth: 1.0
+      depth: 50.0
       roll: 0.0
       pitch: 0.0
       yaw: 0.0
-  MOVE_TO_GATE:
-    action: 
-      type: Move
-      surge: 10.0
-      sway: 0.0
-      depth: 1.0
-      roll: 0.0
-      pitch: 0.0
-      yaw: 0.0
-      duration: 5
 transitions:
-  - { trigger: ok, source: SUBMERGE, dest: MOVE_TO_GATE }
-  - { trigger: ok, source: MOVE_TO_GATE, dest: OK }
+  - { trigger: ok, source: MOVE_TO_GATE, dest: EMERGE }
+  - { trigger: ok, source: EMERGE, dest: OK }
   - { trigger: failed, source: MOVE_TO_GATE, dest: FAILED }
