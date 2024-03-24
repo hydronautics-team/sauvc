@@ -3,13 +3,13 @@ states:
   MOVE_TO_GATE:
     action: 
       type: Move
-      surge: 30.0
+      surge: 50.0
       sway: 0.0
-      depth: 400.0
+      depth: 500.0
       roll: 0.0
       pitch: 0.0
       yaw: 0.0
-      duration: 2.0
+      duration: 15.0
   EMERGE:
     action: 
       type: Move
@@ -19,6 +19,7 @@ states:
       roll: 0.0
       pitch: 0.0
       yaw: 0.0
+      duration: 10.0
 transitions:
   - { trigger: ok, source: MOVE_TO_GATE, dest: EMERGE }
   - { trigger: ok, source: EMERGE, dest: OK }
