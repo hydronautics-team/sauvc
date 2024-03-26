@@ -16,25 +16,9 @@ from launch_ros.actions import PushRosNamespace
 
 def generate_launch_description():
 
-    # front camera
-    front_camera_topic_arg = DeclareLaunchArgument(
-        "front_camera_topic", default_value='/stingray/topics/front_camera'
-    )
-    front_camera_path_arg = DeclareLaunchArgument(
-        "front_camera_path", default_value='/dev/video0'
-    )
-
-    # object detection
-    image_topic_list_arg = DeclareLaunchArgument(
-        "image_topic_list", default_value='/stingray/topics/front_camera'
-    )
-    weights_pkg_name_arg = DeclareLaunchArgument(
-        "weights_pkg_name", default_value='sauvc_object_detection'
-    )
-
     # missions
     mission_package_names_arg = DeclareLaunchArgument(
-        "mission_package_names", default_value='sauvc_missions stingray_missions'
+        "mission_package_names", default_value='[sauvc_missions, stingray_missions]'
     )
 
     # core
@@ -62,10 +46,6 @@ def generate_launch_description():
 
     # load ros config
     return LaunchDescription([
-        front_camera_topic_arg,
-        front_camera_path_arg,
-        image_topic_list_arg,
-        weights_pkg_name_arg,
         mission_package_names_arg,
         uv_state_topic_arg,
         set_twist_srv_arg,
@@ -74,25 +54,10 @@ def generate_launch_description():
         set_stabilization_srv_arg,
         enable_thrusters_srv_arg,
         set_device_srv_arg,
-        
-        # front camera
-        Node(
-            package='usb_cam',
-            executable='usb_cam_node_exe',
-            name='camera_driver',
-            remappings=[
-                ('/image_raw', LaunchConfiguration("front_camera_topic")),
-            ],
-            parameters=[
-                {'video_device': LaunchConfiguration("front_camera_path")},
-            ],
-            respawn=True,
-            respawn_delay=1,
-        ),
 
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(str(Path(
-                get_package_share_directory('stingray_launch'), 'main.launch.py'))),
+                get_package_share_directory('stingray_launch'), 'control.launch.py'))),
             launch_arguments={
                 'mission_package_names': LaunchConfiguration("mission_package_names"),
                 'uv_state_topic': LaunchConfiguration("uv_state_topic"),
