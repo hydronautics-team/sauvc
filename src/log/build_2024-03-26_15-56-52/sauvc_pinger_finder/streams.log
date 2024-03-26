@@ -1,0 +1,110 @@
+[0.085s] Invoking command in '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/sauvc_pinger_finder': AMENT_PREFIX_PATH=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial:/opt/ros/iron LD_LIBRARY_PATH=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/lib:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/cmake --build /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/sauvc_pinger_finder -- -j16 -l16
+[0.163s] [ 33%] [32mBuilding CXX object CMakeFiles/uart_driver_node.dir/src/uart_driver_node.cpp.o[0m
+[0.163s] [ 66%] [32mBuilding CXX object CMakeFiles/uart_driver_node.dir/src/messages/msg_pingerFinder.cpp.o[0m
+[2.577s] In file included from [01m[K/usr/include/boost/smart_ptr/detail/sp_thread_sleep.hpp:22[m[K,
+[2.577s]                  from [01m[K/usr/include/boost/smart_ptr/detail/yield_k.hpp:23[m[K,
+[2.577s]                  from [01m[K/usr/include/boost/smart_ptr/detail/spinlock_gcc_atomic.hpp:14[m[K,
+[2.577s]                  from [01m[K/usr/include/boost/smart_ptr/detail/spinlock.hpp:42[m[K,
+[2.577s]                  from [01m[K/usr/include/boost/smart_ptr/detail/spinlock_pool.hpp:25[m[K,
+[2.578s]                  from [01m[K/usr/include/boost/smart_ptr/shared_ptr.hpp:29[m[K,
+[2.578s]                  from [01m[K/usr/include/boost/shared_ptr.hpp:17[m[K,
+[2.578s]                  from [01m[K/usr/include/boost/date_time/time_clock.hpp:17[m[K,
+[2.578s]                  from [01m[K/usr/include/boost/date_time/posix_time/posix_time_types.hpp:10[m[K,
+[2.578s]                  from [01m[K/usr/include/boost/asio/time_traits.hpp:23[m[K,
+[2.578s]                  from [01m[K/usr/include/boost/asio/detail/timer_queue_ptime.hpp:22[m[K,
+[2.578s]                  from [01m[K/usr/include/boost/asio/detail/deadline_timer_service.hpp:29[m[K,
+[2.578s]                  from [01m[K/usr/include/boost/asio/basic_deadline_timer.hpp:25[m[K,
+[2.578s]                  from [01m[K/usr/include/boost/asio.hpp:25[m[K,
+[2.578s]                  from [01m[K/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/include/stingray_core_communication/udp_driver.h:5[m[K,
+[2.578s]                  from [01m[K/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/sauvc_pinger_finder/src/uart_driver_node.cpp:1[m[K:
+[2.578s] [01m[K/usr/include/boost/bind.hpp:36:1:[m[K [01;36m[Knote: [m[K‘[01m[K#pragma message: The practice of declaring the Bind placeholders (_1, _2, ...) in the global namespace is deprecated. Please use <boost/bind/bind.hpp> + using namespace boost::placeholders, or define BOOST_BIND_GLOBAL_PLACEHOLDERS to retain the current behavior.[m[K’
+[2.579s]    36 | [01;36m[KBOOST_PRAGMA_MESSAGE[m[K(
+[2.579s]       | [01;36m[K^~~~~~~~~~~~~~~~~~~~[m[K
+[5.646s] In file included from [01m[K/opt/ros/iron/include/rclcpp/rclcpp/logging.hpp:24[m[K,
+[5.646s]                  from [01m[K/opt/ros/iron/include/rclcpp/rclcpp/client.hpp:43[m[K,
+[5.646s]                  from [01m[K/opt/ros/iron/include/rclcpp/rclcpp/callback_group.hpp:24[m[K,
+[5.647s]                  from [01m[K/opt/ros/iron/include/rclcpp/rclcpp/any_executable.hpp:20[m[K,
+[5.647s]                  from [01m[K/opt/ros/iron/include/rclcpp/rclcpp/memory_strategy.hpp:25[m[K,
+[5.647s]                  from [01m[K/opt/ros/iron/include/rclcpp/rclcpp/memory_strategies.hpp:18[m[K,
+[5.647s]                  from [01m[K/opt/ros/iron/include/rclcpp/rclcpp/executor_options.hpp:20[m[K,
+[5.647s]                  from [01m[K/opt/ros/iron/include/rclcpp/rclcpp/executor.hpp:37[m[K,
+[5.647s]                  from [01m[K/opt/ros/iron/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+[5.647s]                  from [01m[K/opt/ros/iron/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+[5.647s]                  from [01m[K/opt/ros/iron/include/rclcpp/rclcpp/rclcpp.hpp:167[m[K,
+[5.647s]                  from [01m[K/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/include/stingray_core_communication/udp_driver.h:8[m[K,
+[5.648s]                  from [01m[K/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/sauvc_pinger_finder/src/uart_driver_node.cpp:1[m[K:
+[5.648s] /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/include/stingray_core_communication/udp_driver.h: In instantiation of ‘[01m[KUDPBridgeSender<RequestMessage>::UDPBridgeSender(std::shared_ptr<rclcpp::Node>, boost::asio::io_service&) [with RequestMessage = WeltMessage; boost::asio::io_service = boost::asio::io_context][m[K’:
+[5.648s] [01m[K/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/sauvc_pinger_finder/src/uart_driver_node.cpp:9:71:[m[K   required from here
+[5.648s] [01m[K/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/include/stingray_core_communication/udp_driver.h:36:42:[m[K [01;35m[Kwarning: [m[Kformat ‘[01m[K%d[m[K’ expects argument of type ‘[01m[Kint[m[K’, but argument 6 has type ‘[01m[Kint64_t[m[K’ {aka ‘[01m[Klong int[m[K’} [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wformat=-Wformat=]8;;[m[K]
+[5.648s]    36 |         RCLCPP_INFO(_node->get_logger(), [01;35m[K"UDPBridgeSender: socket opened. Address: %s, port: %d"[m[K,
+[5.648s]       |                                          [01;35m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[5.648s]    37 |             _node->get_parameter("send_to_ip").as_string().c_str(), [32m[K_node->get_parameter("send_to_port").as_int()[m[K);
+[5.649s]       |                                                                     [32m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[5.649s]       |                                                                                                                [32m[K|[m[K
+[5.649s]       |                                                                                                                [32m[Kint64_t {aka long int}[m[K
+[5.649s] In file included from [01m[K/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/sauvc_pinger_finder/src/uart_driver_node.cpp:1[m[K:
+[5.649s] [01m[K/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/include/stingray_core_communication/udp_driver.h:36:95:[m[K [01;36m[Knote: [m[Kformat string is defined here
+[5.649s]    36 |         RCLCPP_INFO(_node->get_logger(), "UDPBridgeSender: socket opened. Address: %s, port: [01;36m[K%d[m[K",
+[5.649s]       |                                                                                              [01;36m[K~^[m[K
+[5.649s]       |                                                                                               [01;36m[K|[m[K
+[5.650s]       |                                                                                               [01;36m[Kint[m[K
+[5.650s]       |                                                                                              [32m[K%ld[m[K
+[5.661s] In file included from [01m[K/opt/ros/iron/include/rclcpp/rclcpp/logging.hpp:24[m[K,
+[5.661s]                  from [01m[K/opt/ros/iron/include/rclcpp/rclcpp/client.hpp:43[m[K,
+[5.661s]                  from [01m[K/opt/ros/iron/include/rclcpp/rclcpp/callback_group.hpp:24[m[K,
+[5.661s]                  from [01m[K/opt/ros/iron/include/rclcpp/rclcpp/any_executable.hpp:20[m[K,
+[5.661s]                  from [01m[K/opt/ros/iron/include/rclcpp/rclcpp/memory_strategy.hpp:25[m[K,
+[5.661s]                  from [01m[K/opt/ros/iron/include/rclcpp/rclcpp/memory_strategies.hpp:18[m[K,
+[5.661s]                  from [01m[K/opt/ros/iron/include/rclcpp/rclcpp/executor_options.hpp:20[m[K,
+[5.662s]                  from [01m[K/opt/ros/iron/include/rclcpp/rclcpp/executor.hpp:37[m[K,
+[5.662s]                  from [01m[K/opt/ros/iron/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+[5.662s]                  from [01m[K/opt/ros/iron/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+[5.662s]                  from [01m[K/opt/ros/iron/include/rclcpp/rclcpp/rclcpp.hpp:167[m[K,
+[5.662s]                  from [01m[K/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/include/stingray_core_communication/udp_driver.h:8[m[K,
+[5.662s]                  from [01m[K/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/sauvc_pinger_finder/src/uart_driver_node.cpp:1[m[K:
+[5.662s] /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/include/stingray_core_communication/udp_driver.h: In instantiation of ‘[01m[KUDPBridgeReceiver<ResponseMessage>::UDPBridgeReceiver(std::shared_ptr<rclcpp::Node>, boost::asio::io_service&) [with ResponseMessage = WeltMessage; boost::asio::io_service = boost::asio::io_context][m[K’:
+[5.662s] [01m[K/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/sauvc_pinger_finder/src/uart_driver_node.cpp:11:77:[m[K   required from here
+[5.663s] [01m[K/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/include/stingray_core_communication/udp_driver.h:96:42:[m[K [01;35m[Kwarning: [m[Kformat ‘[01m[K%d[m[K’ expects argument of type ‘[01m[Kint[m[K’, but argument 6 has type ‘[01m[Kint64_t[m[K’ {aka ‘[01m[Klong int[m[K’} [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wformat=-Wformat=]8;;[m[K]
+[5.663s]    96 |         RCLCPP_INFO(_node->get_logger(), [01;35m[K"UDPBridgeReceiver: socket binded to address: %s, port: %d"[m[K,
+[5.663s]       |                                          [01;35m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[5.663s]    97 |             _node->get_parameter("receive_from_ip").as_string().c_str(),
+[5.663s]    98 |             [32m[K_node->get_parameter("receive_from_port").as_int()[m[K);
+[5.663s]       |             [32m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[5.663s]       |                                                             [32m[K|[m[K
+[5.663s]       |                                                             [32m[Kint64_t {aka long int}[m[K
+[5.664s] In file included from [01m[K/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/sauvc_pinger_finder/src/uart_driver_node.cpp:1[m[K:
+[5.664s] [01m[K/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/include/stingray_core_communication/udp_driver.h:96:99:[m[K [01;36m[Knote: [m[Kformat string is defined here
+[5.664s]    96 |         RCLCPP_INFO(_node->get_logger(), "UDPBridgeReceiver: socket binded to address: %s, port: [01;36m[K%d[m[K",
+[5.664s]       |                                                                                                  [01;36m[K~^[m[K
+[5.664s]       |                                                                                                   [01;36m[K|[m[K
+[5.664s]       |                                                                                                   [01;36m[Kint[m[K
+[5.664s]       |                                                                                                  [32m[K%ld[m[K
+[5.925s] /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/include/stingray_core_communication/udp_driver.h: In instantiation of ‘[01m[Kvoid UDPBridgeReceiver<ResponseMessage>::driver_response_callback(const boost::system::error_code&, size_t) [with ResponseMessage = WeltMessage; size_t = long unsigned int][m[K’:
+[5.925s] [01m[K/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/include/stingray_core_communication/udp_driver.h:116:25:[m[K   required from ‘[01m[Kvoid UDPBridgeReceiver<ResponseMessage>::try_receive() [with ResponseMessage = WeltMessage][m[K’
+[5.926s] [01m[K/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/sauvc_pinger_finder/src/uart_driver_node.cpp:13:29:[m[K   required from here
+[5.926s] [01m[K/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/include/stingray_core_communication/udp_driver.h:120:82:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kbytes_transferred[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[5.926s]   120 |     void driver_response_callback(const boost::system::error_code &error, [01;35m[Ksize_t bytes_transferred[m[K) {
+[5.926s]       |                                                                           [01;35m[K~~~~~~~^~~~~~~~~~~~~~~~~[m[K
+[13.613s] [100%] [32m[1mLinking CXX executable uart_driver_node[0m
+[14.289s] [100%] Built target uart_driver_node
+[14.304s] Invoked command in '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/sauvc_pinger_finder' returned '0': AMENT_PREFIX_PATH=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial:/opt/ros/iron LD_LIBRARY_PATH=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/lib:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/cmake --build /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/sauvc_pinger_finder -- -j16 -l16
+[14.350s] Invoking command in '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/sauvc_pinger_finder': AMENT_PREFIX_PATH=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial:/opt/ros/iron LD_LIBRARY_PATH=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/lib:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/cmake --install /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/sauvc_pinger_finder
+[14.363s] -- Install configuration: ""
+[14.363s] -- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/lib/sauvc_pinger_finder/uart_driver_node
+[14.370s] -- Set runtime path of "/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/lib/sauvc_pinger_finder/uart_driver_node" to ""
+[14.370s] -- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/share/ament_index/resource_index/package_run_dependencies/sauvc_pinger_finder
+[14.370s] -- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/share/ament_index/resource_index/parent_prefix_path/sauvc_pinger_finder
+[14.370s] -- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/share/sauvc_pinger_finder/environment/ament_prefix_path.sh
+[14.371s] -- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/share/sauvc_pinger_finder/environment/ament_prefix_path.dsv
+[14.371s] -- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/share/sauvc_pinger_finder/environment/path.sh
+[14.371s] -- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/share/sauvc_pinger_finder/environment/path.dsv
+[14.371s] -- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/share/sauvc_pinger_finder/local_setup.bash
+[14.371s] -- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/share/sauvc_pinger_finder/local_setup.sh
+[14.371s] -- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/share/sauvc_pinger_finder/local_setup.zsh
+[14.371s] -- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/share/sauvc_pinger_finder/local_setup.dsv
+[14.371s] -- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/share/sauvc_pinger_finder/package.dsv
+[14.371s] -- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/share/ament_index/resource_index/packages/sauvc_pinger_finder
+[14.371s] -- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/share/sauvc_pinger_finder/cmake/sauvc_pinger_finderConfig.cmake
+[14.372s] -- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/share/sauvc_pinger_finder/cmake/sauvc_pinger_finderConfig-version.cmake
+[14.372s] -- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/share/sauvc_pinger_finder/package.xml
+[14.376s] Invoked command in '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/sauvc_pinger_finder' returned '0': AMENT_PREFIX_PATH=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial:/opt/ros/iron LD_LIBRARY_PATH=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/lib:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/cmake --install /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/sauvc_pinger_finder

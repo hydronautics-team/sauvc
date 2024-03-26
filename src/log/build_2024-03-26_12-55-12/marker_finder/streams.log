@@ -1,0 +1,21 @@
+[1.062s] Invoking command in '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/marker_finder': /usr/bin/cmake /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/marker_finder -DCATKIN_INSTALL_INTO_PREFIX_ROOT=0 -DCMAKE_INSTALL_PREFIX=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/marker_finder
+[2.179s] -- Configuring incomplete, errors occurred!
+[2.179s] See also "/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/marker_finder/CMakeFiles/CMakeOutput.log".
+[2.179s] [31mCMake Error at CMakeLists.txt:10 (find_package):
+[2.180s]   By not providing "Findcatkin.cmake" in CMAKE_MODULE_PATH this project has
+[2.180s]   asked CMake to find a package configuration file provided by "catkin", but
+[2.180s]   CMake did not find one.
+[2.180s] 
+[2.180s]   Could not find a package configuration file provided by "catkin" with any
+[2.180s]   of the following names:
+[2.180s] 
+[2.180s]     catkinConfig.cmake
+[2.181s]     catkin-config.cmake
+[2.181s] 
+[2.181s]   Add the installation prefix of "catkin" to CMAKE_PREFIX_PATH or set
+[2.181s]   "catkin_DIR" to a directory containing one of the above files.  If "catkin"
+[2.181s]   provides a separate development package or SDK, be sure it has been
+[2.181s]   installed.
+[2.181s] 
+[2.182s] [0m
+[2.651s] Invoked command in '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/marker_finder' returned '1': /usr/bin/cmake /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/marker_finder -DCATKIN_INSTALL_INTO_PREFIX_ROOT=0 -DCMAKE_INSTALL_PREFIX=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/marker_finder

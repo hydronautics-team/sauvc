@@ -1,0 +1,23 @@
+// generated from rosidl_adapter/resource/srv.idl.em
+// with input from stingray_core_interfaces/srv/SetDevice.srv
+// generated code does not contain a copyright notice
+
+
+module stingray_core_interfaces {
+  module srv {
+    @verbatim (language="comment", text=
+      "Request")
+    struct SetDevice_Request {
+      uint8 device;
+
+      int32 value;
+    };
+    @verbatim (language="comment", text=
+      "Response")
+    struct SetDevice_Response {
+      boolean success;
+
+      string message;
+    };
+  };
+};

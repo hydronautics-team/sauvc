@@ -1,0 +1,33 @@
+[0.678s] Invoking command in '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/marker_finder': /usr/bin/cmake /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/marker_finder -DCATKIN_INSTALL_INTO_PREFIX_ROOT=0 -DCMAKE_INSTALL_PREFIX=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/marker_finder
+[1.494s] -- The C compiler identification is GNU 11.4.0
+[1.494s] -- The CXX compiler identification is GNU 11.4.0
+[1.494s] -- Detecting C compiler ABI info
+[1.494s] -- Detecting C compiler ABI info - done
+[1.494s] -- Check for working C compiler: /usr/bin/cc - skipped
+[1.495s] -- Detecting C compile features
+[1.495s] -- Detecting C compile features - done
+[1.495s] -- Detecting CXX compiler ABI info
+[1.495s] -- Detecting CXX compiler ABI info - done
+[1.495s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[1.495s] -- Detecting CXX compile features
+[1.495s] -- Detecting CXX compile features - done
+[1.495s] -- Configuring incomplete, errors occurred!
+[1.495s] See also "/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/marker_finder/CMakeFiles/CMakeOutput.log".
+[1.495s] [31mCMake Error at CMakeLists.txt:10 (find_package):
+[1.495s]   By not providing "Findcatkin.cmake" in CMAKE_MODULE_PATH this project has
+[1.495s]   asked CMake to find a package configuration file provided by "catkin", but
+[1.495s]   CMake did not find one.
+[1.495s] 
+[1.496s]   Could not find a package configuration file provided by "catkin" with any
+[1.496s]   of the following names:
+[1.496s] 
+[1.496s]     catkinConfig.cmake
+[1.496s]     catkin-config.cmake
+[1.496s] 
+[1.496s]   Add the installation prefix of "catkin" to CMAKE_PREFIX_PATH or set
+[1.496s]   "catkin_DIR" to a directory containing one of the above files.  If "catkin"
+[1.496s]   provides a separate development package or SDK, be sure it has been
+[1.496s]   installed.
+[1.496s] 
+[1.496s] [0m
+[1.852s] Invoked command in '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/marker_finder' returned '1': /usr/bin/cmake /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/marker_finder -DCATKIN_INSTALL_INTO_PREFIX_ROOT=0 -DCMAKE_INSTALL_PREFIX=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/marker_finder

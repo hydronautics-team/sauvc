@@ -1,0 +1,108 @@
+[0.780s] Invoking command in '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/stingray_core_interfaces': CMAKE_PREFIX_PATH=/opt/ros/iron /usr/bin/cmake --build /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/stingray_core_interfaces -- -j16 -l16
+[2.586s] [  1%] [34m[1mGenerating type hashes for ROS interfaces[0m
+[2.587s] [  1%] Built target ament_cmake_python_copy_stingray_core_interfaces
+[2.587s] running egg_info
+[2.588s] creating stingray_core_interfaces.egg-info
+[2.589s] writing stingray_core_interfaces.egg-info/PKG-INFO
+[2.589s] writing dependency_links to stingray_core_interfaces.egg-info/dependency_links.txt
+[2.591s] writing top-level names to stingray_core_interfaces.egg-info/top_level.txt
+[2.592s] writing manifest file 'stingray_core_interfaces.egg-info/SOURCES.txt'
+[2.593s] reading manifest file 'stingray_core_interfaces.egg-info/SOURCES.txt'
+[2.595s] writing manifest file 'stingray_core_interfaces.egg-info/SOURCES.txt'
+[2.596s] [  1%] Built target ament_cmake_python_build_stingray_core_interfaces_egg
+[2.596s] [  1%] Built target stingray_core_interfaces__rosidl_generator_type_description
+[2.596s] [  2%] [34m[1mGenerating C code for ROS interfaces[0m
+[2.596s] [  3%] [34m[1mGenerating C++ code for ROS interfaces[0m
+[2.596s] Traceback (most recent call last):
+[2.596s] Traceback (most recent call last):
+[2.597s]   File "/opt/ros/iron/share/rosidl_generator_c/cmake/../../../lib/rosidl_generator_c/rosidl_generator_c", line 42, in <module>
+[2.597s]   File "/opt/ros/iron/share/rosidl_generator_cpp/cmake/../../../lib/rosidl_generator_cpp/rosidl_generator_cpp", line 38, in <module>
+[2.597s] gmake[2]: *** Deleting file 'rosidl_generator_c/stingray_core_interfaces/msg/uv_state.h'
+[2.597s] gmake[2]: *** Deleting file 'rosidl_generator_cpp/stingray_core_interfaces/msg/uv_state.hpp'
+[2.597s]     sys.exit(main())
+[2.597s]   File "/opt/ros/iron/share/rosidl_generator_c/cmake/../../../lib/rosidl_generator_c/rosidl_generator_c", line 38, in main
+[2.598s]     sys.exit(main())
+[2.598s]   File "/opt/ros/iron/share/rosidl_generator_cpp/cmake/../../../lib/rosidl_generator_cpp/rosidl_generator_cpp", line 34, in main
+[2.598s]     generate_c(args.generator_arguments_file, args.disable_description_codegen)
+[2.598s]   File "/opt/ros/iron/lib/python3.10/site-packages/rosidl_generator_c/__init__.py", line 41, in generate_c
+[2.598s]     generate_cpp(args.generator_arguments_file)
+[2.598s]     return generate_files(
+[2.599s]   File "/opt/ros/iron/lib/python3.10/site-packages/rosidl_generator_cpp/__init__.py", line 38, in generate_cpp
+[2.599s]   File "/opt/ros/iron/lib/python3.10/site-packages/rosidl_pycommon/__init__.py", line 107, in generate_files
+[2.599s]     expand_template(
+[2.599s]   File "/opt/ros/iron/lib/python3.10/site-packages/rosidl_pycommon/__init__.py", line 169, in expand_template
+[2.599s]     return generate_files(
+[2.599s]   File "/opt/ros/iron/lib/python3.10/site-packages/rosidl_pycommon/__init__.py", line 92, in generate_files
+[2.599s]     interpreter.string(template_content, template_path, locals=data)
+[2.600s]   File "/usr/lib/python3/dist-packages/em.py", line 2391, in string
+[2.600s]     idl_file = parse_idl_file(locator)
+[2.600s]   File "/opt/ros/iron/lib/python3.10/site-packages/rosidl_parser/parser.py", line 64, in parse_idl_file
+[2.600s]     content = parse_idl_string(string, png_file=png_file)
+[2.600s]   File "/opt/ros/iron/lib/python3.10/site-packages/rosidl_parser/parser.py", line 72, in parse_idl_string
+[2.600s]     tree = get_ast_from_idl_string(idl_string)
+[2.600s]   File "/opt/ros/iron/lib/python3.10/site-packages/rosidl_parser/parser.py", line 89, in get_ast_from_idl_string
+[2.601s]     return _parser.parse(idl_string)
+[2.601s]   File "/usr/lib/python3/dist-packages/lark/lark.py", line 619, in parse
+[2.601s]     return self.parser.parse(text, start=start, on_error=on_error)
+[2.601s]   File "/usr/lib/python3/dist-packages/lark/parser_frontends.py", line 99, in parse
+[2.604s]     return self.parser.parse(stream, chosen_start, **kw)
+[2.604s]   File "/usr/lib/python3/dist-packages/lark/parsers/earley.py", line 292, in parse
+[2.604s]     self.safe(scanner, True, locals)
+[2.605s]   File "/usr/lib/python3/dist-packages/em.py", line 2401, in safe
+[2.605s]     return transformer.transform(solutions[0])
+[2.605s]   File "/usr/lib/python3/dist-packages/lark/parsers/earley_forest.py", line 395, in transform
+[2.605s]     self.visit(root)
+[2.605s]   File "/usr/lib/python3/dist-packages/lark/parsers/earley_forest.py", line 531, in visit
+[2.605s]     self.parse(scanner, locals)
+[2.605s]   File "/usr/lib/python3/dist-packages/em.py", line 2421, in parse
+[2.606s]     self.prioritizer.visit(root)
+[2.606s]   File "/usr/lib/python3/dist-packages/lark/parsers/earley_forest.py", line 355, in visit
+[2.606s]     next_node = vsni(current)
+[2.606s]   File "/usr/lib/python3/dist-packages/lark/parsers/earley_forest.py", line 472, in visit_symbol_node_in
+[2.606s]     return iter(node.children)
+[2.607s]   File "/usr/lib/python3/dist-packages/lark/parsers/earley_forest.py", line 89, in children
+[2.607s]     token.run(self, locals)
+[2.607s]   File "/usr/lib/python3/dist-packages/em.py", line 1547, in run
+[2.607s]     return sorted(self._children, key=attrgetter('sort_key'))
+[2.607s]   File "/usr/lib/python3/dist-packages/lark/parsers/earley_forest.py", line 139, in sort_key
+[2.608s]     @property
+[2.608s] KeyboardInterrupt
+[2.608s]     self.subrun(info[0][1], interpreter, locals)
+[2.608s]   File "/usr/lib/python3/dist-packages/em.py", line 1631, in subrun
+[2.608s]     token.run(interpreter, locals)
+[2.608s]   File "/usr/lib/python3/dist-packages/em.py", line 1425, in run
+[2.616s]     interpreter.execute(self.code, locals)
+[2.617s]   File "/usr/lib/python3/dist-packages/em.py", line 2596, in execute
+[2.617s]     _exec(statements, self.globals, locals)
+[2.617s]   File "<string>", line 3, in <module>
+[2.617s]   File "/opt/ros/iron/lib/python3.10/site-packages/rosidl_pycommon/__init__.py", line 218, in _expand_template
+[2.617s]     interpreter.string(content, str(template_path), kwargs)
+[2.617s]   File "/usr/lib/python3/dist-packages/em.py", line 2391, in string
+[2.617s]     self.safe(scanner, True, locals)
+[2.618s]   File "/usr/lib/python3/dist-packages/em.py", line 2401, in safe
+[2.618s]     self.parse(scanner, locals)
+[2.618s]   File "/usr/lib/python3/dist-packages/em.py", line 2417, in parse
+[2.620s]     token = scanner.one()
+[2.620s]   File "/usr/lib/python3/dist-packages/em.py", line 1984, in one
+[2.621s]     token.scan(self)
+[2.621s]   File "/usr/lib/python3/dist-packages/em.py", line 1421, in scan
+[2.621s]     i = scanner.complex('{', '}', 0)
+[2.621s]   File "/usr/lib/python3/dist-packages/em.py", line 1893, in complex
+[2.622s]     newQuote = self.check(i, quote)
+[2.622s]   File "/usr/lib/python3/dist-packages/em.py", line 1766, in check
+[2.628s]     if self[i] in '\'\"':
+[2.628s]   File "/usr/lib/python3/dist-packages/em.py", line 1683, in __getitem__
+[2.628s]     if isinstance(index, slice):
+[2.628s] KeyboardInterrupt
+[2.634s] Exception ignored in: <function Interpreter.__del__ at 0x7869af021e10>
+[2.634s] Traceback (most recent call last):
+[2.634s]   File "/usr/lib/python3/dist-packages/em.py", line 2094, in __del__
+[2.634s]   File "/usr/lib/python3/dist-packages/em.py", line 2157, in shutdown
+[2.634s]   File "/usr/lib/python3/dist-packages/em.py", line 2647, in finalize
+[2.635s]   File "/usr/lib/python3/dist-packages/em.py", line 2200, in push
+[2.635s] AttributeError: '_io.TextIOWrapper' object has no attribute 'push'
+[2.636s] gmake[2]: *** [CMakeFiles/stingray_core_interfaces__rosidl_generator_c.dir/build.make:160: rosidl_generator_c/stingray_core_interfaces/msg/uv_state.h] Interrupt
+[2.636s] gmake[1]: *** [CMakeFiles/Makefile2:240: CMakeFiles/stingray_core_interfaces__rosidl_generator_c.dir/all] Interrupt
+[2.637s] gmake[2]: *** [CMakeFiles/stingray_core_interfaces__cpp.dir/build.make:178: rosidl_generator_cpp/stingray_core_interfaces/msg/uv_state.hpp] Interrupt
+[2.637s] gmake[1]: *** [CMakeFiles/Makefile2:293: CMakeFiles/stingray_core_interfaces__cpp.dir/all] Interrupt
+[2.637s] gmake: *** [Makefile:146: all] Interrupt

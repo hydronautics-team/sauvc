@@ -1,0 +1,351 @@
+[1.096s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build', '--packages-select', 'sauvc_pinger_finder/']
+[1.096s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=False, test_result_base=None, continue_on_error=False, executor='parallel', parallel_workers=16, event_handlers=None, ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['.'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=['sauvc_pinger_finder/'], packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, allow_overriding=[], cmake_args=None, cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, verb_parser=<colcon_defaults.argument_parser.defaults.DefaultArgumentsDecorator object at 0x742bf8877340>, verb_extension=<colcon_core.verb.build.BuildVerb object at 0x742bf9509e70>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0x742bf9509e70>>)
+[1.147s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[1.148s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[1.148s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[1.148s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[1.148s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[1.148s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[1.148s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src'
+[1.148s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[1.148s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[1.148s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[1.148s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[1.148s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[1.148s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[1.148s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[1.148s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[1.149s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[1.162s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['cmake', 'python']
+[1.162s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'cmake'
+[1.162s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python'
+[1.162s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['python_setup_py']
+[1.162s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python_setup_py'
+[1.163s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extensions ['ignore', 'ignore_ament_install']
+[1.163s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extension 'ignore'
+[1.163s] Level 1:colcon.colcon_core.package_identification:_identify(build) ignored
+[1.163s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extensions ['ignore', 'ignore_ament_install']
+[1.163s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extension 'ignore'
+[1.163s] Level 1:colcon.colcon_core.package_identification:_identify(install) ignored
+[1.163s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extensions ['ignore', 'ignore_ament_install']
+[1.163s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extension 'ignore'
+[1.163s] Level 1:colcon.colcon_core.package_identification:_identify(log) ignored
+[1.163s] Level 1:colcon.colcon_core.package_identification:_identify(marker_finder) by extensions ['ignore', 'ignore_ament_install']
+[1.163s] Level 1:colcon.colcon_core.package_identification:_identify(marker_finder) by extension 'ignore'
+[1.164s] Level 1:colcon.colcon_core.package_identification:_identify(marker_finder) by extension 'ignore_ament_install'
+[1.164s] Level 1:colcon.colcon_core.package_identification:_identify(marker_finder) by extensions ['colcon_pkg']
+[1.164s] Level 1:colcon.colcon_core.package_identification:_identify(marker_finder) by extension 'colcon_pkg'
+[1.164s] Level 1:colcon.colcon_core.package_identification:_identify(marker_finder) by extensions ['colcon_meta']
+[1.164s] Level 1:colcon.colcon_core.package_identification:_identify(marker_finder) by extension 'colcon_meta'
+[1.164s] Level 1:colcon.colcon_core.package_identification:_identify(marker_finder) by extensions ['ros']
+[1.164s] Level 1:colcon.colcon_core.package_identification:_identify(marker_finder) by extension 'ros'
+[1.167s] DEBUG:colcon.colcon_core.package_identification:Package 'marker_finder' with type 'ros.catkin' and name 'marker_finder'
+[1.167s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_launch) by extensions ['ignore', 'ignore_ament_install']
+[1.168s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_launch) by extension 'ignore'
+[1.168s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_launch) by extension 'ignore_ament_install'
+[1.168s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_launch) by extensions ['colcon_pkg']
+[1.168s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_launch) by extension 'colcon_pkg'
+[1.168s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_launch) by extensions ['colcon_meta']
+[1.168s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_launch) by extension 'colcon_meta'
+[1.168s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_launch) by extensions ['ros']
+[1.168s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_launch) by extension 'ros'
+[1.168s] DEBUG:colcon.colcon_core.package_identification:Package 'sauvc_launch' with type 'ros.ament_python' and name 'sauvc_launch'
+[1.169s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_missions) by extensions ['ignore', 'ignore_ament_install']
+[1.169s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_missions) by extension 'ignore'
+[1.169s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_missions) by extension 'ignore_ament_install'
+[1.169s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_missions) by extensions ['colcon_pkg']
+[1.169s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_missions) by extension 'colcon_pkg'
+[1.169s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_missions) by extensions ['colcon_meta']
+[1.169s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_missions) by extension 'colcon_meta'
+[1.169s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_missions) by extensions ['ros']
+[1.169s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_missions) by extension 'ros'
+[1.170s] DEBUG:colcon.colcon_core.package_identification:Package 'sauvc_missions' with type 'ros.ament_python' and name 'sauvc_missions'
+[1.170s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_object_detection) by extensions ['ignore', 'ignore_ament_install']
+[1.170s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_object_detection) by extension 'ignore'
+[1.170s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_object_detection) by extension 'ignore_ament_install'
+[1.170s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_object_detection) by extensions ['colcon_pkg']
+[1.170s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_object_detection) by extension 'colcon_pkg'
+[1.170s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_object_detection) by extensions ['colcon_meta']
+[1.170s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_object_detection) by extension 'colcon_meta'
+[1.170s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_object_detection) by extensions ['ros']
+[1.170s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_object_detection) by extension 'ros'
+[1.171s] DEBUG:colcon.colcon_core.package_identification:Package 'sauvc_object_detection' with type 'ros.ament_python' and name 'sauvc_object_detection'
+[1.171s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_pinger_finder) by extensions ['ignore', 'ignore_ament_install']
+[1.171s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_pinger_finder) by extension 'ignore'
+[1.171s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_pinger_finder) by extension 'ignore_ament_install'
+[1.171s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_pinger_finder) by extensions ['colcon_pkg']
+[1.171s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_pinger_finder) by extension 'colcon_pkg'
+[1.171s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_pinger_finder) by extensions ['colcon_meta']
+[1.171s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_pinger_finder) by extension 'colcon_meta'
+[1.171s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_pinger_finder) by extensions ['ros']
+[1.171s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_pinger_finder) by extension 'ros'
+[1.173s] DEBUG:colcon.colcon_core.package_identification:Package 'sauvc_pinger_finder' with type 'ros.ament_cmake' and name 'sauvc_pinger_finder'
+[1.173s] Level 1:colcon.colcon_core.package_identification:_identify(stingray) by extensions ['ignore', 'ignore_ament_install']
+[1.173s] Level 1:colcon.colcon_core.package_identification:_identify(stingray) by extension 'ignore'
+[1.173s] Level 1:colcon.colcon_core.package_identification:_identify(stingray) by extension 'ignore_ament_install'
+[1.173s] Level 1:colcon.colcon_core.package_identification:_identify(stingray) by extensions ['colcon_pkg']
+[1.173s] Level 1:colcon.colcon_core.package_identification:_identify(stingray) by extension 'colcon_pkg'
+[1.173s] Level 1:colcon.colcon_core.package_identification:_identify(stingray) by extensions ['colcon_meta']
+[1.173s] Level 1:colcon.colcon_core.package_identification:_identify(stingray) by extension 'colcon_meta'
+[1.173s] Level 1:colcon.colcon_core.package_identification:_identify(stingray) by extensions ['ros']
+[1.173s] Level 1:colcon.colcon_core.package_identification:_identify(stingray) by extension 'ros'
+[1.173s] Level 1:colcon.colcon_core.package_identification:_identify(stingray) by extensions ['cmake', 'python']
+[1.173s] Level 1:colcon.colcon_core.package_identification:_identify(stingray) by extension 'cmake'
+[1.173s] Level 1:colcon.colcon_core.package_identification:_identify(stingray) by extension 'python'
+[1.173s] Level 1:colcon.colcon_core.package_identification:_identify(stingray) by extensions ['python_setup_py']
+[1.173s] Level 1:colcon.colcon_core.package_identification:_identify(stingray) by extension 'python_setup_py'
+[1.174s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources) by extensions ['ignore', 'ignore_ament_install']
+[1.174s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources) by extension 'ignore'
+[1.174s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources) by extension 'ignore_ament_install'
+[1.174s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources) by extensions ['colcon_pkg']
+[1.174s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources) by extension 'colcon_pkg'
+[1.174s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources) by extensions ['colcon_meta']
+[1.174s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources) by extension 'colcon_meta'
+[1.174s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources) by extensions ['ros']
+[1.174s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources) by extension 'ros'
+[1.174s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources) by extensions ['cmake', 'python']
+[1.174s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources) by extension 'cmake'
+[1.174s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources) by extension 'python'
+[1.174s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources) by extensions ['python_setup_py']
+[1.174s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources) by extension 'python_setup_py'
+[1.174s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/configs) by extensions ['ignore', 'ignore_ament_install']
+[1.174s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/configs) by extension 'ignore'
+[1.174s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/configs) by extension 'ignore_ament_install'
+[1.175s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/configs) by extensions ['colcon_pkg']
+[1.175s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/configs) by extension 'colcon_pkg'
+[1.175s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/configs) by extensions ['colcon_meta']
+[1.175s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/configs) by extension 'colcon_meta'
+[1.175s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/configs) by extensions ['ros']
+[1.175s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/configs) by extension 'ros'
+[1.175s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/configs) by extensions ['cmake', 'python']
+[1.175s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/configs) by extension 'cmake'
+[1.175s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/configs) by extension 'python'
+[1.175s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/configs) by extensions ['python_setup_py']
+[1.175s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/configs) by extension 'python_setup_py'
+[1.175s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/weights) by extensions ['ignore', 'ignore_ament_install']
+[1.175s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/weights) by extension 'ignore'
+[1.176s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/weights) by extension 'ignore_ament_install'
+[1.176s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/weights) by extensions ['colcon_pkg']
+[1.176s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/weights) by extension 'colcon_pkg'
+[1.176s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/weights) by extensions ['colcon_meta']
+[1.176s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/weights) by extension 'colcon_meta'
+[1.176s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/weights) by extensions ['ros']
+[1.176s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/weights) by extension 'ros'
+[1.176s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/weights) by extensions ['cmake', 'python']
+[1.176s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/weights) by extension 'cmake'
+[1.176s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/weights) by extension 'python'
+[1.176s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/weights) by extensions ['python_setup_py']
+[1.176s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/weights) by extension 'python_setup_py'
+[1.177s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/weights/yolov5) by extensions ['ignore', 'ignore_ament_install']
+[1.177s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/weights/yolov5) by extension 'ignore'
+[1.177s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/weights/yolov5) by extension 'ignore_ament_install'
+[1.177s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/weights/yolov5) by extensions ['colcon_pkg']
+[1.177s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/weights/yolov5) by extension 'colcon_pkg'
+[1.177s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/weights/yolov5) by extensions ['colcon_meta']
+[1.177s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/weights/yolov5) by extension 'colcon_meta'
+[1.177s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/weights/yolov5) by extensions ['ros']
+[1.177s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/weights/yolov5) by extension 'ros'
+[1.178s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/weights/yolov5) by extensions ['cmake', 'python']
+[1.178s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/weights/yolov5) by extension 'cmake'
+[1.178s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/weights/yolov5) by extension 'python'
+[1.178s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/weights/yolov5) by extensions ['python_setup_py']
+[1.178s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/weights/yolov5) by extension 'python_setup_py'
+[1.178s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src) by extensions ['ignore', 'ignore_ament_install']
+[1.178s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src) by extension 'ignore'
+[1.178s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src) by extension 'ignore_ament_install'
+[1.178s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src) by extensions ['colcon_pkg']
+[1.178s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src) by extension 'colcon_pkg'
+[1.178s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src) by extensions ['colcon_meta']
+[1.178s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src) by extension 'colcon_meta'
+[1.179s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src) by extensions ['ros']
+[1.179s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src) by extension 'ros'
+[1.179s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src) by extensions ['cmake', 'python']
+[1.179s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src) by extension 'cmake'
+[1.179s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src) by extension 'python'
+[1.179s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src) by extensions ['python_setup_py']
+[1.179s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src) by extension 'python_setup_py'
+[1.180s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core) by extensions ['ignore', 'ignore_ament_install']
+[1.180s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core) by extension 'ignore'
+[1.180s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core) by extension 'ignore_ament_install'
+[1.180s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core) by extensions ['colcon_pkg']
+[1.180s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core) by extension 'colcon_pkg'
+[1.180s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core) by extensions ['colcon_meta']
+[1.180s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core) by extension 'colcon_meta'
+[1.180s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core) by extensions ['ros']
+[1.180s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core) by extension 'ros'
+[1.180s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core) by extensions ['cmake', 'python']
+[1.180s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core) by extension 'cmake'
+[1.180s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core) by extension 'python'
+[1.180s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core) by extensions ['python_setup_py']
+[1.180s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core) by extension 'python_setup_py'
+[1.180s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src) by extensions ['ignore', 'ignore_ament_install']
+[1.181s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src) by extension 'ignore'
+[1.181s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src) by extension 'ignore_ament_install'
+[1.181s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src) by extensions ['colcon_pkg']
+[1.181s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src) by extension 'colcon_pkg'
+[1.181s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src) by extensions ['colcon_meta']
+[1.181s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src) by extension 'colcon_meta'
+[1.181s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src) by extensions ['ros']
+[1.181s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src) by extension 'ros'
+[1.181s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src) by extensions ['cmake', 'python']
+[1.181s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src) by extension 'cmake'
+[1.181s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src) by extension 'python'
+[1.181s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src) by extensions ['python_setup_py']
+[1.181s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src) by extension 'python_setup_py'
+[1.181s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/serial) by extensions ['ignore', 'ignore_ament_install']
+[1.181s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/serial) by extension 'ignore'
+[1.181s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/serial) by extension 'ignore_ament_install'
+[1.181s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/serial) by extensions ['colcon_pkg']
+[1.181s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/serial) by extension 'colcon_pkg'
+[1.182s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/serial) by extensions ['colcon_meta']
+[1.182s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/serial) by extension 'colcon_meta'
+[1.182s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/serial) by extensions ['ros']
+[1.182s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/serial) by extension 'ros'
+[1.183s] DEBUG:colcon.colcon_core.package_identification:Package 'stingray/src/stingray_core/src/serial' with type 'ros.ament_cmake' and name 'serial'
+[1.183s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/stingray_core_communication) by extensions ['ignore', 'ignore_ament_install']
+[1.183s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/stingray_core_communication) by extension 'ignore'
+[1.183s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/stingray_core_communication) by extension 'ignore_ament_install'
+[1.183s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/stingray_core_communication) by extensions ['colcon_pkg']
+[1.183s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/stingray_core_communication) by extension 'colcon_pkg'
+[1.183s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/stingray_core_communication) by extensions ['colcon_meta']
+[1.183s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/stingray_core_communication) by extension 'colcon_meta'
+[1.183s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/stingray_core_communication) by extensions ['ros']
+[1.183s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/stingray_core_communication) by extension 'ros'
+[1.185s] DEBUG:colcon.colcon_core.package_identification:Package 'stingray/src/stingray_core/src/stingray_core_communication' with type 'ros.ament_cmake' and name 'stingray_core_communication'
+[1.185s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/stingray_core_interfaces) by extensions ['ignore', 'ignore_ament_install']
+[1.185s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/stingray_core_interfaces) by extension 'ignore'
+[1.185s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/stingray_core_interfaces) by extension 'ignore_ament_install'
+[1.185s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/stingray_core_interfaces) by extensions ['colcon_pkg']
+[1.185s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/stingray_core_interfaces) by extension 'colcon_pkg'
+[1.185s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/stingray_core_interfaces) by extensions ['colcon_meta']
+[1.185s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/stingray_core_interfaces) by extension 'colcon_meta'
+[1.185s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/stingray_core_interfaces) by extensions ['ros']
+[1.185s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/stingray_core_interfaces) by extension 'ros'
+[1.186s] DEBUG:colcon.colcon_core.package_identification:Package 'stingray/src/stingray_core/src/stingray_core_interfaces' with type 'ros.ament_cmake' and name 'stingray_core_interfaces'
+[1.187s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/stingray_core_launch) by extensions ['ignore', 'ignore_ament_install']
+[1.187s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/stingray_core_launch) by extension 'ignore'
+[1.187s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/stingray_core_launch) by extension 'ignore_ament_install'
+[1.187s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/stingray_core_launch) by extensions ['colcon_pkg']
+[1.187s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/stingray_core_launch) by extension 'colcon_pkg'
+[1.187s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/stingray_core_launch) by extensions ['colcon_meta']
+[1.187s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/stingray_core_launch) by extension 'colcon_meta'
+[1.187s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/stingray_core_launch) by extensions ['ros']
+[1.187s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/stingray_core_launch) by extension 'ros'
+[1.188s] DEBUG:colcon.colcon_core.package_identification:Package 'stingray/src/stingray_core/src/stingray_core_launch' with type 'ros.ament_python' and name 'stingray_core_launch'
+[1.188s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_devices) by extensions ['ignore', 'ignore_ament_install']
+[1.188s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_devices) by extension 'ignore'
+[1.188s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_devices) by extension 'ignore_ament_install'
+[1.188s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_devices) by extensions ['colcon_pkg']
+[1.188s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_devices) by extension 'colcon_pkg'
+[1.188s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_devices) by extensions ['colcon_meta']
+[1.188s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_devices) by extension 'colcon_meta'
+[1.189s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_devices) by extensions ['ros']
+[1.189s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_devices) by extension 'ros'
+[1.190s] DEBUG:colcon.colcon_core.package_identification:Package 'stingray/src/stingray_devices' with type 'ros.ament_cmake' and name 'stingray_devices'
+[1.190s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_interfaces) by extensions ['ignore', 'ignore_ament_install']
+[1.190s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_interfaces) by extension 'ignore'
+[1.190s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_interfaces) by extension 'ignore_ament_install'
+[1.190s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_interfaces) by extensions ['colcon_pkg']
+[1.190s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_interfaces) by extension 'colcon_pkg'
+[1.190s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_interfaces) by extensions ['colcon_meta']
+[1.190s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_interfaces) by extension 'colcon_meta'
+[1.190s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_interfaces) by extensions ['ros']
+[1.190s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_interfaces) by extension 'ros'
+[1.191s] DEBUG:colcon.colcon_core.package_identification:Package 'stingray/src/stingray_interfaces' with type 'ros.ament_cmake' and name 'stingray_interfaces'
+[1.191s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_launch) by extensions ['ignore', 'ignore_ament_install']
+[1.191s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_launch) by extension 'ignore'
+[1.191s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_launch) by extension 'ignore_ament_install'
+[1.192s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_launch) by extensions ['colcon_pkg']
+[1.192s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_launch) by extension 'colcon_pkg'
+[1.192s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_launch) by extensions ['colcon_meta']
+[1.192s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_launch) by extension 'colcon_meta'
+[1.192s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_launch) by extensions ['ros']
+[1.192s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_launch) by extension 'ros'
+[1.192s] DEBUG:colcon.colcon_core.package_identification:Package 'stingray/src/stingray_launch' with type 'ros.ament_python' and name 'stingray_launch'
+[1.193s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_missions) by extensions ['ignore', 'ignore_ament_install']
+[1.193s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_missions) by extension 'ignore'
+[1.193s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_missions) by extension 'ignore_ament_install'
+[1.193s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_missions) by extensions ['colcon_pkg']
+[1.193s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_missions) by extension 'colcon_pkg'
+[1.193s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_missions) by extensions ['colcon_meta']
+[1.193s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_missions) by extension 'colcon_meta'
+[1.193s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_missions) by extensions ['ros']
+[1.193s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_missions) by extension 'ros'
+[1.194s] DEBUG:colcon.colcon_core.package_identification:Package 'stingray/src/stingray_missions' with type 'ros.ament_python' and name 'stingray_missions'
+[1.194s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_movement) by extensions ['ignore', 'ignore_ament_install']
+[1.194s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_movement) by extension 'ignore'
+[1.194s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_movement) by extension 'ignore_ament_install'
+[1.194s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_movement) by extensions ['colcon_pkg']
+[1.194s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_movement) by extension 'colcon_pkg'
+[1.194s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_movement) by extensions ['colcon_meta']
+[1.195s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_movement) by extension 'colcon_meta'
+[1.195s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_movement) by extensions ['ros']
+[1.195s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_movement) by extension 'ros'
+[1.196s] DEBUG:colcon.colcon_core.package_identification:Package 'stingray/src/stingray_movement' with type 'ros.ament_cmake' and name 'stingray_movement'
+[1.196s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_object_detection) by extensions ['ignore', 'ignore_ament_install']
+[1.196s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_object_detection) by extension 'ignore'
+[1.196s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_object_detection) by extension 'ignore_ament_install'
+[1.196s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_object_detection) by extensions ['colcon_pkg']
+[1.196s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_object_detection) by extension 'colcon_pkg'
+[1.196s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_object_detection) by extensions ['colcon_meta']
+[1.196s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_object_detection) by extension 'colcon_meta'
+[1.196s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_object_detection) by extensions ['ros']
+[1.196s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_object_detection) by extension 'ros'
+[1.199s] DEBUG:colcon.colcon_core.package_identification:Package 'stingray/src/stingray_object_detection' with type 'ros.ament_python' and name 'stingray_object_detection'
+[1.199s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_utils) by extensions ['ignore', 'ignore_ament_install']
+[1.199s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_utils) by extension 'ignore'
+[1.199s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_utils) by extension 'ignore_ament_install'
+[1.199s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_utils) by extensions ['colcon_pkg']
+[1.199s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_utils) by extension 'colcon_pkg'
+[1.199s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_utils) by extensions ['colcon_meta']
+[1.199s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_utils) by extension 'colcon_meta'
+[1.199s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_utils) by extensions ['ros']
+[1.200s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_utils) by extension 'ros'
+[1.201s] DEBUG:colcon.colcon_core.package_identification:Package 'stingray/src/stingray_utils' with type 'ros.ament_cmake' and name 'stingray_utils'
+[1.201s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[1.201s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[1.201s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[1.201s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[1.201s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[1.220s] WARNING:colcon.colcon_core.package_selection:ignoring unknown package 'sauvc_pinger_finder/' in --packages-select
+[1.295s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'marker_finder' in 'marker_finder'
+[1.295s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'sauvc_launch' in 'sauvc_launch'
+[1.295s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'serial' in 'stingray/src/stingray_core/src/serial'
+[1.295s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'stingray_core_interfaces' in 'stingray/src/stingray_core/src/stingray_core_interfaces'
+[1.295s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'stingray_core_launch' in 'stingray/src/stingray_core/src/stingray_core_launch'
+[1.295s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'stingray_interfaces' in 'stingray/src/stingray_interfaces'
+[1.295s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'stingray_launch' in 'stingray/src/stingray_launch'
+[1.295s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'stingray_object_detection' in 'stingray/src/stingray_object_detection'
+[1.295s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'sauvc_object_detection' in 'sauvc_object_detection'
+[1.295s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'stingray_core_communication' in 'stingray/src/stingray_core/src/stingray_core_communication'
+[1.296s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'stingray_utils' in 'stingray/src/stingray_utils'
+[1.296s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'sauvc_missions' in 'sauvc_missions'
+[1.296s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'sauvc_pinger_finder' in 'sauvc_pinger_finder'
+[1.296s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'stingray_devices' in 'stingray/src/stingray_devices'
+[1.296s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'stingray_missions' in 'stingray/src/stingray_missions'
+[1.296s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'stingray_movement' in 'stingray/src/stingray_movement'
+[1.345s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) check parameters
+[1.345s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) discover
+[1.385s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 289 installed packages in /opt/ros/iron
+[1.400s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) using defaults
+[1.497s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[1.515s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[1.515s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[1.516s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[1.516s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '0'
+[1.516s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[1.541s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[1.541s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[1.541s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[1.564s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[1.595s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[1.595s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/local_setup.ps1'
+[1.597s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/_local_setup_util_ps1.py'
+[1.598s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/setup.ps1'
+[1.630s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/local_setup.sh'
+[1.632s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/_local_setup_util_sh.py'
+[1.633s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/setup.sh'
+[1.659s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/local_setup.bash'
+[1.659s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/setup.bash'
+[1.681s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/local_setup.zsh'
+[1.682s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/setup.zsh'

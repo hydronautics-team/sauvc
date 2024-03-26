@@ -1,0 +1,107 @@
+[0.775s] Invoking command in '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/stingray_interfaces': CMAKE_PREFIX_PATH=/opt/ros/iron /usr/bin/cmake --build /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/stingray_interfaces -- -j16 -l16
+[2.763s] [  1%] Built target stingray_interfaces__rosidl_generator_type_description
+[2.763s] [  1%] Built target ament_cmake_python_copy_stingray_interfaces
+[2.764s] [  2%] [34m[1mGenerating C code for ROS interfaces[0m
+[2.764s] [  3%] [34m[1mGenerating C++ code for ROS interfaces[0m
+[2.764s] running egg_info
+[2.764s] writing stingray_interfaces.egg-info/PKG-INFO
+[2.764s] writing dependency_links to stingray_interfaces.egg-info/dependency_links.txt
+[2.764s] writing top-level names to stingray_interfaces.egg-info/top_level.txt
+[2.765s] reading manifest file 'stingray_interfaces.egg-info/SOURCES.txt'
+[2.765s] writing manifest file 'stingray_interfaces.egg-info/SOURCES.txt'
+[2.765s] [  3%] Built target ament_cmake_python_build_stingray_interfaces_egg
+[3.273s] [  3%] Built target stingray_interfaces__cpp
+[4.253s] [  4%] [32mBuilding C object CMakeFiles/stingray_interfaces__rosidl_generator_c.dir/rosidl_generator_c/stingray_interfaces/srv/detail/set_transition__description.c.o[0m
+[4.278s] [  5%] [32mBuilding C object CMakeFiles/stingray_interfaces__rosidl_generator_c.dir/rosidl_generator_c/stingray_interfaces/srv/detail/set_transition__functions.c.o[0m
+[4.283s] [  7%] [32mBuilding C object CMakeFiles/stingray_interfaces__rosidl_generator_c.dir/rosidl_generator_c/stingray_interfaces/action/detail/twist_action__description.c.o[0m
+[4.289s] [  8%] [32mBuilding C object CMakeFiles/stingray_interfaces__rosidl_generator_c.dir/rosidl_generator_c/stingray_interfaces/srv/detail/set_transition__type_support.c.o[0m
+[4.303s] [ 10%] [32mBuilding C object CMakeFiles/stingray_interfaces__rosidl_generator_c.dir/rosidl_generator_c/stingray_interfaces/action/detail/twist_action__type_support.c.o[0m
+[4.315s] [ 10%] [32mBuilding C object CMakeFiles/stingray_interfaces__rosidl_generator_c.dir/rosidl_generator_c/stingray_interfaces/action/detail/twist_action__functions.c.o[0m
+[4.342s] [ 11%] [32mBuilding C object CMakeFiles/stingray_interfaces__rosidl_generator_c.dir/rosidl_generator_c/stingray_interfaces/action/detail/device_action__description.c.o[0m
+[4.461s] [ 13%] [32mBuilding C object CMakeFiles/stingray_interfaces__rosidl_generator_c.dir/rosidl_generator_c/stingray_interfaces/action/detail/device_action__functions.c.o[0m
+[4.473s] [ 14%] [32mBuilding C object CMakeFiles/stingray_interfaces__rosidl_generator_c.dir/rosidl_generator_c/stingray_interfaces/action/detail/device_action__type_support.c.o[0m
+[4.505s] [ 15%] [32mBuilding C object CMakeFiles/stingray_interfaces__rosidl_generator_c.dir/rosidl_generator_c/stingray_interfaces/msg/detail/bbox__functions.c.o[0m
+[4.509s] [ 16%] [32mBuilding C object CMakeFiles/stingray_interfaces__rosidl_generator_c.dir/rosidl_generator_c/stingray_interfaces/msg/detail/bbox__description.c.o[0m
+[4.510s] [ 17%] [32mBuilding C object CMakeFiles/stingray_interfaces__rosidl_generator_c.dir/rosidl_generator_c/stingray_interfaces/msg/detail/bbox__type_support.c.o[0m
+[4.516s] [ 19%] [32mBuilding C object CMakeFiles/stingray_interfaces__rosidl_generator_c.dir/rosidl_generator_c/stingray_interfaces/msg/detail/bbox_array__description.c.o[0m
+[4.573s] [ 20%] [32mBuilding C object CMakeFiles/stingray_interfaces__rosidl_generator_c.dir/rosidl_generator_c/stingray_interfaces/msg/detail/bbox_array__functions.c.o[0m
+[4.639s] [ 21%] [32mBuilding C object CMakeFiles/stingray_interfaces__rosidl_generator_c.dir/rosidl_generator_c/stingray_interfaces/msg/detail/bbox_array__type_support.c.o[0m
+[4.656s] [ 22%] [32mBuilding C object CMakeFiles/stingray_interfaces__rosidl_generator_c.dir/rosidl_generator_c/stingray_interfaces/srv/detail/set_enable_object_detection__functions.c.o[0m
+[4.697s] [ 25%] [32mBuilding C object CMakeFiles/stingray_interfaces__rosidl_generator_c.dir/rosidl_generator_c/stingray_interfaces/srv/detail/set_enable_object_detection__type_support.c.o[0m
+[4.697s] [ 25%] [32mBuilding C object CMakeFiles/stingray_interfaces__rosidl_generator_c.dir/rosidl_generator_c/stingray_interfaces/srv/detail/set_enable_object_detection__description.c.o[0m
+[5.369s] [ 26%] [32m[1mLinking C shared library libstingray_interfaces__rosidl_generator_c.so[0m
+[5.664s] [ 26%] Built target stingray_interfaces__rosidl_generator_c
+[5.754s] [ 27%] [34m[1mGenerating C++ type support dispatch for ROS interfaces[0m
+[5.773s] [ 28%] [34m[1mGenerating C introspection for ROS interfaces[0m
+[5.785s] [ 30%] [34m[1mGenerating C++ introspection for ROS interfaces[0m
+[5.788s] [ 30%] [34m[1mGenerating C type support for eProsima Fast-RTPS[0m
+[5.808s] [ 32%] [34m[1mGenerating C type support dispatch for ROS interfaces[0m
+[5.809s] [ 33%] [34m[1mGenerating C++ type support for eProsima Fast-RTPS[0m
+[8.057s] [ 35%] [32mBuilding CXX object CMakeFiles/stingray_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/stingray_interfaces/action/device_action__type_support.cpp.o[0m
+[8.058s] [ 35%] [32mBuilding CXX object CMakeFiles/stingray_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/stingray_interfaces/srv/set_transition__type_support.cpp.o[0m
+[8.060s] [ 38%] [32mBuilding CXX object CMakeFiles/stingray_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/stingray_interfaces/msg/bbox__type_support.cpp.o[0m
+[8.061s] [ 38%] [32mBuilding CXX object CMakeFiles/stingray_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/stingray_interfaces/srv/set_enable_object_detection__type_support.cpp.o[0m
+[8.062s] [ 39%] [32mBuilding CXX object CMakeFiles/stingray_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/stingray_interfaces/msg/bbox_array__type_support.cpp.o[0m
+[8.062s] [ 40%] [32mBuilding CXX object CMakeFiles/stingray_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/stingray_interfaces/action/twist_action__type_support.cpp.o[0m
+[8.341s] [ 41%] [32mBuilding CXX object CMakeFiles/stingray_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/stingray_interfaces/srv/set_transition__type_support.cpp.o[0m
+[8.359s] [ 42%] [32mBuilding CXX object CMakeFiles/stingray_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/stingray_interfaces/action/device_action__type_support.cpp.o[0m
+[8.361s] [ 44%] [32mBuilding CXX object CMakeFiles/stingray_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/stingray_interfaces/action/twist_action__type_support.cpp.o[0m
+[8.369s] [ 45%] [32mBuilding CXX object CMakeFiles/stingray_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/stingray_interfaces/msg/bbox_array__type_support.cpp.o[0m
+[8.372s] [ 46%] [32mBuilding CXX object CMakeFiles/stingray_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/stingray_interfaces/msg/bbox__type_support.cpp.o[0m
+[8.397s] [ 47%] [32mBuilding CXX object CMakeFiles/stingray_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/stingray_interfaces/srv/set_enable_object_detection__type_support.cpp.o[0m
+[8.639s] [ 48%] [32m[1mLinking CXX shared library libstingray_interfaces__rosidl_typesupport_c.so[0m
+[8.701s] [ 50%] [32mBuilding C object CMakeFiles/stingray_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/stingray_interfaces/srv/detail/set_transition__type_support.c.o[0m
+[8.707s] [ 51%] [32mBuilding C object CMakeFiles/stingray_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/stingray_interfaces/msg/detail/bbox_array__type_support.c.o[0m
+[8.715s] [ 52%] [32mBuilding C object CMakeFiles/stingray_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/stingray_interfaces/srv/detail/set_enable_object_detection__type_support.c.o[0m
+[8.719s] [ 53%] [32mBuilding C object CMakeFiles/stingray_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/stingray_interfaces/msg/detail/bbox__type_support.c.o[0m
+[8.732s] [ 54%] [32mBuilding C object CMakeFiles/stingray_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/stingray_interfaces/action/detail/twist_action__type_support.c.o[0m
+[8.758s] [ 55%] [32mBuilding C object CMakeFiles/stingray_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/stingray_interfaces/action/detail/device_action__type_support.c.o[0m
+[8.868s] [ 55%] Built target stingray_interfaces__rosidl_typesupport_c
+[9.008s] [ 57%] [32m[1mLinking C shared library libstingray_interfaces__rosidl_typesupport_introspection_c.so[0m
+[9.058s] [ 59%] [32mBuilding CXX object CMakeFiles/stingray_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/stingray_interfaces/action/detail/device_action__type_support.cpp.o[0m
+[9.059s] [ 60%] [32mBuilding CXX object CMakeFiles/stingray_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/stingray_interfaces/msg/detail/bbox_array__type_support.cpp.o[0m
+[9.061s] [ 61%] [32mBuilding CXX object CMakeFiles/stingray_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/stingray_interfaces/action/detail/twist_action__type_support.cpp.o[0m
+[9.063s] [ 61%] [32mBuilding CXX object CMakeFiles/stingray_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/stingray_interfaces/msg/detail/bbox__type_support.cpp.o[0m
+[9.071s] [ 63%] [32mBuilding CXX object CMakeFiles/stingray_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/stingray_interfaces/srv/detail/set_transition__type_support.cpp.o[0m
+[9.079s] [ 64%] [32mBuilding CXX object CMakeFiles/stingray_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/stingray_interfaces/srv/detail/set_enable_object_detection__type_support.cpp.o[0m
+[9.145s] [ 64%] Built target stingray_interfaces__rosidl_typesupport_introspection_c
+[9.186s] [ 65%] [32mBuilding CXX object CMakeFiles/stingray_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/stingray_interfaces/action/detail/dds_fastrtps/device_action__type_support.cpp.o[0m
+[9.188s] [ 66%] [32mBuilding CXX object CMakeFiles/stingray_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/stingray_interfaces/action/detail/dds_fastrtps/twist_action__type_support.cpp.o[0m
+[9.195s] [ 67%] [32mBuilding CXX object CMakeFiles/stingray_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/stingray_interfaces/srv/detail/dds_fastrtps/set_transition__type_support.cpp.o[0m
+[9.227s] [ 69%] [32mBuilding CXX object CMakeFiles/stingray_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/stingray_interfaces/msg/detail/dds_fastrtps/bbox__type_support.cpp.o[0m
+[9.383s] [ 70%] [32mBuilding CXX object CMakeFiles/stingray_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/stingray_interfaces/msg/detail/dds_fastrtps/bbox_array__type_support.cpp.o[0m
+[9.599s] [ 71%] [32mBuilding CXX object CMakeFiles/stingray_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/stingray_interfaces/srv/detail/dds_fastrtps/set_enable_object_detection__type_support.cpp.o[0m
+[9.707s] [ 72%] [32mBuilding CXX object CMakeFiles/stingray_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/stingray_interfaces/action/detail/twist_action__type_support_c.cpp.o[0m
+[9.729s] [ 73%] [32mBuilding CXX object CMakeFiles/stingray_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/stingray_interfaces/srv/detail/set_transition__type_support_c.cpp.o[0m
+[10.427s] [ 75%] [32mBuilding CXX object CMakeFiles/stingray_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/stingray_interfaces/action/detail/device_action__type_support_c.cpp.o[0m
+[10.475s] [ 76%] [32mBuilding CXX object CMakeFiles/stingray_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/stingray_interfaces/msg/detail/bbox__type_support_c.cpp.o[0m
+[10.829s] [ 77%] [32mBuilding CXX object CMakeFiles/stingray_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/stingray_interfaces/msg/detail/bbox_array__type_support_c.cpp.o[0m
+[10.955s] [ 78%] [32mBuilding CXX object CMakeFiles/stingray_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/stingray_interfaces/srv/detail/set_enable_object_detection__type_support_c.cpp.o[0m
+[11.087s] [ 79%] [32m[1mLinking CXX shared library libstingray_interfaces__rosidl_typesupport_cpp.so[0m
+[11.408s] [ 79%] Built target stingray_interfaces__rosidl_typesupport_cpp
+[11.966s] [ 80%] [32m[1mLinking CXX shared library libstingray_interfaces__rosidl_typesupport_fastrtps_c.so[0m
+[12.097s] [ 80%] Built target stingray_interfaces__rosidl_typesupport_fastrtps_c
+[12.141s] [ 82%] [32m[1mLinking CXX shared library libstingray_interfaces__rosidl_typesupport_introspection_cpp.so[0m
+[12.146s] [ 83%] [32m[1mLinking CXX shared library libstingray_interfaces__rosidl_typesupport_fastrtps_cpp.so[0m
+[12.302s] [ 83%] Built target stingray_interfaces__rosidl_typesupport_introspection_cpp
+[12.332s] [ 83%] Built target stingray_interfaces__rosidl_typesupport_fastrtps_cpp
+[12.367s] [ 83%] Built target stingray_interfaces
+[12.401s] [ 84%] [34m[1mGenerating Python code for ROS interfaces[0m
+[15.671s] [ 84%] Built target stingray_interfaces__py
+[15.701s] [ 85%] [32mBuilding C object CMakeFiles/stingray_interfaces__rosidl_generator_py.dir/rosidl_generator_py/stingray_interfaces/srv/_set_transition_s.c.o[0m
+[15.701s] [ 86%] [32mBuilding C object CMakeFiles/stingray_interfaces__rosidl_generator_py.dir/rosidl_generator_py/stingray_interfaces/action/_twist_action_s.c.o[0m
+[15.702s] [ 88%] [32mBuilding C object CMakeFiles/stingray_interfaces__rosidl_generator_py.dir/rosidl_generator_py/stingray_interfaces/msg/_bbox_s.c.o[0m
+[15.703s] [ 89%] [32mBuilding C object CMakeFiles/stingray_interfaces__rosidl_generator_py.dir/rosidl_generator_py/stingray_interfaces/action/_device_action_s.c.o[0m
+[15.706s] [ 91%] [32mBuilding C object CMakeFiles/stingray_interfaces__rosidl_generator_py.dir/rosidl_generator_py/stingray_interfaces/msg/_bbox_array_s.c.o[0m
+[15.706s] [ 91%] [32mBuilding C object CMakeFiles/stingray_interfaces__rosidl_generator_py.dir/rosidl_generator_py/stingray_interfaces/srv/_set_enable_object_detection_s.c.o[0m
+[16.015s] [ 92%] [32m[1mLinking C shared library rosidl_generator_py/stingray_interfaces/libstingray_interfaces__rosidl_generator_py.so[0m
+[16.095s] [ 92%] Built target stingray_interfaces__rosidl_generator_py
+[16.126s] [ 94%] [32mBuilding C object CMakeFiles/stingray_interfaces__rosidl_typesupport_fastrtps_c__pyext.dir/rosidl_generator_py/stingray_interfaces/_stingray_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c.o[0m
+[16.128s] [ 95%] [32mBuilding C object CMakeFiles/stingray_interfaces__rosidl_typesupport_c__pyext.dir/rosidl_generator_py/stingray_interfaces/_stingray_interfaces_s.ep.rosidl_typesupport_c.c.o[0m
+[16.128s] [ 96%] [32mBuilding C object CMakeFiles/stingray_interfaces__rosidl_typesupport_introspection_c__pyext.dir/rosidl_generator_py/stingray_interfaces/_stingray_interfaces_s.ep.rosidl_typesupport_introspection_c.c.o[0m
+[16.418s] [ 97%] [32m[1mLinking C shared library rosidl_generator_py/stingray_interfaces/stingray_interfaces_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so[0m
+[16.429s] [ 98%] [32m[1mLinking C shared library rosidl_generator_py/stingray_interfaces/stingray_interfaces_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so[0m
+[16.457s] [100%] [32m[1mLinking C shared library rosidl_generator_py/stingray_interfaces/stingray_interfaces_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so[0m
+[16.496s] [100%] Built target stingray_interfaces__rosidl_typesupport_introspection_c__pyext
+[16.504s] [100%] Built target stingray_interfaces__rosidl_typesupport_c__pyext
+[16.531s] [100%] Built target stingray_interfaces__rosidl_typesupport_fastrtps_c__pyext

@@ -1,0 +1,8 @@
+source;share/sauvc_pinger_finder/hook/cmake_prefix_path.ps1
+source;share/sauvc_pinger_finder/hook/cmake_prefix_path.dsv
+source;share/sauvc_pinger_finder/hook/cmake_prefix_path.sh
+source;share/sauvc_pinger_finder/local_setup.bash
+source;share/sauvc_pinger_finder/local_setup.dsv
+source;share/sauvc_pinger_finder/local_setup.ps1
+source;share/sauvc_pinger_finder/local_setup.sh
+source;share/sauvc_pinger_finder/local_setup.zsh

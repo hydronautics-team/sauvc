@@ -1,0 +1,578 @@
+[1.139s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build', '--packages-select', 'sauvc_pinger_finder', 'stingray_core_communication', 'serial', 'stingray_core_interfaces']
+[1.139s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=False, test_result_base=None, continue_on_error=False, executor='parallel', parallel_workers=16, event_handlers=None, ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['.'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=['sauvc_pinger_finder', 'stingray_core_communication', 'serial', 'stingray_core_interfaces'], packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, allow_overriding=[], cmake_args=None, cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, verb_parser=<colcon_defaults.argument_parser.defaults.DefaultArgumentsDecorator object at 0x78b32bc7e410>, verb_extension=<colcon_core.verb.build.BuildVerb object at 0x78b32c989e40>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0x78b32c989e40>>)
+[1.189s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[1.189s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[1.189s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[1.189s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[1.189s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[1.189s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[1.189s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src'
+[1.189s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[1.189s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[1.189s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[1.189s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[1.189s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[1.189s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[1.189s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[1.190s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[1.190s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[1.202s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['cmake', 'python']
+[1.202s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'cmake'
+[1.202s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python'
+[1.203s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['python_setup_py']
+[1.203s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python_setup_py'
+[1.203s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extensions ['ignore', 'ignore_ament_install']
+[1.203s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extension 'ignore'
+[1.203s] Level 1:colcon.colcon_core.package_identification:_identify(build) ignored
+[1.203s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extensions ['ignore', 'ignore_ament_install']
+[1.203s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extension 'ignore'
+[1.203s] Level 1:colcon.colcon_core.package_identification:_identify(install) ignored
+[1.203s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extensions ['ignore', 'ignore_ament_install']
+[1.203s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extension 'ignore'
+[1.203s] Level 1:colcon.colcon_core.package_identification:_identify(log) ignored
+[1.203s] Level 1:colcon.colcon_core.package_identification:_identify(marker_finder) by extensions ['ignore', 'ignore_ament_install']
+[1.204s] Level 1:colcon.colcon_core.package_identification:_identify(marker_finder) by extension 'ignore'
+[1.204s] Level 1:colcon.colcon_core.package_identification:_identify(marker_finder) by extension 'ignore_ament_install'
+[1.204s] Level 1:colcon.colcon_core.package_identification:_identify(marker_finder) by extensions ['colcon_pkg']
+[1.204s] Level 1:colcon.colcon_core.package_identification:_identify(marker_finder) by extension 'colcon_pkg'
+[1.204s] Level 1:colcon.colcon_core.package_identification:_identify(marker_finder) by extensions ['colcon_meta']
+[1.204s] Level 1:colcon.colcon_core.package_identification:_identify(marker_finder) by extension 'colcon_meta'
+[1.204s] Level 1:colcon.colcon_core.package_identification:_identify(marker_finder) by extensions ['ros']
+[1.204s] Level 1:colcon.colcon_core.package_identification:_identify(marker_finder) by extension 'ros'
+[1.207s] DEBUG:colcon.colcon_core.package_identification:Package 'marker_finder' with type 'ros.catkin' and name 'marker_finder'
+[1.207s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_launch) by extensions ['ignore', 'ignore_ament_install']
+[1.207s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_launch) by extension 'ignore'
+[1.208s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_launch) by extension 'ignore_ament_install'
+[1.208s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_launch) by extensions ['colcon_pkg']
+[1.208s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_launch) by extension 'colcon_pkg'
+[1.208s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_launch) by extensions ['colcon_meta']
+[1.208s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_launch) by extension 'colcon_meta'
+[1.208s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_launch) by extensions ['ros']
+[1.208s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_launch) by extension 'ros'
+[1.208s] DEBUG:colcon.colcon_core.package_identification:Package 'sauvc_launch' with type 'ros.ament_python' and name 'sauvc_launch'
+[1.208s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_missions) by extensions ['ignore', 'ignore_ament_install']
+[1.209s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_missions) by extension 'ignore'
+[1.209s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_missions) by extension 'ignore_ament_install'
+[1.209s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_missions) by extensions ['colcon_pkg']
+[1.209s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_missions) by extension 'colcon_pkg'
+[1.209s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_missions) by extensions ['colcon_meta']
+[1.209s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_missions) by extension 'colcon_meta'
+[1.209s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_missions) by extensions ['ros']
+[1.209s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_missions) by extension 'ros'
+[1.209s] DEBUG:colcon.colcon_core.package_identification:Package 'sauvc_missions' with type 'ros.ament_python' and name 'sauvc_missions'
+[1.210s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_object_detection) by extensions ['ignore', 'ignore_ament_install']
+[1.210s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_object_detection) by extension 'ignore'
+[1.210s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_object_detection) by extension 'ignore_ament_install'
+[1.210s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_object_detection) by extensions ['colcon_pkg']
+[1.210s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_object_detection) by extension 'colcon_pkg'
+[1.210s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_object_detection) by extensions ['colcon_meta']
+[1.210s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_object_detection) by extension 'colcon_meta'
+[1.210s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_object_detection) by extensions ['ros']
+[1.210s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_object_detection) by extension 'ros'
+[1.211s] DEBUG:colcon.colcon_core.package_identification:Package 'sauvc_object_detection' with type 'ros.ament_python' and name 'sauvc_object_detection'
+[1.211s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_pinger_finder) by extensions ['ignore', 'ignore_ament_install']
+[1.211s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_pinger_finder) by extension 'ignore'
+[1.211s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_pinger_finder) by extension 'ignore_ament_install'
+[1.211s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_pinger_finder) by extensions ['colcon_pkg']
+[1.211s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_pinger_finder) by extension 'colcon_pkg'
+[1.211s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_pinger_finder) by extensions ['colcon_meta']
+[1.211s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_pinger_finder) by extension 'colcon_meta'
+[1.211s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_pinger_finder) by extensions ['ros']
+[1.211s] Level 1:colcon.colcon_core.package_identification:_identify(sauvc_pinger_finder) by extension 'ros'
+[1.212s] DEBUG:colcon.colcon_core.package_identification:Package 'sauvc_pinger_finder' with type 'ros.ament_cmake' and name 'sauvc_pinger_finder'
+[1.212s] Level 1:colcon.colcon_core.package_identification:_identify(stingray) by extensions ['ignore', 'ignore_ament_install']
+[1.212s] Level 1:colcon.colcon_core.package_identification:_identify(stingray) by extension 'ignore'
+[1.213s] Level 1:colcon.colcon_core.package_identification:_identify(stingray) by extension 'ignore_ament_install'
+[1.213s] Level 1:colcon.colcon_core.package_identification:_identify(stingray) by extensions ['colcon_pkg']
+[1.213s] Level 1:colcon.colcon_core.package_identification:_identify(stingray) by extension 'colcon_pkg'
+[1.213s] Level 1:colcon.colcon_core.package_identification:_identify(stingray) by extensions ['colcon_meta']
+[1.213s] Level 1:colcon.colcon_core.package_identification:_identify(stingray) by extension 'colcon_meta'
+[1.213s] Level 1:colcon.colcon_core.package_identification:_identify(stingray) by extensions ['ros']
+[1.213s] Level 1:colcon.colcon_core.package_identification:_identify(stingray) by extension 'ros'
+[1.213s] Level 1:colcon.colcon_core.package_identification:_identify(stingray) by extensions ['cmake', 'python']
+[1.213s] Level 1:colcon.colcon_core.package_identification:_identify(stingray) by extension 'cmake'
+[1.213s] Level 1:colcon.colcon_core.package_identification:_identify(stingray) by extension 'python'
+[1.213s] Level 1:colcon.colcon_core.package_identification:_identify(stingray) by extensions ['python_setup_py']
+[1.213s] Level 1:colcon.colcon_core.package_identification:_identify(stingray) by extension 'python_setup_py'
+[1.213s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources) by extensions ['ignore', 'ignore_ament_install']
+[1.213s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources) by extension 'ignore'
+[1.213s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources) by extension 'ignore_ament_install'
+[1.213s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources) by extensions ['colcon_pkg']
+[1.213s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources) by extension 'colcon_pkg'
+[1.213s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources) by extensions ['colcon_meta']
+[1.213s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources) by extension 'colcon_meta'
+[1.213s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources) by extensions ['ros']
+[1.213s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources) by extension 'ros'
+[1.214s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources) by extensions ['cmake', 'python']
+[1.214s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources) by extension 'cmake'
+[1.214s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources) by extension 'python'
+[1.214s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources) by extensions ['python_setup_py']
+[1.214s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources) by extension 'python_setup_py'
+[1.214s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/configs) by extensions ['ignore', 'ignore_ament_install']
+[1.214s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/configs) by extension 'ignore'
+[1.214s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/configs) by extension 'ignore_ament_install'
+[1.214s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/configs) by extensions ['colcon_pkg']
+[1.214s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/configs) by extension 'colcon_pkg'
+[1.214s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/configs) by extensions ['colcon_meta']
+[1.214s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/configs) by extension 'colcon_meta'
+[1.214s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/configs) by extensions ['ros']
+[1.214s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/configs) by extension 'ros'
+[1.214s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/configs) by extensions ['cmake', 'python']
+[1.214s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/configs) by extension 'cmake'
+[1.214s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/configs) by extension 'python'
+[1.214s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/configs) by extensions ['python_setup_py']
+[1.214s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/configs) by extension 'python_setup_py'
+[1.214s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/weights) by extensions ['ignore', 'ignore_ament_install']
+[1.215s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/weights) by extension 'ignore'
+[1.215s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/weights) by extension 'ignore_ament_install'
+[1.215s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/weights) by extensions ['colcon_pkg']
+[1.215s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/weights) by extension 'colcon_pkg'
+[1.215s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/weights) by extensions ['colcon_meta']
+[1.215s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/weights) by extension 'colcon_meta'
+[1.215s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/weights) by extensions ['ros']
+[1.215s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/weights) by extension 'ros'
+[1.215s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/weights) by extensions ['cmake', 'python']
+[1.215s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/weights) by extension 'cmake'
+[1.215s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/weights) by extension 'python'
+[1.215s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/weights) by extensions ['python_setup_py']
+[1.215s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/weights) by extension 'python_setup_py'
+[1.215s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/weights/yolov5) by extensions ['ignore', 'ignore_ament_install']
+[1.215s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/weights/yolov5) by extension 'ignore'
+[1.215s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/weights/yolov5) by extension 'ignore_ament_install'
+[1.215s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/weights/yolov5) by extensions ['colcon_pkg']
+[1.215s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/weights/yolov5) by extension 'colcon_pkg'
+[1.215s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/weights/yolov5) by extensions ['colcon_meta']
+[1.215s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/weights/yolov5) by extension 'colcon_meta'
+[1.216s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/weights/yolov5) by extensions ['ros']
+[1.216s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/weights/yolov5) by extension 'ros'
+[1.216s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/weights/yolov5) by extensions ['cmake', 'python']
+[1.216s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/weights/yolov5) by extension 'cmake'
+[1.216s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/weights/yolov5) by extension 'python'
+[1.216s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/weights/yolov5) by extensions ['python_setup_py']
+[1.216s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/resources/weights/yolov5) by extension 'python_setup_py'
+[1.216s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src) by extensions ['ignore', 'ignore_ament_install']
+[1.216s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src) by extension 'ignore'
+[1.216s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src) by extension 'ignore_ament_install'
+[1.216s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src) by extensions ['colcon_pkg']
+[1.216s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src) by extension 'colcon_pkg'
+[1.216s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src) by extensions ['colcon_meta']
+[1.216s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src) by extension 'colcon_meta'
+[1.216s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src) by extensions ['ros']
+[1.216s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src) by extension 'ros'
+[1.216s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src) by extensions ['cmake', 'python']
+[1.216s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src) by extension 'cmake'
+[1.216s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src) by extension 'python'
+[1.216s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src) by extensions ['python_setup_py']
+[1.216s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src) by extension 'python_setup_py'
+[1.217s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core) by extensions ['ignore', 'ignore_ament_install']
+[1.217s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core) by extension 'ignore'
+[1.217s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core) by extension 'ignore_ament_install'
+[1.217s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core) by extensions ['colcon_pkg']
+[1.217s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core) by extension 'colcon_pkg'
+[1.217s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core) by extensions ['colcon_meta']
+[1.217s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core) by extension 'colcon_meta'
+[1.217s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core) by extensions ['ros']
+[1.217s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core) by extension 'ros'
+[1.217s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core) by extensions ['cmake', 'python']
+[1.217s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core) by extension 'cmake'
+[1.217s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core) by extension 'python'
+[1.217s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core) by extensions ['python_setup_py']
+[1.217s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core) by extension 'python_setup_py'
+[1.217s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src) by extensions ['ignore', 'ignore_ament_install']
+[1.217s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src) by extension 'ignore'
+[1.217s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src) by extension 'ignore_ament_install'
+[1.217s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src) by extensions ['colcon_pkg']
+[1.218s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src) by extension 'colcon_pkg'
+[1.218s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src) by extensions ['colcon_meta']
+[1.218s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src) by extension 'colcon_meta'
+[1.218s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src) by extensions ['ros']
+[1.218s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src) by extension 'ros'
+[1.218s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src) by extensions ['cmake', 'python']
+[1.218s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src) by extension 'cmake'
+[1.218s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src) by extension 'python'
+[1.218s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src) by extensions ['python_setup_py']
+[1.218s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src) by extension 'python_setup_py'
+[1.218s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/serial) by extensions ['ignore', 'ignore_ament_install']
+[1.218s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/serial) by extension 'ignore'
+[1.218s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/serial) by extension 'ignore_ament_install'
+[1.218s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/serial) by extensions ['colcon_pkg']
+[1.218s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/serial) by extension 'colcon_pkg'
+[1.218s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/serial) by extensions ['colcon_meta']
+[1.218s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/serial) by extension 'colcon_meta'
+[1.218s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/serial) by extensions ['ros']
+[1.218s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/serial) by extension 'ros'
+[1.219s] DEBUG:colcon.colcon_core.package_identification:Package 'stingray/src/stingray_core/src/serial' with type 'ros.ament_cmake' and name 'serial'
+[1.219s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/stingray_core_communication) by extensions ['ignore', 'ignore_ament_install']
+[1.220s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/stingray_core_communication) by extension 'ignore'
+[1.220s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/stingray_core_communication) by extension 'ignore_ament_install'
+[1.220s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/stingray_core_communication) by extensions ['colcon_pkg']
+[1.220s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/stingray_core_communication) by extension 'colcon_pkg'
+[1.220s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/stingray_core_communication) by extensions ['colcon_meta']
+[1.220s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/stingray_core_communication) by extension 'colcon_meta'
+[1.220s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/stingray_core_communication) by extensions ['ros']
+[1.220s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/stingray_core_communication) by extension 'ros'
+[1.221s] DEBUG:colcon.colcon_core.package_identification:Package 'stingray/src/stingray_core/src/stingray_core_communication' with type 'ros.ament_cmake' and name 'stingray_core_communication'
+[1.222s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/stingray_core_interfaces) by extensions ['ignore', 'ignore_ament_install']
+[1.222s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/stingray_core_interfaces) by extension 'ignore'
+[1.222s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/stingray_core_interfaces) by extension 'ignore_ament_install'
+[1.222s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/stingray_core_interfaces) by extensions ['colcon_pkg']
+[1.222s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/stingray_core_interfaces) by extension 'colcon_pkg'
+[1.222s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/stingray_core_interfaces) by extensions ['colcon_meta']
+[1.222s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/stingray_core_interfaces) by extension 'colcon_meta'
+[1.222s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/stingray_core_interfaces) by extensions ['ros']
+[1.222s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/stingray_core_interfaces) by extension 'ros'
+[1.223s] DEBUG:colcon.colcon_core.package_identification:Package 'stingray/src/stingray_core/src/stingray_core_interfaces' with type 'ros.ament_cmake' and name 'stingray_core_interfaces'
+[1.223s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/stingray_core_launch) by extensions ['ignore', 'ignore_ament_install']
+[1.223s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/stingray_core_launch) by extension 'ignore'
+[1.223s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/stingray_core_launch) by extension 'ignore_ament_install'
+[1.223s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/stingray_core_launch) by extensions ['colcon_pkg']
+[1.223s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/stingray_core_launch) by extension 'colcon_pkg'
+[1.223s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/stingray_core_launch) by extensions ['colcon_meta']
+[1.223s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/stingray_core_launch) by extension 'colcon_meta'
+[1.224s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/stingray_core_launch) by extensions ['ros']
+[1.224s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_core/src/stingray_core_launch) by extension 'ros'
+[1.224s] DEBUG:colcon.colcon_core.package_identification:Package 'stingray/src/stingray_core/src/stingray_core_launch' with type 'ros.ament_python' and name 'stingray_core_launch'
+[1.224s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_devices) by extensions ['ignore', 'ignore_ament_install']
+[1.225s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_devices) by extension 'ignore'
+[1.225s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_devices) by extension 'ignore_ament_install'
+[1.225s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_devices) by extensions ['colcon_pkg']
+[1.225s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_devices) by extension 'colcon_pkg'
+[1.225s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_devices) by extensions ['colcon_meta']
+[1.225s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_devices) by extension 'colcon_meta'
+[1.225s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_devices) by extensions ['ros']
+[1.225s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_devices) by extension 'ros'
+[1.226s] DEBUG:colcon.colcon_core.package_identification:Package 'stingray/src/stingray_devices' with type 'ros.ament_cmake' and name 'stingray_devices'
+[1.226s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_interfaces) by extensions ['ignore', 'ignore_ament_install']
+[1.226s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_interfaces) by extension 'ignore'
+[1.226s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_interfaces) by extension 'ignore_ament_install'
+[1.227s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_interfaces) by extensions ['colcon_pkg']
+[1.227s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_interfaces) by extension 'colcon_pkg'
+[1.227s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_interfaces) by extensions ['colcon_meta']
+[1.227s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_interfaces) by extension 'colcon_meta'
+[1.227s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_interfaces) by extensions ['ros']
+[1.227s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_interfaces) by extension 'ros'
+[1.227s] DEBUG:colcon.colcon_core.package_identification:Package 'stingray/src/stingray_interfaces' with type 'ros.ament_cmake' and name 'stingray_interfaces'
+[1.228s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_launch) by extensions ['ignore', 'ignore_ament_install']
+[1.228s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_launch) by extension 'ignore'
+[1.228s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_launch) by extension 'ignore_ament_install'
+[1.228s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_launch) by extensions ['colcon_pkg']
+[1.228s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_launch) by extension 'colcon_pkg'
+[1.228s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_launch) by extensions ['colcon_meta']
+[1.228s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_launch) by extension 'colcon_meta'
+[1.228s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_launch) by extensions ['ros']
+[1.228s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_launch) by extension 'ros'
+[1.229s] DEBUG:colcon.colcon_core.package_identification:Package 'stingray/src/stingray_launch' with type 'ros.ament_python' and name 'stingray_launch'
+[1.229s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_missions) by extensions ['ignore', 'ignore_ament_install']
+[1.229s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_missions) by extension 'ignore'
+[1.229s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_missions) by extension 'ignore_ament_install'
+[1.229s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_missions) by extensions ['colcon_pkg']
+[1.229s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_missions) by extension 'colcon_pkg'
+[1.229s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_missions) by extensions ['colcon_meta']
+[1.229s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_missions) by extension 'colcon_meta'
+[1.229s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_missions) by extensions ['ros']
+[1.229s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_missions) by extension 'ros'
+[1.230s] DEBUG:colcon.colcon_core.package_identification:Package 'stingray/src/stingray_missions' with type 'ros.ament_python' and name 'stingray_missions'
+[1.230s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_movement) by extensions ['ignore', 'ignore_ament_install']
+[1.230s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_movement) by extension 'ignore'
+[1.231s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_movement) by extension 'ignore_ament_install'
+[1.231s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_movement) by extensions ['colcon_pkg']
+[1.231s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_movement) by extension 'colcon_pkg'
+[1.231s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_movement) by extensions ['colcon_meta']
+[1.231s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_movement) by extension 'colcon_meta'
+[1.231s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_movement) by extensions ['ros']
+[1.231s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_movement) by extension 'ros'
+[1.232s] DEBUG:colcon.colcon_core.package_identification:Package 'stingray/src/stingray_movement' with type 'ros.ament_cmake' and name 'stingray_movement'
+[1.232s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_object_detection) by extensions ['ignore', 'ignore_ament_install']
+[1.232s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_object_detection) by extension 'ignore'
+[1.232s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_object_detection) by extension 'ignore_ament_install'
+[1.232s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_object_detection) by extensions ['colcon_pkg']
+[1.232s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_object_detection) by extension 'colcon_pkg'
+[1.232s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_object_detection) by extensions ['colcon_meta']
+[1.232s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_object_detection) by extension 'colcon_meta'
+[1.233s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_object_detection) by extensions ['ros']
+[1.233s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_object_detection) by extension 'ros'
+[1.235s] DEBUG:colcon.colcon_core.package_identification:Package 'stingray/src/stingray_object_detection' with type 'ros.ament_python' and name 'stingray_object_detection'
+[1.235s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_utils) by extensions ['ignore', 'ignore_ament_install']
+[1.235s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_utils) by extension 'ignore'
+[1.235s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_utils) by extension 'ignore_ament_install'
+[1.235s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_utils) by extensions ['colcon_pkg']
+[1.235s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_utils) by extension 'colcon_pkg'
+[1.235s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_utils) by extensions ['colcon_meta']
+[1.235s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_utils) by extension 'colcon_meta'
+[1.235s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_utils) by extensions ['ros']
+[1.235s] Level 1:colcon.colcon_core.package_identification:_identify(stingray/src/stingray_utils) by extension 'ros'
+[1.237s] DEBUG:colcon.colcon_core.package_identification:Package 'stingray/src/stingray_utils' with type 'ros.ament_cmake' and name 'stingray_utils'
+[1.237s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[1.237s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[1.237s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[1.237s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[1.237s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[1.311s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'marker_finder' in 'marker_finder'
+[1.311s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'sauvc_launch' in 'sauvc_launch'
+[1.312s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'stingray_core_launch' in 'stingray/src/stingray_core/src/stingray_core_launch'
+[1.312s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'stingray_interfaces' in 'stingray/src/stingray_interfaces'
+[1.312s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'stingray_launch' in 'stingray/src/stingray_launch'
+[1.312s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'stingray_object_detection' in 'stingray/src/stingray_object_detection'
+[1.312s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'sauvc_object_detection' in 'sauvc_object_detection'
+[1.312s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'stingray_utils' in 'stingray/src/stingray_utils'
+[1.312s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'sauvc_missions' in 'sauvc_missions'
+[1.312s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'stingray_devices' in 'stingray/src/stingray_devices'
+[1.312s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'stingray_missions' in 'stingray/src/stingray_missions'
+[1.312s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'stingray_movement' in 'stingray/src/stingray_movement'
+[1.341s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) check parameters
+[1.341s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) discover
+[1.371s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 289 installed packages in /opt/ros/iron
+[1.388s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) using defaults
+[1.490s] Level 5:colcon.colcon_core.verb:set package 'serial' build argument 'cmake_args' from command line to 'None'
+[1.490s] Level 5:colcon.colcon_core.verb:set package 'serial' build argument 'cmake_target' from command line to 'None'
+[1.490s] Level 5:colcon.colcon_core.verb:set package 'serial' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[1.490s] Level 5:colcon.colcon_core.verb:set package 'serial' build argument 'cmake_clean_cache' from command line to 'False'
+[1.490s] Level 5:colcon.colcon_core.verb:set package 'serial' build argument 'cmake_clean_first' from command line to 'False'
+[1.490s] Level 5:colcon.colcon_core.verb:set package 'serial' build argument 'cmake_force_configure' from command line to 'False'
+[1.490s] Level 5:colcon.colcon_core.verb:set package 'serial' build argument 'ament_cmake_args' from command line to 'None'
+[1.490s] Level 5:colcon.colcon_core.verb:set package 'serial' build argument 'catkin_cmake_args' from command line to 'None'
+[1.490s] Level 5:colcon.colcon_core.verb:set package 'serial' build argument 'catkin_skip_building_tests' from command line to 'False'
+[1.490s] DEBUG:colcon.colcon_core.verb:Building package 'serial' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/serial', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial', 'merge_install': False, 'path': '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/stingray/src/stingray_core/src/serial', 'symlink_install': False, 'test_result_base': None}
+[1.508s] Level 5:colcon.colcon_core.verb:set package 'stingray_core_interfaces' build argument 'cmake_args' from command line to 'None'
+[1.508s] Level 5:colcon.colcon_core.verb:set package 'stingray_core_interfaces' build argument 'cmake_target' from command line to 'None'
+[1.508s] Level 5:colcon.colcon_core.verb:set package 'stingray_core_interfaces' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[1.508s] Level 5:colcon.colcon_core.verb:set package 'stingray_core_interfaces' build argument 'cmake_clean_cache' from command line to 'False'
+[1.508s] Level 5:colcon.colcon_core.verb:set package 'stingray_core_interfaces' build argument 'cmake_clean_first' from command line to 'False'
+[1.508s] Level 5:colcon.colcon_core.verb:set package 'stingray_core_interfaces' build argument 'cmake_force_configure' from command line to 'False'
+[1.508s] Level 5:colcon.colcon_core.verb:set package 'stingray_core_interfaces' build argument 'ament_cmake_args' from command line to 'None'
+[1.508s] Level 5:colcon.colcon_core.verb:set package 'stingray_core_interfaces' build argument 'catkin_cmake_args' from command line to 'None'
+[1.508s] Level 5:colcon.colcon_core.verb:set package 'stingray_core_interfaces' build argument 'catkin_skip_building_tests' from command line to 'False'
+[1.508s] DEBUG:colcon.colcon_core.verb:Building package 'stingray_core_interfaces' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/stingray_core_interfaces', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces', 'merge_install': False, 'path': '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/stingray/src/stingray_core/src/stingray_core_interfaces', 'symlink_install': False, 'test_result_base': None}
+[1.526s] Level 5:colcon.colcon_core.verb:set package 'stingray_core_communication' build argument 'cmake_args' from command line to 'None'
+[1.526s] Level 5:colcon.colcon_core.verb:set package 'stingray_core_communication' build argument 'cmake_target' from command line to 'None'
+[1.526s] Level 5:colcon.colcon_core.verb:set package 'stingray_core_communication' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[1.526s] Level 5:colcon.colcon_core.verb:set package 'stingray_core_communication' build argument 'cmake_clean_cache' from command line to 'False'
+[1.526s] Level 5:colcon.colcon_core.verb:set package 'stingray_core_communication' build argument 'cmake_clean_first' from command line to 'False'
+[1.526s] Level 5:colcon.colcon_core.verb:set package 'stingray_core_communication' build argument 'cmake_force_configure' from command line to 'False'
+[1.526s] Level 5:colcon.colcon_core.verb:set package 'stingray_core_communication' build argument 'ament_cmake_args' from command line to 'None'
+[1.526s] Level 5:colcon.colcon_core.verb:set package 'stingray_core_communication' build argument 'catkin_cmake_args' from command line to 'None'
+[1.526s] Level 5:colcon.colcon_core.verb:set package 'stingray_core_communication' build argument 'catkin_skip_building_tests' from command line to 'False'
+[1.526s] DEBUG:colcon.colcon_core.verb:Building package 'stingray_core_communication' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/stingray_core_communication', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication', 'merge_install': False, 'path': '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/stingray/src/stingray_core/src/stingray_core_communication', 'symlink_install': False, 'test_result_base': None}
+[1.546s] Level 5:colcon.colcon_core.verb:set package 'sauvc_pinger_finder' build argument 'cmake_args' from command line to 'None'
+[1.547s] Level 5:colcon.colcon_core.verb:set package 'sauvc_pinger_finder' build argument 'cmake_target' from command line to 'None'
+[1.547s] Level 5:colcon.colcon_core.verb:set package 'sauvc_pinger_finder' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[1.547s] Level 5:colcon.colcon_core.verb:set package 'sauvc_pinger_finder' build argument 'cmake_clean_cache' from command line to 'False'
+[1.547s] Level 5:colcon.colcon_core.verb:set package 'sauvc_pinger_finder' build argument 'cmake_clean_first' from command line to 'False'
+[1.547s] Level 5:colcon.colcon_core.verb:set package 'sauvc_pinger_finder' build argument 'cmake_force_configure' from command line to 'False'
+[1.547s] Level 5:colcon.colcon_core.verb:set package 'sauvc_pinger_finder' build argument 'ament_cmake_args' from command line to 'None'
+[1.547s] Level 5:colcon.colcon_core.verb:set package 'sauvc_pinger_finder' build argument 'catkin_cmake_args' from command line to 'None'
+[1.547s] Level 5:colcon.colcon_core.verb:set package 'sauvc_pinger_finder' build argument 'catkin_skip_building_tests' from command line to 'False'
+[1.547s] DEBUG:colcon.colcon_core.verb:Building package 'sauvc_pinger_finder' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/sauvc_pinger_finder', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder', 'merge_install': False, 'path': '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/sauvc_pinger_finder', 'symlink_install': False, 'test_result_base': None}
+[1.566s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[1.587s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[1.588s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/stingray/src/stingray_core/src/serial' with build type 'ament_cmake'
+[1.588s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/stingray/src/stingray_core/src/serial'
+[1.616s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[1.617s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[1.617s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[1.660s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/stingray/src/stingray_core/src/stingray_core_interfaces' with build type 'ament_cmake'
+[1.660s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/stingray/src/stingray_core/src/stingray_core_interfaces'
+[1.685s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[1.685s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[1.744s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/serial': CMAKE_PREFIX_PATH=/opt/ros/iron /usr/bin/cmake --build /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/serial -- -j16 -l16
+[1.751s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/stingray_core_interfaces': CMAKE_PREFIX_PATH=/opt/ros/iron /usr/bin/cmake --build /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/stingray_core_interfaces -- -j16 -l16
+[1.860s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/serial' returned '0': CMAKE_PREFIX_PATH=/opt/ros/iron /usr/bin/cmake --build /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/serial -- -j16 -l16
+[1.940s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/serial': CMAKE_PREFIX_PATH=/opt/ros/iron /usr/bin/cmake --install /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/serial
+[1.964s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(serial)
+[1.966s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/serial' returned '0': CMAKE_PREFIX_PATH=/opt/ros/iron /usr/bin/cmake --install /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/serial
+[2.001s] Level 1:colcon.colcon_core.environment:checking '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial' for CMake module files
+[2.002s] Level 1:colcon.colcon_core.environment:checking '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial' for CMake config files
+[2.002s] Level 1:colcon.colcon_core.shell:create_environment_hook('serial', 'cmake_prefix_path')
+[2.026s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial/share/serial/hook/cmake_prefix_path.ps1'
+[2.027s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial/share/serial/hook/cmake_prefix_path.dsv'
+[2.028s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial/share/serial/hook/cmake_prefix_path.sh'
+[2.029s] Level 1:colcon.colcon_core.environment:checking '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial/lib'
+[2.030s] Level 1:colcon.colcon_core.environment:checking '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial/bin'
+[2.030s] Level 1:colcon.colcon_core.environment:checking '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial/lib/pkgconfig/serial.pc'
+[2.030s] Level 1:colcon.colcon_core.environment:checking '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial/lib/python3.10/site-packages'
+[2.031s] Level 1:colcon.colcon_core.environment:checking '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial/bin'
+[2.065s] INFO:colcon.colcon_core.shell:Creating package script '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial/share/serial/package.ps1'
+[2.067s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial/share/serial/package.dsv'
+[2.068s] INFO:colcon.colcon_core.shell:Creating package script '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial/share/serial/package.sh'
+[2.070s] INFO:colcon.colcon_core.shell:Creating package script '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial/share/serial/package.bash'
+[2.072s] INFO:colcon.colcon_core.shell:Creating package script '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial/share/serial/package.zsh'
+[2.073s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial/share/colcon-core/packages/serial)
+[2.163s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(serial)
+[2.187s] Level 1:colcon.colcon_core.environment:checking '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial' for CMake module files
+[2.188s] Level 1:colcon.colcon_core.environment:checking '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial' for CMake config files
+[2.188s] Level 1:colcon.colcon_core.shell:create_environment_hook('serial', 'cmake_prefix_path')
+[2.212s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial/share/serial/hook/cmake_prefix_path.ps1'
+[2.213s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial/share/serial/hook/cmake_prefix_path.dsv'
+[2.214s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial/share/serial/hook/cmake_prefix_path.sh'
+[2.215s] Level 1:colcon.colcon_core.environment:checking '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial/lib'
+[2.215s] Level 1:colcon.colcon_core.environment:checking '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial/bin'
+[2.216s] Level 1:colcon.colcon_core.environment:checking '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial/lib/pkgconfig/serial.pc'
+[2.216s] Level 1:colcon.colcon_core.environment:checking '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial/lib/python3.10/site-packages'
+[2.217s] Level 1:colcon.colcon_core.environment:checking '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial/bin'
+[2.243s] INFO:colcon.colcon_core.shell:Creating package script '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial/share/serial/package.ps1'
+[2.245s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial/share/serial/package.dsv'
+[2.246s] INFO:colcon.colcon_core.shell:Creating package script '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial/share/serial/package.sh'
+[2.247s] INFO:colcon.colcon_core.shell:Creating package script '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial/share/serial/package.bash'
+[2.248s] INFO:colcon.colcon_core.shell:Creating package script '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial/share/serial/package.zsh'
+[2.250s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial/share/colcon-core/packages/serial)
+[2.390s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/stingray_core_interfaces' returned '0': CMAKE_PREFIX_PATH=/opt/ros/iron /usr/bin/cmake --build /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/stingray_core_interfaces -- -j16 -l16
+[2.685s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/stingray_core_interfaces': CMAKE_PREFIX_PATH=/opt/ros/iron /usr/bin/cmake --install /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/stingray_core_interfaces
+[2.783s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(stingray_core_interfaces)
+[2.784s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/stingray_core_interfaces' returned '0': CMAKE_PREFIX_PATH=/opt/ros/iron /usr/bin/cmake --install /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/stingray_core_interfaces
+[2.805s] Level 1:colcon.colcon_core.environment:checking '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces' for CMake module files
+[2.806s] Level 1:colcon.colcon_core.environment:checking '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces' for CMake config files
+[2.807s] Level 1:colcon.colcon_core.shell:create_environment_hook('stingray_core_interfaces', 'cmake_prefix_path')
+[2.828s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/hook/cmake_prefix_path.ps1'
+[2.829s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/hook/cmake_prefix_path.dsv'
+[2.830s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/hook/cmake_prefix_path.sh'
+[2.831s] Level 1:colcon.colcon_core.environment:checking '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib'
+[2.831s] Level 1:colcon.colcon_core.shell:create_environment_hook('stingray_core_interfaces', 'ld_library_path_lib')
+[2.853s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/hook/ld_library_path_lib.ps1'
+[2.853s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/hook/ld_library_path_lib.dsv'
+[2.854s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/hook/ld_library_path_lib.sh'
+[2.854s] Level 1:colcon.colcon_core.environment:checking '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/bin'
+[2.855s] Level 1:colcon.colcon_core.environment:checking '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/pkgconfig/stingray_core_interfaces.pc'
+[2.855s] Level 1:colcon.colcon_core.environment:checking '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/python3.10/site-packages'
+[2.855s] Level 1:colcon.colcon_core.shell:create_environment_hook('stingray_core_interfaces', 'pythonpath')
+[2.875s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/hook/pythonpath.ps1'
+[2.876s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/hook/pythonpath.dsv'
+[2.877s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/hook/pythonpath.sh'
+[2.877s] Level 1:colcon.colcon_core.environment:checking '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/bin'
+[2.900s] INFO:colcon.colcon_core.shell:Creating package script '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/package.ps1'
+[2.901s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/package.dsv'
+[2.901s] INFO:colcon.colcon_core.shell:Creating package script '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/package.sh'
+[2.902s] INFO:colcon.colcon_core.shell:Creating package script '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/package.bash'
+[2.902s] INFO:colcon.colcon_core.shell:Creating package script '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/package.zsh'
+[2.903s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/colcon-core/packages/stingray_core_interfaces)
+[3.187s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(stingray_core_interfaces)
+[3.207s] Level 1:colcon.colcon_core.environment:checking '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces' for CMake module files
+[3.208s] Level 1:colcon.colcon_core.environment:checking '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces' for CMake config files
+[3.209s] Level 1:colcon.colcon_core.shell:create_environment_hook('stingray_core_interfaces', 'cmake_prefix_path')
+[3.227s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/hook/cmake_prefix_path.ps1'
+[3.228s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/hook/cmake_prefix_path.dsv'
+[3.228s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/hook/cmake_prefix_path.sh'
+[3.229s] Level 1:colcon.colcon_core.environment:checking '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib'
+[3.229s] Level 1:colcon.colcon_core.shell:create_environment_hook('stingray_core_interfaces', 'ld_library_path_lib')
+[3.253s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/hook/ld_library_path_lib.ps1'
+[3.254s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/hook/ld_library_path_lib.dsv'
+[3.254s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/hook/ld_library_path_lib.sh'
+[3.255s] Level 1:colcon.colcon_core.environment:checking '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/bin'
+[3.255s] Level 1:colcon.colcon_core.environment:checking '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/pkgconfig/stingray_core_interfaces.pc'
+[3.255s] Level 1:colcon.colcon_core.environment:checking '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/python3.10/site-packages'
+[3.255s] Level 1:colcon.colcon_core.shell:create_environment_hook('stingray_core_interfaces', 'pythonpath')
+[3.276s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/hook/pythonpath.ps1'
+[3.277s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/hook/pythonpath.dsv'
+[3.277s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/hook/pythonpath.sh'
+[3.278s] Level 1:colcon.colcon_core.environment:checking '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/bin'
+[3.299s] INFO:colcon.colcon_core.shell:Creating package script '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/package.ps1'
+[3.300s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/package.dsv'
+[3.301s] INFO:colcon.colcon_core.shell:Creating package script '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/package.sh'
+[3.301s] INFO:colcon.colcon_core.shell:Creating package script '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/package.bash'
+[3.302s] INFO:colcon.colcon_core.shell:Creating package script '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/package.zsh'
+[3.302s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/colcon-core/packages/stingray_core_interfaces)
+[3.303s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/stingray/src/stingray_core/src/stingray_core_communication' with build type 'ament_cmake'
+[3.303s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/stingray/src/stingray_core/src/stingray_core_communication'
+[3.330s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[3.331s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[3.395s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/stingray_core_communication': AMENT_PREFIX_PATH=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial:/opt/ros/iron LD_LIBRARY_PATH=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/cmake --build /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/stingray_core_communication -- -j16 -l16
+[3.531s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/stingray_core_communication' returned '0': AMENT_PREFIX_PATH=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial:/opt/ros/iron LD_LIBRARY_PATH=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/cmake --build /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/stingray_core_communication -- -j16 -l16
+[3.596s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/stingray_core_communication': AMENT_PREFIX_PATH=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial:/opt/ros/iron LD_LIBRARY_PATH=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/cmake --install /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/stingray_core_communication
+[3.611s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(stingray_core_communication)
+[3.615s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/stingray_core_communication' returned '0': AMENT_PREFIX_PATH=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial:/opt/ros/iron LD_LIBRARY_PATH=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/cmake --install /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/stingray_core_communication
+[3.635s] Level 1:colcon.colcon_core.environment:checking '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication' for CMake module files
+[3.636s] Level 1:colcon.colcon_core.environment:checking '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication' for CMake config files
+[3.636s] Level 1:colcon.colcon_core.shell:create_environment_hook('stingray_core_communication', 'cmake_prefix_path')
+[3.657s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/share/stingray_core_communication/hook/cmake_prefix_path.ps1'
+[3.658s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/share/stingray_core_communication/hook/cmake_prefix_path.dsv'
+[3.658s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/share/stingray_core_communication/hook/cmake_prefix_path.sh'
+[3.659s] Level 1:colcon.colcon_core.environment:checking '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/lib'
+[3.659s] Level 1:colcon.colcon_core.environment:checking '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/bin'
+[3.659s] Level 1:colcon.colcon_core.environment:checking '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/lib/pkgconfig/stingray_core_communication.pc'
+[3.660s] Level 1:colcon.colcon_core.environment:checking '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/lib/python3.10/site-packages'
+[3.660s] Level 1:colcon.colcon_core.environment:checking '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/bin'
+[3.682s] INFO:colcon.colcon_core.shell:Creating package script '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/share/stingray_core_communication/package.ps1'
+[3.682s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/share/stingray_core_communication/package.dsv'
+[3.683s] INFO:colcon.colcon_core.shell:Creating package script '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/share/stingray_core_communication/package.sh'
+[3.684s] INFO:colcon.colcon_core.shell:Creating package script '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/share/stingray_core_communication/package.bash'
+[3.684s] INFO:colcon.colcon_core.shell:Creating package script '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/share/stingray_core_communication/package.zsh'
+[3.684s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/share/colcon-core/packages/stingray_core_communication)
+[3.764s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(stingray_core_communication)
+[3.786s] Level 1:colcon.colcon_core.environment:checking '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication' for CMake module files
+[3.786s] Level 1:colcon.colcon_core.environment:checking '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication' for CMake config files
+[3.787s] Level 1:colcon.colcon_core.shell:create_environment_hook('stingray_core_communication', 'cmake_prefix_path')
+[3.805s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/share/stingray_core_communication/hook/cmake_prefix_path.ps1'
+[3.806s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/share/stingray_core_communication/hook/cmake_prefix_path.dsv'
+[3.806s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/share/stingray_core_communication/hook/cmake_prefix_path.sh'
+[3.807s] Level 1:colcon.colcon_core.environment:checking '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/lib'
+[3.807s] Level 1:colcon.colcon_core.environment:checking '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/bin'
+[3.807s] Level 1:colcon.colcon_core.environment:checking '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/lib/pkgconfig/stingray_core_communication.pc'
+[3.807s] Level 1:colcon.colcon_core.environment:checking '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/lib/python3.10/site-packages'
+[3.808s] Level 1:colcon.colcon_core.environment:checking '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/bin'
+[3.827s] INFO:colcon.colcon_core.shell:Creating package script '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/share/stingray_core_communication/package.ps1'
+[3.828s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/share/stingray_core_communication/package.dsv'
+[3.828s] INFO:colcon.colcon_core.shell:Creating package script '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/share/stingray_core_communication/package.sh'
+[3.829s] INFO:colcon.colcon_core.shell:Creating package script '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/share/stingray_core_communication/package.bash'
+[3.829s] INFO:colcon.colcon_core.shell:Creating package script '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/share/stingray_core_communication/package.zsh'
+[3.830s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/share/colcon-core/packages/stingray_core_communication)
+[3.830s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/sauvc_pinger_finder' with build type 'ament_cmake'
+[3.830s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/sauvc_pinger_finder'
+[3.854s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[3.854s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[3.918s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/sauvc_pinger_finder': AMENT_PREFIX_PATH=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial:/opt/ros/iron LD_LIBRARY_PATH=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/lib:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/cmake --build /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/sauvc_pinger_finder -- -j16 -l16
+[10.598s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/sauvc_pinger_finder' returned '0': AMENT_PREFIX_PATH=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial:/opt/ros/iron LD_LIBRARY_PATH=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/lib:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/cmake --build /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/sauvc_pinger_finder -- -j16 -l16
+[10.638s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/sauvc_pinger_finder': AMENT_PREFIX_PATH=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial:/opt/ros/iron LD_LIBRARY_PATH=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/lib:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/cmake --install /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/sauvc_pinger_finder
+[10.651s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(sauvc_pinger_finder)
+[10.651s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/sauvc_pinger_finder' returned '0': AMENT_PREFIX_PATH=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial:/opt/ros/iron LD_LIBRARY_PATH=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/lib:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib:/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/cmake --install /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/sauvc_pinger_finder
+[10.671s] Level 1:colcon.colcon_core.environment:checking '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder' for CMake module files
+[10.672s] Level 1:colcon.colcon_core.environment:checking '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder' for CMake config files
+[10.672s] Level 1:colcon.colcon_core.shell:create_environment_hook('sauvc_pinger_finder', 'cmake_prefix_path')
+[10.690s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/share/sauvc_pinger_finder/hook/cmake_prefix_path.ps1'
+[10.691s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/share/sauvc_pinger_finder/hook/cmake_prefix_path.dsv'
+[10.691s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/share/sauvc_pinger_finder/hook/cmake_prefix_path.sh'
+[10.692s] Level 1:colcon.colcon_core.environment:checking '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/lib'
+[10.692s] Level 1:colcon.colcon_core.environment:checking '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/bin'
+[10.692s] Level 1:colcon.colcon_core.environment:checking '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/lib/pkgconfig/sauvc_pinger_finder.pc'
+[10.693s] Level 1:colcon.colcon_core.environment:checking '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/lib/python3.10/site-packages'
+[10.693s] Level 1:colcon.colcon_core.environment:checking '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/bin'
+[10.712s] INFO:colcon.colcon_core.shell:Creating package script '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/share/sauvc_pinger_finder/package.ps1'
+[10.713s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/share/sauvc_pinger_finder/package.dsv'
+[10.713s] INFO:colcon.colcon_core.shell:Creating package script '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/share/sauvc_pinger_finder/package.sh'
+[10.714s] INFO:colcon.colcon_core.shell:Creating package script '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/share/sauvc_pinger_finder/package.bash'
+[10.714s] INFO:colcon.colcon_core.shell:Creating package script '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/share/sauvc_pinger_finder/package.zsh'
+[10.715s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/share/colcon-core/packages/sauvc_pinger_finder)
+[10.770s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(sauvc_pinger_finder)
+[10.789s] Level 1:colcon.colcon_core.environment:checking '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder' for CMake module files
+[10.790s] Level 1:colcon.colcon_core.environment:checking '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder' for CMake config files
+[10.790s] Level 1:colcon.colcon_core.shell:create_environment_hook('sauvc_pinger_finder', 'cmake_prefix_path')
+[10.810s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/share/sauvc_pinger_finder/hook/cmake_prefix_path.ps1'
+[10.811s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/share/sauvc_pinger_finder/hook/cmake_prefix_path.dsv'
+[10.811s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/share/sauvc_pinger_finder/hook/cmake_prefix_path.sh'
+[10.812s] Level 1:colcon.colcon_core.environment:checking '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/lib'
+[10.812s] Level 1:colcon.colcon_core.environment:checking '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/bin'
+[10.812s] Level 1:colcon.colcon_core.environment:checking '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/lib/pkgconfig/sauvc_pinger_finder.pc'
+[10.813s] Level 1:colcon.colcon_core.environment:checking '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/lib/python3.10/site-packages'
+[10.813s] Level 1:colcon.colcon_core.environment:checking '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/bin'
+[10.833s] INFO:colcon.colcon_core.shell:Creating package script '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/share/sauvc_pinger_finder/package.ps1'
+[10.834s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/share/sauvc_pinger_finder/package.dsv'
+[10.835s] INFO:colcon.colcon_core.shell:Creating package script '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/share/sauvc_pinger_finder/package.sh'
+[10.835s] INFO:colcon.colcon_core.shell:Creating package script '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/share/sauvc_pinger_finder/package.bash'
+[10.836s] INFO:colcon.colcon_core.shell:Creating package script '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/share/sauvc_pinger_finder/package.zsh'
+[10.836s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/share/colcon-core/packages/sauvc_pinger_finder)
+[10.837s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[10.837s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[10.837s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '0'
+[10.837s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[10.868s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[10.868s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[10.868s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[10.888s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[10.910s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/local_setup.ps1'
+[10.911s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/_local_setup_util_ps1.py'
+[10.913s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/setup.ps1'
+[10.957s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/local_setup.sh'
+[10.958s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/_local_setup_util_sh.py'
+[10.959s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/setup.sh'
+[10.986s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/local_setup.bash'
+[10.987s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/setup.bash'
+[11.010s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/local_setup.zsh'
+[11.011s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/setup.zsh'
