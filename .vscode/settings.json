@@ -9,6 +9,7 @@
         "/opt/ros/iron/local/lib/python3.10/dist-packages",
         "./install/stingray_interfaces/lib/python3.10/site-packages",
         "./install/stingray_core_interfaces/lib/python3.10/site-packages",
+        "./src/sauvc_navigation",
         "./src/stingray/src/stingray_utils",
         "./src/stingray/src/stingray_core/src/stingray_core_interfaces",
         "./src/stingray/src/stingray_missions",
