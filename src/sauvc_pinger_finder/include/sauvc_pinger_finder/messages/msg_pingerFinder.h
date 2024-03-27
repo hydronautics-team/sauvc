@@ -7,13 +7,10 @@ class PingerFinderMessage : public AbstractMessage {
 public:
     PingerFinderMessage();
 
-    const static uint8_t length = 33; // 31(message) + 2(checksum) = 31 dyte
+    const static uint8_t length = 1;
     static const uint8_t dev_amount = 2;
 
-    
-
-    uint16_t checksum;
-    // parsel end
+    int8_t angle;
 
     void pack(std::vector<uint8_t> &container) override; // raspberry_cm4 to STM
     bool parse(std::vector<uint8_t> &input) override; // pult to raspberry_cm4
