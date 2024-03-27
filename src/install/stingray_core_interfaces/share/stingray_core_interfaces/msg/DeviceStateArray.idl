@@ -1,0 +1,13 @@
+// generated from rosidl_adapter/resource/msg.idl.em
+// with input from stingray_core_interfaces/msg/DeviceStateArray.msg
+// generated code does not contain a copyright notice
+
+#include "stingray_core_interfaces/msg/DeviceState.idl"
+
+module stingray_core_interfaces {
+  module msg {
+    struct DeviceStateArray {
+      sequence<stingray_core_interfaces::msg::DeviceState> states;
+    };
+  };
+};

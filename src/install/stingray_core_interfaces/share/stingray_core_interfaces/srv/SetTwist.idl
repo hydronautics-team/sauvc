@@ -1,0 +1,31 @@
+// generated from rosidl_adapter/resource/srv.idl.em
+// with input from stingray_core_interfaces/srv/SetTwist.srv
+// generated code does not contain a copyright notice
+
+
+module stingray_core_interfaces {
+  module srv {
+    @verbatim (language="comment", text=
+      "Request")
+    struct SetTwist_Request {
+      float surge;
+
+      float sway;
+
+      float depth;
+
+      float roll;
+
+      float pitch;
+
+      float yaw;
+    };
+    @verbatim (language="comment", text=
+      "Response")
+    struct SetTwist_Response {
+      boolean success;
+
+      string message;
+    };
+  };
+};

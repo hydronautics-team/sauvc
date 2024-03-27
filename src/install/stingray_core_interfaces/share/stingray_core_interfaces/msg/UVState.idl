@@ -1,0 +1,32 @@
+// generated from rosidl_adapter/resource/msg.idl.em
+// with input from stingray_core_interfaces/msg/UVState.msg
+// generated code does not contain a copyright notice
+
+
+module stingray_core_interfaces {
+  module msg {
+    struct UVState {
+      float roll;
+
+      float pitch;
+
+      float yaw;
+
+      float roll_speed;
+
+      float pitch_speed;
+
+      float yaw_speed;
+
+      float depth;
+
+      boolean depth_stabilization;
+
+      boolean roll_stabilization;
+
+      boolean pitch_stabilization;
+
+      boolean yaw_stabilization;
+    };
+  };
+};

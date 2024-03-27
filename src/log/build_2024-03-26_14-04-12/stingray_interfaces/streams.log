@@ -1,0 +1,99 @@
+[0.718s] Invoking command in '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/stingray_interfaces': CMAKE_PREFIX_PATH=/opt/ros/iron /usr/bin/cmake --build /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/stingray_interfaces -- -j16 -l16
+[2.532s] [  1%] [34m[1mGenerating type hashes for ROS interfaces[0m
+[2.532s] [  1%] Built target ament_cmake_python_copy_stingray_interfaces
+[2.532s] running egg_info
+[2.533s] creating stingray_interfaces.egg-info
+[2.533s] writing stingray_interfaces.egg-info/PKG-INFO
+[2.533s] writing dependency_links to stingray_interfaces.egg-info/dependency_links.txt
+[2.533s] writing top-level names to stingray_interfaces.egg-info/top_level.txt
+[2.534s] writing manifest file 'stingray_interfaces.egg-info/SOURCES.txt'
+[2.534s] reading manifest file 'stingray_interfaces.egg-info/SOURCES.txt'
+[2.534s] writing manifest file 'stingray_interfaces.egg-info/SOURCES.txt'
+[2.534s] [  1%] Built target ament_cmake_python_build_stingray_interfaces_egg
+[2.534s] [  1%] Built target stingray_interfaces__rosidl_generator_type_description
+[2.534s] [  2%] [34m[1mGenerating C code for ROS interfaces[0m
+[2.534s] [  3%] [34m[1mGenerating C++ code for ROS interfaces[0m
+[2.540s] Traceback (most recent call last):
+[2.540s]   File "/opt/ros/iron/share/rosidl_generator_c/cmake/../../../lib/rosidl_generator_c/rosidl_generator_c", line 42, in <module>
+[2.540s] Traceback (most recent call last):
+[2.540s]   File "/opt/ros/iron/share/rosidl_generator_cpp/cmake/../../../lib/rosidl_generator_cpp/rosidl_generator_cpp", line 38, in <module>
+[2.540s] gmake[2]: *** Deleting file 'rosidl_generator_cpp/stingray_interfaces/srv/set_transition.hpp'
+[2.540s] gmake[2]: *** Deleting file 'rosidl_generator_c/stingray_interfaces/srv/set_transition.h'
+[2.540s]     sys.exit(main())
+[2.541s]   File "/opt/ros/iron/share/rosidl_generator_c/cmake/../../../lib/rosidl_generator_c/rosidl_generator_c", line 38, in main
+[2.541s]     sys.exit(main())
+[2.541s]   File "/opt/ros/iron/share/rosidl_generator_cpp/cmake/../../../lib/rosidl_generator_cpp/rosidl_generator_cpp", line 34, in main
+[2.541s]     generate_c(args.generator_arguments_file, args.disable_description_codegen)
+[2.541s]   File "/opt/ros/iron/lib/python3.10/site-packages/rosidl_generator_c/__init__.py", line 41, in generate_c
+[2.542s]     generate_cpp(args.generator_arguments_file)
+[2.542s]   File "/opt/ros/iron/lib/python3.10/site-packages/rosidl_generator_cpp/__init__.py", line 38, in generate_cpp
+[2.542s]     return generate_files(
+[2.542s]   File "/opt/ros/iron/lib/python3.10/site-packages/rosidl_pycommon/__init__.py", line 107, in generate_files
+[2.542s]     return generate_files(
+[2.542s]   File "/opt/ros/iron/lib/python3.10/site-packages/rosidl_pycommon/__init__.py", line 107, in generate_files
+[2.542s]     expand_template(
+[2.543s]   File "/opt/ros/iron/lib/python3.10/site-packages/rosidl_pycommon/__init__.py", line 169, in expand_template
+[2.543s]     expand_template(
+[2.543s]   File "/opt/ros/iron/lib/python3.10/site-packages/rosidl_pycommon/__init__.py", line 169, in expand_template
+[2.543s]     interpreter.string(template_content, template_path, locals=data)
+[2.543s]   File "/usr/lib/python3/dist-packages/em.py", line 2391, in string
+[2.543s]     interpreter.string(template_content, template_path, locals=data)
+[2.544s]   File "/usr/lib/python3/dist-packages/em.py", line 2391, in string
+[2.544s]     self.safe(scanner, True, locals)
+[2.544s]   File "/usr/lib/python3/dist-packages/em.py", line 2401, in safe
+[2.544s]     self.safe(scanner, True, locals)
+[2.544s]   File "/usr/lib/python3/dist-packages/em.py", line 2401, in safe
+[2.544s]     self.parse(scanner, locals)
+[2.545s]   File "/usr/lib/python3/dist-packages/em.py", line 2417, in parse
+[2.545s]     self.parse(scanner, locals)
+[2.545s]   File "/usr/lib/python3/dist-packages/em.py", line 2421, in parse
+[2.545s]     token = scanner.one()
+[2.545s]   File "/usr/lib/python3/dist-packages/em.py", line 1984, in one
+[2.545s]     token.scan(self)
+[2.546s]   File "/usr/lib/python3/dist-packages/em.py", line 1421, in scan
+[2.546s]     i = scanner.complex('{', '}', 0)
+[2.546s]   File "/usr/lib/python3/dist-packages/em.py", line 1902, in complex
+[2.546s]     token.run(self, locals)
+[2.546s]   File "/usr/lib/python3/dist-packages/em.py", line 1547, in run
+[2.546s]     if quote:
+[2.547s] KeyboardInterrupt
+[2.547s]     self.subrun(info[0][1], interpreter, locals)
+[2.547s]   File "/usr/lib/python3/dist-packages/em.py", line 1631, in subrun
+[2.548s]     token.run(interpreter, locals)
+[2.549s]   File "/usr/lib/python3/dist-packages/em.py", line 1425, in run
+[2.549s]     interpreter.execute(self.code, locals)
+[2.550s]   File "/usr/lib/python3/dist-packages/em.py", line 2596, in execute
+[2.550s]     _exec(statements, self.globals, locals)
+[2.550s]   File "<string>", line 2, in <module>
+[2.550s]   File "/opt/ros/iron/lib/python3.10/site-packages/rosidl_pycommon/__init__.py", line 218, in _expand_template
+[2.550s]     interpreter.string(content, str(template_path), kwargs)
+[2.550s]   File "/usr/lib/python3/dist-packages/em.py", line 2391, in string
+[2.551s]     self.safe(scanner, True, locals)
+[2.551s]   File "/usr/lib/python3/dist-packages/em.py", line 2401, in safe
+[2.557s]     self.parse(scanner, locals)
+[2.558s]   File "/usr/lib/python3/dist-packages/em.py", line 2421, in parse
+[2.558s]     token.run(self, locals)
+[2.558s]   File "/usr/lib/python3/dist-packages/em.py", line 1526, in run
+[2.559s]     if interpreter.evaluate(secondary.rest, locals):
+[2.559s]   File "/usr/lib/python3/dist-packages/em.py", line 2564, in evaluate
+[2.559s]     def evaluate(self, expression, locals=None):
+[2.559s] KeyboardInterrupt
+[2.563s] Exception ignored in: <function Interpreter.__del__ at 0x7d4bf615bf40>
+[2.564s] Traceback (most recent call last):
+[2.564s]   File "/usr/lib/python3/dist-packages/em.py", line 2094, in __del__
+[2.564s]   File "/usr/lib/python3/dist-packages/em.py", line 2157, in shutdown
+[2.564s]   File "/usr/lib/python3/dist-packages/em.py", line 2647, in finalize
+[2.564s]   File "/usr/lib/python3/dist-packages/em.py", line 2200, in push
+[2.564s] AttributeError: '_io.TextIOWrapper' object has no attribute 'push'
+[2.566s] Exception ignored in: <function Interpreter.__del__ at 0x7bff3dffde10>
+[2.566s] Traceback (most recent call last):
+[2.566s]   File "/usr/lib/python3/dist-packages/em.py", line 2094, in __del__
+[2.566s]   File "/usr/lib/python3/dist-packages/em.py", line 2157, in shutdown
+[2.566s]   File "/usr/lib/python3/dist-packages/em.py", line 2647, in finalize
+[2.566s]   File "/usr/lib/python3/dist-packages/em.py", line 2200, in push
+[2.566s] AttributeError: '_io.TextIOWrapper' object has no attribute 'push'
+[2.567s] gmake[2]: *** [CMakeFiles/stingray_interfaces__cpp.dir/build.make:154: rosidl_generator_cpp/stingray_interfaces/srv/set_transition.hpp] Interrupt
+[2.567s] gmake[1]: *** [CMakeFiles/Makefile2:293: CMakeFiles/stingray_interfaces__cpp.dir/all] Interrupt
+[2.568s] gmake[2]: *** [CMakeFiles/stingray_interfaces__rosidl_generator_c.dir/build.make:136: rosidl_generator_c/stingray_interfaces/srv/set_transition.h] Interrupt
+[2.568s] gmake[1]: *** [CMakeFiles/Makefile2:240: CMakeFiles/stingray_interfaces__rosidl_generator_c.dir/all] Interrupt
+[2.568s] gmake: *** [Makefile:146: all] Interrupt

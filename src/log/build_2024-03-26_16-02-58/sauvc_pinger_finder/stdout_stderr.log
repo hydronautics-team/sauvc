@@ -1,0 +1,41 @@
+[35m[1mConsolidate compiler generated dependencies of target uart_driver_node[0m
+[ 33%] [32mBuilding CXX object CMakeFiles/uart_driver_node.dir/src/uart_driver_node.cpp.o[0m
+In file included from [01m[K/usr/include/boost/smart_ptr/detail/sp_thread_sleep.hpp:22[m[K,
+                 from [01m[K/usr/include/boost/smart_ptr/detail/yield_k.hpp:23[m[K,
+                 from [01m[K/usr/include/boost/smart_ptr/detail/spinlock_gcc_atomic.hpp:14[m[K,
+                 from [01m[K/usr/include/boost/smart_ptr/detail/spinlock.hpp:42[m[K,
+                 from [01m[K/usr/include/boost/smart_ptr/detail/spinlock_pool.hpp:25[m[K,
+                 from [01m[K/usr/include/boost/smart_ptr/shared_ptr.hpp:29[m[K,
+                 from [01m[K/usr/include/boost/shared_ptr.hpp:17[m[K,
+                 from [01m[K/usr/include/boost/date_time/time_clock.hpp:17[m[K,
+                 from [01m[K/usr/include/boost/date_time/posix_time/posix_time_types.hpp:10[m[K,
+                 from [01m[K/usr/include/boost/asio/time_traits.hpp:23[m[K,
+                 from [01m[K/usr/include/boost/asio/detail/timer_queue_ptime.hpp:22[m[K,
+                 from [01m[K/usr/include/boost/asio/detail/deadline_timer_service.hpp:29[m[K,
+                 from [01m[K/usr/include/boost/asio/basic_deadline_timer.hpp:25[m[K,
+                 from [01m[K/usr/include/boost/asio.hpp:25[m[K,
+                 from [01m[K/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/include/stingray_core_communication/udp_driver.h:5[m[K,
+                 from [01m[K/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/sauvc_pinger_finder/src/uart_driver_node.cpp:1[m[K:
+[01m[K/usr/include/boost/bind.hpp:36:1:[m[K [01;36m[Knote: [m[K‘[01m[K#pragma message: The practice of declaring the Bind placeholders (_1, _2, ...) in the global namespace is deprecated. Please use <boost/bind/bind.hpp> + using namespace boost::placeholders, or define BOOST_BIND_GLOBAL_PLACEHOLDERS to retain the current behavior.[m[K’
+   36 | [01;36m[KBOOST_PRAGMA_MESSAGE[m[K(
+      | [01;36m[K^~~~~~~~~~~~~~~~~~~~[m[K
+[ 66%] [32m[1mLinking CXX executable uart_driver_node[0m
+[100%] Built target uart_driver_node
+-- Install configuration: ""
+-- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/lib/sauvc_pinger_finder/uart_driver_node
+-- Set runtime path of "/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/lib/sauvc_pinger_finder/uart_driver_node" to ""
+-- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/share/ament_index/resource_index/package_run_dependencies/sauvc_pinger_finder
+-- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/share/ament_index/resource_index/parent_prefix_path/sauvc_pinger_finder
+-- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/share/sauvc_pinger_finder/environment/ament_prefix_path.sh
+-- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/share/sauvc_pinger_finder/environment/ament_prefix_path.dsv
+-- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/share/sauvc_pinger_finder/environment/path.sh
+-- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/share/sauvc_pinger_finder/environment/path.dsv
+-- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/share/sauvc_pinger_finder/local_setup.bash
+-- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/share/sauvc_pinger_finder/local_setup.sh
+-- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/share/sauvc_pinger_finder/local_setup.zsh
+-- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/share/sauvc_pinger_finder/local_setup.dsv
+-- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/share/sauvc_pinger_finder/package.dsv
+-- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/share/ament_index/resource_index/packages/sauvc_pinger_finder
+-- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/share/sauvc_pinger_finder/cmake/sauvc_pinger_finderConfig.cmake
+-- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/share/sauvc_pinger_finder/cmake/sauvc_pinger_finderConfig-version.cmake
+-- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder/share/sauvc_pinger_finder/package.xml

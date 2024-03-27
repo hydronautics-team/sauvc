@@ -1,0 +1,33 @@
+[1.028s] Invoking command in '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/sauvc_pinger_finder': /usr/bin/cmake /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/sauvc_pinger_finder -DCMAKE_INSTALL_PREFIX=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder
+[1.421s] -- The C compiler identification is GNU 11.4.0
+[1.421s] -- The CXX compiler identification is GNU 11.4.0
+[1.421s] -- Detecting C compiler ABI info
+[1.421s] -- Detecting C compiler ABI info - done
+[1.421s] -- Check for working C compiler: /usr/bin/cc - skipped
+[1.421s] -- Detecting C compile features
+[1.421s] -- Detecting C compile features - done
+[1.421s] -- Detecting CXX compiler ABI info
+[1.487s] -- Detecting CXX compiler ABI info - done
+[1.500s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[1.501s] -- Detecting CXX compile features
+[1.501s] -- Detecting CXX compile features - done
+[1.518s] [31mCMake Error at CMakeLists.txt:9 (find_package):
+[1.518s]   By not providing "Findament_cmake.cmake" in CMAKE_MODULE_PATH this project
+[1.518s]   has asked CMake to find a package configuration file provided by
+[1.519s]   "ament_cmake", but CMake did not find one.
+[1.519s] 
+[1.519s]   Could not find a package configuration file provided by "ament_cmake" with
+[1.519s]   any of the following names:
+[1.519s] 
+[1.519s]     ament_cmakeConfig.cmake
+[1.519s]     ament_cmake-config.cmake
+[1.520s] 
+[1.520s]   Add the installation prefix of "ament_cmake" to CMAKE_PREFIX_PATH or set
+[1.520s]   "ament_cmake_DIR" to a directory containing one of the above files.  If
+[1.520s]   "ament_cmake" provides a separate development package or SDK, be sure it
+[1.520s]   has been installed.
+[1.520s] 
+[1.520s] [0m
+[1.520s] -- Configuring incomplete, errors occurred!
+[1.521s] See also "/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/sauvc_pinger_finder/CMakeFiles/CMakeOutput.log".
+[1.788s] Invoked command in '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/sauvc_pinger_finder' returned '1': /usr/bin/cmake /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/sauvc_pinger_finder -DCMAKE_INSTALL_PREFIX=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/sauvc_pinger_finder

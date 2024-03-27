@@ -1,0 +1,80 @@
+-- Found ament_cmake: 2.0.4 (/opt/ros/iron/share/ament_cmake/cmake)
+-- Found rclcpp: 21.0.5 (/opt/ros/iron/share/rclcpp/cmake)
+-- Found rosidl_generator_c: 4.0.1 (/opt/ros/iron/share/rosidl_generator_c/cmake)
+-- Found rosidl_generator_cpp: 4.0.1 (/opt/ros/iron/share/rosidl_generator_cpp/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Found rmw_implementation_cmake: 7.1.0 (/opt/ros/iron/share/rmw_implementation_cmake/cmake)
+-- Found rmw_fastrtps_cpp: 7.1.3 (/opt/ros/iron/share/rmw_fastrtps_cpp/cmake)
+-- Using RMW implementation 'rmw_fastrtps_cpp' as default
+-- Found std_msgs: 5.0.0 (/opt/ros/iron/share/std_msgs/cmake)
+-- Found std_srvs: 5.0.0 (/opt/ros/iron/share/std_srvs/cmake)
+-- Found serial: 1.2.1 (/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/serial/share/serial/cmake)
+-- Found stingray_core_interfaces: 0.1.0 (/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/cmake)
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/stingray_core_communication
+[  4%] [32mBuilding CXX object CMakeFiles/stingray_core_communication.dir/src/messages/normal.cpp.o[0m
+[ 13%] [32mBuilding CXX object CMakeFiles/stingray_core_communication.dir/src/messages/config.cpp.o[0m
+[ 17%] [32mBuilding CXX object CMakeFiles/stingray_core_communication.dir/src/messages/direct.cpp.o[0m
+[ 26%] [32mBuilding CXX object CMakeFiles/hardware_bridge_node.dir/src/hardware_bridge_node.cpp.o[0m
+[ 26%] [32mBuilding CXX object CMakeFiles/uart_driver_node.dir/src/uart_driver_node.cpp.o[0m
+[ 30%] [32mBuilding CXX object CMakeFiles/uart_driver_node.dir/src/messages/common.cpp.o[0m
+[ 43%] [32mBuilding CXX object CMakeFiles/uart_driver_node.dir/src/messages/config.cpp.o[0m
+[ 43%] [32mBuilding CXX object CMakeFiles/uart_driver_node.dir/src/messages/normal.cpp.o[0m
+[ 43%] [32mBuilding CXX object CMakeFiles/udp_driver_node.dir/src/udp_driver_node.cpp.o[0m
+[ 52%] [32mBuilding CXX object CMakeFiles/hardware_bridge_node.dir/src/messages/common.cpp.o[0m
+[ 52%] [32mBuilding CXX object CMakeFiles/stingray_core_communication.dir/src/messages/common.cpp.o[0m
+[ 52%] [32mBuilding CXX object CMakeFiles/uart_driver_node.dir/src/messages/direct.cpp.o[0m
+[ 60%] [32mBuilding CXX object CMakeFiles/udp_driver_node.dir/src/messages/config.cpp.o[0m
+[ 60%] [32mBuilding CXX object CMakeFiles/udp_driver_node.dir/src/messages/common.cpp.o[0m
+[ 65%] [32mBuilding CXX object CMakeFiles/hardware_bridge_node.dir/src/messages/config.cpp.o[0m
+[ 69%] [32mBuilding CXX object CMakeFiles/hardware_bridge_node.dir/src/messages/direct.cpp.o[0m
+[ 73%] [32mBuilding CXX object CMakeFiles/hardware_bridge_node.dir/src/messages/normal.cpp.o[0m
+[ 78%] [32mBuilding CXX object CMakeFiles/udp_driver_node.dir/src/messages/direct.cpp.o[0m
+[ 82%] [32mBuilding CXX object CMakeFiles/udp_driver_node.dir/src/messages/normal.cpp.o[0m
+[ 86%] [32m[1mLinking CXX static library libstingray_core_communication.a[0m
+[ 86%] Built target stingray_core_communication
+[ 91%] [32m[1mLinking CXX executable uart_driver_node[0m
+[ 91%] Built target uart_driver_node
+[ 95%] [32m[1mLinking CXX executable udp_driver_node[0m
+[ 95%] Built target udp_driver_node
+[100%] [32m[1mLinking CXX executable hardware_bridge_node[0m
+[100%] Built target hardware_bridge_node
+-- Install configuration: ""
+-- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/include/stingray_core_communication
+-- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/include/stingray_core_communication/hardware_bridge.h
+-- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/include/stingray_core_communication/uart_driver.h
+-- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/include/stingray_core_communication/udp_driver.h
+-- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/include/stingray_core_communication/messages
+-- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/include/stingray_core_communication/messages/direct.h
+-- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/include/stingray_core_communication/messages/normal.h
+-- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/include/stingray_core_communication/messages/config.h
+-- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/include/stingray_core_communication/messages/common.h
+-- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/lib/stingray_core_communication/hardware_bridge_node
+-- Set runtime path of "/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/lib/stingray_core_communication/hardware_bridge_node" to ""
+-- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/lib/stingray_core_communication/uart_driver_node
+-- Set runtime path of "/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/lib/stingray_core_communication/uart_driver_node" to ""
+-- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/lib/stingray_core_communication/udp_driver_node
+-- Set runtime path of "/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/lib/stingray_core_communication/udp_driver_node" to ""
+-- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/lib/libstingray_core_communication.a
+-- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/share/stingray_core_communication/environment/library_path.sh
+-- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/share/stingray_core_communication/environment/library_path.dsv
+-- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/share/ament_index/resource_index/package_run_dependencies/stingray_core_communication
+-- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/share/ament_index/resource_index/parent_prefix_path/stingray_core_communication
+-- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/share/stingray_core_communication/environment/ament_prefix_path.sh
+-- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/share/stingray_core_communication/environment/ament_prefix_path.dsv
+-- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/share/stingray_core_communication/environment/path.sh
+-- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/share/stingray_core_communication/environment/path.dsv
+-- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/share/stingray_core_communication/local_setup.bash
+-- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/share/stingray_core_communication/local_setup.sh
+-- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/share/stingray_core_communication/local_setup.zsh
+-- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/share/stingray_core_communication/local_setup.dsv
+-- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/share/stingray_core_communication/package.dsv
+-- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/share/ament_index/resource_index/packages/stingray_core_communication
+-- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/share/stingray_core_communication/cmake/ament_cmake_export_dependencies-extras.cmake
+-- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/share/stingray_core_communication/cmake/ament_cmake_export_include_directories-extras.cmake
+-- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/share/stingray_core_communication/cmake/ament_cmake_export_libraries-extras.cmake
+-- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/share/stingray_core_communication/cmake/stingray_core_communicationConfig.cmake
+-- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/share/stingray_core_communication/cmake/stingray_core_communicationConfig-version.cmake
+-- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_communication/share/stingray_core_communication/package.xml

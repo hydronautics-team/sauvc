@@ -1,0 +1,278 @@
+[0.113s] Invoking command in '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/stingray_core_interfaces': CMAKE_PREFIX_PATH=/opt/ros/iron /usr/bin/cmake --build /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/stingray_core_interfaces -- -j16 -l16
+[0.233s] [  1%] Built target stingray_core_interfaces__rosidl_generator_type_description
+[0.252s] [  1%] Built target ament_cmake_python_copy_stingray_core_interfaces
+[0.274s] [  2%] Built target stingray_core_interfaces__cpp
+[0.292s] [ 26%] Built target stingray_core_interfaces__rosidl_generator_c
+[0.349s] [ 40%] Built target stingray_core_interfaces__rosidl_typesupport_introspection_c
+[0.349s] [ 45%] Built target stingray_core_interfaces__rosidl_typesupport_c
+[0.350s] [ 64%] Built target stingray_core_interfaces__rosidl_typesupport_introspection_cpp
+[0.351s] [ 64%] Built target stingray_core_interfaces__rosidl_typesupport_cpp
+[0.358s] [ 73%] Built target stingray_core_interfaces__rosidl_typesupport_fastrtps_cpp
+[0.358s] [ 83%] Built target stingray_core_interfaces__rosidl_typesupport_fastrtps_c
+[0.397s] [ 83%] Built target stingray_core_interfaces
+[0.436s] [ 84%] Built target stingray_core_interfaces__py
+[0.480s] [ 92%] Built target stingray_core_interfaces__rosidl_generator_py
+[0.532s] [ 95%] Built target stingray_core_interfaces__rosidl_typesupport_fastrtps_c__pyext
+[0.539s] [100%] Built target stingray_core_interfaces__rosidl_typesupport_introspection_c__pyext
+[0.539s] [100%] Built target stingray_core_interfaces__rosidl_typesupport_c__pyext
+[0.744s] running egg_info
+[0.746s] writing stingray_core_interfaces.egg-info/PKG-INFO
+[0.746s] writing dependency_links to stingray_core_interfaces.egg-info/dependency_links.txt
+[0.746s] writing top-level names to stingray_core_interfaces.egg-info/top_level.txt
+[0.752s] reading manifest file 'stingray_core_interfaces.egg-info/SOURCES.txt'
+[0.754s] writing manifest file 'stingray_core_interfaces.egg-info/SOURCES.txt'
+[0.807s] [100%] Built target ament_cmake_python_build_stingray_core_interfaces_egg
+[0.829s] Invoked command in '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/stingray_core_interfaces' returned '0': CMAKE_PREFIX_PATH=/opt/ros/iron /usr/bin/cmake --build /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/stingray_core_interfaces -- -j16 -l16
+[1.112s] Invoking command in '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/stingray_core_interfaces': CMAKE_PREFIX_PATH=/opt/ros/iron /usr/bin/cmake --install /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/stingray_core_interfaces
+[1.124s] -- Install configuration: ""
+[1.124s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/ament_index/resource_index/rosidl_interfaces/stingray_core_interfaces
+[1.125s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/msg/UVState.json
+[1.125s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/msg/DeviceState.json
+[1.125s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/msg/DeviceStateArray.json
+[1.125s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/srv/SetDevice.json
+[1.125s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/srv/SetTwist.json
+[1.126s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/srv/SetStabilization.json
+[1.126s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces
+[1.126s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg
+[1.126s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/device_state_array.h
+[1.126s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/rosidl_generator_c__visibility_control.h
+[1.126s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/uv_state.h
+[1.126s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/detail
+[1.127s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/detail/device_state_array__struct.h
+[1.127s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/detail/device_state_array__type_support.h
+[1.127s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/detail/device_state__description.c
+[1.127s] -- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/detail/uv_state__type_support.c
+[1.127s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/detail/uv_state__struct.h
+[1.128s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/detail/device_state_array__functions.c
+[1.128s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/detail/device_state__functions.c
+[1.128s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/detail/device_state_array__functions.h
+[1.128s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/detail/device_state_array__description.c
+[1.128s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/detail/uv_state__functions.h
+[1.128s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/detail/device_state__functions.h
+[1.129s] -- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/detail/device_state__type_support.c
+[1.129s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/detail/uv_state__functions.c
+[1.129s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/detail/uv_state__description.c
+[1.129s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/detail/device_state__struct.h
+[1.129s] -- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/detail/device_state_array__type_support.c
+[1.130s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/detail/device_state__type_support.h
+[1.130s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/detail/uv_state__type_support.h
+[1.130s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/device_state.h
+[1.130s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv
+[1.130s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/set_device.h
+[1.130s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/set_twist.h
+[1.131s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/detail
+[1.131s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/detail/set_stabilization__functions.h
+[1.131s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/detail/set_device__description.c
+[1.131s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/detail/set_twist__description.c
+[1.131s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/detail/set_twist__functions.c
+[1.131s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/detail/set_stabilization__type_support.h
+[1.131s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/detail/set_stabilization__description.c
+[1.131s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/detail/set_twist__functions.h
+[1.131s] -- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/detail/set_device__type_support.c
+[1.131s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/detail/set_device__functions.h
+[1.132s] -- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/detail/set_twist__type_support.c
+[1.132s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/detail/set_stabilization__struct.h
+[1.132s] -- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/detail/set_stabilization__type_support.c
+[1.132s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/detail/set_device__functions.c
+[1.132s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/detail/set_device__type_support.h
+[1.132s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/detail/set_device__struct.h
+[1.132s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/detail/set_twist__type_support.h
+[1.132s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/detail/set_stabilization__functions.c
+[1.132s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/detail/set_twist__struct.h
+[1.132s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/set_stabilization.h
+[1.133s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/environment/library_path.sh
+[1.133s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/environment/library_path.dsv
+[1.133s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/libstingray_core_interfaces__rosidl_generator_c.so
+[1.133s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces
+[1.133s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg
+[1.133s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/rosidl_typesupport_fastrtps_c__visibility_control.h
+[1.133s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/detail
+[1.133s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/detail/device_state__rosidl_typesupport_fastrtps_c.h
+[1.133s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/detail/device_state_array__rosidl_typesupport_fastrtps_c.h
+[1.133s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/detail/uv_state__rosidl_typesupport_fastrtps_c.h
+[1.133s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv
+[1.133s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/detail
+[1.133s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/detail/set_stabilization__rosidl_typesupport_fastrtps_c.h
+[1.134s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/detail/set_device__rosidl_typesupport_fastrtps_c.h
+[1.134s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/detail/set_twist__rosidl_typesupport_fastrtps_c.h
+[1.134s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/libstingray_core_interfaces__rosidl_typesupport_fastrtps_c.so
+[1.134s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces
+[1.134s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg
+[1.134s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/uv_state.hpp
+[1.134s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/device_state.hpp
+[1.134s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/detail
+[1.135s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/detail/uv_state__traits.hpp
+[1.135s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/detail/device_state__struct.hpp
+[1.135s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/detail/device_state_array__traits.hpp
+[1.135s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/detail/device_state_array__builder.hpp
+[1.135s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/detail/uv_state__struct.hpp
+[1.135s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/detail/device_state__builder.hpp
+[1.135s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/detail/uv_state__builder.hpp
+[1.135s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/detail/device_state_array__struct.hpp
+[1.135s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/detail/device_state__traits.hpp
+[1.135s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/device_state_array.hpp
+[1.136s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv
+[1.136s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/set_device.hpp
+[1.136s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/detail
+[1.136s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/detail/set_stabilization__traits.hpp
+[1.136s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/detail/set_device__struct.hpp
+[1.136s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/detail/set_device__builder.hpp
+[1.136s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/detail/set_stabilization__struct.hpp
+[1.136s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/detail/set_twist__struct.hpp
+[1.136s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/detail/set_device__traits.hpp
+[1.136s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/detail/set_twist__builder.hpp
+[1.137s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/detail/set_stabilization__builder.hpp
+[1.137s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/detail/set_twist__traits.hpp
+[1.137s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/set_stabilization.hpp
+[1.137s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/set_twist.hpp
+[1.137s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces
+[1.137s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg
+[1.137s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/rosidl_typesupport_fastrtps_cpp__visibility_control.h
+[1.137s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/detail
+[1.138s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/detail/uv_state__rosidl_typesupport_fastrtps_cpp.hpp
+[1.138s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/detail/device_state_array__rosidl_typesupport_fastrtps_cpp.hpp
+[1.138s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/detail/device_state__rosidl_typesupport_fastrtps_cpp.hpp
+[1.138s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/detail/dds_fastrtps
+[1.138s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv
+[1.138s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/detail
+[1.138s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/detail/set_stabilization__rosidl_typesupport_fastrtps_cpp.hpp
+[1.138s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/detail/set_twist__rosidl_typesupport_fastrtps_cpp.hpp
+[1.138s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/detail/set_device__rosidl_typesupport_fastrtps_cpp.hpp
+[1.138s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/detail/dds_fastrtps
+[1.138s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/libstingray_core_interfaces__rosidl_typesupport_fastrtps_cpp.so
+[1.138s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces
+[1.138s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg
+[1.138s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/detail
+[1.138s] -- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/detail/uv_state__type_support.c
+[1.139s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/detail/uv_state__rosidl_typesupport_introspection_c.h
+[1.139s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/detail/device_state_array__rosidl_typesupport_introspection_c.h
+[1.139s] -- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/detail/device_state__type_support.c
+[1.139s] -- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/detail/device_state_array__type_support.c
+[1.139s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/detail/device_state__rosidl_typesupport_introspection_c.h
+[1.139s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/rosidl_typesupport_introspection_c__visibility_control.h
+[1.139s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv
+[1.139s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/detail
+[1.139s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/detail/set_stabilization__rosidl_typesupport_introspection_c.h
+[1.139s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/detail/set_device__rosidl_typesupport_introspection_c.h
+[1.139s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/detail/set_twist__rosidl_typesupport_introspection_c.h
+[1.139s] -- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/detail/set_device__type_support.c
+[1.139s] -- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/detail/set_twist__type_support.c
+[1.140s] -- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/detail/set_stabilization__type_support.c
+[1.140s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/libstingray_core_interfaces__rosidl_typesupport_introspection_c.so
+[1.140s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/libstingray_core_interfaces__rosidl_typesupport_c.so
+[1.140s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces
+[1.140s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg
+[1.140s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/detail
+[1.140s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/detail/device_state__rosidl_typesupport_introspection_cpp.hpp
+[1.140s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/detail/device_state_array__type_support.cpp
+[1.140s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/detail/device_state__type_support.cpp
+[1.140s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/detail/uv_state__type_support.cpp
+[1.140s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/detail/uv_state__rosidl_typesupport_introspection_cpp.hpp
+[1.140s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/msg/detail/device_state_array__rosidl_typesupport_introspection_cpp.hpp
+[1.140s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv
+[1.140s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/detail
+[1.141s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/detail/set_twist__rosidl_typesupport_introspection_cpp.hpp
+[1.141s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/detail/set_stabilization__type_support.cpp
+[1.141s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/detail/set_twist__type_support.cpp
+[1.141s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/detail/set_device__type_support.cpp
+[1.141s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/detail/set_device__rosidl_typesupport_introspection_cpp.hpp
+[1.141s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/include/stingray_core_interfaces/stingray_core_interfaces/srv/detail/set_stabilization__rosidl_typesupport_introspection_cpp.hpp
+[1.141s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/libstingray_core_interfaces__rosidl_typesupport_introspection_cpp.so
+[1.141s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/libstingray_core_interfaces__rosidl_typesupport_cpp.so
+[1.141s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/environment/pythonpath.sh
+[1.141s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/environment/pythonpath.dsv
+[1.141s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/python3.10/site-packages/stingray_core_interfaces-0.1.0-py3.10.egg-info
+[1.141s] -- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/python3.10/site-packages/stingray_core_interfaces-0.1.0-py3.10.egg-info/PKG-INFO
+[1.141s] -- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/python3.10/site-packages/stingray_core_interfaces-0.1.0-py3.10.egg-info/top_level.txt
+[1.141s] -- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/python3.10/site-packages/stingray_core_interfaces-0.1.0-py3.10.egg-info/SOURCES.txt
+[1.142s] -- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/python3.10/site-packages/stingray_core_interfaces-0.1.0-py3.10.egg-info/dependency_links.txt
+[1.142s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/python3.10/site-packages/stingray_core_interfaces
+[1.142s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/python3.10/site-packages/stingray_core_interfaces/stingray_core_interfaces_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so
+[1.142s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/python3.10/site-packages/stingray_core_interfaces/libstingray_core_interfaces__rosidl_generator_py.so
+[1.142s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/python3.10/site-packages/stingray_core_interfaces/stingray_core_interfaces_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so
+[1.142s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/python3.10/site-packages/stingray_core_interfaces/_stingray_core_interfaces_s.ep.rosidl_typesupport_c.c
+[1.142s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/python3.10/site-packages/stingray_core_interfaces/msg
+[1.142s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/python3.10/site-packages/stingray_core_interfaces/msg/_uv_state_s.c
+[1.142s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/python3.10/site-packages/stingray_core_interfaces/msg/_device_state.py
+[1.142s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/python3.10/site-packages/stingray_core_interfaces/msg/_device_state_array_s.c
+[1.142s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/python3.10/site-packages/stingray_core_interfaces/msg/_device_state_array.py
+[1.142s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/python3.10/site-packages/stingray_core_interfaces/msg/_device_state_s.c
+[1.142s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/python3.10/site-packages/stingray_core_interfaces/msg/_uv_state.py
+[1.143s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/python3.10/site-packages/stingray_core_interfaces/msg/__init__.py
+[1.143s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/python3.10/site-packages/stingray_core_interfaces/_stingray_core_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c
+[1.143s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/python3.10/site-packages/stingray_core_interfaces/stingray_core_interfaces_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so
+[1.143s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/python3.10/site-packages/stingray_core_interfaces/_stingray_core_interfaces_s.ep.rosidl_typesupport_introspection_c.c
+[1.143s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/python3.10/site-packages/stingray_core_interfaces/srv
+[1.143s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/python3.10/site-packages/stingray_core_interfaces/srv/_set_device.py
+[1.143s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/python3.10/site-packages/stingray_core_interfaces/srv/_set_twist_s.c
+[1.143s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/python3.10/site-packages/stingray_core_interfaces/srv/_set_stabilization_s.c
+[1.143s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/python3.10/site-packages/stingray_core_interfaces/srv/_set_twist.py
+[1.143s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/python3.10/site-packages/stingray_core_interfaces/srv/_set_stabilization.py
+[1.143s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/python3.10/site-packages/stingray_core_interfaces/srv/_set_device_s.c
+[1.143s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/python3.10/site-packages/stingray_core_interfaces/srv/__init__.py
+[1.143s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/python3.10/site-packages/stingray_core_interfaces/__init__.py
+[1.190s] Listing '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/python3.10/site-packages/stingray_core_interfaces'...
+[1.190s] Listing '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/python3.10/site-packages/stingray_core_interfaces/msg'...
+[1.190s] Listing '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/python3.10/site-packages/stingray_core_interfaces/srv'...
+[1.198s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/python3.10/site-packages/stingray_core_interfaces/stingray_core_interfaces_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so
+[1.198s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/python3.10/site-packages/stingray_core_interfaces/stingray_core_interfaces_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so
+[1.198s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/python3.10/site-packages/stingray_core_interfaces/stingray_core_interfaces_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so
+[1.199s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/lib/libstingray_core_interfaces__rosidl_generator_py.so
+[1.199s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/msg/UVState.idl
+[1.199s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/msg/DeviceState.idl
+[1.199s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/msg/DeviceStateArray.idl
+[1.200s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/srv/SetDevice.idl
+[1.200s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/srv/SetTwist.idl
+[1.200s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/srv/SetStabilization.idl
+[1.200s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/msg/UVState.msg
+[1.200s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/msg/DeviceState.msg
+[1.200s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/msg/DeviceStateArray.msg
+[1.200s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/srv/SetDevice.srv
+[1.200s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/srv/SetDevice_Request.msg
+[1.200s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/srv/SetDevice_Response.msg
+[1.200s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/srv/SetTwist.srv
+[1.200s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/srv/SetTwist_Request.msg
+[1.201s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/srv/SetTwist_Response.msg
+[1.201s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/srv/SetStabilization.srv
+[1.201s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/srv/SetStabilization_Request.msg
+[1.201s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/srv/SetStabilization_Response.msg
+[1.201s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/ament_index/resource_index/package_run_dependencies/stingray_core_interfaces
+[1.201s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/ament_index/resource_index/parent_prefix_path/stingray_core_interfaces
+[1.201s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/environment/ament_prefix_path.sh
+[1.201s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/environment/ament_prefix_path.dsv
+[1.201s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/environment/path.sh
+[1.202s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/environment/path.dsv
+[1.202s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/local_setup.bash
+[1.202s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/local_setup.sh
+[1.202s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/local_setup.zsh
+[1.202s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/local_setup.dsv
+[1.202s] -- Installing: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/package.dsv
+[1.202s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/ament_index/resource_index/packages/stingray_core_interfaces
+[1.203s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/cmake/export_stingray_core_interfaces__rosidl_generator_cExport.cmake
+[1.203s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/cmake/export_stingray_core_interfaces__rosidl_generator_cExport-noconfig.cmake
+[1.203s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/cmake/export_stingray_core_interfaces__rosidl_typesupport_fastrtps_cExport.cmake
+[1.203s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/cmake/export_stingray_core_interfaces__rosidl_typesupport_fastrtps_cExport-noconfig.cmake
+[1.203s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/cmake/export_stingray_core_interfaces__rosidl_generator_cppExport.cmake
+[1.204s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/cmake/export_stingray_core_interfaces__rosidl_typesupport_fastrtps_cppExport.cmake
+[1.204s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/cmake/export_stingray_core_interfaces__rosidl_typesupport_fastrtps_cppExport-noconfig.cmake
+[1.204s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/cmake/stingray_core_interfaces__rosidl_typesupport_introspection_cExport.cmake
+[1.204s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/cmake/stingray_core_interfaces__rosidl_typesupport_introspection_cExport-noconfig.cmake
+[1.204s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/cmake/stingray_core_interfaces__rosidl_typesupport_cExport.cmake
+[1.204s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/cmake/stingray_core_interfaces__rosidl_typesupport_cExport-noconfig.cmake
+[1.205s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/cmake/stingray_core_interfaces__rosidl_typesupport_introspection_cppExport.cmake
+[1.205s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/cmake/stingray_core_interfaces__rosidl_typesupport_introspection_cppExport-noconfig.cmake
+[1.205s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/cmake/stingray_core_interfaces__rosidl_typesupport_cppExport.cmake
+[1.205s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/cmake/stingray_core_interfaces__rosidl_typesupport_cppExport-noconfig.cmake
+[1.205s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/cmake/export_stingray_core_interfaces__rosidl_generator_pyExport.cmake
+[1.205s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/cmake/export_stingray_core_interfaces__rosidl_generator_pyExport-noconfig.cmake
+[1.205s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/cmake/rosidl_cmake-extras.cmake
+[1.206s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/cmake/ament_cmake_export_dependencies-extras.cmake
+[1.206s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/cmake/ament_cmake_export_include_directories-extras.cmake
+[1.206s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/cmake/ament_cmake_export_libraries-extras.cmake
+[1.206s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/cmake/ament_cmake_export_targets-extras.cmake
+[1.206s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/cmake/rosidl_cmake_export_typesupport_targets-extras.cmake
+[1.206s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/cmake/rosidl_cmake_export_typesupport_libraries-extras.cmake
+[1.207s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/cmake/stingray_core_interfacesConfig.cmake
+[1.207s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/cmake/stingray_core_interfacesConfig-version.cmake
+[1.207s] -- Up-to-date: /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces/share/stingray_core_interfaces/package.xml
+[1.212s] Invoked command in '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/stingray_core_interfaces' returned '0': CMAKE_PREFIX_PATH=/opt/ros/iron /usr/bin/cmake --install /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/stingray_core_interfaces

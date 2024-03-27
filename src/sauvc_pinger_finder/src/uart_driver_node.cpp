@@ -6,7 +6,7 @@ int main(int argc, char *argv[]) {
     rclcpp::executors::MultiThreadedExecutor executor;
     boost::asio::io_service io_service;
     std::shared_ptr<rclcpp::Node> sender_node = rclcpp::Node::make_shared("UARTDriverSender");
-    auto sender = UDPBridgeSender<PingerFinderMessage>(sender_node, io_service);
+    auto sender = UDPBridgeSender<WeltMessage>(sender_node, io_service);
     // std::shared_ptr<rclcpp::Node> receiver_node = rclcpp::Node::make_shared("UDPDriverReceiver");
     // auto receiver = UDPBridgeReceiver<WeltMessage>(receiver_node, io_service);
     // std::thread s([&] {

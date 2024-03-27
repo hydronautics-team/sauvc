@@ -1,0 +1,33 @@
+[0.371s] Invoking command in '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/stingray_core_interfaces': /usr/bin/cmake /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/stingray/src/stingray_core/src/stingray_core_interfaces -DCMAKE_INSTALL_PREFIX=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces
+[1.651s] -- The C compiler identification is GNU 11.4.0
+[1.651s] -- The CXX compiler identification is GNU 11.4.0
+[1.651s] -- Detecting C compiler ABI info
+[1.651s] -- Detecting C compiler ABI info - done
+[1.651s] -- Check for working C compiler: /usr/bin/cc - skipped
+[1.651s] -- Detecting C compile features
+[1.651s] -- Detecting C compile features - done
+[1.651s] -- Detecting CXX compiler ABI info
+[1.651s] -- Detecting CXX compiler ABI info - done
+[1.651s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[1.651s] -- Detecting CXX compile features
+[1.652s] -- Detecting CXX compile features - done
+[1.652s] -- Configuring incomplete, errors occurred!
+[1.652s] See also "/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/stingray_core_interfaces/CMakeFiles/CMakeOutput.log".
+[1.652s] [31mCMake Error at CMakeLists.txt:8 (find_package):
+[1.652s]   By not providing "Findament_cmake.cmake" in CMAKE_MODULE_PATH this project
+[1.652s]   has asked CMake to find a package configuration file provided by
+[1.652s]   "ament_cmake", but CMake did not find one.
+[1.652s] 
+[1.652s]   Could not find a package configuration file provided by "ament_cmake" with
+[1.652s]   any of the following names:
+[1.652s] 
+[1.653s]     ament_cmakeConfig.cmake
+[1.653s]     ament_cmake-config.cmake
+[1.653s] 
+[1.653s]   Add the installation prefix of "ament_cmake" to CMAKE_PREFIX_PATH or set
+[1.653s]   "ament_cmake_DIR" to a directory containing one of the above files.  If
+[1.653s]   "ament_cmake" provides a separate development package or SDK, be sure it
+[1.653s]   has been installed.
+[1.653s] 
+[1.653s] [0m
+[2.012s] Invoked command in '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/stingray_core_interfaces' returned '1': /usr/bin/cmake /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/stingray/src/stingray_core/src/stingray_core_interfaces -DCMAKE_INSTALL_PREFIX=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_core_interfaces
