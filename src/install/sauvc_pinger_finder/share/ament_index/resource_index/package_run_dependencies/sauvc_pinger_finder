@@ -1,1 +1,0 @@
-rclcpp;std_msgs;std_srvs;serial;stingray_core_interfaces;boost;stingray_core_communication;ament_lint_auto;ament_lint_common

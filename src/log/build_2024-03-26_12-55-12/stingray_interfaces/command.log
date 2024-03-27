@@ -1,1 +1,0 @@
-Invoking command in '/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/build/stingray_interfaces': CMAKE_PREFIX_PATH=/opt/ros/iron /usr/bin/cmake /home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/stingray/src/stingray_interfaces -DCMAKE_INSTALL_PREFIX=/home/shakuevda/Desktop/SAUVC/sauvc_hyadroacoustic/src/install/stingray_interfaces

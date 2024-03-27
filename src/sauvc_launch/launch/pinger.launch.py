@@ -20,11 +20,11 @@ def generate_launch_description():
         Node(
             package='sauvc_pinger_finder',
             executable='uart_driver_node',
-            name='uart_driver_node',
-            parameters=[
+            name='uart_driver_node'
+            # parameters=[
 
-            ],
+            # ],
             # respawn=True,
             # respawn_delay=0.5,
-        ),
+        )
     ])
