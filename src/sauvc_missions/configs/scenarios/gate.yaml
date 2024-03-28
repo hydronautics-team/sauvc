@@ -1,0 +1,12 @@
+initial: INIT
+missions:
+  INIT:
+    config_name: init
+    package_name: stingray_missions
+  GATE:
+    config_name: gate
+    package_name: sauvc_missions
+transitions:
+  - { source: INIT, outcome: OK, dest: GATE }
+  - { source: GATE, outcome: OK, dest: OK }
+  - { source: [INIT, GATE], outcome: FAILED, dest: FAILED }

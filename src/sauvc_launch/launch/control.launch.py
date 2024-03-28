@@ -15,6 +15,10 @@ from launch_ros.actions import PushRosNamespace
 
 
 def generate_launch_description():
+    # object detection
+    bbox_array_topic_arg = DeclareLaunchArgument(
+        "bbox_array_topic", default_value='/stingray/topics/front_camera/bbox_array'
+    )
 
     # missions
     mission_package_names_arg = DeclareLaunchArgument(
@@ -46,6 +50,7 @@ def generate_launch_description():
 
     # load ros config
     return LaunchDescription([
+        bbox_array_topic_arg,
         mission_package_names_arg,
         uv_state_topic_arg,
         set_twist_srv_arg,
@@ -59,6 +64,7 @@ def generate_launch_description():
             PythonLaunchDescriptionSource(str(Path(
                 get_package_share_directory('stingray_launch'), 'control.launch.py'))),
             launch_arguments={
+                'bbox_array_topic': LaunchConfiguration("bbox_array_topic"),
                 'mission_package_names': LaunchConfiguration("mission_package_names"),
                 'uv_state_topic': LaunchConfiguration("uv_state_topic"),
                 'device_state_array_topic': LaunchConfiguration("device_state_array_topic"),
