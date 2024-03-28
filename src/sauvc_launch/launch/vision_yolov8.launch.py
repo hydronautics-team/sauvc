@@ -66,7 +66,7 @@ def generate_launch_description():
 
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(str(Path(
-                get_package_share_directory('stingray_launch'), 'vision.launch.py'))),
+                get_package_share_directory('stingray_launch'), 'vision_yolov8.launch.py'))),
             launch_arguments={
                 'camera_topic': LaunchConfiguration("front_camera_topic"),
                 'camera_path': LaunchConfiguration("front_camera_path"),
