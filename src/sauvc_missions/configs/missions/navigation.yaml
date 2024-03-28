@@ -1,0 +1,73 @@
+initial: MOVE_TO_FLAG
+states:
+  MOVE_TO_FLAG:
+    action: 
+      type: Move
+      surge: 50.0
+      sway: 0.0
+      depth: 500.0
+      roll: 0.0
+      pitch: 0.0
+      yaw: 0.0
+      duration: 15.0
+  MOVE_AROUND_FLAG_SWAY_1:
+    action: 
+      type: Move
+      surge: 0
+      sway: 10.0
+      depth: 500.0
+      roll: 0.0
+      pitch: 0.0
+      yaw: 0.0
+      duration: 3.0
+  MOVE_AROUND_FLAG_SURGE:
+    action: 
+      type: Move
+      surge: 50.0
+      sway: 0.0
+      depth: 500.0
+      roll: 0.0
+      pitch: 0.0
+      yaw: 0.0
+      duration: 3.0
+  MOVE_AROUND_FLAG_SWAY_2:
+    action: 
+      type: Move
+      surge: 0
+      sway: -10.0
+      depth: 500.0
+      roll: 0.0
+      pitch: 0.0
+      yaw: 0.0
+      duration: 3.0
+  MOVE_TO_GATE:
+    action: 
+      type: Move
+      surge: 50.0
+      sway: 0.0
+      depth: 500.0
+      roll: 0.0
+      pitch: 0.0
+      yaw: 0.0
+      duration: 15.0
+  EMERGE:
+    action: 
+      type: Move
+      surge: 0.0
+      sway: 0.0
+      depth: 50.0
+      roll: 0.0
+      pitch: 0.0
+      yaw: 0.0
+      duration: 10.0
+transitions:
+  - { trigger: ok, source: MOVE_TO_FLAG, dest: MOVE_AROUND_FLAG_SWAY_1 }
+  - { trigger: ok, source: MOVE_AROUND_FLAG_SWAY_1, dest: MOVE_AROUND_FLAG_SURGE }
+  - { trigger: ok, source: MOVE_AROUND_FLAG_SURGE, dest: MOVE_AROUND_FLAG_SWAY_2 }
+  - { trigger: ok, source: MOVE_AROUND_FLAG_SWAY_2, dest: MOVE_TO_GATE }
+  - { trigger: ok, source: MOVE_TO_GATE, dest: EMERGE }
+  - { trigger: ok, source: EMERGE, dest: OK }
+  - { trigger: failed, source: [ENABLE_OBJECT_DETECTION, MOVE_TO_FLAG,
+                                MOVE_AROUND_FLAG_SWAY_1, MOVE_AROUND_FLAG_SURGE,
+                                MOVE_AROUND_FLAG_SWAY_2, MOVE_TO_GATE, EMERGE],
+                                dest: FAILED }

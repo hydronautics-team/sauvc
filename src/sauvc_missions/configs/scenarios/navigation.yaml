@@ -1,0 +1,16 @@
+initial: INIT
+missions:
+  INIT:
+    config_name: init
+    package_name: stingray_missions
+  SEARCH_VISION_GATE:
+    config_name: search_vision_gate
+    package_name: sauvc_missions
+  NAVIGATION:
+    config_name: navigation
+    package_name: sauvc_missions
+transitions:
+  - { source: INIT, outcome: OK, dest: SEARCH_VISION_GATE }
+  - { source: SEARCH_VISION_GATE, outcome: OK, dest: NAVIGATION }
+  - { source: NAVIGATION, outcome: OK, dest: OK }
+  - { source: [INIT, NAVIGATION], outcome: FAILED, dest: FAILED }
