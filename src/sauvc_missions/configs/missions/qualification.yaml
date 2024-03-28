@@ -7,7 +7,7 @@ states:
       enable: true
   MOVE_TO_GATE:
     action: 
-      type: Move
+      type: Twist
       surge: 50.0
       sway: 0.0
       depth: 500.0
@@ -17,7 +17,7 @@ states:
       duration: 15.0
   EMERGE:
     action: 
-      type: Move
+      type: Twist
       surge: 0.0
       sway: 0.0
       depth: 50.0

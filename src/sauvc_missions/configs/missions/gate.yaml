@@ -1,0 +1,15 @@
+initial: MOVE_CENTERING_GATE
+states:
+  MOVE_CENTERING_GATE:
+    timeout: 60
+    action: 
+      type: BboxCenteringTwist
+      bbox_name: gate
+      surge: 100.0
+      depth: 500.0
+      roll: 0.0
+      pitch: 0.0
+transitions:
+  - { trigger: ok, source: MOVE_CENTERING_GATE, dest: OK }
+  - { trigger: fail, source: MOVE_CENTERING_GATE, dest: FAILED }
+  - { trigger: timeout, source: MOVE_CENTERING_GATE, dest: FAILED }

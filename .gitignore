@@ -1,3 +1,7 @@
+build/
+install/
+log/
+
 # Weights
 *.pt
 
