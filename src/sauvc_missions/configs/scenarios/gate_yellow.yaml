@@ -1,4 +1,7 @@
 initial: INIT
+ok_state_package_name: stingray_missions
+failed_state_package_name: stingray_missions
+abort_state_package_name: stingray_missions
 missions:
   INIT:
     config_name: init
@@ -15,16 +18,12 @@ missions:
   YELLOW_COLUMN:
     config_name: yellow_column
     package_name: sauvc_missions
-  END:
-    config_name: end
-    package_name: stingray_missions
 
 transitions:
   - { source: INIT, outcome: OK, dest: SEARCH_GATE }
   - { source: SEARCH_GATE, outcome: OK, dest: GATE }
   - { source: GATE, outcome: OK, dest: SEARCH_YELLOW_COLUMN }
   - { source: SEARCH_YELLOW_COLUMN, outcome: OK, dest: YELLOW_COLUMN }
-  - { source: YELLOW_COLUMN, outcome: OK, dest: END }
-  - { source: END, outcome: OK, dest: OK }
+  - { source: YELLOW_COLUMN, outcome: OK, dest: OK }
 
   - { source: [INIT, SEARCH_GATE, GATE, SEARCH_YELLOW_COLUMN, YELLOW_COLUMN, END], outcome: FAILED, dest: FAILED }
