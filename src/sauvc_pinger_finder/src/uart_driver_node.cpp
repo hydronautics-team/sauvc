@@ -3,7 +3,7 @@
 
 int main(int argc, char *argv[]) {
     rclcpp::init(argc, argv);
-    std::shared_ptr<rclcpp::Node> node = rclcpp::Node::make_shared("UartDriver");
+    std::shared_ptr<rclcpp::Node> node = rclcpp::Node::make_shared("PingerUartDriver");
     auto bridge = UartDriver<PingerFinderMessage, PingerFinderMessage>(node);
     rclcpp::spin(node);
     rclcpp::shutdown();
