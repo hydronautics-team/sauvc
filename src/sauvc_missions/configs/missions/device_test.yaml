@@ -1,0 +1,21 @@
+initial: DEVICE_OPEN
+states:
+  DEVICE_OPEN:
+    action:
+      type: SetDeviceValue
+      device: 0
+      value: 1
+  WAIT_DEV:
+    action:
+      type: Duration
+      duration: 3.0
+  DEVICE_CLOSE:
+    action:
+      type: SetDeviceValue
+      device: 0
+      value: 0
+transitions:
+  - { trigger: ok, source: DEVICE_OPEN, dest: WAIT_DEV }
+  - { trigger: ok, source: WAIT_DEV, dest: DEVICE_CLOSE }
+  - { trigger: ok, source: DEVICE_CLOSE, dest: OK }
+  - { trigger: fail, source: [DEVICE_OPEN, WAIT_DEV, DEVICE_CLOSE], dest: FAILED }
