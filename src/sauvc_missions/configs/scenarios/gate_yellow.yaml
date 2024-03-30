@@ -26,4 +26,4 @@ transitions:
   - { source: SEARCH_YELLOW_COLUMN, outcome: OK, dest: YELLOW_COLUMN }
   - { source: YELLOW_COLUMN, outcome: OK, dest: OK }
 
-  - { source: [INIT, SEARCH_GATE, GATE, SEARCH_YELLOW_COLUMN, YELLOW_COLUMN, END], outcome: FAILED, dest: FAILED }
+  - { source: [INIT, SEARCH_GATE, GATE, SEARCH_YELLOW_COLUMN, YELLOW_COLUMN], outcome: FAILED, dest: FAILED }

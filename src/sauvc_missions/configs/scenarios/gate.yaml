@@ -18,4 +18,4 @@ transitions:
   - { source: SEARCH_GATE, outcome: OK, dest: GATE }
   - { source: GATE, outcome: OK, dest: OK }
 
-  - { source: [INIT, SEARCH_GATE, GATE, END], outcome: FAILED, dest: FAILED }
+  - { source: [INIT, SEARCH_GATE, GATE], outcome: FAILED, dest: FAILED }
