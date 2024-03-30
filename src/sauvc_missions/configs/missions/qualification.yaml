@@ -29,4 +29,4 @@ transitions:
   - { trigger: ok, source: ENABLE_OBJECT_DETECTION, dest: MOVE_TO_GATE }
   - { trigger: ok, source: MOVE_TO_GATE, dest: EMERGE }
   - { trigger: ok, source: EMERGE, dest: OK }
-  - { trigger: failed, source: MOVE_TO_GATE, dest: FAILED }
+  - { trigger: failed, source: [MOVE_TO_GATE, EMERGE], dest: FAILED }
