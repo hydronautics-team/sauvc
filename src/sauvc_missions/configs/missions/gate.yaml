@@ -1,7 +1,6 @@
 initial: MOVE_CENTERING_GATE
 states:
   MOVE_CENTERING_GATE:
-    timeout: 60
     action: 
       type: BboxCenteringTwist
       bbox_name: gate

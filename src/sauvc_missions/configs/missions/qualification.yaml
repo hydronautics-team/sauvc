@@ -1,10 +1,10 @@
 initial: ENABLE_OBJECT_DETECTION
 states:
-  ENABLE_OBJECT_DETECTION:
-    action:
-      type: EnableObjectDetection
-      camera_topic: /stingray/topics/front_camera
-      enable: true
+  # ENABLE_OBJECT_DETECTION:
+  #   action:
+  #     type: EnableObjectDetection
+  #     camera_topic: /stingray/topics/front_camera
+  #     enable: true
   MOVE_TO_GATE:
     action: 
       type: Twist
