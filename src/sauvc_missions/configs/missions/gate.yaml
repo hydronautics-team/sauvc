@@ -1,10 +1,10 @@
 initial: MOVE_CENTERING_GATE
 states:
-  ENABLE_OBJECT_DETECTION:
-    action:
-      type: EnableObjectDetection
-      camera_topic: /stingray/topics/front_camera
-      enable: true
+  # ENABLE_OBJECT_DETECTION:
+  #   action:
+  #     type: EnableObjectDetection
+  #     camera_topic: /stingray/topics/front_camera
+  #     enable: true
   MOVE_CENTERING_GATE:
     action: 
       type: BboxCenteringTwist
@@ -14,7 +14,7 @@ states:
       roll: 0.0
       pitch: 0.0
 transitions:
-  - { trigger: ok, source: ENABLE_OBJECT_DETECTION, dest: MOVE_CENTERING_GATE }
+  # - { trigger: ok, source: ENABLE_OBJECT_DETECTION, dest: MOVE_CENTERING_GATE }
   - { trigger: ok, source: MOVE_CENTERING_GATE, dest: OK }
   - { trigger: fail, source: [ENABLE_OBJECT_DETECTION, MOVE_CENTERING_GATE], dest: FAILED }
   - { trigger: timeout, source: MOVE_CENTERING_GATE, dest: FAILED }

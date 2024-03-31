@@ -1,4 +1,4 @@
-initial: ENABLE_OBJECT_DETECTION
+initial: MOVE_TO_GATE
 states:
   # ENABLE_OBJECT_DETECTION:
   #   action:
@@ -26,7 +26,7 @@ states:
       yaw: 0.0
       duration: 10.0
 transitions:
-  - { trigger: ok, source: ENABLE_OBJECT_DETECTION, dest: MOVE_TO_GATE }
+  # - { trigger: ok, source: ENABLE_OBJECT_DETECTION, dest: MOVE_TO_GATE }
   - { trigger: ok, source: MOVE_TO_GATE, dest: EMERGE }
   - { trigger: ok, source: EMERGE, dest: OK }
   - { trigger: failed, source: [MOVE_TO_GATE, EMERGE], dest: FAILED }
