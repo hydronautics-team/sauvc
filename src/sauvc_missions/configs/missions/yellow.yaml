@@ -1,0 +1,48 @@
+initial: SEARCH_YELLOW
+states:
+  # ENABLE_OBJECT_DETECTION:
+  #   action:
+  #     type: EnableObjectDetection
+  #     camera_topic: /stingray/topics/front_camera
+  #     enable: true
+  SEARCH_YELLOW:
+    transition_event: 
+      type: ObjectDetectionEvent
+      topic_name: /stingray/topics/front_camera/bbox_array
+      data: yellow_flare
+      count: 5
+      trigger: found
+    action: 
+      type: Twist
+      surge: 0.0
+      sway: 0.0
+      depth: 1.0
+      roll: 0.0
+      pitch: 0.0
+      yaw: 30
+      duration: 2.0
+  MOVE_CENTERING_YELLOW:
+    action: 
+      type: BboxCenteringTwist
+      bbox_name: yellow_flare
+      surge: 30.0
+      depth: 1.0
+      roll: 0.0
+      pitch: 0.0
+  MOVE_PUNCH_YELLOW:
+    action: 
+      type: Twist
+      surge: 50.0
+      sway: 0.0
+      depth: 1.0
+      roll: 0.0
+      pitch: 0.0
+      yaw: 0.0
+      duration: 2.0
+transitions:
+  # - { trigger: ok, source: ENABLE_OBJECT_DETECTION, dest: MOVE_CENTERING_GATE }
+  - { trigger: ok, source: SEARCH_YELLOW, dest: SEARCH_YELLOW }
+  - { trigger: found, source: SEARCH_YELLOW, dest: MOVE_CENTERING_YELLOW }
+  - { trigger: ok, source: MOVE_CENTERING_YELLOW, dest: MOVE_PUNCH_YELLOW }
+  - { trigger: ok, source: MOVE_PUNCH_YELLOW, dest: OK }
+  - { trigger: fail, source: [SEARCH_YELLOW, MOVE_CENTERING_YELLOW, MOVE_PUNCH_YELLOW ], dest: FAILED }

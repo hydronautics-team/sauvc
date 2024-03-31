@@ -1,21 +1,38 @@
-initial: DEVICE_OPEN
+initial: DROPPER_OPEN
 states:
-  DEVICE_OPEN:
+  DROPPER_OPEN:
     action:
       type: SetDeviceValue
       device: 0
       value: 1
-  WAIT_DEV:
+  WAIT_DROPPER:
     action:
       type: Duration
       duration: 3.0
-  DEVICE_CLOSE:
+  DROPPER_CLOSE:
     action:
       type: SetDeviceValue
       device: 0
       value: 0
+  GRABBER_OPEN:
+    action:
+      type: SetDeviceValue
+      device: 1
+      value: 1
+  WAIT_GRABBER:
+    action:
+      type: Duration
+      duration: 3.0
+  GRABBER_CLOSE:
+    action:
+      type: SetDeviceValue
+      device: 1
+      value: 0
 transitions:
-  - { trigger: ok, source: DEVICE_OPEN, dest: WAIT_DEV }
-  - { trigger: ok, source: WAIT_DEV, dest: DEVICE_CLOSE }
-  - { trigger: ok, source: DEVICE_CLOSE, dest: OK }
-  - { trigger: fail, source: [DEVICE_OPEN, WAIT_DEV, DEVICE_CLOSE], dest: FAILED }
+  - { trigger: ok, source: DROPPER_OPEN, dest: WAIT_DROPPER }
+  - { trigger: ok, source: WAIT_DROPPER, dest: DROPPER_CLOSE }
+  - { trigger: ok, source: DROPPER_CLOSE, dest: GRABBER_OPEN }
+  - { trigger: ok, source: GRABBER_OPEN, dest: WAIT_GRABBER }
+  - { trigger: ok, source: WAIT_GRABBER, dest: GRABBER_CLOSE }
+  - { trigger: ok, source: GRABBER_CLOSE, dest: OK }
+  - { trigger: fail, source: [DROPPER_OPEN, WAIT_DROPPER, DROPPER_CLOSE, GRABBER_OPEN, WAIT_GRABBER, GRABBER_CLOSE], dest: FAILED }

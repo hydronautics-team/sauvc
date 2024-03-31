@@ -1,20 +1,42 @@
-initial: MOVE_CENTERING_GATE
+initial: MOVE_TO_GATE
 states:
   # ENABLE_OBJECT_DETECTION:
   #   action:
   #     type: EnableObjectDetection
   #     camera_topic: /stingray/topics/front_camera
   #     enable: true
+  MOVE_TO_GATE:
+    action: 
+      type: Twist
+      surge: 100.0
+      sway: 0.0
+      depth: 1.0
+      roll: 0.0
+      pitch: 0.0
+      yaw: 0.0
+      duration: 1.5
   MOVE_CENTERING_GATE:
     action: 
       type: BboxCenteringTwist
       bbox_name: gate
       surge: 50.0
-      depth: 500.0
+      depth: 1.0
       roll: 0.0
       pitch: 0.0
+  MOVE_THROUGH_GATE:
+    action: 
+      type: Twist
+      surge: 100.0
+      sway: 0.0
+      depth: 1.0
+      roll: 0.0
+      pitch: 0.0
+      yaw: 0.0
+      duration: 3.0
 transitions:
   # - { trigger: ok, source: ENABLE_OBJECT_DETECTION, dest: MOVE_CENTERING_GATE }
-  - { trigger: ok, source: MOVE_CENTERING_GATE, dest: OK }
-  - { trigger: fail, source: [ENABLE_OBJECT_DETECTION, MOVE_CENTERING_GATE], dest: FAILED }
+  - { trigger: ok, source: MOVE_TO_GATE, dest: MOVE_CENTERING_GATE }
+  - { trigger: ok, source: MOVE_CENTERING_GATE, dest: MOVE_THROUGH_GATE }
+  - { trigger: ok, source: MOVE_THROUGH_GATE, dest: OK }
+  - { trigger: fail, source: [MOVE_CENTERING_GATE, MOVE_THROUGH_GATE], dest: FAILED }
   - { trigger: timeout, source: MOVE_CENTERING_GATE, dest: FAILED }

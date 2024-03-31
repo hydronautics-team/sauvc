@@ -6,16 +6,12 @@ missions:
   INIT:
     config_name: init
     package_name: stingray_missions
-  SEARCH_GATE:
-    config_name: search_vision_gate
-    package_name: sauvc_missions
   GATE:
     config_name: gate
     package_name: sauvc_missions
 
 transitions:
-  - { source: INIT, outcome: OK, dest: SEARCH_GATE }
-  - { source: SEARCH_GATE, outcome: OK, dest: GATE }
+  - { source: INIT, outcome: OK, dest: GATE }
   - { source: GATE, outcome: OK, dest: OK }
 
-  - { source: [INIT, SEARCH_GATE, GATE], outcome: FAILED, dest: FAILED }
+  - { source: [INIT, GATE], outcome: FAILED, dest: FAILED }

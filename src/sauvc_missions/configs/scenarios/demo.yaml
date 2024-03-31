@@ -1,11 +1,16 @@
-initial: DEVICE_TEST
+initial: INIT
 ok_state_package_name: stingray_missions
 failed_state_package_name: stingray_missions
 abort_state_package_name: stingray_missions
 missions:
+  INIT:
+    config_name: init
+    package_name: stingray_missions
   DEVICE_TEST:
     config_name: device_test
     package_name: sauvc_missions
 transitions:
+  - { source: INIT, outcome: OK, dest: DEVICE_TEST }
   - { source: DEVICE_TEST, outcome: OK, dest: OK }
-  - { source: DEVICE_TEST, outcome: FAILED, dest: FAILED }
+
+  - { source: [INIT, DEVICE_TEST], outcome: FAILED, dest: FAILED }
