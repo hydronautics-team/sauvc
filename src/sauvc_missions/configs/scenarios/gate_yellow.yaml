@@ -10,7 +10,7 @@ missions:
     config_name: gate
     package_name: sauvc_missions
   YELLOW:
-    config_name: yellow_column
+    config_name: yellow
     package_name: sauvc_missions
 
 transitions:
