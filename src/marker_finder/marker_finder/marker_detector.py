@@ -1,35 +1,53 @@
 #!/usr/bin/env python3
 
-import rospy
 from cv_bridge import CvBridge, CvBridgeError
 from sensor_msgs.msg import Image
 import cv2
 import numpy as np
 import imutils
 
-from marker_finder.msg import MarkerBoundingBox as marker_msg
-from marker_finder.msg import ObjectsArray
-from marker_finder.srv import EnableMarkerDetection as detector_toggle_srv
-from marker_finder.srv import EnableMarkerDetectionRequest as detector_toggle_req
-from marker_finder.srv import EnableMarkerDetectionResponse as detector_toggle_res
+import rclpy
+from rclpy.node import Node
 
-class MarkerDetector:
-    def __init__(self, input_image_topic, box_topic, debug, debug_image_topic, ksize, sigma, closure, obj_light, obj_gray) -> None:
-        self.image_sub = rospy.Subscriber(input_image_topic, Image, self.image_callback, callback_args=input_image_topic, queue_size = 1)
-        self.box_topic = rospy.Publisher(box_topic, ObjectsArray, queue_size=1)
-        
-        service = rospy.Service("marker_detection_switch", detector_toggle_srv, self.enable_detector)
+from stingray_interfaces.msg import Bbox as marker_msg
+from stingray_interfaces.msg import BboxArray as ObjectsArray
+from stingray_interfaces.srv import SetEnableObjectDetection as detector_toggle_srv
+from stingray_interfaces.srv import SetEnableObjectDetectionRequest as detector_toggle_req
+from stingray_interfaces.srv import SetEnableObjectDetectionResponse as detector_toggle_res
+
+
+
+class MarkerDetector(Node):
+    def __init__(self):
+        super().__init__("marker_finder")
+        self.declare_parameter("~image_topic_name")
+        self.declare_parameter("~box_topic_name")
+        self.declare_parameter("~debug")
+        self.declare_parameter("~debug_image_name")
+        self.declare_parameter("~kernel")
+        self.declare_parameter("~sigma")
+        self.declare_parameter("~closure")
+        self.declare_parameter("~light")
+        self.declare_parameter("~grayness")
+
+        self.image_sub = self.create_subscription(Image, 
+                                                  self.get_parameter("~image_topic_name").get_parameter_value().string_value, 
+                                                  self.image_callback, 
+                                                  1)
+        self.box_topic = self.create_publisher(ObjectsArray, 
+                                               self.get_parameter("~box_topic_name").get_parameter_value().string_value, 
+                                               1)
+
+        self.service = self.create_service(detector_toggle_srv, 
+                                           "marker_detection_switch", 
+                                           self.enable_detector)
         self.detection_enabled = False
+
+        if self.get_parameter("~debug").get_parameter_value().bool_value:
+            self.image_pub = self.create_publisher(Image, 
+                                                   self.get_parameter("~debug_image_name").get_parameter_value().string_value, 
+                                                   1)
         
-        self.debug = debug
-        if self.debug:
-            self.image_pub = rospy.Publisher(debug_image_topic, Image, queue_size=1)
-        
-        self.ksize = ksize
-        self.sigma = sigma
-        self.closure = closure
-        self.obj_light = obj_light
-        self.obj_gray = obj_gray
         
         self.cv_bridge = CvBridge()
         
@@ -53,7 +71,7 @@ class MarkerDetector:
             self.image_pub.publish(ros_image)
                 
         except CvBridgeError as e:
-            rospy.logerr(e)
+            self.get_logger().error(e)
     
     def detect_marker(self, cv_image):
         processed_img = self.preprocess(cv_image)
@@ -122,21 +140,16 @@ class MarkerDetector:
         return msg
 
 
-if __name__ == '__main__':
-    rospy.init_node('marker_finder')
-    
-    image_topic = rospy.get_param("~image_topic_name")
-    box_topic = rospy.get_param("~box_topic_name")
-    debug = rospy.get_param("~debug")
-    debug_image_topic = rospy.get_param("~debug_image_name")
-    ksize = rospy.get_param("~kernel")
-    sigma = rospy.get_param("~sigma")
-    closure = rospy.get_param("~closure")
-    obj_light = rospy.get_param("~light")
-    obj_gray = rospy.get_param("~grayness")
+def main(args=None):
+    rclpy.init(args=args)
 
-    try:
-        m = MarkerDetector(image_topic, box_topic, debug, debug_image_topic, ksize, sigma, closure, obj_light, obj_gray)
-        rospy.spin()
-    except rospy.ROSInterruptException:
-        rospy.logerr("Shutting down {} node".format(rospy.get_name()))
+    marker_node = MarkerDetector()
+
+    rclpy.spin(marker_node)
+
+    marker_node.destroy_node()
+    rclpy.shutdown()
+
+
+if __name__ == "__main__":
+    main()
