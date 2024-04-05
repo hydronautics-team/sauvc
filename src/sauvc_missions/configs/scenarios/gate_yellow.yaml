@@ -17,5 +17,4 @@ transitions:
   - { source: INIT, outcome: OK, dest: GATE }
   - { source: GATE, outcome: OK, dest: YELLOW }
   - { source: YELLOW, outcome: OK, dest: OK }
-
   - { source: [INIT, GATE, YELLOW], outcome: FAILED, dest: FAILED }

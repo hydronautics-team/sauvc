@@ -1,34 +1,41 @@
-initial: SEARCH_YELLOW
+initial: ENABLE_OBJECT_DETECTION
 states:
-  # ENABLE_OBJECT_DETECTION:
-  #   action:
-  #     type: EnableObjectDetection
-  #     camera_topic: /stingray/topics/front_camera
-  #     enable: true
+  ENABLE_OBJECT_DETECTION:
+    action:
+      type: EnableObjectDetection
+      camera_topic: /stingray/topics/front_camera
+      enable: true
   SEARCH_YELLOW:
-    transition_event: 
-      type: ObjectDetectionEvent
-      topic_name: /stingray/topics/front_camera/bbox_array
-      data: yellow_flare
-      count: 5
-      trigger: found
     action: 
-      type: Twist
-      surge: 0.0
-      sway: 0.0
+      type: BboxSearchTwist
+      bbox_name: yellow_flare
+      bbox_topic: /stingray/topics/front_camera/bbox_array
+      first_clockwise: true
+      found_threshold: 10
+      max_yaw: 120
+      yaw_step: 15.0
       depth: 1.0
       roll: 0.0
       pitch: 0.0
-      yaw: 30
-      duration: 2.0
+      duration: 1.5
+      search_rate: 1.5
   MOVE_CENTERING_YELLOW:
     action: 
       type: BboxCenteringTwist
       bbox_name: yellow_flare
-      surge: 30.0
+      bbox_topic: /stingray/topics/front_camera/bbox_array
+      distance_threshold: 2.0
+      lost_threshold: 30
+      avoid_bbox_name_array: []
+      avoid_distance_threshold: 2.5
+      avoid_horizontal_threshold: 1.0
+      surge: 50.0
+      sway: 0.0
       depth: 1.0
       roll: 0.0
       pitch: 0.0
+      duration: 15.0
+      centering_rate: 0.5
   MOVE_PUNCH_YELLOW:
     action: 
       type: Twist
@@ -38,11 +45,9 @@ states:
       roll: 0.0
       pitch: 0.0
       yaw: 0.0
-      duration: 2.0
+      duration: 3.0
 transitions:
-  # - { trigger: ok, source: ENABLE_OBJECT_DETECTION, dest: MOVE_CENTERING_GATE }
-  - { trigger: ok, source: SEARCH_YELLOW, dest: SEARCH_YELLOW }
-  - { trigger: found, source: SEARCH_YELLOW, dest: MOVE_CENTERING_YELLOW }
+  - { trigger: ok, source: ENABLE_OBJECT_DETECTION, dest: SEARCH_YELLOW }
+  - { trigger: ok, source: SEARCH_YELLOW, dest: MOVE_CENTERING_YELLOW }
   - { trigger: ok, source: MOVE_CENTERING_YELLOW, dest: MOVE_PUNCH_YELLOW }
   - { trigger: ok, source: MOVE_PUNCH_YELLOW, dest: OK }
-  - { trigger: fail, source: [SEARCH_YELLOW, MOVE_CENTERING_YELLOW, MOVE_PUNCH_YELLOW ], dest: FAILED }

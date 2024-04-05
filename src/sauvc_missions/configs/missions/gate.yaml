@@ -1,28 +1,41 @@
-initial: MOVE_TO_GATE
+initial: ENABLE_OBJECT_DETECTION
 states:
-  # ENABLE_OBJECT_DETECTION:
-  #   action:
-  #     type: EnableObjectDetection
-  #     camera_topic: /stingray/topics/front_camera
-  #     enable: true
-  MOVE_TO_GATE:
+  ENABLE_OBJECT_DETECTION:
+    action:
+      type: EnableObjectDetection
+      camera_topic: /stingray/topics/front_camera
+      enable: true
+  SEARCH_GATE:
     action: 
-      type: Twist
-      surge: 100.0
-      sway: 0.0
+      type: BboxSearchTwist
+      bbox_name: gate
+      bbox_topic: /stingray/topics/front_camera/bbox_array
+      first_clockwise: true
+      found_threshold: 10
+      max_yaw: 120
+      yaw_step: 15.0
       depth: 1.0
       roll: 0.0
       pitch: 0.0
-      yaw: 0.0
       duration: 1.5
+      search_rate: 1.5
   MOVE_CENTERING_GATE:
     action: 
       type: BboxCenteringTwist
       bbox_name: gate
+      bbox_topic: /stingray/topics/front_camera/bbox_array
+      distance_threshold: 2.0
+      lost_threshold: 30
+      avoid_bbox_name_array: [red_flare]
+      avoid_distance_threshold: 2.5
+      avoid_horizontal_threshold: 1.0
       surge: 50.0
+      sway: 0.0
       depth: 1.0
       roll: 0.0
       pitch: 0.0
+      duration: 15.0
+      centering_rate: 0.5
   MOVE_THROUGH_GATE:
     action: 
       type: Twist
@@ -32,11 +45,9 @@ states:
       roll: 0.0
       pitch: 0.0
       yaw: 0.0
-      duration: 3.0
+      duration: 5.0
 transitions:
-  # - { trigger: ok, source: ENABLE_OBJECT_DETECTION, dest: MOVE_CENTERING_GATE }
-  - { trigger: ok, source: MOVE_TO_GATE, dest: MOVE_CENTERING_GATE }
+  - { trigger: ok, source: ENABLE_OBJECT_DETECTION, dest: SEARCH_GATE }
+  - { trigger: ok, source: SEARCH_GATE, dest: MOVE_CENTERING_GATE }
   - { trigger: ok, source: MOVE_CENTERING_GATE, dest: MOVE_THROUGH_GATE }
   - { trigger: ok, source: MOVE_THROUGH_GATE, dest: OK }
-  - { trigger: fail, source: [MOVE_CENTERING_GATE, MOVE_THROUGH_GATE], dest: FAILED }
-  - { trigger: timeout, source: MOVE_CENTERING_GATE, dest: FAILED }
