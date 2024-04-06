@@ -10,12 +10,11 @@ missions:
     config_name: gate
     package_name: sauvc_missions
   YELLOW:
-    config_name: yellow_column
+    config_name: yellow
     package_name: sauvc_missions
 
 transitions:
   - { source: INIT, outcome: OK, dest: GATE }
   - { source: GATE, outcome: OK, dest: YELLOW }
   - { source: YELLOW, outcome: OK, dest: OK }
-
   - { source: [INIT, GATE, YELLOW], outcome: FAILED, dest: FAILED }
