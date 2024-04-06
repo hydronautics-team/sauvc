@@ -8,7 +8,6 @@ public:
     PingerFinderMessage();
 
     const static uint8_t length = 1;
-    static const uint8_t dev_amount = 2;
 
     int8_t angle;
 

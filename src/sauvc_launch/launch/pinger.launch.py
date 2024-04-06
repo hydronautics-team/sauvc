@@ -17,7 +17,7 @@ from launch_ros.actions import PushRosNamespace
 def generate_launch_description():
     # topic names
     driver_request_topic_arg = DeclareLaunchArgument(
-        "driver_request_topic", default_value='/stingray/topics/driver_request'
+        "driver_request_topic", default_value='/stingray/topics/driver_hydroacoustic_request'
     )
    
     driver_response_topic_arg = DeclareLaunchArgument(
@@ -42,6 +42,18 @@ def generate_launch_description():
         "serial_timeout", default_value="1000"
     )
 
+    angle_hydroacoustic_topic_arg = DeclareLaunchArgument(
+        "angle_hydroacoustic_topic", default_value='/stingray/topics/angle_hydroacoustic_topic'
+    )
+
+    driver_hydroacoustic_request_topic_arg = DeclareLaunchArgument(
+        "driver_hydroacoustic_request_topic", default_value='/stingray/topics/driver_hydroacoustic_request'
+    )
+   
+    driver_hydroacoustic_response_topic_arg = DeclareLaunchArgument(
+        "driver_hydroacoustic_response_topic", default_value='/stingray/topics/driver_hydroacoustic_response'
+    )
+
     return LaunchDescription([
         driver_request_topic_arg,
         driver_response_topic_arg,
@@ -51,11 +63,14 @@ def generate_launch_description():
         stop_bits_arg,
         parity_arg,
         serial_timeout_arg,
+        angle_hydroacoustic_topic_arg,
+        driver_hydroacoustic_request_topic_arg,
+        driver_hydroacoustic_response_topic_arg,
        
         Node(
             package='sauvc_pinger_finder',
-            executable='pinger_uart_driver_node',
-            name='pinger_uart_driver_node',
+            executable='uart_driver_node',
+            name='uart_driver_node',
             parameters=[
                 {'driver_request_topic': LaunchConfiguration("driver_request_topic")},
                 {'driver_response_topic': LaunchConfiguration("driver_response_topic")},
@@ -68,5 +83,17 @@ def generate_launch_description():
             ],
             respawn=True,
             respawn_delay=0.5,
+        ),
+        Node(
+            package='sauvc_pinger_finder',
+            executable='hydroacoustic_bridge_node',
+            name='hydroacoustic_bridge_node',
+            parameters=[
+                {'angle_hydroacoustic_topic': LaunchConfiguration("angle_hydroacoustic_topic")},
+                {'driver_hydroacoustic_request_topic': LaunchConfiguration("driver_hydroacoustic_request_topic")},
+                {'driver_hydroacoustic_response_topic': LaunchConfiguration("driver_hydroacoustic_response_topic")},
+            ],
+            # respawn=True,
+            # respawn_delay=0.5,
         ),
     ])

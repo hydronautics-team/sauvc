@@ -1,5 +1,5 @@
-#include "stingray_core_communication/uart_driver.h"
 #include "sauvc_pinger_finder/messages/msg_pingerFinder.h"
+#include "stingray_core_communication/uart_driver.h"
 
 int main(int argc, char *argv[]) {
     rclcpp::init(argc, argv);

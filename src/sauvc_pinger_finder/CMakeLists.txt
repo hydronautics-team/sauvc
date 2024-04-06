@@ -20,17 +20,32 @@ include_directories(include)
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
 
+# add_library(${PROJECT_NAME}
+#         include/sauvc_pinger_finder/hydroacoustic_bridge.h
+#         include/sauvc_pinger_finder/messages/msg_pingerFinder.h
+#         src/messages/msg_pingerFinder.cpp
+#         src/hydroacoustic_bridge_node.cpp
+#         src/uart_driver_node.cpp
+# )
+
 add_executable(uart_driver_node
         src/uart_driver_node.cpp
         include/sauvc_pinger_finder/messages/msg_pingerFinder.h
         src/messages/msg_pingerFinder.cpp
         )
-ament_target_dependencies(uart_driver_node rclcpp std_msgs std_srvs serial stingray_core_interfaces stingray_core_communication)
+ament_target_dependencies(uart_driver_node rclcpp Boost std_msgs std_srvs serial stingray_core_interfaces stingray_core_communication)
 
+add_executable(hydroacoustic_bridge_node
+        src/hydroacoustic_bridge_node.cpp
+        include/sauvc_pinger_finder/hydroacoustic_bridge.h
+        src/messages/msg_pingerFinder.cpp
+        )
+ament_target_dependencies(hydroacoustic_bridge_node rclcpp std_msgs std_srvs serial stingray_core_interfaces stingray_core_communication)
 
 ## Install executable
 install(TARGETS
         uart_driver_node
+        hydroacoustic_bridge_node
         # ${PROJECT_NAME}
         DESTINATION lib/${PROJECT_NAME}
         # EXPORT ${PROJECT_NAME}
