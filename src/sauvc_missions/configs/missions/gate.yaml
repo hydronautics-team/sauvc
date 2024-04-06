@@ -11,7 +11,7 @@ states:
       bbox_name: gate
       bbox_topic: /stingray/topics/front_camera/bbox_array
       first_clockwise: true
-      found_threshold: 10
+      found_threshold: 5
       max_yaw: 120
       yaw_step: 15.0
       depth: 1.0
@@ -30,12 +30,12 @@ states:
       avoid_distance_threshold: 2.5
       avoid_horizontal_threshold: 1.0
       surge: 50.0
-      sway: 0.0
+      sway: 50.0
       depth: 1.0
       roll: 0.0
       pitch: 0.0
       duration: 15.0
-      centering_rate: 0.5
+      centering_rate: 1.0
   MOVE_THROUGH_GATE:
     action: 
       type: Twist
