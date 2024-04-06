@@ -15,4 +15,4 @@ test:  test/images # test images (optional)
 
 # Classes
 nc: 7  # number of classes
-names: ['gate','red_flare','yellow_flare','mat','red_bowl','blue_bowl', 'gate_qualification']  # class names
+names: ['gate','red_flare','yellow_flare','mat','red_bowl','blue_bowl', 'gate_qualification', 'blue_flare', 'small_red_flare']  # class names
