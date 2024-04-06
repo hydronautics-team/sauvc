@@ -9,6 +9,6 @@ states:
       roll: 0.0
       pitch: 0.0
       yaw: 0.0
-      duration: 15.0
+      duration: 20.0
 transitions:
   - { trigger: ok, source: MOVE_TO_GATE, dest: OK }
