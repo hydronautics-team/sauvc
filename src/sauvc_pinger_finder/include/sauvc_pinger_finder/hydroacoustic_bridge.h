@@ -15,6 +15,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <math.h>
 
 #include "stingray_core_interfaces/srv/set_twist.hpp"
 #include "stingray_core_interfaces/srv/set_device.hpp"
@@ -36,20 +37,20 @@ public:
 
         // ROS PARAMETERS
         // topic names
-        _node->declare_parameter("driver_hydroacoustic_request_topic", "/stingray/topics/driver_hydroacoustic_request");
+        _node->declare_parameter("driver_request_topic", "/stingray/topics/driver_request");
+        _node->declare_parameter("driver_response_topic", "/stingray/topics/driver_response");
         _node->declare_parameter("angle_hydroacoustic_topic", "/stingray/topics/angle_hydroacoustic");
-        _node->declare_parameter("driver_hydroacoustic_response_topic", "/stingray/topics/driver_hydroacoustic_response");
-        
+
         // ROS publishers
-        this->driverHydroacousticRequestPub = _node->create_publisher<std_msgs::msg::UInt8MultiArray>(
-            _node->get_parameter("driver_hydroacoustic_request_topic").as_string(), 1000);
-        this->angleToPingerPub = _node->create_publisher<std_msgs::msg::UInt8MultiArray>(
+        this->driverRequestPub = _node->create_publisher<std_msgs::msg::UInt8MultiArray>(
+            _node->get_parameter("driver_request_topic").as_string(), 1000);
+        this->angleToPingerPub = _node->create_publisher<std_msgs::msg::Float64>(
             _node->get_parameter("angle_hydroacoustic_topic").as_string(), 1000);
-        
+
         // ROS subscribers
-        this->driverHydroacousticResponseSub = _node->create_subscription<std_msgs::msg::UInt8MultiArray>(
-            _node->get_parameter("driver_hydroacoustic_response_topic").as_string(), 1000,
-            std::bind(&HydroacousticBridge::driverHydroacousticResponseCallback, this, std::placeholders::_1));
+        this->driverResponseSub = _node->create_subscription<std_msgs::msg::UInt8MultiArray>(
+            _node->get_parameter("driver_response_topic").as_string(), 1000,
+            std::bind(&HydroacousticBridge::driverResponseCallback, this, std::placeholders::_1));
 
         // Output message container
         driverHydroacousticRequestMsg.layout.dim.push_back(std_msgs::msg::MultiArrayDimension());
@@ -58,14 +59,14 @@ public:
         driverHydroacousticRequestMsg.layout.dim[0].label = "driverHydroacousticRequestMsg";
 
         // Initializing timer for publishing messages. Callback interval: 0.05 ms
-        this->publishingTimer = _node->create_wall_timer(50ms, std::bind(&HydroacousticBridge::driverHydroacousticRequestCallback, this));
+        this->publishingTimer = _node->create_wall_timer(500ms, std::bind(&HydroacousticBridge::driverRequestCallback, this));
     }
 
     std::shared_ptr<rclcpp::Node> _node;
 
 private:
 
-    void driverHydroacousticRequestCallback() {
+    void driverRequestCallback() {
         // Make output message
         std::vector<uint8_t> output_vector;
 
@@ -77,22 +78,20 @@ private:
             driverHydroacousticRequestMsg.data.push_back(output_vector[i]);
         }
         // Publish messages
-        driverHydroacousticRequestPub->publish(driverHydroacousticRequestMsg);  
-        // RCLCPP_INFO(_node->get_logger(), "Size of my vector: %ld", driverHydroacousticRequestMsg.data.size());
-        }
+        driverRequestPub->publish(driverHydroacousticRequestMsg);
+    }
 
-    void driverHydroacousticResponseCallback(const std_msgs::msg::UInt8MultiArray &msg) {
+    void driverResponseCallback(const std_msgs::msg::UInt8MultiArray &msg) {
         std::vector<uint8_t> received_vector;
         for (int i = 0; i < ResponseMessage::length; i++) {
             received_vector.push_back(msg.data[i]);
-            RCLCPP_INFO(_node->get_logger(), "Size of my vector: %d", msg.data[i]);
-
         }
         bool ok = responseMessage.parse(received_vector);
         if (ok) {
-
-            angleToPinger.data.push_back(responseMessage.angle);
-
+            int8_t offset = reinterpret_cast<int8_t>(responseMessage.angle);
+            uint16_t Fs = 1250; // kHz
+            float angle = asin(1498 * offset / (Fs * 24.89)) / M_PI * 180;
+            angleToPinger.data = angle;
             angleToPingerPub->publish(angleToPinger);
 
         } else
@@ -100,14 +99,14 @@ private:
     }
 
     // ROS publishers
-    rclcpp::Publisher<std_msgs::msg::UInt8MultiArray>::SharedPtr driverHydroacousticRequestPub;
-    rclcpp::Publisher<std_msgs::msg::UInt8MultiArray>::SharedPtr angleToPingerPub;
+    rclcpp::Publisher<std_msgs::msg::UInt8MultiArray>::SharedPtr driverRequestPub;
+    rclcpp::Publisher<std_msgs::msg::Float64>::SharedPtr angleToPingerPub;
 
     // ROS subscribers
-    rclcpp::Subscription<std_msgs::msg::UInt8MultiArray>::SharedPtr driverHydroacousticResponseSub;
+    rclcpp::Subscription<std_msgs::msg::UInt8MultiArray>::SharedPtr driverResponseSub;
 
     // Message containers
-    std_msgs::msg::UInt8MultiArray angleToPinger;
+    std_msgs::msg::Float64 angleToPinger;
     std_msgs::msg::UInt8MultiArray driverHydroacousticRequestMsg;
     RequestMessage requestMessage;
     ResponseMessage responseMessage;
