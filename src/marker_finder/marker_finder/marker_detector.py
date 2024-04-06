@@ -20,22 +20,22 @@ from stingray_interfaces.srv import SetEnableObjectDetectionResponse as detector
 class MarkerDetector(Node):
     def __init__(self):
         super().__init__("marker_finder")
-        self.declare_parameter("~image_topic_name")
-        self.declare_parameter("~box_topic_name")
-        self.declare_parameter("~debug")
-        self.declare_parameter("~debug_image_name")
-        self.declare_parameter("~kernel")
-        self.declare_parameter("~sigma")
-        self.declare_parameter("~closure")
-        self.declare_parameter("~light")
-        self.declare_parameter("~grayness")
+        self.declare_parameter("camera_bottom_topic_name")
+        self.declare_parameter("box_topic_name")
+        self.declare_parameter("debug")
+        self.declare_parameter("debug_image_name")
+        self.declare_parameter("kernel")
+        self.declare_parameter("sigma")
+        self.declare_parameter("closure")
+        self.declare_parameter("light")
+        self.declare_parameter("grayness")
 
         self.image_sub = self.create_subscription(Image, 
-                                                  self.get_parameter("~image_topic_name").get_parameter_value().string_value, 
+                                                  self.get_parameter("image_topic_name").get_parameter_value().string_value, 
                                                   self.image_callback, 
                                                   1)
         self.box_topic = self.create_publisher(ObjectsArray, 
-                                               self.get_parameter("~box_topic_name").get_parameter_value().string_value, 
+                                               self.get_parameter("box_topic_name").get_parameter_value().string_value, 
                                                1)
 
         self.service = self.create_service(detector_toggle_srv, 
@@ -43,9 +43,9 @@ class MarkerDetector(Node):
                                            self.enable_detector)
         self.detection_enabled = False
 
-        if self.get_parameter("~debug").get_parameter_value().bool_value:
+        if self.get_parameter("debug").get_parameter_value().bool_value:
             self.image_pub = self.create_publisher(Image, 
-                                                   self.get_parameter("~debug_image_name").get_parameter_value().string_value, 
+                                                   self.get_parameter("debug_image_name").get_parameter_value().string_value, 
                                                    1)
         
         

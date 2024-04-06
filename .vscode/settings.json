@@ -13,6 +13,7 @@
         "./src/stingray/src/stingray_utils",
         "./src/stingray/src/stingray_core/src/stingray_core_interfaces",
         "./src/stingray/src/stingray_missions",
+        "./src/marker_finder",
     ],
     "files.associations": {
         "cctype": "cpp",
