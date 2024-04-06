@@ -16,3 +16,6 @@ blue_bowl:
 red_bowl:
   real_size: 0.7
   reference_dim: width
+marker:
+  real_size: 0.035
+  reference_dim: height
