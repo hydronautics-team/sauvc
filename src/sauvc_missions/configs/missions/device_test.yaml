@@ -8,7 +8,7 @@ states:
   WAIT_DROPPER:
     action:
       type: Duration
-      duration: 3.0
+      duration: 10.0
   DROPPER_CLOSE:
     action:
       type: SetDeviceValue
@@ -22,7 +22,7 @@ states:
   WAIT_GRABBER:
     action:
       type: Duration
-      duration: 3.0
+      duration: 10.0
   GRABBER_CLOSE:
     action:
       type: SetDeviceValue
@@ -31,8 +31,5 @@ states:
 transitions:
   - { trigger: ok, source: DROPPER_OPEN, dest: WAIT_DROPPER }
   - { trigger: ok, source: WAIT_DROPPER, dest: DROPPER_CLOSE }
-  - { trigger: ok, source: DROPPER_CLOSE, dest: GRABBER_OPEN }
-  - { trigger: ok, source: GRABBER_OPEN, dest: WAIT_GRABBER }
-  - { trigger: ok, source: WAIT_GRABBER, dest: GRABBER_CLOSE }
-  - { trigger: ok, source: GRABBER_CLOSE, dest: OK }
-  - { trigger: fail, source: [DROPPER_OPEN, WAIT_DROPPER, DROPPER_CLOSE, GRABBER_OPEN, WAIT_GRABBER, GRABBER_CLOSE], dest: FAILED }
+  - { trigger: ok, source: DROPPER_CLOSE, dest: OK }
+  - { trigger: fail, source: [DROPPER_OPEN, WAIT_DROPPER, DROPPER_CLOSE], dest: FAILED }
