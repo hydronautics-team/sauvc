@@ -1,5 +1,5 @@
 gate:
-  real_size: 1.5
+  real_size: 2.0
   reference_dim: height
 qualification_gate:
   real_size: 1.0
