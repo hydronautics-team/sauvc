@@ -75,5 +75,9 @@ def generate_launch_description():
                 'set_device_srv': LaunchConfiguration("set_device_srv"),
             }.items(),
         ),
+        IncludeLaunchDescription(
+            PythonLaunchDescriptionSource(str(Path(
+                get_package_share_directory('sauvc_launch'), 'pinger.launch.py')))
+        ),
         
     ])

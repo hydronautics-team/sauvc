@@ -4,7 +4,7 @@
 #include <rclcpp/rclcpp.hpp>
 #include <std_msgs/msg/string.hpp>
 #include <std_msgs/msg/u_int16.hpp>
-#include <std_msgs/msg/float64.hpp>
+#include <std_msgs/msg/float32.hpp>
 #include <std_msgs/msg/u_int32.hpp>
 #include <std_msgs/msg/int32.hpp>
 #include <std_msgs/msg/u_int8_multi_array.hpp>
@@ -44,7 +44,7 @@ public:
         // ROS publishers
         this->driverRequestPub = _node->create_publisher<std_msgs::msg::UInt8MultiArray>(
             _node->get_parameter("driver_request_topic").as_string(), 1000);
-        this->angleToPingerPub = _node->create_publisher<std_msgs::msg::Float64>(
+        this->angleToPingerPub = _node->create_publisher<std_msgs::msg::Float32>(
             _node->get_parameter("angle_hydroacoustic_topic").as_string(), 1000);
 
         // ROS subscribers
@@ -100,13 +100,13 @@ private:
 
     // ROS publishers
     rclcpp::Publisher<std_msgs::msg::UInt8MultiArray>::SharedPtr driverRequestPub;
-    rclcpp::Publisher<std_msgs::msg::Float64>::SharedPtr angleToPingerPub;
+    rclcpp::Publisher<std_msgs::msg::Float32>::SharedPtr angleToPingerPub;
 
     // ROS subscribers
     rclcpp::Subscription<std_msgs::msg::UInt8MultiArray>::SharedPtr driverResponseSub;
 
     // Message containers
-    std_msgs::msg::Float64 angleToPinger;
+    std_msgs::msg::Float32 angleToPinger;
     std_msgs::msg::UInt8MultiArray driverHydroacousticRequestMsg;
     RequestMessage requestMessage;
     ResponseMessage responseMessage;
