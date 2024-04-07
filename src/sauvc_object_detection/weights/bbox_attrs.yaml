@@ -5,7 +5,7 @@ qualification_gate:
   real_size: 1.0
   reference_dim: height
 yellow_flare:
-  real_size: 1.0
+  real_size: 0.8
   reference_dim: height
 red_flare:
   real_size: 1.5
@@ -19,3 +19,9 @@ red_bowl:
 mat:
   real_size: 8.0
   reference_dim: width
+small_red_flare:
+  real_size: 0.8
+  reference_dim: height
+blue_flare:
+  real_size: 0.8
+  reference_dim: height
