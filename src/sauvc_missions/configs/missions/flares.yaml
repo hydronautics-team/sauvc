@@ -8,26 +8,26 @@ states:
   WAIT_SEQUENCE:
     action:
       type: Duration
-      duration: 10.0
+      duration: 20.0
   FLARES:
     action: 
       type: SequencePunchBboxTwist
       bbox_topic: /stingray/topics/front_camera/bbox_array
       first_clockwise: true
-      found_threshold: 3
-      distance_threshold: 2.0
+      found_threshold: 1
+      distance_threshold: 0.0
       lost_threshold: 30
       avoid_distance_threshold: 2.5
       avoid_horizontal_threshold: 0.7
       max_yaw: 180
-      yaw_step: 30.0
-      surge: 50.0
+      yaw_step: 15.0
+      surge: 30.0
       avoid_sway: 0.0
-      depth: 1.0
+      depth: 1.5
       roll: 0.0
       pitch: 0.0
       centering_duration: 15.0
-      search_rate: 1.5
+      search_rate: 0.5
       centering_rate: 1.0
       punch_duration: 3.0
 transitions:

@@ -17,7 +17,7 @@ states:
       avoid_horizontal_threshold: 0.0
       surge: 50.0
       sway: 0.0
-      depth: 1.0
+      depth: 1.5
       roll: 0.0
       pitch: 0.0
       duration: 15.0
@@ -34,7 +34,7 @@ states:
       type: Twist
       surge: 50.0
       sway: 0.0
-      depth: 1.0
+      depth: 1.5
       roll: 0.0
       pitch: 0.0
       yaw: 0.0
