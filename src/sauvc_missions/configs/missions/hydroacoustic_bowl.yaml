@@ -54,10 +54,16 @@ states:
       roll: 0.0
       pitch: 0.0
       yaw: 0.0
-      duration: 5.0
+      duration: 4.0
+  DROPPER_OPEN:
+    action:
+      type: SetDeviceValue
+      device: 0
+      value: 1
 transitions:
   - { trigger: ok, source: ENABLE_OBJECT_DETECTION, dest: MAT_CENTERING }
   - { trigger: ok, source: MAT_CENTERING, dest: HYDROACOUSTIC_CENTERING }
   - { trigger: ok, source: HYDROACOUSTIC_CENTERING, dest: DISABLE_OBJECT_DETECTION }
   - { trigger: ok, source: DISABLE_OBJECT_DETECTION, dest: MOVE_TO_BOWL }
-  - { trigger: ok, source: MOVE_TO_BOWL, dest: OK }
+  - { trigger: ok, source: MOVE_TO_BOWL, dest: DROPPER_OPEN }
+  - { trigger: ok, source: DROPPER_OPEN, dest: OK }
