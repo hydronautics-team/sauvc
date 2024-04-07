@@ -17,10 +17,10 @@ from launch_ros.actions import PushRosNamespace
 def generate_launch_description():
     # topic names
     driver_request_topic_arg = DeclareLaunchArgument(
-        "driver_request_topic", default_value='/stingray/topics/driver_hydroacoustic_request'
+        "hydroacoustic_driver_request_topic", default_value='/stingray/topics/driver_hydroacoustic_request'
     )
     driver_response_topic_arg = DeclareLaunchArgument(
-        "driver_response_topic", default_value='/stingray/topics/driver_hydroacoustic_response'
+        "hydroacoustic_driver_response_topic", default_value='/stingray/topics/driver_hydroacoustic_response'
     )
     device_arg = DeclareLaunchArgument(
         "device", default_value="/dev/ttyUSB0"
@@ -61,8 +61,8 @@ def generate_launch_description():
             executable='uart_driver_node',
             name='hydroacoustic_uart_driver_node',
             parameters=[
-                {'driver_request_topic': LaunchConfiguration("driver_request_topic")},
-                {'driver_response_topic': LaunchConfiguration("driver_response_topic")},
+                {'driver_request_topic': LaunchConfiguration("hydroacoustic_driver_request_topic")},
+                {'driver_response_topic': LaunchConfiguration("hydroacoustic_driver_response_topic")},
                 {'device': LaunchConfiguration("device")},
                 {'baudrate': LaunchConfiguration("baudrate")},
                 {'data_bits': LaunchConfiguration("data_bits")},
@@ -79,8 +79,8 @@ def generate_launch_description():
             name='hydroacoustic_bridge_node',
             parameters=[
                 {'angle_hydroacoustic_topic': LaunchConfiguration("angle_hydroacoustic_topic")},
-                {'driver_request_topic': LaunchConfiguration("driver_request_topic")},
-                {'driver_response_topic': LaunchConfiguration("driver_response_topic")},
+                {'driver_request_topic': LaunchConfiguration("hydroacoustic_driver_request_topic")},
+                {'driver_response_topic': LaunchConfiguration("hydroacoustic_driver_response_topic")},
             ],
             respawn=True,
             respawn_delay=0.5,
