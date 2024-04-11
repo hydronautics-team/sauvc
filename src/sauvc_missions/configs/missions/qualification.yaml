@@ -1,0 +1,14 @@
+initial: MOVE_TO_GATE
+states:
+  MOVE_TO_GATE:
+    action: 
+      type: Twist
+      surge: 100.0
+      sway: 0.0
+      depth: 1.5
+      roll: 0.0
+      pitch: 0.0
+      yaw: 0.0
+      duration: 20.0
+transitions:
+  - { trigger: ok, source: MOVE_TO_GATE, dest: OK }

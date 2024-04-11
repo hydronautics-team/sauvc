@@ -1,0 +1,24 @@
+initial: INIT
+ok_state_package_name: stingray_missions
+failed_state_package_name: stingray_missions
+abort_state_package_name: stingray_missions
+missions:
+  INIT:
+    config_name: init
+    package_name: stingray_missions
+  GATE:
+    config_name: gate
+    package_name: sauvc_missions
+  FLARES:
+    config_name: flares
+    package_name: sauvc_missions
+  HYDROACOUSTIC:
+    config_name: hydroacoustic_bowl
+    package_name: sauvc_missions
+
+transitions:
+  - { source: INIT, outcome: OK, dest: GATE }
+  - { source: GATE, outcome: OK, dest: FLARES }
+  - { source: FLARES, outcome: OK, dest: HYDROACOUSTIC }
+  - { source: HYDROACOUSTIC, outcome: OK, dest: OK }
+  - { source: [INIT, GATE, FLARES, HYDROACOUSTIC], outcome: FAILED, dest: FAILED }

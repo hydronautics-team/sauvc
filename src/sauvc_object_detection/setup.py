@@ -1,8 +1,7 @@
 from setuptools import find_packages, setup
-import os
 from glob import glob
 
-package_name = 'sauvc_missions'
+package_name = 'sauvc_object_detection'
 
 setup(
     name=package_name,
@@ -12,8 +11,8 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
-        (f'share/{package_name}/configs/missions', glob('configs/missions/*.yaml')),
-        (f'share/{package_name}/configs/scenarios', glob('configs/scenarios/*.yaml')),
+        (f'share/{package_name}/weights', glob('weights/*.yaml')),
+        (f'share/{package_name}/weights', glob('weights/*.pt')),
     ],
     install_requires=['setuptools'],
     zip_safe=True,

@@ -1,0 +1,17 @@
+initial: INIT
+ok_state_package_name: stingray_missions
+failed_state_package_name: stingray_missions
+abort_state_package_name: stingray_missions
+missions:
+  INIT:
+    config_name: init
+    package_name: stingray_missions
+  MOVE_TO_BOWL:
+    config_name: blue_bowl
+    package_name: sauvc_missions
+transitions:
+  - { source: INIT, outcome: OK, dest: MOVE_TO_BOWL }
+  - { source: MOVE_TO_BOWL, outcome: OK, dest: OK }
+
+  - { source: INIT, outcome: FAILED, dest: FAILED }
+

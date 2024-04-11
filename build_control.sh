@@ -1,0 +1,1 @@
+colcon build --packages-ignore marker_finder serial sauvc_object_detection stingray_object_detection

@@ -1,0 +1,49 @@
+initial: ENABLE_OBJECT_DETECTION
+states:
+  ENABLE_OBJECT_DETECTION:
+    action:
+      type: EnableObjectDetection
+      camera_topic: /stingray/topics/front_camera
+      enable: true
+  SUBMERGE:
+    action: 
+      type: Twist
+      surge: 0.0
+      sway: -100.0
+      depth: 1.5
+      roll: 0.0
+      pitch: 0.0
+      yaw: 0.0
+      duration: 5.0
+  MOVE_CENTERING_GATE:
+    action: 
+      type: BboxCenteringTwist
+      bbox_name: gate
+      bbox_topic: /stingray/topics/front_camera/bbox_array
+      distance_threshold: 2.0
+      lost_threshold: 30
+      avoid_bbox_name_array: [red_flare]
+      avoid_distance_threshold: 3.5
+      avoid_horizontal_threshold: 2.0
+      surge: 50.0
+      sway: -50.0
+      depth: 1.5
+      roll: 0.0
+      pitch: 0.0
+      duration: 15.0
+      centering_rate: 1.0
+  MOVE_THROUGH_GATE:
+    action: 
+      type: Twist
+      surge: 100.0
+      sway: 0.0
+      depth: 1.5
+      roll: 0.0
+      pitch: 0.0
+      yaw: 0.0
+      duration: 5.0
+transitions:
+  - { trigger: ok, source: ENABLE_OBJECT_DETECTION, dest: SUBMERGE }
+  - { trigger: ok, source: SUBMERGE, dest: MOVE_CENTERING_GATE }
+  - { trigger: ok, source: MOVE_CENTERING_GATE, dest: MOVE_THROUGH_GATE }
+  - { trigger: ok, source: MOVE_THROUGH_GATE, dest: OK }

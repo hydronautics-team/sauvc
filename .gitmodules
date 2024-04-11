@@ -1,3 +1,6 @@
 [submodule "src/stingray"]
 	path = src/stingray
-	url = https://github.com/hydronautics-team/stingray
+	url = git@github.com:hydronautics-team/stingray.git
+[submodule "src/sauvc_navigation"]
+	path = src/sauvc_navigation
+	url = git@github.com:hydronautics-team/sauvc_navigation.git

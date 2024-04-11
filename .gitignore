@@ -1,3 +1,7 @@
+build/
+install/
+log/
+
 # Weights
 *.pt
 
@@ -37,6 +41,8 @@
 # ROS
 devel/
 logs/
+log/
+install/
 build/
 bin/
 lib/
@@ -87,6 +93,8 @@ qtcreator-*
 # Catkin custom files
 CATKIN_IGNORE
 
+# vscode
+.vscode/
 
 # JetBrains
 
@@ -112,6 +120,3 @@ CATKIN_IGNORE
 
 /**/.idea/
 /**/cmake-build-debug/
-
-# Visual Studio Code
-/.vscode
