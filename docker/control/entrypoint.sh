@@ -2,7 +2,7 @@
 set -e
 
 # Проверяем, существует ли файл setup.bash
-if [ -f install/setup.bash ]; then
+if [ -f /sauvc/install/setup.bash ]; then
   echo "[INFO] Код уже сбилжен"
   source /sauvc/install/setup.bash
 else

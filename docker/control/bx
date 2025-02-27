@@ -1,1 +1,3 @@
-docker buildx build --platform linux/amd64,linux/arm64 -t hydronautics/sauvc:control -f Dockerfile --push .
+#!/bin/bash
+
+docker buildx build --platform linux/amd64,linux/arm64 -t hydronautics/sauvc:control -f Dockerfile --push ../../
