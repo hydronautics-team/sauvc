@@ -15,10 +15,13 @@ def generate_launch_description():
     zbar_camera_topic_arg = DeclareLaunchArgument(
         "zbar_camera_topic", default_value='/stingray/topics/front_camera'
     )
-    
+
     # object detection
     image_topic_list_arg = DeclareLaunchArgument(
         "image_topic_list", default_value='[/stingray/topics/front_camera, /stingray/topics/bottom_camera]'
+    )
+    camera_info_topic_arg = DeclareLaunchArgument(
+        "camera_info_topic", default_value='[/stingray/topics/front_camera/camera_info, /stingray/topics/bottom_camera/camera_info]'
     )
     weights_pkg_name_arg = DeclareLaunchArgument(
         "weights_pkg_name", default_value='sauvc_object_detection'
@@ -30,11 +33,11 @@ def generate_launch_description():
         "debug", default_value='True'
     )
 
-
     # load ros config
     return LaunchDescription([
         zbar_camera_topic_arg,
         image_topic_list_arg,
+        camera_info_topic_arg,
         weights_pkg_name_arg,
         bbox_attrs_pkg_name_arg,
         debug_arg,
@@ -47,6 +50,7 @@ def generate_launch_description():
                 'weights_pkg_name': LaunchConfiguration("weights_pkg_name"),
                 'bbox_attrs_pkg_name': LaunchConfiguration("bbox_attrs_pkg_name"),
                 'image_topic_list': LaunchConfiguration("image_topic_list"),
+                'camera_info_topic': LaunchConfiguration("camera_info_topic"),
                 'debug': LaunchConfiguration("debug"),
             }.items(),
         ),
