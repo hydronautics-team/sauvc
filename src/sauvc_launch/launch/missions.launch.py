@@ -99,7 +99,7 @@ def generate_launch_description():
 
         # missions
         Node(
-            package='stingray_missions',
+            package='sauvc_missions',
             executable='fsm_node',
             name='fsm_node',
             parameters=[

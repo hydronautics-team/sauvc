@@ -219,9 +219,14 @@ class HydroacousticCenteringTwistStateAction(StateActionBase):
         return await super().execute(**kwargs)
 
 
-def load_sauvc_actions(node: Node):
+def load_sauvc_actions(node: Node) -> dict[str, StateActionBase]:
     """Load all actions"""
-    return load_stingray_actions(node).update({
-        "SequencePunchBboxTwist": SequencePunchBboxTwistStateAction,
-        "HydroacousticCenteringTwist": HydroacousticCenteringTwistStateAction
-    })
+    stingray_actions = load_stingray_actions(node)
+    # get_logger("action").info(f'Loaded stingray_actions: {stingray_actions}')
+    
+    sauvc_actions ={
+        SequencePunchBboxTwistStateAction.type: SequencePunchBboxTwistStateAction(node),
+        HydroacousticCenteringTwistStateAction.type: HydroacousticCenteringTwistStateAction(node)
+    }
+    # get_logger("action").info(f'Loaded sauvc_actions: {sauvc_actions}')
+    return {**stingray_actions, **sauvc_actions}
