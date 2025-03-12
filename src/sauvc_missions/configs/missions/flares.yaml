@@ -15,12 +15,12 @@ states:
       bbox_topic: /stingray/topics/front_camera/bbox_array
       first_clockwise: true
       found_threshold: 1
-      distance_threshold: 0.0
+      distance_threshold: 0.5
       lost_threshold: 30
-      avoid_distance_threshold: 2.5
-      avoid_horizontal_threshold: 0.7
-      max_yaw: 180
-      yaw_step: 15.0
+      avoid_distance_threshold: 1.5
+      avoid_horizontal_threshold: 1.0
+      max_yaw: 360
+      yaw_step: 30.0
       surge: 30.0
       avoid_sway: 0.0
       depth: 1.5

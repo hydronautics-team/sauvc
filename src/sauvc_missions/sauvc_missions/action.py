@@ -29,7 +29,7 @@ class SequencePunchBboxTwistStateAction(StateActionBase):
 
     def get_bbox_name(self, flare_id: str):
         if flare_id == "R":
-            return "small_red_flare"
+            return "red_flare"
         elif flare_id == "B":
             return "blue_flare"
         elif flare_id == "Y":
@@ -41,14 +41,14 @@ class SequencePunchBboxTwistStateAction(StateActionBase):
         if flare_id == "R":
             return ["blue_flare", "yellow_flare"]
         elif flare_id == "B":
-            return ["small_red_flare", "yellow_flare"]
+            return ["red_flare", "yellow_flare"]
         elif flare_id == "Y":
-            return ["small_red_flare", "blue_flare"]
+            return ["red_flare", "blue_flare"]
         else:
             return []
 
     async def execute(self,
-                      sequence: list[str] = [],
+                      sequence: list[str] = ["R", "B", "Y"],
                       bbox_topic: str = "",
                       distance_threshold: float = 0.0,
                       avoid_distance_threshold: float = 0.0,
@@ -106,9 +106,14 @@ class SequencePunchBboxTwistStateAction(StateActionBase):
                 f"Timeout while waiting for {self.twist_action_client._action_name} action server")
             return False
 
+        get_logger('action').info(
+                f"sequence: {self.sequence}")
+        
         for flare in self.sequence:
             search_goal = BboxSearchTwistAction.Goal()
             search_goal.bbox_name = self.get_bbox_name(flare_id=flare)
+            get_logger('action').info(
+                f"Target bbox flare: {search_goal.bbox_name}")
             search_goal.bbox_topic = self.bbox_topic
             search_goal.first_clockwise = self.first_clockwise
             search_goal.found_threshold = int(self.found_threshold)
