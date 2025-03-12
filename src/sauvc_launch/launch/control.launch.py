@@ -7,7 +7,7 @@ from launch_ros.actions import Node
 def generate_launch_description():
     # missions
     mission_package_names_arg = DeclareLaunchArgument(
-        "mission_package_names", default_value='[sauvc_missions stingray_missions]'
+        "mission_package_names", default_value='[sauvc_missions, stingray_missions]'
     )
     transition_srv_arg = DeclareLaunchArgument(
         "transition_srv", default_value='/stingray/services/transition'
