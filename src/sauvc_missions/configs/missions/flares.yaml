@@ -3,7 +3,7 @@ states:
   ENABLE_OBJECT_DETECTION:
     action:
       type: EnableObjectDetection
-      camera_topic: /stingray/topics/front_camera
+      camera_topic: /stingray/topics/camera/front
       enable: true
   WAIT_SEQUENCE:
     action:
@@ -12,7 +12,7 @@ states:
   FLARES:
     action: 
       type: SequencePunchBboxTwist
-      bbox_topic: /stingray/topics/front_camera/bbox_array
+      bbox_topic: /stingray/topics/camera/front/bbox_array
       first_clockwise: true
       found_threshold: 1
       distance_threshold: 0.5

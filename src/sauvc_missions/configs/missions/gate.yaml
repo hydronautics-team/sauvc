@@ -3,7 +3,7 @@ states:
   ENABLE_OBJECT_DETECTION:
     action:
       type: EnableObjectDetection
-      camera_topic: /stingray/topics/front_camera
+      camera_topic: /stingray/topics/camera/front
       enable: true
   SUBMERGE:
     action: 
@@ -19,7 +19,7 @@ states:
     action: 
       type: BboxCenteringTwist
       bbox_name: gate
-      bbox_topic: /stingray/topics/front_camera/bbox_array
+      bbox_topic: /stingray/topics/camera/front/bbox_array
       distance_threshold: 1.5
       lost_threshold: 30
       avoid_bbox_name_array: [orange_flare]

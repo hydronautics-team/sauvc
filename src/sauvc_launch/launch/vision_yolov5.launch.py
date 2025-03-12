@@ -13,15 +13,15 @@ from launch_ros.actions import Node
 def generate_launch_description():
     # zbar camera
     zbar_camera_topic_arg = DeclareLaunchArgument(
-        "zbar_camera_topic", default_value='/stingray/topics/front_camera'
+        "zbar_camera_topic", default_value='/stingray/topics/camera/front'
     )
 
     # object detection
     image_topic_list_arg = DeclareLaunchArgument(
-        "image_topic_list", default_value='[/stingray/topics/front_camera, /stingray/topics/bottom_camera]'
+        "image_topic_list", default_value='[/stingray/topics/camera/front, /stingray/topics/camera/bottom]'
     )
     camera_info_topic_list_arg = DeclareLaunchArgument(
-        "camera_info_topic_list", default_value='[/stingray/topics/front_camera/camera_info, /stingray/topics/bottom_camera/camera_info]'
+        "camera_info_topic_list", default_value='[/stingray/topics/camera/front/camera_info, /stingray/topics/camera/bottom/camera_info]'
     )
     weights_pkg_name_arg = DeclareLaunchArgument(
         "weights_pkg_name", default_value='sauvc_object_detection'

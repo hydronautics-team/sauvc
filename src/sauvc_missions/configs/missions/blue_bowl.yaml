@@ -3,13 +3,13 @@ states:
   ENABLE_OBJECT_DETECTION:
     action:
       type: EnableObjectDetection
-      camera_topic: /stingray/topics/front_camera
+      camera_topic: /stingray/topics/camera/front
       enable: true
   MOVE_WITH_CENTERING:
     action: 
       type: BboxCenteringTwist
       bbox_name: blue_bowl
-      bbox_topic: /stingray/topics/front_camera/bbox_array
+      bbox_topic: /stingray/topics/camera/front/bbox_array
       distance_threshold: 1.5
       lost_threshold: 30
       avoid_bbox_name_array: []
@@ -25,7 +25,7 @@ states:
   DISABLE_OBJECT_DETECTION:
     action:
       type: EnableObjectDetection
-      camera_topic: /stingray/topics/front_camera
+      camera_topic: /stingray/topics/camera/front
       enable: false
 # определенное количество времени движения до тазика
 # необходимо подобрать благоприятную скорость, время движения, глубину 
