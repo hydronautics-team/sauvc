@@ -160,7 +160,7 @@ def generate_launch_description():
             respawn_delay=1,
         ),
         Node(
-            package='stingray_movement',
+            package='sauvc_movement',
             executable='hydroacoustic_centering_twist_action_server',
             name='hydroacoustic_centering_twist_action_server',
             parameters=[
