@@ -8,7 +8,7 @@ states:
   WAIT_SEQUENCE:
     action:
       type: Duration
-      duration: 20.0
+      duration: 2.0
   FLARES:
     action: 
       type: SequencePunchBboxTwist

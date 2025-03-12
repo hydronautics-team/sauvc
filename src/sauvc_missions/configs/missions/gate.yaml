@@ -20,7 +20,7 @@ states:
       type: BboxCenteringTwist
       bbox_name: gate
       bbox_topic: /stingray/topics/front_camera/bbox_array
-      distance_threshold: 2.0
+      distance_threshold: 1.5
       lost_threshold: 30
       avoid_bbox_name_array: [orange_flare]
       avoid_distance_threshold: 3.5
@@ -31,7 +31,7 @@ states:
       roll: 0.0
       pitch: 0.0
       duration: 15.0
-      centering_rate: 1.0
+      centering_rate: 2
   MOVE_THROUGH_GATE:
     action: 
       type: Twist
