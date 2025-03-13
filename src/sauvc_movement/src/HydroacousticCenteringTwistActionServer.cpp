@@ -11,7 +11,7 @@ HydroacousticCenteringTwistActionServer::HydroacousticCenteringTwistActionServer
 void HydroacousticCenteringTwistActionServer::bboxArrayCallback(const stingray_interfaces::msg::BboxArray &msg) {
     bool found_target = false;
     for (auto bbox : msg.bboxes) {
-        if (bbox.name == target_bbox_name && abs(bbox.horizontal_angle) < target_angle_threshold && abs(bbox.horizontal_angle) < abs(current_target_bbox.horizontal_angle)) {
+        if (bbox.name == target_bbox_name) {//} && abs(bbox.horizontal_angle) < target_angle_threshold && abs(bbox.horizontal_angle) < abs(current_target_bbox.horizontal_angle)) {
             current_target_bbox = bbox;
             found_target = true;
             target_disappeared_counter = 0;
@@ -61,13 +61,6 @@ void HydroacousticCenteringTwistActionServer::execute(const std::shared_ptr<rclc
     auto goal_result = std::make_shared<sauvc_interfaces::action::HydroacousticCenteringTwistAction::Result>();
     goal_result->success = false;
 
-    bboxArraySub = _node->create_subscription<stingray_interfaces::msg::BboxArray>(
-        goal->bbox_topic, 10,
-        std::bind(&HydroacousticCenteringTwistActionServer::bboxArrayCallback, this, std::placeholders::_1));
-
-    angleHydroacousticSub = _node->create_subscription<std_msgs::msg::Float32>(goal->hydroacoustic_topic, 10,
-        std::bind(&HydroacousticCenteringTwistActionServer::hydroacousticCallback, this, std::placeholders::_1));
-
     // check duration
     if (goal->duration < 0.0) {
         goal_result->success = false;
@@ -75,6 +68,13 @@ void HydroacousticCenteringTwistActionServer::execute(const std::shared_ptr<rclc
         RCLCPP_ERROR(_node->get_logger(), "Duration value must be greater than 0.0");
         return;
     }
+
+    bboxArraySub = _node->create_subscription<stingray_interfaces::msg::BboxArray>(
+        goal->bbox_topic, 10,
+        std::bind(&HydroacousticCenteringTwistActionServer::bboxArrayCallback, this, std::placeholders::_1));
+
+    angleHydroacousticSub = _node->create_subscription<std_msgs::msg::Float32>(goal->hydroacoustic_topic, 10,
+        std::bind(&HydroacousticCenteringTwistActionServer::hydroacousticCallback, this, std::placeholders::_1));
 
     // send service request
     target_bbox_name = goal->bbox_name;
@@ -102,18 +102,34 @@ void HydroacousticCenteringTwistActionServer::execute(const std::shared_ptr<rclc
 
         if (isTwistDone(goal) && isCenteringTwistDone()) {
             RCLCPP_INFO(_node->get_logger(), "Twist done, target distance: %f, closer than: %f", current_target_bbox.pos_z, target_distance_threshold);
+            twistSrvRequest->surge = 0;
+            //break;
+        }
+
+        if (isTwistDone(goal) && isCenteringTwistDone() && abs(current_uv_state.yaw - twistSrvRequest->yaw) < goal->angle_threshold) {
+            RCLCPP_INFO(_node->get_logger(), "Centering done, current yaw: %f, pinger agnle: %f", current_uv_state.yaw, current_hydroacoustic_angle);
+            twistSrvRequest->surge = 0;
             break;
         }
-        twistSrvRequest->yaw = current_hydroacoustic_angle;
+
+        twistSrvRequest->yaw = current_uv_state.yaw + current_hydroacoustic_angle;
         RCLCPP_INFO(_node->get_logger(), "Twist action current yaw: %f, request diff: %f, surge: %f", current_uv_state.yaw, twistSrvRequest->yaw, twistSrvRequest->surge);
+        RCLCPP_INFO(_node->get_logger(), "Pure current_hydroacoustic_angle: %f", current_hydroacoustic_angle);
         // check if service success
         twistSrvClient->async_send_request(twistSrvRequest).wait();
-        twistSrvRequest->yaw = 0.0;
+        // twistSrvRequest->yaw = 0.0;
 
         if (goal_handle->is_canceling()) {
             goal_result->success = false;
             RCLCPP_INFO(_node->get_logger(), "Goal canceled");
             goal_handle->canceled(goal_result);
+
+            target_disappeared_counter = 0;
+            target_bbox_name = "";
+            angleHydroacousticSub.reset();
+            bboxArraySub.reset();
+            // stop maneuvr service request
+            stopTwist(twistSrvRequest);
             return;
         }
         // rclcpp::spin_some(_node);
