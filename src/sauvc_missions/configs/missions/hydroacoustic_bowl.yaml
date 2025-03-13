@@ -28,8 +28,8 @@ states:
       bbox_name: red_bowl
       bbox_topic: /stingray/topics/front_camera/bbox_array
       hydroacoustic_topic: /stingray/topics/angle_hydroacoustic
-      angle_threshold: 10.0
-      distance_threshold: 2.0
+      angle_threshold: 2.0
+      distance_threshold: 1.2
       lost_threshold: 30
       surge: 50.0
       sway: 0.0
@@ -54,7 +54,7 @@ states:
       roll: 0.0
       pitch: 0.0
       yaw: 0.0
-      duration: 4.0
+      duration: 5.0
   DROPPER_OPEN:
     action:
       type: SetDeviceValue

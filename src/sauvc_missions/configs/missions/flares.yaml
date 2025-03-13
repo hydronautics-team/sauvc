@@ -22,7 +22,8 @@ states:
       max_yaw: 360
       yaw_step: 30.0
       surge: 30.0
-      avoid_sway: 0.0
+      avoid_sway: -50
+      sway: 0
       depth: 1.5
       roll: 0.0
       pitch: 0.0
