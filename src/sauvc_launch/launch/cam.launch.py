@@ -30,6 +30,9 @@ def generate_launch_description():
         DeclareLaunchArgument('front_camera_output_height',
                               default_value='480',
                               description='Высота видео'),
+        DeclareLaunchArgument('front_camera_framerate',
+                              default_value='30.0',
+                              description='Частота кадров видео'),
         # bottom camera
         DeclareLaunchArgument("enable_bottom_camera",
                               default_value="true",
@@ -40,7 +43,7 @@ def generate_launch_description():
         DeclareLaunchArgument("bottom_camera_info_topic",
                               default_value='/stingray/topics/camera/bottom/camera_info'),
         DeclareLaunchArgument("bottom_camera_path",
-                              default_value='/dev/video2'),
+                              default_value='/dev/video0'),
         DeclareLaunchArgument("bottom_camera_calibration_path",
                               default_value="package://sauvc_cam/configs/bottom_camera.yaml"),
         DeclareLaunchArgument('bottom_camera_output_width',
@@ -49,6 +52,9 @@ def generate_launch_description():
         DeclareLaunchArgument('bottom_camera_output_height',
                               default_value='480',
                               description='Высота видео'),
+        DeclareLaunchArgument('bottom_camera_framerate',
+                              default_value='30.0',
+                              description='Частота кадров видео'),
         # recorder
         DeclareLaunchArgument("enable_recording_front_camera",
                               default_value="true",
@@ -57,7 +63,7 @@ def generate_launch_description():
                                 default_value="true",
                                 description="Включить(true) или отключить(false) ноду нижней камеры"),
         DeclareLaunchArgument('output_fps',
-                              default_value='15',
+                              default_value='30',
                               description='Частота кадров видео'),
         DeclareLaunchArgument('output_format',
                               default_value='h264',
@@ -84,6 +90,7 @@ def generate_launch_description():
                 ('/camera_info', LaunchConfiguration("front_camera_info_topic")),
             ],
             parameters=[
+                {'framerate': LaunchConfiguration("front_camera_framerate")},
                 {'video_device': LaunchConfiguration("front_camera_path")},
                 {'camera_info_url': LaunchConfiguration(
                     "front_camera_calibration_path")},
@@ -107,6 +114,7 @@ def generate_launch_description():
                 ('/camera_info', LaunchConfiguration("bottom_camera_info_topic")),
             ],
             parameters=[
+                {'framerate': LaunchConfiguration("bottom_camera_framerate")},
                 {'video_device': LaunchConfiguration("bottom_camera_path")},
                 {'camera_info_url': LaunchConfiguration(
                     "bottom_camera_calibration_path")},
@@ -114,7 +122,7 @@ def generate_launch_description():
                 {'image_width': LaunchConfiguration(
                     "bottom_camera_output_width")},
                 {'image_height': LaunchConfiguration(
-                    "bottom_camera_output_width")},
+                    "bottom_camera_output_height")},
             ],
             respawn=True,
             respawn_delay=1,
@@ -125,6 +133,7 @@ def generate_launch_description():
             PythonLaunchDescriptionSource(str(Path(
                 get_package_share_directory('stingray_launch'), 'recorder.launch.py'))),
             launch_arguments={
+                # 'recorder_name': 'front_camera_recorder',
                 'source_topic': LaunchConfiguration('front_camera_topic'),
                 'output_width': LaunchConfiguration('front_camera_output_width'),
                 'output_height': LaunchConfiguration('front_camera_output_height'),
@@ -139,6 +148,7 @@ def generate_launch_description():
             PythonLaunchDescriptionSource(str(Path(
                 get_package_share_directory('stingray_launch'), 'recorder.launch.py'))),
             launch_arguments={
+                # 'recorder_name': 'bottom_camera_recorder',
                 'source_topic': LaunchConfiguration('bottom_camera_topic'),
                 'output_width': LaunchConfiguration('bottom_camera_output_width'),
                 'output_height': LaunchConfiguration('bottom_camera_output_height'),
