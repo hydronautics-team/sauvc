@@ -1,0 +1,36 @@
+initial: MOVE_THROUGH_GATE
+states:
+  MOVE_THROUGH_GATE:
+    action: 
+      type: Twist
+      surge: 100.0
+      sway: 0.0
+      depth: 0.6
+      roll: 0.0
+      pitch: 0.0
+      yaw: 0.0
+      duration: 15.0
+  ROTATE_180:
+    action: 
+      type: Twist
+      surge: 0.0
+      sway: 0.0
+      depth: 0.6
+      roll: 0.0
+      pitch: 0.0
+      yaw: 179.9
+      duration: 10.0
+  MOVE_THROUGH_GATE_AGAIN:
+    action: 
+      type: Twist
+      surge: 100.0
+      sway: 0.0
+      depth: 0.6
+      roll: 0.0
+      pitch: 0.0
+      yaw: 0.0
+      duration: 15.0
+transitions:
+  - { trigger: ok, source: MOVE_THROUGH_GATE, dest: ROTATE_180 }
+  - { trigger: ok, source: ROTATE_180, dest: MOVE_THROUGH_GATE_AGAIN }
+  - { trigger: ok, source: MOVE_THROUGH_GATE_AGAIN, dest: OK }

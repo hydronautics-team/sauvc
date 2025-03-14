@@ -23,7 +23,7 @@ states:
       distance_threshold: 1.5
       lost_threshold: 30
       avoid_bbox_name_array: [orange_flare]
-      avoid_distance_threshold: 3.5
+      avoid_distance_threshold: 2.0
       avoid_horizontal_threshold: 2.0
       surge: 50.0
       sway: -50.0

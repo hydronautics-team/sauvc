@@ -106,10 +106,17 @@ class SequencePunchBboxTwistStateAction(StateActionBase):
                 f"Timeout while waiting for {self.twist_action_client._action_name} action server")
             return False
 
+        # ещё один костыль, но он нужен
+        if len(self.sequence) != 3 : self.sequence = ["R", "B", "Y"]
         get_logger('action').info(
                 f"sequence: {self.sequence}")
         
-        for flare in self.sequence:
+        #for flare in self.sequence:
+        count = 0
+        while self.sequence:
+            count += 1
+            flare = self.sequence.pop(0)
+
             search_goal = BboxSearchTwistAction.Goal()
             search_goal.bbox_name = self.get_bbox_name(flare_id=flare)
             get_logger('action').info(
@@ -128,6 +135,17 @@ class SequencePunchBboxTwistStateAction(StateActionBase):
                 get_logger('action').error(
                     f"Error while executing {self.node.get_parameter('bbox_search_twist_action').get_parameter_value().string_value}")
                 return False
+            # if flare did't finded
+            if not result.result.finded:
+                if count < 3 : 
+                    self.sequence.append(flare)
+                    get_logger('action').error(
+                    f"Flare not finded, go to the next")
+                    continue
+                else : 
+                    get_logger('action').error(
+                    f"Not all flares was killed, but action is complete")
+                    return True
 
             centering_goal = BboxCenteringTwistAction.Goal()
             centering_goal.bbox_name = self.get_bbox_name(flare_id=flare)
