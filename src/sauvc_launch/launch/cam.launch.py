@@ -71,6 +71,8 @@ def generate_launch_description():
         DeclareLaunchArgument('record_dir',
                               default_value='./records/',
                               description='Путь к папке для сохранения записей'),
+        DeclareLaunchArgument("enable_recording_topic", 
+                                default_value='/stingray/topics/enable_recording'),
 
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(str(Path(
@@ -133,13 +135,14 @@ def generate_launch_description():
             PythonLaunchDescriptionSource(str(Path(
                 get_package_share_directory('stingray_launch'), 'recorder.launch.py'))),
             launch_arguments={
-                # 'recorder_name': 'front_camera_recorder',
+                'recorder_name': 'front_camera_recorder',
                 'source_topic': LaunchConfiguration('front_camera_topic'),
                 'output_width': LaunchConfiguration('front_camera_output_width'),
                 'output_height': LaunchConfiguration('front_camera_output_height'),
                 'output_fps': LaunchConfiguration('output_fps'),
                 'output_format': LaunchConfiguration('output_format'),
                 'record_dir': LaunchConfiguration('record_dir'),
+                'enable_recording_topic': LaunchConfiguration('enable_recording_topic'),
             }.items(),
             condition=IfCondition(LaunchConfiguration('enable_recording_front_camera'))
         ),
@@ -148,13 +151,14 @@ def generate_launch_description():
             PythonLaunchDescriptionSource(str(Path(
                 get_package_share_directory('stingray_launch'), 'recorder.launch.py'))),
             launch_arguments={
-                # 'recorder_name': 'bottom_camera_recorder',
+                'recorder_name': 'bottom_camera_recorder',
                 'source_topic': LaunchConfiguration('bottom_camera_topic'),
                 'output_width': LaunchConfiguration('bottom_camera_output_width'),
                 'output_height': LaunchConfiguration('bottom_camera_output_height'),
                 'output_fps': LaunchConfiguration('output_fps'),
                 'output_format': LaunchConfiguration('output_format'),
                 'record_dir': LaunchConfiguration('record_dir'),
+                'enable_recording_topic': LaunchConfiguration('enable_recording_topic'),
             }.items(),
             condition=IfCondition(LaunchConfiguration('enable_recording_bottom_camera'))
         ),
