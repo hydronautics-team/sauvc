@@ -8,7 +8,11 @@ missions:
   QUALIFICATION:
     config_name: qualification
     package_name: sauvc_missions
+  TURN_AROUND:
+    config_name: turn_around
+    package_name: sauvc_missions
 transitions:
   - { source: INIT, outcome: OK, dest: QUALIFICATION }
-  - { source: QUALIFICATION, outcome: OK, dest: OK }
-  - { source: [INIT, QUALIFICATION], outcome: FAILED, dest: FAILED }
+  - { source: QUALIFICATION, outcome: OK, dest: TURN_AROUND }
+  - { source: TURN_AROUND, outcome: OK, dest: OK }
+  - { source: [INIT, QUALIFICATION, TURN_AROUND], outcome: FAILED, dest: FAILED }
