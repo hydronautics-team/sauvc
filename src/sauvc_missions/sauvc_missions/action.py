@@ -11,20 +11,35 @@ from stingray_missions.action import StateActionBase, load_stingray_actions
 
 class SequencePunchBboxTwistStateAction(StateActionBase):
     type = "SequencePunchBboxTwist"
+    sequence: list[str] = None
 
     def __init__(self, node: Node):
         super().__init__(node=node)
 
         self.bbox_centering_twist_action_client = AsyncActionClient(
-            self.node, BboxCenteringTwistAction, self.node.get_parameter('bbox_centering_twist_action').get_parameter_value().string_value)
+            self.node,
+            BboxCenteringTwistAction,
+            self.node.get_parameter(
+                'bbox_centering_twist_action').get_parameter_value().string_value
+        )
         self.bbox_search_twist_action_client = AsyncActionClient(
-            self.node, BboxSearchTwistAction, self.node.get_parameter('bbox_search_twist_action').get_parameter_value().string_value)
+            self.node,
+            BboxSearchTwistAction,
+            self.node.get_parameter(
+                'bbox_search_twist_action').get_parameter_value().string_value
+        )
         self.twist_action_client = AsyncActionClient(
-            self.node, TwistAction, self.node.get_parameter('twist_action').get_parameter_value().string_value)
+            self.node,
+            TwistAction,
+            self.node.get_parameter(
+                'twist_action').get_parameter_value().string_value
+        )
 
     def stop(self):
+        # Отправляем отмену экшенам, если нужно
         self.bbox_centering_twist_action_client.cancel()
         self.bbox_search_twist_action_client.cancel()
+        self.twist_action_client.cancel()
         return super().stop()
 
     def get_bbox_name(self, flare_id: str):
@@ -35,9 +50,11 @@ class SequencePunchBboxTwistStateAction(StateActionBase):
         elif flare_id == "Y":
             return "yellow_flare"
         else:
+            # Если пришёл неизвестный flare_id, можно вернуть что-то дефолтное
             return "yellow_flare"
 
     def get_avoid_bbox_array(self, flare_id: str):
+        # Возвращаем список объектов, которые хотим избегать
         if flare_id == "R":
             return ["blue_flare", "yellow_flare"]
         elif flare_id == "B":
@@ -48,7 +65,6 @@ class SequencePunchBboxTwistStateAction(StateActionBase):
             return []
 
     async def execute(self,
-                      sequence: list[str] = ["R", "B", "Y"],
                       bbox_topic: str = "",
                       distance_threshold: float = 0.0,
                       avoid_distance_threshold: float = 0.0,
@@ -70,8 +86,16 @@ class SequencePunchBboxTwistStateAction(StateActionBase):
                       **kwargs) -> bool:
         get_logger("action").info(f"Executing {self.type} state action")
 
+        # Если sequence не передана, используем дефолт
+        if not self.sequence:
+            # Можно сделать так: sequence = ["R","B","Y"]
+            self.sequence = ["Y", "R", "B"]
+            get_logger("action").warn(
+                "No sequence provided, using default [R,B,Y]")
+
         self.bbox_topic = bbox_topic
-        self.sequence = sequence
+
+        # Сохраняем остальные параметры локально
         self.distance_threshold = float(distance_threshold)
         self.avoid_distance_threshold = float(avoid_distance_threshold)
         self.avoid_horizontal_threshold = float(avoid_horizontal_threshold)
@@ -90,97 +114,126 @@ class SequencePunchBboxTwistStateAction(StateActionBase):
         self.punch_duration = float(punch_duration)
         self.centering_rate = float(centering_rate)
 
-        # Проверка доступности сервера экшена
-        if not self.bbox_search_twist_action_client.wait_for_server(timeout_sec=1.0): 
+        # Проверка доступности серверов
+        if not self.bbox_search_twist_action_client.wait_for_server(timeout_sec=2.0):
             get_logger("action").error(
                 f"Timeout while waiting for {self.bbox_search_twist_action_client._action_name} action server")
             return False
-        
-        if not self.bbox_centering_twist_action_client.wait_for_server(timeout_sec=1.0): 
+
+        if not self.bbox_centering_twist_action_client.wait_for_server(timeout_sec=2.0):
             get_logger("action").error(
                 f"Timeout while waiting for {self.bbox_centering_twist_action_client._action_name} action server")
             return False
-        
-        if not self.twist_action_client.wait_for_server(timeout_sec=1.0):
+
+        if not self.twist_action_client.wait_for_server(timeout_sec=2.0):
             get_logger("action").error(
                 f"Timeout while waiting for {self.twist_action_client._action_name} action server")
             return False
 
-        # ещё один костыль, но он нужен
-        if len(self.sequence) != 3 : self.sequence = ["R", "B", "Y"]
-        get_logger('action').info(
-                f"sequence: {self.sequence}")
-        
-        #for flare in self.sequence:
-        count = 0
-        while self.sequence:
-            count += 1
-            flare = self.sequence.pop(0)
+        get_logger('action').info(f"Flares sequence: {self.sequence}")
 
+        # Счётчик успешно сбитых фларов
+        punched_flares_count = 0
+
+        # Для каждого flare в последовательности
+        for flare in self.sequence:
+            flare_name = self.get_bbox_name(flare)
+
+            # === 1) Поиск flare ===
             search_goal = BboxSearchTwistAction.Goal()
-            search_goal.bbox_name = self.get_bbox_name(flare_id=flare)
-            get_logger('action').info(
-                f"Target bbox flare: {search_goal.bbox_name}")
+            search_goal.bbox_name = flare_name
             search_goal.bbox_topic = self.bbox_topic
             search_goal.first_clockwise = self.first_clockwise
-            search_goal.found_threshold = int(self.found_threshold)
-            search_goal.max_yaw = float(self.max_yaw)
-            search_goal.yaw_step = float(self.yaw_step)
-            search_goal.depth = float(self.depth)
-            search_goal.roll = float(self.roll)
-            search_goal.pitch = float(self.pitch)
-            search_goal.search_rate = float(self.search_rate)
-            result = await self.bbox_search_twist_action_client.send_goal_async(search_goal)
-            if not result.result.success:
-                get_logger('action').error(
-                    f"Error while executing {self.node.get_parameter('bbox_search_twist_action').get_parameter_value().string_value}")
-                return False
-            # if flare did't finded
-            if not result.result.finded:
-                if count < 3 : 
-                    self.sequence.append(flare)
-                    get_logger('action').error(
-                    f"Flare not finded, go to the next")
-                    continue
-                else : 
-                    get_logger('action').error(
-                    f"Not all flares was killed, but action is complete")
-                    return True
+            search_goal.found_threshold = self.found_threshold
+            search_goal.max_yaw = self.max_yaw
+            search_goal.yaw_step = self.yaw_step
+            search_goal.depth = self.depth
+            search_goal.roll = self.roll
+            search_goal.pitch = self.pitch
+            search_goal.search_rate = self.search_rate
+            # Допустим, время поиска (duration) = 0 => без таймлимита.
+            # Или хотим ограничить 30 секунд, например:
+            # search_goal.duration = 30.0
 
+            get_logger('action').info(f"Searching flare: {flare_name}")
+            search_result = await self.bbox_search_twist_action_client.send_goal_async(search_goal)
+
+            if not search_result.result.success:
+                get_logger('action').error(
+                    f"Search action for flare {flare_name} failed (success=False). Stopping.")
+                continue
+                # return False
+
+            if not search_result.result.finded:
+                get_logger('action').warn(
+                    f"Flare {flare_name} was NOT found (finded=False). Skipping or continue next.")
+                # Если строго нужно сбить все, возвращаем False
+                # return False
+                # ИЛИ можно «пропустить» этот flare, идём к следующему:
+                continue
+
+            get_logger('action').info(
+                f"Flare {flare_name} found => now center on it")
+
+            # === 2) Центрирование ===
             centering_goal = BboxCenteringTwistAction.Goal()
-            centering_goal.bbox_name = self.get_bbox_name(flare_id=flare)
+            centering_goal.bbox_name = flare_name
             centering_goal.bbox_topic = self.bbox_topic
-            centering_goal.distance_threshold = float(self.distance_threshold)
-            centering_goal.lost_threshold = int(self.lost_threshold)
+            centering_goal.distance_threshold = self.distance_threshold
+            centering_goal.lost_threshold = self.lost_threshold
             centering_goal.avoid_bbox_name_array = self.get_avoid_bbox_array(
-                flare_id=flare)
-            centering_goal.avoid_distance_threshold = float(
-                self.avoid_distance_threshold)
-            centering_goal.avoid_horizontal_threshold = float(
-                self.avoid_horizontal_threshold)
-            centering_goal.surge = float(self.surge)
-            centering_goal.sway = float(self.avoid_sway)
-            centering_goal.depth = float(self.depth)
-            centering_goal.roll = float(self.roll)
-            centering_goal.pitch = float(self.pitch)
-            centering_goal.duration = float(self.centering_duration)
-            centering_goal.centering_rate = float(self.centering_rate)
-            result = await self.bbox_centering_twist_action_client.send_goal_async(centering_goal)
-            if not result.result.success:
-                get_logger('action').error(
-                    f"Error while executing {self.node.get_parameter('bbox_centering_twist_action').get_parameter_value().string_value}")
-                return False
+                flare)
+            centering_goal.avoid_distance_threshold = self.avoid_distance_threshold
+            centering_goal.avoid_horizontal_threshold = self.avoid_horizontal_threshold
+            centering_goal.surge = self.surge
+            centering_goal.sway = self.avoid_sway
+            centering_goal.depth = self.depth
+            centering_goal.roll = self.roll
+            centering_goal.pitch = self.pitch
+            centering_goal.duration = self.centering_duration
+            centering_goal.centering_rate = self.centering_rate
 
+            center_result = await self.bbox_centering_twist_action_client.send_goal_async(centering_goal)
+            if not center_result.result.success:
+                get_logger('action').error(
+                    f"Centering action for flare {flare_name} failed (success=False). Stopping.")
+                continue
+                # return False
+
+            get_logger('action').info(
+                f"Flare {flare_name} centered => now punch")
+
+            # === 3) Сбитие (подача surge) ===
             punch_goal = TwistAction.Goal()
-            punch_goal.surge = float(70.0)
-            punch_goal.sway = float(0.0)
-            punch_goal.depth = float(self.depth)
-            punch_goal.roll = float(self.roll)
-            punch_goal.pitch = float(self.pitch)
-            punch_goal.yaw = float(0.0)
-            punch_goal.duration = float(self.punch_duration)
-            # result = await self.twist_action_client.send_goal_async(punch_goal)
-        return await super().execute(**kwargs)
+            punch_goal.surge = 70.0
+            punch_goal.sway = 0.0
+            punch_goal.depth = self.depth
+            punch_goal.roll = self.roll
+            punch_goal.pitch = self.pitch
+            punch_goal.yaw = 0.0
+            punch_goal.duration = self.punch_duration
+
+            punch_result = await self.twist_action_client.send_goal_async(punch_goal)
+            # Допустим, у нас есть punch_result.result.success
+            # Проверим:
+            if not punch_result.result.success:
+                get_logger('action').error(
+                    f"Punch action for flare {flare_name} failed. Stopping.")
+                continue
+                # return False
+
+            get_logger('action').info(f"Flare {flare_name} has been punched.")
+            punched_flares_count += 1
+
+        # После цикла проверяем, сбили ли мы хотя бы один flare
+        if punched_flares_count == 0:
+            get_logger('action').error(
+                "No flares were successfully punched. Mission failed.")
+            return False
+        else:
+            get_logger('action').info(
+                f"Mission complete. Total flares punched: {punched_flares_count}")
+            return True
 
 
 class HydroacousticCenteringTwistStateAction(StateActionBase):
@@ -229,7 +282,7 @@ class HydroacousticCenteringTwistStateAction(StateActionBase):
         self.goal.duration = float(duration)
         self.goal.centering_rate = float(centering_rate)
 
-        if not self.hydroacoustic_centering_twist_action_client.wait_for_server(timeout_sec=1.0): 
+        if not self.hydroacoustic_centering_twist_action_client.wait_for_server(timeout_sec=1.0):
             get_logger("action").error(
                 f"Timeout while waiting for {self.hydroacoustic_centering_twist_action_client._action_name} action server")
             return False
@@ -246,10 +299,11 @@ def load_sauvc_actions(node: Node) -> dict[str, StateActionBase]:
     """Load all actions"""
     stingray_actions = load_stingray_actions(node)
     # get_logger("action").info(f'Loaded stingray_actions: {stingray_actions}')
-    
-    sauvc_actions ={
+
+    sauvc_actions = {
         SequencePunchBboxTwistStateAction.type: SequencePunchBboxTwistStateAction(node),
-        HydroacousticCenteringTwistStateAction.type: HydroacousticCenteringTwistStateAction(node)
+        HydroacousticCenteringTwistStateAction.type: HydroacousticCenteringTwistStateAction(
+            node)
     }
     # get_logger("action").info(f'Loaded sauvc_actions: {sauvc_actions}')
     return {**stingray_actions, **sauvc_actions}
