@@ -16,4 +16,3 @@ transitions:
   - { source: INIT, outcome: OK, dest: GATE }
   - { source: GATE, outcome: OK, dest: FLARES }
   - { source: FLARES, outcome: OK, dest: OK }
-  - { source: [INIT, GATE, FLARES], outcome: FAILED, dest: FAILED }

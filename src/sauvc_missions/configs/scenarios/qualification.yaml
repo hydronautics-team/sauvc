@@ -11,4 +11,3 @@ missions:
 transitions:
   - { source: INIT, outcome: OK, dest: QUALIFICATION }
   - { source: QUALIFICATION, outcome: OK, dest: OK }
-  - { source: [INIT, QUALIFICATION], outcome: FAILED, dest: FAILED }

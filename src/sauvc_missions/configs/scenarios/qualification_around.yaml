@@ -15,4 +15,3 @@ transitions:
   - { source: INIT, outcome: OK, dest: QUALIFICATION }
   - { source: QUALIFICATION, outcome: OK, dest: TURN_AROUND }
   - { source: TURN_AROUND, outcome: OK, dest: OK }
-  - { source: [INIT, QUALIFICATION, TURN_AROUND], outcome: FAILED, dest: FAILED }

@@ -20,4 +20,3 @@ transitions:
   - { source: GATE, outcome: OK, dest: FLARES }
   - { source: FLARES, outcome: OK, dest: HYDROACOUSTIC }
   - { source: HYDROACOUSTIC, outcome: OK, dest: OK }
-  - { source: [INIT, GATE, FLARES, HYDROACOUSTIC], outcome: FAILED, dest: FAILED }

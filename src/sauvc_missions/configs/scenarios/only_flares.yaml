@@ -12,4 +12,3 @@ missions:
 transitions:
   - { source: INIT, outcome: OK, dest: FLARES }
   - { source: FLARES, outcome: OK, dest: OK }
-  - { source: [INIT, FLARES], outcome: FAILED, dest: FAILED }
