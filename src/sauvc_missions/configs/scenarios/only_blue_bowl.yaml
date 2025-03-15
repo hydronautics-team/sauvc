@@ -5,14 +5,9 @@ missions:
   INIT:
     config_name: init
     package_name: stingray_missions
-  GATE:
-    config_name: gate
-    package_name: sauvc_missions
-  BLUE_BOWL:
+  MOVE_TO_BOWL:
     config_name: blue_bowl
     package_name: sauvc_missions
-
 transitions:
-  - { source: INIT, outcome: OK, dest: GATE }
-  - { source: GATE, outcome: OK, dest: BLUE_BOWL }
-  - { source: BLUE_BOWL, outcome: OK, dest: OK }
+  - { source: INIT, outcome: OK, dest: MOVE_TO_BOWL }
+  - { source: MOVE_TO_BOWL, outcome: OK, dest: OK }

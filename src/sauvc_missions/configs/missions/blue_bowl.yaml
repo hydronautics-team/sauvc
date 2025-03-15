@@ -5,22 +5,52 @@ states:
       type: EnableObjectDetection
       camera_topic: /stingray/topics/camera/front
       enable: true
-  MOVE_WITH_CENTERING:
+  SEARCH_MAT:
+    action: 
+      type: BboxSearchTwist
+      bbox_name: mat
+      bbox_topic: /stingray/topics/camera/front/bbox_array
+      first_clockwise: true
+      found_threshold: 1
+      max_yaw: 360
+      yaw_step: 30.0
+      depth: 1.5
+      roll: 0.0
+      pitch: 0.0
+      search_rate: 0.5
+  CENTERING_MAT:
     action: 
       type: BboxCenteringTwist
-      bbox_name: blue_bowl
+      bbox_name: mat
       bbox_topic: /stingray/topics/camera/front/bbox_array
-      distance_threshold: 1.5
+      distance_threshold: 10.0
       lost_threshold: 30
       avoid_bbox_name_array: []
       avoid_distance_threshold: 0.0
       avoid_horizontal_threshold: 0.0
-      surge: 50.0
+      surge: 100.0
       sway: 0.0
-      depth: 1.5
+      depth: 1.0
       roll: 0.0
       pitch: 0.0
-      duration: 15.0
+      duration: 100.0
+      centering_rate: 0.5
+  CENTERING_BLUE_BOWL:
+    action: 
+      type: BboxCenteringTwist
+      bbox_name: blue_bowl
+      bbox_topic: /stingray/topics/camera/front/bbox_array
+      distance_threshold: 2.0
+      lost_threshold: 30
+      avoid_bbox_name_array: []
+      avoid_distance_threshold: 0.0
+      avoid_horizontal_threshold: 0.0
+      surge: 30.0
+      sway: 0.0
+      depth: 1.0
+      roll: 0.0
+      pitch: 0.0
+      duration: 100.0
       centering_rate: 0.5
   DISABLE_OBJECT_DETECTION:
     action:
@@ -32,15 +62,17 @@ states:
   MOVE_TO_BOWL: 
     action: 
       type: Twist
-      surge: 50.0
+      surge: 30.0
       sway: 0.0
-      depth: 1.5
+      depth: 1.0
       roll: 0.0
       pitch: 0.0
       yaw: 0.0
       duration: 5.0
 transitions:
-  - { trigger: ok, source: ENABLE_OBJECT_DETECTION, dest: MOVE_WITH_CENTERING }
-  - { trigger: ok, source: MOVE_WITH_CENTERING, dest: DISABLE_OBJECT_DETECTION }
+  - { trigger: ok, source: ENABLE_OBJECT_DETECTION, dest: SEARCH_MAT }
+  - { trigger: ok, source: SEARCH_MAT, dest: CENTERING_MAT }
+  - { trigger: ok, source: CENTERING_MAT, dest: CENTERING_BLUE_BOWL }
+  - { trigger: ok, source: CENTERING_BLUE_BOWL, dest: DISABLE_OBJECT_DETECTION }
   - { trigger: ok, source: DISABLE_OBJECT_DETECTION, dest: MOVE_TO_BOWL }
   - { trigger: ok, source: MOVE_TO_BOWL, dest: OK }

@@ -8,11 +8,15 @@ missions:
   GATE:
     config_name: gate
     package_name: sauvc_missions
+  FLARES:
+    config_name: flares
+    package_name: sauvc_missions
   BLUE_BOWL:
     config_name: blue_bowl
     package_name: sauvc_missions
 
 transitions:
   - { source: INIT, outcome: OK, dest: GATE }
-  - { source: GATE, outcome: OK, dest: BLUE_BOWL }
+  - { source: GATE, outcome: OK, dest: FLARES }
+  - { source: FLARES, outcome: OK, dest: BLUE_BOWL }
   - { source: BLUE_BOWL, outcome: OK, dest: OK }
