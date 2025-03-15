@@ -1,4 +1,4 @@
-nc: 7  # number of classes
+nc: 9  # number of classes
 names:
   0: gate
   1: orange_flare
