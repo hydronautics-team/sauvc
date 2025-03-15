@@ -1,0 +1,23 @@
+initial: ENABLE_OBJECT_DETECTION
+states:
+  ENABLE_OBJECT_DETECTION:
+    action:
+      type: EnableObjectDetection
+      camera_topic: /stingray/topics/camera/front
+      enable: true
+  BOWL_CENTERING:
+    action: 
+      type: BboxBottomCenteringTwist
+      bbox_name: blue_bowl
+      bbox_topic: /stingray/topics/camera/bottom/bbox_array
+      threshold_x: 2
+      threshold_y: 2
+      lost_threshold: 3000
+      surge: 20.0
+      sway: 20.0
+      depth: 0.3
+      duration: 60.0
+      centering_rate: 1
+transitions:
+  - { trigger: ok, source: ENABLE_OBJECT_DETECTION, dest: BOWL_CENTERING }
+  - { trigger: ok, source: BOWL_CENTERING, dest: OK }

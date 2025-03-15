@@ -21,17 +21,17 @@ states:
       bbox_name: gate
       bbox_topic: /stingray/topics/camera/front/bbox_array
       distance_threshold: 1.5
-      lost_threshold: 30
+      lost_threshold: 300
       avoid_bbox_name_array: [orange_flare]
       avoid_distance_threshold: 2.0
       avoid_horizontal_threshold: 2.0
-      surge: 100.0
-      sway: -20.0
-      depth: 0.5
+      surge: 50.0
+      sway: -50.0
+      depth: 1.5
       roll: 0.0
       pitch: 0.0
       duration: 15.0
-      centering_rate: 0.5
+      centering_rate: 5
   MOVE_THROUGH_GATE:
     action: 
       type: Twist

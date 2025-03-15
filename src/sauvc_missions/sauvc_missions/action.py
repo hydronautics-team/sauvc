@@ -4,6 +4,7 @@ from rclpy.node import Node
 from stingray_utils.acyncio import AsyncActionClient
 from stingray_interfaces.action import TwistAction
 from stingray_interfaces.action import BboxCenteringTwistAction
+from stingray_interfaces.action import BboxBottomCenteringTwistAction
 from stingray_interfaces.action import BboxSearchTwistAction
 from sauvc_interfaces.action import HydroacousticCenteringTwistAction
 from stingray_missions.action import StateActionBase, load_stingray_actions

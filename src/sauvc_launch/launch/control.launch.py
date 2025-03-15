@@ -28,6 +28,9 @@ def generate_launch_description():
     bbox_centering_twist_action_arg = DeclareLaunchArgument(
         "bbox_centering_twist_action", default_value='/stingray/actions/bbox_centering_twist'
     )
+    bbox_bottom_centering_twist_action_arg = DeclareLaunchArgument(
+        "bbox_bottom_centering_twist_action", default_value='/stingray/actions/bbox_bottom_centering_twist'
+    )
     bbox_search_twist_action_arg = DeclareLaunchArgument(
         "bbox_search_twist_action", default_value='/stingray/actions/bbox_search_twist'
     )
@@ -75,6 +78,7 @@ def generate_launch_description():
         zbar_topic_arg,
         twist_action_arg,
         bbox_centering_twist_action_arg,
+        bbox_bottom_centering_twist_action_arg,
         hydroacoustic_centering_twist_action_arg,
         bbox_search_twist_action_arg,
         uv_state_topic_arg,
@@ -97,6 +101,7 @@ def generate_launch_description():
                 {'transition_srv': LaunchConfiguration("transition_srv")},
                 {'twist_action': LaunchConfiguration("twist_action")},
                 {'bbox_centering_twist_action': LaunchConfiguration("bbox_centering_twist_action")},
+                {'bbox_bottom_centering_twist_action': LaunchConfiguration("bbox_bottom_centering_twist_action")},
                 {'bbox_search_twist_action': LaunchConfiguration("bbox_search_twist_action")},
                 {'hydroacoustic_centering_twist_action': LaunchConfiguration("hydroacoustic_centering_twist_action")},
                 {'device_action': LaunchConfiguration("device_action")},
@@ -141,6 +146,18 @@ def generate_launch_description():
             name='bbox_centering_twist_action_server',
             parameters=[
                 {'bbox_centering_twist_action': LaunchConfiguration("bbox_centering_twist_action")},
+                {'uv_state_topic': LaunchConfiguration("uv_state_topic")},
+                {'set_twist_srv': LaunchConfiguration("set_twist_srv")},
+            ],
+            respawn=True,
+            respawn_delay=1,
+        ),
+        Node(
+            package='stingray_movement',
+            executable='bbox_bottom_centering_twist_action_server',
+            name='bbox_bottom_centering_twist_action_server',
+            parameters=[
+                {'bbox_bottom_centering_twist_action': LaunchConfiguration("bbox_bottom_centering_twist_action")},
                 {'uv_state_topic': LaunchConfiguration("uv_state_topic")},
                 {'set_twist_srv': LaunchConfiguration("set_twist_srv")},
             ],
