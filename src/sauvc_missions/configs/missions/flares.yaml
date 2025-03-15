@@ -15,21 +15,21 @@ states:
       bbox_topic: /stingray/topics/camera/front/bbox_array
       first_clockwise: true
       found_threshold: 1
-      distance_threshold: 0.5
-      lost_threshold: 30
+      distance_threshold: 1.5
+      lost_threshold: 300
       avoid_distance_threshold: 1.5
       avoid_horizontal_threshold: 1.0
       max_yaw: 360
       yaw_step: 30.0
       surge: 30.0
-      avoid_sway: -50
+      avoid_sway: -20
       sway: 0
       depth: 1.5
       roll: 0.0
       pitch: 0.0
       centering_duration: 15.0
       search_rate: 0.5
-      centering_rate: 1.0
+      centering_rate: 0.5
       punch_duration: 3.0
 transitions:
   - { trigger: ok, source: ENABLE_OBJECT_DETECTION, dest: WAIT_SEQUENCE }
