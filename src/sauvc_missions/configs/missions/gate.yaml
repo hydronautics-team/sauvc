@@ -23,19 +23,19 @@ states:
       distance_threshold: 2.5
       lost_threshold: 10000
       avoid_bbox_name_array: [orange_flare, red_flare]
-      avoid_distance_threshold: 2.0
+      avoid_distance_threshold: 3
       avoid_horizontal_threshold: 2.0
       surge: 30.0
-      sway: -10.0
-      depth: 0.5
+      sway: 20.0
+      depth: 1.5
       roll: 0.0
       pitch: 0.0
       duration: 45.0
-      centering_rate: 0.2
+      centering_rate: 0.5
   MOVE_THROUGH_GATE:
     action: 
       type: Twist
-      surge: 100.0
+      surge: 50.0
       sway: 0.0
       depth: 1.5
       roll: 0.0

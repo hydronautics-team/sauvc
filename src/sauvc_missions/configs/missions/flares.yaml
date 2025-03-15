@@ -22,12 +22,12 @@ states:
       max_yaw: 360
       yaw_step: 30.0
       surge: 30.0
-      avoid_sway: -20
+      avoid_sway: 20
       sway: 0
       depth: 1.5
       roll: 0.0
       pitch: 0.0
-      centering_duration: 15.0
+      centering_duration: 300.0
       search_rate: 0.5
       centering_rate: 0.5
       punch_duration: 3.0
