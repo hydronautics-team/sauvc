@@ -5,10 +5,14 @@ missions:
   INIT:
     config_name: init
     package_name: stingray_missions
+  GATE:
+    config_name: gate
+    package_name: sauvc_missions
   HYDROACOUSTIC:
     config_name: hydroacoustic_bowl
     package_name: sauvc_missions
 
 transitions:
-  - { source: INIT, outcome: OK, dest: HYDROACOUSTIC }
+  - { source: INIT, outcome: OK, dest: GATE }
+  - { source: GATE, outcome: OK, dest: HYDROACOUSTIC }
   - { source: HYDROACOUSTIC, outcome: OK, dest: OK }
