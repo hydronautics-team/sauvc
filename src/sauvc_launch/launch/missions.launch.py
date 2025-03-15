@@ -17,7 +17,7 @@ from launch_ros.actions import PushRosNamespace
 def generate_launch_description():
     # object detection
     bbox_array_topic_arg = DeclareLaunchArgument(
-        "bbox_array_topic", default_value='/stingray/topics/front_camera/bbox_array'
+        "bbox_array_topic", default_value='/stingray/topics/camera/front/bbox_array'
     )
 
     # missions

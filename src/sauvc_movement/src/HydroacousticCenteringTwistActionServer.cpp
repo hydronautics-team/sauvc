@@ -53,7 +53,7 @@ void HydroacousticCenteringTwistActionServer::execute(const std::shared_ptr<rclc
             return;
         }
         RCLCPP_ERROR(_node->get_logger(), "Service %s not available!", _node->get_parameter("set_twist_srv").as_string().c_str());
-        // return;
+        return;
     }
 
     // get goal data
