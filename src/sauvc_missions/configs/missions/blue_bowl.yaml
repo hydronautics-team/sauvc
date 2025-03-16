@@ -52,11 +52,11 @@ states:
       pitch: 0.0
       duration: 100.0
       centering_rate: 0.5
-  DISABLE_OBJECT_DETECTION:
-    action:
-      type: EnableObjectDetection
-      camera_topic: /stingray/topics/camera/front
-      enable: false
+  # DISABLE_OBJECT_DETECTION:
+  #   action:
+  #     type: EnableObjectDetection
+  #     camera_topic: /stingray/topics/camera/front
+  #     enable: false
 # определенное количество времени движения до тазика
 # необходимо подобрать благоприятную скорость, время движения, глубину 
   MOVE_TO_BOWL: 
@@ -69,10 +69,26 @@ states:
       pitch: 0.0
       yaw: 0.0
       duration: 5.0
+  DEV:
+    action: 
+      type: SetDeviceValue
+      device: 0
+      value: 1
+  MOVE_BACK: 
+    action: 
+      type: Twist
+      surge: -50.0
+      sway: 0.0
+      depth: 1.0
+      roll: 0.0
+      pitch: 0.0
+      yaw: 0.0
+      duration: 5.0
 transitions:
   - { trigger: ok, source: ENABLE_OBJECT_DETECTION, dest: SEARCH_MAT }
   - { trigger: ok, source: SEARCH_MAT, dest: CENTERING_MAT }
   - { trigger: ok, source: CENTERING_MAT, dest: CENTERING_BLUE_BOWL }
-  - { trigger: ok, source: CENTERING_BLUE_BOWL, dest: DISABLE_OBJECT_DETECTION }
-  - { trigger: ok, source: DISABLE_OBJECT_DETECTION, dest: MOVE_TO_BOWL }
-  - { trigger: ok, source: MOVE_TO_BOWL, dest: OK }
+  - { trigger: ok, source: CENTERING_BLUE_BOWL, dest: MOVE_TO_BOWL }
+  - { trigger: ok, source: MOVE_TO_BOWL, dest: DEV }
+  - { trigger: ok, source: DEV, dest: MOVE_BACK }
+  - { trigger: ok, source: MOVE_BACK, dest: OK }

@@ -20,12 +20,12 @@ states:
       type: BboxCenteringTwist
       bbox_name: gate
       bbox_topic: /stingray/topics/camera/front/bbox_array
-      distance_threshold: 2.5
+      distance_threshold: 3.0
       lost_threshold: 10000
       avoid_bbox_name_array: [orange_flare, red_flare]
-      avoid_distance_threshold: 3
-      avoid_horizontal_threshold: 2.0
-      surge: 30.0
+      avoid_distance_threshold: 1.5
+      avoid_horizontal_threshold: 0.5
+      surge: 40.0
       sway: 20.0
       depth: 1.5
       roll: 0.0
@@ -41,7 +41,7 @@ states:
       roll: 0.0
       pitch: 0.0
       yaw: 0.0
-      duration: 5.0
+      duration: 8.0
 transitions:
   - { trigger: ok, source: ENABLE_OBJECT_DETECTION, dest: SUBMERGE }
   - { trigger: ok, source: SUBMERGE, dest: MOVE_CENTERING_GATE }
