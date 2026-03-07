@@ -1,0 +1,45 @@
+initial: INIT
+ok_state_package_name: stingray_missions
+failed_state_package_name: stingray_missions
+missions:
+  INIT:
+    config_name: init
+    package_name: stingray_missions
+  MOVE_FORWARD_1:
+    config_name: forward
+    package_name: sauvc_missions
+  RIGHT_1:
+    config_name: right
+    package_name: sauvc_missions
+  MOVE_FORWARD_2:
+    config_name: forward
+    package_name: sauvc_missions
+  LEFT_1:
+    config_name: left
+    package_name: sauvc_missions
+  MOVE_FORWARD_3:
+    config_name: forward
+    package_name: sauvc_missions
+  LEFT_2:
+    config_name: left
+    package_name: sauvc_missions
+  MOVE_FORWARD_4:
+    config_name: forward
+    package_name: sauvc_missions
+  LEFT_3:
+    config_name: left
+    package_name: sauvc_missions
+  MOVE_FORWARD_5:
+    config_name: forward
+    package_name: sauvc_missions
+transitions:
+  - { source: INIT, outcome: OK, dest: MOVE_FORWARD_1 }
+  - { source: MOVE_FORWARD_1, outcome: OK, dest: RIGHT_1 }
+  - { source: RIGHT_1, outcome: OK, dest: MOVE_FORWARD_2 }
+  - { source: MOVE_FORWARD_2, outcome: OK, dest: LEFT_1 }
+  - { source: LEFT_1, outcome: OK, dest: MOVE_FORWARD_3 }
+  - { source: MOVE_FORWARD_3, outcome: OK, dest: LEFT_2 }
+  - { source: LEFT_2, outcome: OK, dest: MOVE_FORWARD_4 }
+  - { source: MOVE_FORWARD_4, outcome: OK, dest: LEFT_3 }
+  - { source: LEFT_3, outcome: OK, dest: MOVE_FORWARD_5 }
+  - { source: MOVE_FORWARD_5, outcome: OK, dest: OK }

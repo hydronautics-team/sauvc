@@ -1,6 +1,6 @@
-initial: MOVE_TO_GATE
+initial: FORWARD
 states:
-  MOVE_TO_GATE:
+  FORWARD:
     action: 
       type: Twist
       surge: 100.0
@@ -11,4 +11,4 @@ states:
       yaw: 0.0
       duration: 15.0
 transitions:
-  - { trigger: ok, source: MOVE_TO_GATE, dest: OK }
+  - { trigger: ok, source: FORWARD, dest: OK }

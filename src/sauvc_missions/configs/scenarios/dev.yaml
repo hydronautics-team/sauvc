@@ -1,0 +1,9 @@
+initial: DEV
+ok_state_package_name: stingray_missions
+failed_state_package_name: stingray_missions
+missions:
+  DEV:
+    config_name: dev
+    package_name: sauvc_missions
+transitions:
+  - { source: DEV, outcome: OK, dest: OK }
