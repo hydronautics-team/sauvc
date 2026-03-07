@@ -1,0 +1,9 @@
+initial: DEV
+states:
+  DEV:
+    action: 
+      type: SetDeviceValue
+      device: 0
+      value: 1
+transitions:
+  - { trigger: ok, source: DEV, dest: IDLE }

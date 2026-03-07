@@ -5,9 +5,10 @@ missions:
   INIT:
     config_name: init
     package_name: stingray_missions
-  QUALIFICATION:
-    config_name: qualification
+  FLARES:
+    config_name: flares
     package_name: sauvc_missions
+
 transitions:
-  - { source: INIT, outcome: OK, dest: QUALIFICATION }
-  - { source: QUALIFICATION, outcome: OK, dest: OK }
+  - { source: INIT, outcome: OK, dest: FLARES }
+  - { source: FLARES, outcome: OK, dest: OK }

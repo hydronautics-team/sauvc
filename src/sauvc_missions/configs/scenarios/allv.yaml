@@ -11,12 +11,12 @@ missions:
   FLARES:
     config_name: flares
     package_name: sauvc_missions
-  HYDROACOUSTIC:
-    config_name: hydroacoustic_bowl
+  BLUE_BOWL:
+    config_name: blue_bowl
     package_name: sauvc_missions
 
 transitions:
   - { source: INIT, outcome: OK, dest: GATE }
   - { source: GATE, outcome: OK, dest: FLARES }
-  - { source: FLARES, outcome: OK, dest: HYDROACOUSTIC }
-  - { source: HYDROACOUSTIC, outcome: OK, dest: OK }
+  - { source: FLARES, outcome: OK, dest: BLUE_BOWL }
+  - { source: BLUE_BOWL, outcome: OK, dest: OK }
