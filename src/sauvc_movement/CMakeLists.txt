@@ -12,7 +12,6 @@ find_package(sauvc_interfaces REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(rclcpp_action REQUIRED)
 find_package(rclcpp_components REQUIRED)
-find_package(stingray_core_interfaces REQUIRED)
 find_package(stingray_interfaces REQUIRED)
 find_package(stingray_utils REQUIRED)
 
@@ -30,7 +29,6 @@ ament_target_dependencies(
   rclcpp_components
   stingray_movement
   sauvc_interfaces
-  stingray_core_interfaces
   stingray_interfaces
   stingray_utils
   )

@@ -7,7 +7,7 @@ from rclpy.logging import get_logger
 from stingray_missions.fsm import FSM
 from stingray_missions.fsm_node import ros_loop, fsm_loop, state_action_loop, declare_parameters
 from sauvc_missions.action import load_sauvc_actions, SequencePunchBboxTwistStateAction
-from stingray_core_interfaces.msg import UVState
+from stingray_interfaces.msg import UVState
 
 
 def uv_state_callback( uv_state: UVState):

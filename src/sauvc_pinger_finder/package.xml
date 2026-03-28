@@ -13,7 +13,7 @@
   <depend>std_msgs</depend>
   <depend>std_srvs</depend>
   <depend>serial</depend>
-  <depend>stingray_core_interfaces</depend>
+  <depend>stingray_interfaces</depend>
   <depend>boost</depend>
   <depend>stingray_core_communication</depend>
 

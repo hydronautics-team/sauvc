@@ -44,7 +44,7 @@ bool HydroacousticCenteringTwistActionServer::isTargetLost() {
 
 void HydroacousticCenteringTwistActionServer::execute(const std::shared_ptr<rclcpp_action::ServerGoalHandle<sauvc_interfaces::action::HydroacousticCenteringTwistAction>> goal_handle) {
 
-    auto twistSrvRequest = std::make_shared<stingray_core_interfaces::srv::SetTwist::Request>();
+    auto twistSrvRequest = std::make_shared<stingray_interfaces::srv::SetTwist::Request>();
 
     RCLCPP_INFO(_node->get_logger(), "Execute action");
     while (!twistSrvClient->wait_for_service(1s)) {
