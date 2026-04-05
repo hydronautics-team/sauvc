@@ -11,10 +11,9 @@ else
 
   source "/opt/ros/humble/setup.bash"
   source "/additional_packages/install/setup.bash"
-  source /stingray_core/install/setup.bash
   source /stingray/install/setup.bash
 
-  if ! colcon build --packages-select sauvc_launch sauvc_missions sauvc_pinger_finder; then
+  if ! colcon build --packages-select sauvc_launch sauvc_missions; then
     echo "[ERROR] Сборка завершилась с ошибкой. Удаляем build, install, log..."
     rm -rf build install log
     exit 1
