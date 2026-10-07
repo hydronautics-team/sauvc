@@ -4,6 +4,9 @@ gate:
 qualification_gate:
   real_size: 1.0
   reference_dim: height
+gate_qualification:
+  real_size: 1.0
+  reference_dim: height
 yellow_flare:
   real_size: 0.8
   reference_dim: height
