@@ -1,12 +1,198 @@
 import asyncio
+import math
+import time
+from geometry_msgs.msg import Twist
 from rclpy.logging import get_logger
 from rclpy.node import Node
 from stingray_utils.acyncio import AsyncActionClient
 from stingray_interfaces.action import TwistAction
 from stingray_interfaces.action import BboxCenteringTwistAction
 from stingray_interfaces.action import BboxSearchTwistAction
+from stingray_interfaces.msg import BboxArray
 from sauvc_interfaces.action import HydroacousticCenteringTwistAction
 from stingray_missions.action import StateActionBase, load_stingray_actions
+
+
+class GateVisualControlStateAction(StateActionBase):
+    """Approach and center on a gate using the new /control/data contract."""
+
+    type = "GateVisualControl"
+
+    def __init__(self, node: Node):
+        super().__init__(node=node)
+        topic = self.node.get_parameter(
+            'control_data_topic').get_parameter_value().string_value
+        self.command_pub = self.node.create_publisher(Twist, topic, 10)
+        self.bbox_sub = None
+        self.target = None
+        self.target_received_at = None
+
+    def _bbox_callback(self, msg: BboxArray):
+        candidates = [bbox for bbox in msg.bboxes
+                      if bbox.name == self.target_name]
+        if not candidates:
+            return
+        self.target = max(candidates, key=lambda bbox: bbox.confidence)
+        self.target_received_at = time.monotonic()
+
+    def _publish_stop(self):
+        self.command_pub.publish(Twist())
+
+    def stop(self):
+        get_logger("action").info(f"Stopping {self.type} action")
+        self._publish_stop()
+        return super().stop()
+
+    async def execute(self,
+                      bbox_name: str = "gate",
+                      bbox_topic: str = "",
+                      min_confidence: float = 0.5,
+                      stop_distance: float = 2.0,
+                      horizontal_tolerance: float = 0.15,
+                      lateral_gain: float = 1.0,
+                      max_forward_offset: float = 0.75,
+                      max_lateral_offset: float = 0.3,
+                      lost_timeout: float = 2.0,
+                      initial_detection_timeout: float = 10.0,
+                      timeout: float = 20.0,
+                      control_rate: float = 2.0,
+                      confirmation_count: int = 3,
+                      **kwargs) -> bool:
+        kwargs.pop("type", None)
+        if not bbox_topic:
+            get_logger("action").error(f"{self.type}: bbox_topic is empty")
+            return False
+
+        self.target_name = bbox_name
+        self.target = None
+        self.target_received_at = None
+        self.bbox_sub = self.node.create_subscription(
+            BboxArray, bbox_topic, self._bbox_callback, 10)
+
+        started_at = time.monotonic()
+        confirmed = 0
+        period = 1.0 / max(0.1, float(control_rate))
+        get_logger("action").info(
+            f"{self.type}: waiting for '{bbox_name}' on {bbox_topic}")
+
+        try:
+            while time.monotonic() - started_at < float(timeout):
+                if self.stopped:
+                    self._publish_stop()
+                    return False
+
+                now = time.monotonic()
+                if self.target is None:
+                    if now - started_at > float(initial_detection_timeout):
+                        get_logger("action").error(
+                            f"{self.type}: gate was not detected")
+                        self._publish_stop()
+                        return False
+                    await asyncio.sleep(period)
+                    continue
+
+                if now - self.target_received_at > float(lost_timeout):
+                    get_logger("action").error(
+                        f"{self.type}: gate detections became stale")
+                    self._publish_stop()
+                    return False
+
+                target = self.target
+                if not all(math.isfinite(value) for value in
+                           (target.pos_x, target.pos_z)):
+                    get_logger("action").warning(
+                        f"{self.type}: ignoring non-finite gate position")
+                    await asyncio.sleep(period)
+                    continue
+                if target.confidence < float(min_confidence):
+                    get_logger("action").warning(
+                        f"{self.type}: gate confidence {target.confidence:.2f} "
+                        f"is below {float(min_confidence):.2f}")
+                    await asyncio.sleep(period)
+                    continue
+
+                distance_error = max(0.0, target.pos_z - stop_distance)
+                if distance_error > max(0.0, float(max_forward_offset)):
+                    get_logger("action").error(
+                        f"{self.type}: gate at {target.pos_z:.2f} m is outside "
+                        f"the safe approach envelope")
+                    self._publish_stop()
+                    return False
+                centered = abs(target.pos_x) <= horizontal_tolerance
+                close_enough = distance_error <= 0.0
+                confirmed = confirmed + 1 if centered and close_enough else 0
+
+                if confirmed >= max(1, int(confirmation_count)):
+                    self._publish_stop()
+                    get_logger("action").info(
+                        f"{self.type}: gate centered at {target.pos_z:.2f} m")
+                    return await super().execute(**kwargs)
+
+                command = Twist()
+                command.linear.x = distance_error
+                command.linear.y = max(
+                    -abs(float(max_lateral_offset)),
+                    min(abs(float(max_lateral_offset)),
+                        float(lateral_gain) * target.pos_x))
+                self.command_pub.publish(command)
+                get_logger("action").info(
+                    f"{self.type}: z={target.pos_z:.2f}, x={target.pos_x:.2f}, "
+                    f"forward={command.linear.x:.2f}, lateral={command.linear.y:.2f}")
+                await asyncio.sleep(period)
+
+            get_logger("action").error(f"{self.type}: timeout")
+            self._publish_stop()
+            return False
+        finally:
+            if self.bbox_sub is not None:
+                self.node.destroy_subscription(self.bbox_sub)
+                self.bbox_sub = None
+
+
+class ControlOffsetStateAction(StateActionBase):
+    """Send one bounded relative-position target to the new control input."""
+
+    type = "ControlOffset"
+
+    def __init__(self, node: Node):
+        super().__init__(node=node)
+        topic = self.node.get_parameter(
+            'control_data_topic').get_parameter_value().string_value
+        self.command_pub = self.node.create_publisher(Twist, topic, 10)
+
+    def _publish_stop(self):
+        self.command_pub.publish(Twist())
+
+    def stop(self):
+        get_logger("action").info(f"Stopping {self.type} action")
+        self._publish_stop()
+        return super().stop()
+
+    async def execute(self,
+                      forward: float = 0.0,
+                      lateral: float = 0.0,
+                      settle_time: float = 3.0,
+                      max_offset: float = 1.0,
+                      **kwargs) -> bool:
+        kwargs.pop("type", None)
+        limit = abs(float(max_offset))
+        command = Twist()
+        command.linear.x = max(-limit, min(limit, float(forward)))
+        command.linear.y = max(-limit, min(limit, float(lateral)))
+        self.command_pub.publish(command)
+        get_logger("action").info(
+            f"{self.type}: forward={command.linear.x:.2f}, "
+            f"lateral={command.linear.y:.2f}")
+
+        deadline = time.monotonic() + max(0.0, float(settle_time))
+        while time.monotonic() < deadline:
+            if self.stopped:
+                self._publish_stop()
+                return False
+            await asyncio.sleep(0.1)
+
+        self._publish_stop()
+        return await super().execute(**kwargs)
 
 
 class SequencePunchBboxTwistStateAction(StateActionBase):
@@ -301,6 +487,8 @@ def load_sauvc_actions(node: Node) -> dict[str, StateActionBase]:
     # get_logger("action").info(f'Loaded stingray_actions: {stingray_actions}')
 
     sauvc_actions = {
+        GateVisualControlStateAction.type: GateVisualControlStateAction(node),
+        ControlOffsetStateAction.type: ControlOffsetStateAction(node),
         SequencePunchBboxTwistStateAction.type: SequencePunchBboxTwistStateAction(node),
         HydroacousticCenteringTwistStateAction.type: HydroacousticCenteringTwistStateAction(
             node)

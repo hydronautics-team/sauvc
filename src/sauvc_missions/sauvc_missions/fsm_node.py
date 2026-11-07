@@ -31,6 +31,7 @@ def main():
     node = rclpy.create_node('stingray_missions')
 
     declare_parameters(node)
+    node.declare_parameter('control_data_topic', '/control/data_test')
     node.declare_parameter(
         'hydroacoustic_centering_twist_action', '/stingray/actions/hydroacoustic_centering_twist')
 

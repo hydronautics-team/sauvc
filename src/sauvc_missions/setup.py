@@ -14,6 +14,7 @@ setup(
         ('share/' + package_name, ['package.xml']),
         (f'share/{package_name}/configs/missions', glob('configs/missions/*.yaml')),
         (f'share/{package_name}/configs/scenarios', glob('configs/scenarios/*.yaml')),
+        (f'share/{package_name}/launch', glob('launch/*.launch.py')),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
