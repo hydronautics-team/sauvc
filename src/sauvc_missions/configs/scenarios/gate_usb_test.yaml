@@ -1,0 +1,10 @@
+initial: GATE_USB_TEST
+ok_state_package_name: stingray_missions
+failed_state_package_name: stingray_missions
+missions:
+  GATE_USB_TEST:
+    config_name: gate_usb_test
+    package_name: sauvc_missions
+transitions:
+  - { source: GATE_USB_TEST, outcome: OK, dest: IDLE }
+  - { source: GATE_USB_TEST, outcome: FAILED, dest: IDLE }
