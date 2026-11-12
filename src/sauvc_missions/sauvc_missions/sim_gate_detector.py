@@ -19,6 +19,8 @@ class SimGateDetector(Node):
         super().__init__('sim_gate_detector')
         self.declare_parameter('gate_x', 8.0)
         self.declare_parameter('gate_y', 6.0)
+        self.declare_parameter('gate_width', 1.7)
+        self.declare_parameter('gate_height', 1.2)
         self.declare_parameter('horizontal_fov_deg', 60.0)
         self.declare_parameter(
             'bbox_topic', '/stingray/topics/camera/front/bbox_array')
@@ -52,8 +54,13 @@ class SimGateDetector(Node):
             return
 
         center_x = 320 + int(320 * math.tan(angle) / math.tan(half_fov))
-        pixel_height = max(20, min(440, int(900 / max(1.0, forward))))
-        pixel_width = max(20, min(500, pixel_height))
+        # Approximate the apparent size of the official 1.5 x 1.0 m SAUVC
+        # opening (including its frame) for consumers that inspect bbox shape.
+        pixel_height = max(20, min(440, int(650 / max(1.0, forward))))
+        aspect_ratio = (
+            self.get_parameter('gate_width').value /
+            self.get_parameter('gate_height').value)
+        pixel_width = max(20, min(500, int(pixel_height * aspect_ratio)))
         bbox = Bbox()
         bbox.name = 'gate'
         bbox.id = 0
