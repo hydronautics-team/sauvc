@@ -1,0 +1,10 @@
+initial: GATE_SAUVC_2027
+ok_state_package_name: stingray_missions
+failed_state_package_name: stingray_missions
+missions:
+  GATE_SAUVC_2027:
+    config_name: gate_sauvc_2027
+    package_name: sauvc_missions
+transitions:
+  - { source: GATE_SAUVC_2027, outcome: OK, dest: IDLE }
+  - { source: GATE_SAUVC_2027, outcome: FAILED, dest: IDLE }

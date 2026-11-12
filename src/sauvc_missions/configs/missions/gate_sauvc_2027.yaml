@@ -1,0 +1,54 @@
+initial: ENABLE_OBJECT_DETECTION
+states:
+  ENABLE_OBJECT_DETECTION:
+    action:
+      type: EnableObjectDetection
+      camera_topic: /stingray/topics/camera/front
+      enable: true
+  SEARCH_GATE:
+    action:
+      type: GateSearch
+      bbox_name: gate
+      bbox_topic: /stingray/topics/camera/front/bbox_array
+      min_confidence: 0.5
+      confirmation_count: 3
+      initial_wait: 2.0
+      yaw_step: 30.0
+      max_yaw_offset: 120.0
+      dwell_time: 3.0
+      timeout: 35.0
+      control_rate: 5.0
+  CENTER_GATE:
+    action:
+      type: GateVisualControl
+      bbox_name: gate
+      bbox_topic: /stingray/topics/camera/front/bbox_array
+      min_confidence: 0.5
+      stop_distance: 2.0
+      horizontal_tolerance: 0.15
+      lateral_gain: 1.0
+      max_forward_offset: 0.75
+      max_lateral_offset: 0.3
+      lost_timeout: 2.0
+      initial_detection_timeout: 5.0
+      timeout: 20.0
+      control_rate: 2.0
+      confirmation_count: 3
+  PASS_GATE:
+    action:
+      type: ControlOffset
+      forward: 2.5
+      lateral: 0.0
+      settle_time: 6.0
+      max_offset: 3.0
+  DISABLE_OBJECT_DETECTION:
+    action:
+      type: EnableObjectDetection
+      camera_topic: /stingray/topics/camera/front
+      enable: false
+transitions:
+  - { trigger: ok, source: ENABLE_OBJECT_DETECTION, dest: SEARCH_GATE }
+  - { trigger: ok, source: SEARCH_GATE, dest: CENTER_GATE }
+  - { trigger: ok, source: CENTER_GATE, dest: PASS_GATE }
+  - { trigger: ok, source: PASS_GATE, dest: DISABLE_OBJECT_DETECTION }
+  - { trigger: ok, source: DISABLE_OBJECT_DETECTION, dest: OK }

@@ -2,6 +2,7 @@ import asyncio
 import math
 import time
 from geometry_msgs.msg import Twist
+from nav_msgs.msg import Odometry
 from rclpy.logging import get_logger
 from rclpy.node import Node
 from stingray_utils.acyncio import AsyncActionClient
@@ -13,16 +14,162 @@ from sauvc_interfaces.action import HydroacousticCenteringTwistAction
 from stingray_missions.action import StateActionBase, load_stingray_actions
 
 
-class GateVisualControlStateAction(StateActionBase):
+def _yaw_degrees(orientation) -> float:
+    return math.degrees(math.atan2(
+        2.0 * (orientation.w * orientation.z +
+               orientation.x * orientation.y),
+        1.0 - 2.0 * (orientation.y ** 2 + orientation.z ** 2)))
+
+
+def _normalize_degrees(angle: float) -> float:
+    return (angle + 180.0) % 360.0 - 180.0
+
+
+class RelativeControlStateAction(StateActionBase):
+    """Publish relative XYZ offsets while preserving an absolute yaw setpoint."""
+
+    def __init__(self, node: Node):
+        super().__init__(node=node)
+        topic = self.node.get_parameter(
+            'control_data_topic').get_parameter_value().string_value
+        odometry_topic = self.node.get_parameter(
+            'odometry_topic').get_parameter_value().string_value
+        self.command_pub = self.node.create_publisher(Twist, topic, 10)
+        self.current_yaw = None
+        self.hold_yaw = None
+        self.odometry_sub = self.node.create_subscription(
+            Odometry, odometry_topic, self._odometry_callback, 10)
+
+    def _odometry_callback(self, msg: Odometry):
+        self.current_yaw = _yaw_degrees(msg.pose.pose.orientation)
+
+    def _command(self, forward: float = 0.0, lateral: float = 0.0,
+                 yaw: float = None) -> Twist:
+        command = Twist()
+        command.linear.x = float(forward)
+        command.linear.y = float(lateral)
+        if yaw is None:
+            yaw = self.hold_yaw
+        if yaw is None:
+            yaw = self.current_yaw
+        command.angular.z = _normalize_degrees(yaw or 0.0)
+        return command
+
+    def _publish_hold(self):
+        self.command_pub.publish(self._command())
+
+    def stop(self):
+        get_logger("action").info(f"Stopping {self.type} action")
+        self._publish_hold()
+        return super().stop()
+
+
+class GateSearchStateAction(RelativeControlStateAction):
+    """Search for a gate with an expanding absolute-yaw sweep."""
+
+    type = "GateSearch"
+    found_yaw = None
+
+    def __init__(self, node: Node):
+        super().__init__(node=node)
+        self.bbox_sub = None
+        self.detection_hits = 0
+        self.last_detection_at = None
+
+    def _bbox_callback(self, msg: BboxArray):
+        detected = any(
+            bbox.name == self.target_name and
+            bbox.confidence >= self.min_confidence
+            for bbox in msg.bboxes)
+        self.detection_hits = self.detection_hits + 1 if detected else 0
+        if detected:
+            self.last_detection_at = time.monotonic()
+
+    async def execute(self,
+                      bbox_name: str = "gate",
+                      bbox_topic: str = "",
+                      min_confidence: float = 0.5,
+                      confirmation_count: int = 3,
+                      initial_wait: float = 2.0,
+                      yaw_step: float = 30.0,
+                      max_yaw_offset: float = 120.0,
+                      dwell_time: float = 3.0,
+                      timeout: float = 35.0,
+                      control_rate: float = 5.0,
+                      **kwargs) -> bool:
+        kwargs.pop("type", None)
+        if not bbox_topic:
+            get_logger("action").error(f"{self.type}: bbox_topic is empty")
+            return False
+        if self.current_yaw is None:
+            get_logger("action").error(
+                f"{self.type}: no odometry; cannot create absolute yaw targets")
+            return False
+
+        self.target_name = bbox_name
+        self.min_confidence = float(min_confidence)
+        self.detection_hits = 0
+        self.last_detection_at = None
+        self.hold_yaw = self.current_yaw
+        start_yaw = self.current_yaw
+        type(self).found_yaw = None
+        self.bbox_sub = self.node.create_subscription(
+            BboxArray, bbox_topic, self._bbox_callback, 10)
+
+        period = 1.0 / max(0.1, float(control_rate))
+        started_at = time.monotonic()
+        offsets = [0.0]
+        offset = abs(float(yaw_step))
+        while offset <= abs(float(max_yaw_offset)) + 1e-6:
+            offsets.extend((offset, -offset))
+            offset += abs(float(yaw_step))
+
+        try:
+            for index, yaw_offset in enumerate(offsets):
+                target_yaw = _normalize_degrees(start_yaw + yaw_offset)
+                self.hold_yaw = target_yaw
+                stage_time = float(initial_wait) if index == 0 else float(dwell_time)
+                stage_deadline = time.monotonic() + max(0.0, stage_time)
+                get_logger("action").info(
+                    f"{self.type}: observing at yaw={target_yaw:.1f} deg")
+
+                while time.monotonic() < stage_deadline:
+                    if self.stopped:
+                        return False
+                    if time.monotonic() - started_at >= float(timeout):
+                        get_logger("action").error(f"{self.type}: timeout")
+                        return False
+                    if self.detection_hits >= max(1, int(confirmation_count)):
+                        type(self).found_yaw = (
+                            self.current_yaw if self.current_yaw is not None
+                            else target_yaw)
+                        self.hold_yaw = type(self).found_yaw
+                        self._publish_hold()
+                        get_logger("action").info(
+                            f"{self.type}: gate found at yaw="
+                            f"{type(self).found_yaw:.1f} deg")
+                        return await super().execute(**kwargs)
+                    self.command_pub.publish(
+                        self._command(yaw=target_yaw))
+                    await asyncio.sleep(period)
+
+            get_logger("action").error(
+                f"{self.type}: gate not found in search sector")
+            return False
+        finally:
+            self._publish_hold()
+            if self.bbox_sub is not None:
+                self.node.destroy_subscription(self.bbox_sub)
+                self.bbox_sub = None
+
+
+class GateVisualControlStateAction(RelativeControlStateAction):
     """Approach and center on a gate using the new /control/data contract."""
 
     type = "GateVisualControl"
 
     def __init__(self, node: Node):
         super().__init__(node=node)
-        topic = self.node.get_parameter(
-            'control_data_topic').get_parameter_value().string_value
-        self.command_pub = self.node.create_publisher(Twist, topic, 10)
         self.bbox_sub = None
         self.target = None
         self.target_received_at = None
@@ -34,14 +181,6 @@ class GateVisualControlStateAction(StateActionBase):
             return
         self.target = max(candidates, key=lambda bbox: bbox.confidence)
         self.target_received_at = time.monotonic()
-
-    def _publish_stop(self):
-        self.command_pub.publish(Twist())
-
-    def stop(self):
-        get_logger("action").info(f"Stopping {self.type} action")
-        self._publish_stop()
-        return super().stop()
 
     async def execute(self,
                       bbox_name: str = "gate",
@@ -64,6 +203,10 @@ class GateVisualControlStateAction(StateActionBase):
             return False
 
         self.target_name = bbox_name
+        self.hold_yaw = (
+            GateSearchStateAction.found_yaw
+            if GateSearchStateAction.found_yaw is not None
+            else self.current_yaw)
         self.target = None
         self.target_received_at = None
         self.bbox_sub = self.node.create_subscription(
@@ -78,7 +221,7 @@ class GateVisualControlStateAction(StateActionBase):
         try:
             while time.monotonic() - started_at < float(timeout):
                 if self.stopped:
-                    self._publish_stop()
+                    self._publish_hold()
                     return False
 
                 now = time.monotonic()
@@ -86,7 +229,7 @@ class GateVisualControlStateAction(StateActionBase):
                     if now - started_at > float(initial_detection_timeout):
                         get_logger("action").error(
                             f"{self.type}: gate was not detected")
-                        self._publish_stop()
+                        self._publish_hold()
                         return False
                     await asyncio.sleep(period)
                     continue
@@ -94,7 +237,7 @@ class GateVisualControlStateAction(StateActionBase):
                 if now - self.target_received_at > float(lost_timeout):
                     get_logger("action").error(
                         f"{self.type}: gate detections became stale")
-                    self._publish_stop()
+                    self._publish_hold()
                     return False
 
                 target = self.target
@@ -112,28 +255,24 @@ class GateVisualControlStateAction(StateActionBase):
                     continue
 
                 distance_error = max(0.0, target.pos_z - stop_distance)
-                if distance_error > max(0.0, float(max_forward_offset)):
-                    get_logger("action").error(
-                        f"{self.type}: gate at {target.pos_z:.2f} m is outside "
-                        f"the safe approach envelope")
-                    self._publish_stop()
-                    return False
+                forward = min(
+                    distance_error,
+                    max(0.0, float(max_forward_offset)))
                 centered = abs(target.pos_x) <= horizontal_tolerance
                 close_enough = distance_error <= 0.0
                 confirmed = confirmed + 1 if centered and close_enough else 0
 
                 if confirmed >= max(1, int(confirmation_count)):
-                    self._publish_stop()
+                    self._publish_hold()
                     get_logger("action").info(
                         f"{self.type}: gate centered at {target.pos_z:.2f} m")
                     return await super().execute(**kwargs)
 
-                command = Twist()
-                command.linear.x = distance_error
-                command.linear.y = max(
+                lateral = max(
                     -abs(float(max_lateral_offset)),
                     min(abs(float(max_lateral_offset)),
                         float(lateral_gain) * target.pos_x))
+                command = self._command(forward, lateral)
                 self.command_pub.publish(command)
                 get_logger("action").info(
                     f"{self.type}: z={target.pos_z:.2f}, x={target.pos_x:.2f}, "
@@ -141,7 +280,7 @@ class GateVisualControlStateAction(StateActionBase):
                 await asyncio.sleep(period)
 
             get_logger("action").error(f"{self.type}: timeout")
-            self._publish_stop()
+            self._publish_hold()
             return False
         finally:
             if self.bbox_sub is not None:
@@ -149,24 +288,13 @@ class GateVisualControlStateAction(StateActionBase):
                 self.bbox_sub = None
 
 
-class ControlOffsetStateAction(StateActionBase):
+class ControlOffsetStateAction(RelativeControlStateAction):
     """Send one bounded relative-position target to the new control input."""
 
     type = "ControlOffset"
 
     def __init__(self, node: Node):
         super().__init__(node=node)
-        topic = self.node.get_parameter(
-            'control_data_topic').get_parameter_value().string_value
-        self.command_pub = self.node.create_publisher(Twist, topic, 10)
-
-    def _publish_stop(self):
-        self.command_pub.publish(Twist())
-
-    def stop(self):
-        get_logger("action").info(f"Stopping {self.type} action")
-        self._publish_stop()
-        return super().stop()
 
     async def execute(self,
                       forward: float = 0.0,
@@ -175,10 +303,14 @@ class ControlOffsetStateAction(StateActionBase):
                       max_offset: float = 1.0,
                       **kwargs) -> bool:
         kwargs.pop("type", None)
+        self.hold_yaw = (
+            GateSearchStateAction.found_yaw
+            if GateSearchStateAction.found_yaw is not None
+            else self.current_yaw)
         limit = abs(float(max_offset))
-        command = Twist()
-        command.linear.x = max(-limit, min(limit, float(forward)))
-        command.linear.y = max(-limit, min(limit, float(lateral)))
+        command = self._command(
+            max(-limit, min(limit, float(forward))),
+            max(-limit, min(limit, float(lateral))))
         self.command_pub.publish(command)
         get_logger("action").info(
             f"{self.type}: forward={command.linear.x:.2f}, "
@@ -187,11 +319,11 @@ class ControlOffsetStateAction(StateActionBase):
         deadline = time.monotonic() + max(0.0, float(settle_time))
         while time.monotonic() < deadline:
             if self.stopped:
-                self._publish_stop()
+                self._publish_hold()
                 return False
             await asyncio.sleep(0.1)
 
-        self._publish_stop()
+        self._publish_hold()
         return await super().execute(**kwargs)
 
 
@@ -487,6 +619,7 @@ def load_sauvc_actions(node: Node) -> dict[str, StateActionBase]:
     # get_logger("action").info(f'Loaded stingray_actions: {stingray_actions}')
 
     sauvc_actions = {
+        GateSearchStateAction.type: GateSearchStateAction(node),
         GateVisualControlStateAction.type: GateVisualControlStateAction(node),
         ControlOffsetStateAction.type: ControlOffsetStateAction(node),
         SequencePunchBboxTwistStateAction.type: SequencePunchBboxTwistStateAction(node),
