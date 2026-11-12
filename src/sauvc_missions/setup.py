@@ -26,6 +26,7 @@ setup(
     entry_points={
         'console_scripts': [
             'fsm_node = sauvc_missions.fsm_node:main',
+            'sim_gate_detector = sauvc_missions.sim_gate_detector:main',
         ],
     },
 )

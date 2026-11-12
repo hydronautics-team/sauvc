@@ -31,7 +31,7 @@ states:
       max_lateral_offset: 0.3
       lost_timeout: 2.0
       initial_detection_timeout: 5.0
-      timeout: 20.0
+      timeout: 50.0
       control_rate: 2.0
       confirmation_count: 3
   PASS_GATE:

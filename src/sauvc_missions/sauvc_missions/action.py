@@ -36,12 +36,15 @@ class RelativeControlStateAction(StateActionBase):
             'odometry_topic').get_parameter_value().string_value
         self.command_pub = self.node.create_publisher(Twist, topic, 10)
         self.current_yaw = None
+        self.current_position = None
         self.hold_yaw = None
         self.odometry_sub = self.node.create_subscription(
             Odometry, odometry_topic, self._odometry_callback, 10)
 
     def _odometry_callback(self, msg: Odometry):
         self.current_yaw = _yaw_degrees(msg.pose.pose.orientation)
+        self.current_position = (
+            msg.pose.pose.position.x, msg.pose.pose.position.y)
 
     def _command(self, forward: float = 0.0, lateral: float = 0.0,
                  yaw: float = None) -> Twist:
@@ -173,6 +176,8 @@ class GateVisualControlStateAction(RelativeControlStateAction):
         self.bbox_sub = None
         self.target = None
         self.target_received_at = None
+        self.motion_start = None
+        self.motion_distance = 0.0
 
     def _bbox_callback(self, msg: BboxArray):
         candidates = [bbox for bbox in msg.bboxes
@@ -254,6 +259,25 @@ class GateVisualControlStateAction(RelativeControlStateAction):
                     await asyncio.sleep(period)
                     continue
 
+                # /control/data contains a relative position target. The new
+                # stingray_core deliberately ignores an identical repeated
+                # value, so a saturated offset must finish before we send a
+                # hold and issue the next relative step.
+                if self.motion_start is not None and \
+                        self.current_position is not None:
+                    travelled = math.hypot(
+                        self.current_position[0] - self.motion_start[0],
+                        self.current_position[1] - self.motion_start[1])
+                    required = max(0.05, 0.8 * self.motion_distance)
+                    if travelled < required:
+                        await asyncio.sleep(period)
+                        continue
+                    self._publish_hold()
+                    self.motion_start = None
+                    self.motion_distance = 0.0
+                    await asyncio.sleep(period)
+                    continue
+
                 distance_error = max(0.0, target.pos_z - stop_distance)
                 forward = min(
                     distance_error,
@@ -262,8 +286,14 @@ class GateVisualControlStateAction(RelativeControlStateAction):
                 close_enough = distance_error <= 0.0
                 confirmed = confirmed + 1 if centered and close_enough else 0
 
-                if confirmed >= max(1, int(confirmation_count)):
+                if centered and close_enough:
+                    # Do not issue another lateral correction while confirming
+                    # the final pose. Even a small command can move the vehicle
+                    # back outside the tolerance before the next detection.
                     self._publish_hold()
+                    if confirmed < max(1, int(confirmation_count)):
+                        await asyncio.sleep(period)
+                        continue
                     get_logger("action").info(
                         f"{self.type}: gate centered at {target.pos_z:.2f} m")
                     return await super().execute(**kwargs)
@@ -274,6 +304,9 @@ class GateVisualControlStateAction(RelativeControlStateAction):
                         float(lateral_gain) * target.pos_x))
                 command = self._command(forward, lateral)
                 self.command_pub.publish(command)
+                if self.current_position is not None:
+                    self.motion_start = self.current_position
+                    self.motion_distance = math.hypot(forward, lateral)
                 get_logger("action").info(
                     f"{self.type}: z={target.pos_z:.2f}, x={target.pos_x:.2f}, "
                     f"forward={command.linear.x:.2f}, lateral={command.linear.y:.2f}")
