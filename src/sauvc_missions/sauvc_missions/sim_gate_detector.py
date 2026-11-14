@@ -49,7 +49,17 @@ class SimGateDetector(Node):
         angle = math.atan2(image_right, forward)
         half_fov = math.radians(
             self.get_parameter('horizontal_fov_deg').value) / 2.0
-        if forward <= 0.2 or abs(angle) >= half_fov:
+        gate_width = float(self.get_parameter('gate_width').value)
+        # Keep publishing while any part of the gate remains in view. Using
+        # only the gate centre makes a close target disappear exactly when a
+        # lateral correction is most important.
+        gate_half_angle = math.atan2(0.5 * gate_width, max(0.2, forward))
+        # During search, require the gate centre to enter the camera. At close
+        # range retain the detection while a visible edge is still in frame.
+        # Otherwise search can accept a distant sliver and approach the gate
+        # almost sideways, creating an unnecessarily large sway correction.
+        visible_margin = gate_half_angle if forward < 3.0 else 0.0
+        if forward <= 0.2 or abs(angle) >= half_fov + visible_margin:
             self.publisher.publish(result)
             return
 
@@ -58,15 +68,15 @@ class SimGateDetector(Node):
         # opening (including its frame) for consumers that inspect bbox shape.
         pixel_height = max(20, min(440, int(650 / max(1.0, forward))))
         aspect_ratio = (
-            self.get_parameter('gate_width').value /
+            gate_width /
             self.get_parameter('gate_height').value)
         pixel_width = max(20, min(500, int(pixel_height * aspect_ratio)))
         bbox = Bbox()
         bbox.name = 'gate'
         bbox.id = 0
         bbox.confidence = 0.99
-        bbox.top_left_x = max(0, center_x - pixel_width // 2)
-        bbox.bottom_right_x = min(639, center_x + pixel_width // 2)
+        bbox.top_left_x = max(0, min(639, center_x - pixel_width // 2))
+        bbox.bottom_right_x = max(0, min(639, center_x + pixel_width // 2))
         bbox.top_left_y = max(0, 240 - pixel_height // 2)
         bbox.bottom_right_y = min(479, 240 + pixel_height // 2)
         bbox.pos_x = float(image_right)

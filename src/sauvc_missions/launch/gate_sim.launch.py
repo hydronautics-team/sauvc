@@ -16,6 +16,8 @@ def generate_launch_description():
         DeclareLaunchArgument(
             'synthetic_detections', default_value='true',
             description='Publish deterministic gate bboxes instead of YOLO'),
+        DeclareLaunchArgument('gate_x', default_value='8.0'),
+        DeclareLaunchArgument('gate_y', default_value='6.0'),
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(mission_launch),
             launch_arguments={
@@ -25,6 +27,22 @@ def generate_launch_description():
             package='sauvc_missions',
             executable='sim_gate_detector',
             condition=IfCondition(LaunchConfiguration('synthetic_detections')),
-            parameters=[{'use_sim_time': True}],
+            parameters=[{
+                'use_sim_time': True,
+                'gate_x': LaunchConfiguration('gate_x'),
+                'gate_y': LaunchConfiguration('gate_y'),
+            }],
+            output='screen'),
+        Node(
+            package='stingray_object_detection',
+            executable='detection_distance_monitor',
+            name='detection_distance_monitor',
+            condition=IfCondition(LaunchConfiguration('synthetic_detections')),
+            parameters=[{
+                'bbox_topic': '/stingray/topics/camera/front/bbox_array',
+                'log_interval': 1.0,
+                'source': 'sim-ground-truth',
+                'use_sim_time': True,
+            }],
             output='screen'),
     ])
