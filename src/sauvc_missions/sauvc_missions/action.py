@@ -360,6 +360,198 @@ class ControlOffsetStateAction(RelativeControlStateAction):
         return await super().execute(**kwargs)
 
 
+class VisibleFlareVisualControlStateAction(RelativeControlStateAction):
+    """Lock onto one visible flare, then approach and center on it."""
+
+    type = "VisibleFlareVisualControl"
+
+    def __init__(self, node: Node):
+        super().__init__(node=node)
+        self.bbox_sub = None
+        self.allowed_names = set()
+        self.min_confidence = 0.0
+        self.candidate_name = None
+        self.candidate_hits = 0
+        self.target_name = None
+        self.target = None
+        self.target_received_at = None
+        self.motion_start = None
+        self.motion_distance = 0.0
+
+    def _bbox_callback(self, msg: BboxArray):
+        candidates = [
+            bbox for bbox in msg.bboxes
+            if bbox.name in self.allowed_names and
+            bbox.confidence >= self.min_confidence
+        ]
+
+        if self.target_name is None:
+            if not candidates:
+                self.candidate_name = None
+                self.candidate_hits = 0
+                return
+            candidate = max(candidates, key=lambda bbox: bbox.confidence)
+            if candidate.name == self.candidate_name:
+                self.candidate_hits += 1
+            else:
+                self.candidate_name = candidate.name
+                self.candidate_hits = 1
+            self.target = candidate
+            self.target_received_at = time.monotonic()
+            return
+
+        locked = [bbox for bbox in candidates
+                  if bbox.name == self.target_name]
+        if not locked:
+            return
+        self.target = max(locked, key=lambda bbox: bbox.confidence)
+        self.target_received_at = time.monotonic()
+
+    async def execute(self,
+                      bbox_topic: str = "",
+                      allowed_names: list[str] = None,
+                      min_confidence: float = 0.5,
+                      selection_confirmation_count: int = 5,
+                      stop_distance: float = 1.0,
+                      horizontal_tolerance: float = 0.12,
+                      lateral_gain: float = 1.0,
+                      max_forward_offset: float = 0.4,
+                      max_lateral_offset: float = 0.2,
+                      lost_timeout: float = 2.0,
+                      initial_detection_timeout: float = 10.0,
+                      timeout: float = 45.0,
+                      control_rate: float = 2.0,
+                      centered_confirmation_count: int = 3,
+                      **kwargs) -> bool:
+        kwargs.pop("type", None)
+        if not bbox_topic:
+            get_logger("action").error(
+                f"{self.type}: bbox_topic is empty")
+            return False
+        if self.current_yaw is None or self.current_position is None:
+            get_logger("action").error(
+                f"{self.type}: no odometry; cannot control the vehicle")
+            return False
+
+        names = allowed_names or [
+            "red_flare", "yellow_flare", "blue_flare", "orange_flare"]
+        self.allowed_names = set(names)
+        self.min_confidence = float(min_confidence)
+        self.candidate_name = None
+        self.candidate_hits = 0
+        self.target_name = None
+        self.target = None
+        self.target_received_at = None
+        self.motion_start = None
+        self.motion_distance = 0.0
+        self.hold_yaw = self.current_yaw
+        self.bbox_sub = self.node.create_subscription(
+            BboxArray, bbox_topic, self._bbox_callback, 10)
+
+        started_at = time.monotonic()
+        centered_hits = 0
+        period = 1.0 / max(0.1, float(control_rate))
+        required_selection_hits = max(
+            1, int(selection_confirmation_count))
+        required_centered_hits = max(
+            1, int(centered_confirmation_count))
+        get_logger("action").info(
+            f"{self.type}: waiting for one of {sorted(self.allowed_names)}")
+
+        try:
+            while time.monotonic() - started_at < float(timeout):
+                if self.stopped:
+                    self._publish_hold()
+                    return False
+
+                now = time.monotonic()
+                if self.target_name is None:
+                    if self.candidate_hits >= required_selection_hits:
+                        self.target_name = self.candidate_name
+                        get_logger("action").info(
+                            f"{self.type}: locked onto '{self.target_name}' "
+                            f"after {self.candidate_hits} detections")
+                    elif now - started_at > float(initial_detection_timeout):
+                        get_logger("action").error(
+                            f"{self.type}: no stable flare detection")
+                        self._publish_hold()
+                        return False
+                    else:
+                        await asyncio.sleep(period)
+                        continue
+
+                if self.target is None or self.target_received_at is None or \
+                        now - self.target_received_at > float(lost_timeout):
+                    get_logger("action").error(
+                        f"{self.type}: '{self.target_name}' detection became stale")
+                    self._publish_hold()
+                    return False
+
+                target = self.target
+                if not all(math.isfinite(value) for value in
+                           (target.pos_x, target.pos_z)):
+                    get_logger("action").warning(
+                        f"{self.type}: ignoring non-finite target position")
+                    await asyncio.sleep(period)
+                    continue
+
+                if self.motion_start is not None:
+                    travelled = math.hypot(
+                        self.current_position[0] - self.motion_start[0],
+                        self.current_position[1] - self.motion_start[1])
+                    required = max(0.05, 0.8 * self.motion_distance)
+                    if travelled < required:
+                        await asyncio.sleep(period)
+                        continue
+                    self._publish_hold()
+                    self.motion_start = None
+                    self.motion_distance = 0.0
+                    await asyncio.sleep(period)
+                    continue
+
+                distance_error = max(
+                    0.0, target.pos_z - float(stop_distance))
+                forward = min(
+                    distance_error, max(0.0, float(max_forward_offset)))
+                centered = abs(target.pos_x) <= float(horizontal_tolerance)
+                close_enough = distance_error <= 0.0
+                centered_hits = (
+                    centered_hits + 1 if centered and close_enough else 0)
+
+                if centered and close_enough:
+                    self._publish_hold()
+                    if centered_hits >= required_centered_hits:
+                        get_logger("action").info(
+                            f"{self.type}: '{self.target_name}' centered "
+                            f"at {target.pos_z:.2f} m")
+                        return await super().execute(**kwargs)
+                    await asyncio.sleep(period)
+                    continue
+
+                lateral = max(
+                    -abs(float(max_lateral_offset)),
+                    min(abs(float(max_lateral_offset)),
+                        float(lateral_gain) * target.pos_x))
+                command = self._command(forward, lateral)
+                self.command_pub.publish(command)
+                self.motion_start = self.current_position
+                self.motion_distance = math.hypot(forward, lateral)
+                get_logger("action").info(
+                    f"{self.type}: target={self.target_name}, "
+                    f"z={target.pos_z:.2f}, x={target.pos_x:.2f}, "
+                    f"forward={forward:.2f}, lateral={lateral:.2f}")
+                await asyncio.sleep(period)
+
+            get_logger("action").error(f"{self.type}: timeout")
+            self._publish_hold()
+            return False
+        finally:
+            self._publish_hold()
+            if self.bbox_sub is not None:
+                self.node.destroy_subscription(self.bbox_sub)
+                self.bbox_sub = None
+
+
 class SequencePunchBboxTwistStateAction(StateActionBase):
     type = "SequencePunchBboxTwist"
     sequence: list[str] = None
@@ -655,6 +847,8 @@ def load_sauvc_actions(node: Node) -> dict[str, StateActionBase]:
         GateSearchStateAction.type: GateSearchStateAction(node),
         GateVisualControlStateAction.type: GateVisualControlStateAction(node),
         ControlOffsetStateAction.type: ControlOffsetStateAction(node),
+        VisibleFlareVisualControlStateAction.type:
+            VisibleFlareVisualControlStateAction(node),
         SequencePunchBboxTwistStateAction.type: SequencePunchBboxTwistStateAction(node),
         HydroacousticCenteringTwistStateAction.type: HydroacousticCenteringTwistStateAction(
             node)

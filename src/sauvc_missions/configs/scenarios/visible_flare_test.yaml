@@ -1,0 +1,10 @@
+initial: VISIBLE_FLARE_TEST
+ok_state_package_name: stingray_missions
+failed_state_package_name: stingray_missions
+missions:
+  VISIBLE_FLARE_TEST:
+    config_name: visible_flare_test
+    package_name: sauvc_missions
+transitions:
+  - { source: VISIBLE_FLARE_TEST, outcome: OK, dest: IDLE }
+  - { source: VISIBLE_FLARE_TEST, outcome: FAILED, dest: IDLE }

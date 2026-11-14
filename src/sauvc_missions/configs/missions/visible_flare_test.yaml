@@ -1,0 +1,41 @@
+initial: ENABLE_OBJECT_DETECTION
+states:
+  ENABLE_OBJECT_DETECTION:
+    action:
+      type: EnableObjectDetection
+      camera_topic: /stingray/topics/camera/front
+      enable: true
+  CENTER_VISIBLE_FLARE:
+    action:
+      type: VisibleFlareVisualControl
+      bbox_topic: /stingray/topics/camera/front/bbox_array
+      allowed_names: [red_flare, yellow_flare, blue_flare, orange_flare]
+      min_confidence: 0.5
+      selection_confirmation_count: 5
+      stop_distance: 1.0
+      horizontal_tolerance: 0.12
+      lateral_gain: 1.0
+      max_forward_offset: 0.4
+      max_lateral_offset: 0.2
+      lost_timeout: 2.0
+      initial_detection_timeout: 10.0
+      timeout: 45.0
+      control_rate: 2.0
+      centered_confirmation_count: 3
+  PUNCH_FLARE:
+    action:
+      type: ControlOffset
+      forward: 1.0
+      lateral: 0.0
+      settle_time: 4.0
+      max_offset: 1.0
+  DISABLE_OBJECT_DETECTION:
+    action:
+      type: EnableObjectDetection
+      camera_topic: /stingray/topics/camera/front
+      enable: false
+transitions:
+  - { trigger: ok, source: ENABLE_OBJECT_DETECTION, dest: CENTER_VISIBLE_FLARE }
+  - { trigger: ok, source: CENTER_VISIBLE_FLARE, dest: PUNCH_FLARE }
+  - { trigger: ok, source: PUNCH_FLARE, dest: DISABLE_OBJECT_DETECTION }
+  - { trigger: ok, source: DISABLE_OBJECT_DETECTION, dest: OK }
